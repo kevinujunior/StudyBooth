@@ -1,18 +1,18 @@
 import styled from 'styled-components'
 import React from 'react';
+import './css/LandingPage.css'
 
-const Login = (props) => {
+const LandingPage = (props) => {
     return (
 
         <Container>
             <Nav>
-                
                 <a href="/">
                     <img src ="/images/login-logo.svg" alt=""/>
                 </a>
                 <div>
-                    <Join>Join now</Join>
-                    <SignIn> Sign In</SignIn>
+                    <Join href ="/signup">Join now</Join>
+                    <SignIn href ="/login"> Sign In</SignIn>
                 </div>
             </Nav>
             <Section> 
@@ -21,15 +21,13 @@ const Login = (props) => {
                     <h1 class="welcome"> Welcome to StudyBooth.</h1>
                     <p class="about-text">lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum</p>
                     <div class="emailz"> 
-                        <form>
                           <input type="text" placeholder="Enter Email" name="email" id="email" required></input>
-                            <button type="submit" class="registerbtn-desktop">Signup for StudyBooth</button>
-                        </form>
-                        
+                          <button type="submit" class="registerbtn-desktop" >Signup</button>                    
                         </div>
                     </div>
                     <img src="/images/login_slider_2.png" alt =""/>
                 </Hero>
+                
                 </Section>
         </Container>
     )
@@ -38,13 +36,16 @@ const Login = (props) => {
 
 
 const Container = styled.div`
+background-color: skyblue;
+height: auto;
+width:auto;
+/* margin:10px; */
   
-    width: 100%;
 `;
 
 
 const Nav = styled.nav`
-  
+
     max-width : 1250px;
     margin: auto;
     padding: 12px 0 16px;
@@ -90,14 +91,13 @@ const Nav = styled.nav`
         height: 34px;
         /* padding:2%; */
 
-        @media(max-width:320px){
+        @media(max-width:360px){
             width: 20vw;
-          
-            margin-top:6vw;
-           
+            margin-top:initial;
+           height: initial;
         }
        
-        @media(min-width: 320px) and (max-width:767px) {
+        @media(min-width: 360px) and (max-width:767px) {
             /* padding:10px; */
             width: 90px;
             height: 25px;
@@ -123,19 +123,8 @@ const Nav = styled.nav`
        
     }
 
-    & > div{
-        
-     @media(min-width: 320px) and (max-width:767px) {
-         /* background-color: black; */
-        
-     }
-    
-     }
-    
-
-    
-
-    
+   
+ 
 
  
 `;
@@ -198,6 +187,7 @@ const SignIn = styled.a`
     text-align: center;
     background-color: rgba(0,0,0,0);
     cursor: pointer;
+    text-decoration: none;
     &:hover{
         background-color: rgba(112,181,249,0.15);
         color: #0a66c2;
@@ -252,7 +242,7 @@ width: 100%;
 `;
 
 const Hero = styled.div`    
-   
+
     max-width: 1250px;
     width: 100%;
     display: flex;
@@ -262,18 +252,19 @@ const Hero = styled.div`
     margin: auto;
     z-index: 1;
 
-    
+
   
     .main-welcome{
-        
+      
         width: 40%;
         z-index:1;
+
     
         @media(max-width:319px){
             
-            width: 100%;
+            width: auto;
             margin: auto;
-            padding: auto;
+            padding: 0px;
         }
         @media(min-width: 320px) and (max-width:767px) {
             
@@ -286,6 +277,8 @@ const Hero = styled.div`
             margin:auto;
             width:100%;
             height: auto;
+            padding: 5px;
+            
         }  
 
     }
@@ -303,7 +296,7 @@ const Hero = styled.div`
 
         @media(min-width:767px) and (max-width:1024px){
           margin:20px;
-          width:100%;
+          max-width: 100%;
           padding:0;
           font-size: 54px;
 
@@ -312,17 +305,18 @@ const Hero = styled.div`
         @media(max-width:767px) and (min-width:320px){
           margin:5px;
         font-size:8vw;
-          width:100%;
+        max-width: 100%;
           padding:0;
 
       }
 
       @media(max-width:320px) and (min-width:50px){
           line-height: normal;
-          margin-top:5px;
+          margin-top:20px; 
         font-size:8vw;
-          width:100%;
-          padding:5px;
+          max-width: 100%;
+        margin-left: auto;
+          padding:auto;
 
       }
 
@@ -340,22 +334,27 @@ const Hero = styled.div`
     }
 
     .emailz{
-        width:40%;   
-        display: flex;
-        flex-wrap :nowrap ;
-        justify-content: space-between;
-    
-        @media(min-width: 320px) and (max-width:767px) {
        
-            width : 100%;
-        
+        /* max-width : 1250px; */
+    margin: auto; 
+    padding: 12px 0 16px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* allow space between content in a row*/
+    justify-content: space-between;
+    /* does not let content in same line to go on next line*/
+    flex-wrap: nowrap;
+    max-width:100%;
+   
+    
+    @media(max-width:767px) {
+            max-width:100%;
+            padding: 1.5vw 2vw;
+            font-size: 3vw;
+            margin: 0;
+         
         }
-
-        @media(min-width: 767px) and (max-width:1023px) {
-          
-            width : 100%;
-            height: auto;
-        } 
        
         }
 
@@ -363,36 +362,35 @@ const Hero = styled.div`
 
 
     input[type=text]{
-        border-radius: 5px;
-        
-        margin-right: 10px;
-        margin-left:5px;
-        padding: 15px;
+        border-radius: 10px;
         border: 1.5px solid black;
         background: #fff; 
         stroke: #04AA6D;
-        width:90%;
+        width:100%;   
+        padding   :10px ;
+        margin-right:10px;
 
-        @media(min-width:50px) and (max-width:767px){
-    
-            font-size: 4vw;
-            width: 40vw;
-            padding: 2vw;
-           
+        @media(max-width:767px) {
+            width:100%;
+            padding: 1.5vw 2vw;
+            font-size: 3vw;
         }
-      
       
     }
 
+
+
     .registerbtn-desktop {
-        border-radius: 5px;
+        border-radius: 8px;
         background-color: #04AA6D;
         color: white;
-        padding: 15px 20px;
-        margin: 8px 0;
+        padding: 10px 16px;
+        margin: 8px;
         border: none;
         cursor: pointer;
-        opacity: 0.9;
+        opacity: 0.8;
+        width: 50%;
+        font-size: 16px;
 
         @media(max-width:767px) {
             width:35vw;
@@ -400,8 +398,6 @@ const Hero = styled.div`
             font-size: 3vw;
         }
     }
-
-
 
     img{
         width: 60%;
@@ -420,4 +416,4 @@ const Hero = styled.div`
 `;
 
 
-export default Login
+export default LandingPage

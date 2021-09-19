@@ -1,0 +1,14 @@
+html{
+ display: block; 
+ flex-wrap: nowrap;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* background-color:skyblue; */
+    margin: 0;
+    
+
+  }
+ 
+  
