@@ -1,3 +1,6 @@
+*{
+  margin: 0;
+}
 body {
   /* when i scroll vertically I see scrollbar on rhs */
   overflow-y : scroll;

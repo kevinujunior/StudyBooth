@@ -2,13 +2,16 @@
 import './App.css';
 import { BrowserRouter as Router,  Switch, Route} from 'react-router-dom';
 import Login from "./components/Login"
+import Home from './components/Home';
+
 function App() {
+  const user = "Divyanshu";
   return (
-    <div className="App">
+    <div className="app">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Login />
+            {!user ? <Login /> : <Home />}
           </Route>
         </Switch>
       </Router>
