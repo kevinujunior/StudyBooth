@@ -1,4 +1,5 @@
 import React from 'react'
+import './static/HeaderMobile.css'
 import './static/Header.css'
 import SearchIcon from '@mui/icons-material/Search';
 import logo from './static/logo3.png'
@@ -9,15 +10,19 @@ import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { Avatar, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Header() {
     return (
         <div className="header">
             <div className="header__left">
+                <div className="header__menu">        
+                    <IconButton>
+                        <MenuIcon />
+                    </IconButton>
+                </div>
                 <img src={logo} alt="" />
                 <div className="header__input">
-                    {/* <SearchIcon />
-                    <input placeholder="Search StudyBooth" type="text" /> */}
                     <button class="btn-search"><i class="fas fa-search"><SearchIcon/></i></button>
                     <input type="text" class="input-search" placeholder="Type to Search..."></input>
                 </div>                
@@ -37,17 +42,17 @@ function Header() {
                 </div>
             </div>
             <div className="header__right">
-                <IconButton size="large">
+                <IconButton>
                     <NotificationsNoneRoundedIcon />
                 </IconButton>
-                <IconButton size="large">
+                <IconButton>
                     <MessageRoundedIcon />
                 </IconButton>
                 <div className="header__info">
                     <Avatar />
                     <h4>UserName</h4>
                 </div>
-                <IconButton size="large">
+                <IconButton>
                 <ExpandMoreRoundedIcon />
                 </IconButton>
             </div>
