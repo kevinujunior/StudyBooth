@@ -16,8 +16,10 @@ function Header() {
             <div className="header__left">
                 <img src={logo} alt="" />
                 <div className="header__input">
-                    <SearchIcon />
-                    <input placeholder="Search StudyBooth" type="text" />
+                    {/* <SearchIcon />
+                    <input placeholder="Search StudyBooth" type="text" /> */}
+                    <button class="btn-search"><i class="fas fa-search"><SearchIcon/></i></button>
+                    <input type="text" class="input-search" placeholder="Type to Search..."></input>
                 </div>                
             </div>
             <div className="header__middle">
