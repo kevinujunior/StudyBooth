@@ -55,7 +55,7 @@
         background-color: #eff2f5;
         border-radius: 9999px;
     }
-    .inputSearch{
+    .input-search{
         height: 50px;
         width: 50px;
         border-style: none;
@@ -69,13 +69,13 @@
         color:rgb(0, 0, 0);
     }
 
-    .inputSearch::placeholder{
+    .input-search::placeholder{
     /* color:rgba(255,255,255,.5); */
         font-size: 15px;
         font-weight: 100;
     }
     /* button css */
-    .btnSearch{
+    .btn-search{
         width: 50px;
         height: 50px;
         border-style: none;
@@ -90,7 +90,7 @@
         pointer-events: painted;  
     }
     /* animate button to open search */
-    .btnSearch:focus ~ .inputSearch{
+    .btn-search:focus ~ .input-search{
         width: 300px;
         border-radius: 0px;
         background-color: transparent;
@@ -99,7 +99,7 @@
     }
 
     /* keeps input search open */
-    .inputSearch:focus{
+    .input-search:focus{
         width: 300px;
         border-radius: 0px;
         background-color: transparent;
@@ -122,15 +122,15 @@
     }
 
     /* If buttons are active */
-    .header__optionActive > .MuiSvgIcon-root{
+    .header__option--active > .MuiSvgIcon-root{
         color: #2e81f4;
     }
-    .header__optionActive{
+    .header__option--active{
         /* border-bottom: 4px solid #2e81f4; */
         background-color: #eff2f5;
         border-radius: 22px;
     }
-    .header__optionActive > p{
+    .header__option--active > p{
         color: #2e81f4;
     }
     /* space between middle icons */
@@ -168,157 +168,5 @@
 
     .header__right {
         display: flex;
-    }
-}
-
-
-@media screen and (max-width: 1000px) and (min-width:520px) {
-    .header {
-        /* spacing */
-        overflow: hidden;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-
-        /* positioning */
-        position: sticky;
-        z-index: 100;
-        top:0;
-
-        /* background */
-        box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
-        background-color: white;
-    }
-    .header__left {
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    .header__left > img {
-        height: 5vw;
-        padding: 2% 2%;
-    }
-    
-    .header__menu {
-        height: 5vw;
-        padding: 2% 2%;
-    }
-
-    
-    .header__menu > .MuiSvgIcon-root{
-        font-size: 5vw;
-    }
-
-    .header__input {
-        display: none;
-    }
-    
-    .header__middle {
-        display: none;
-        justify-content: center;
-    }
-
-    .header__right{
-        position: absolute;
-        right: 2%;
-    }
-    
-    .header__info{
-        display: flex;
-        align-items: center;
-    }
-
-    .header__info > h4 {
-        display: none;
-        margin-left: 10px;
-    }
-
-    .header__right {
-        display: flex;
-    }
-
-    .header__right > .MuiIconButton-root > .MuiSvgIcon-root{
-        font-size: x-large;
-        height: 2rem;
-        padding: 2% 2%;
-    }
-
-    .header__info > .MuiAvatar-root{
-        height: 2rem;
-        width: 2rem;
-    }
-}
-
-@media screen and (max-width: 520px) {
-    .header {
-        /* spacing */
-        overflow: hidden;
-        padding: 15px 20px 15px;
-        display: flex;
-        justify-content: space-between;
-
-        /* positioning */
-        position: sticky;
-        z-index: 100;
-        top:0;
-
-        /* background */
-        box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
-        background-color: white;
-    }
-    .header__left {
-        display: flex;
-        justify-content: space-evenly;
-        padding-top: 2.3%;
-    }
-
-    .header__left > img {
-        height: 7vw;
-        padding: 2% 2%;
-    }
-    
-    .header__menu > .MuiIconButton-root > .MuiSvgIcon-root {
-        height: 5vw;
-        padding: 2% 2%;
-    }
-
-    
-    .header__menu > .MuiSvgIcon-root{
-        font-size: 7vw;
-    }
-
-    .header__input {
-        display: none;
-    }
-    
-    .header__middle {
-        display: none;
-        justify-content: center;
-    }
-
-    .header__right{
-        display: flex;
-        position: absolute;
-        right: 0.1em;
-        padding: 0%;
-    }
-    
-    .header__info{
-        display: flex;
-        align-items: center;
-    }
-
-    .header__info > h4 {
-        display: none;
-    }
-
-    .header__right > .MuiIconButton-root > .MuiSvgIcon-root{
-        font-size: x-large;
-        height: 2rem;
-    }
-
-    .header__info > .MuiAvatar-root{
-        height: 2rem;
-        width: 2rem;
     }
 }

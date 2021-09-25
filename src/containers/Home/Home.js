@@ -1,17 +1,17 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
-import classes from './Home.css'
-import RightPanel from './RightPanel/RightPanel';
+import './Home.css'
+
 
 function Home() {
     return (
-        <div className={classes.home}>
+        <div className="home">
             {/* Header */}
             <Header />
             <h4>Home</h4>
             {/* Left Sidebar */}
             {/* Feed */}
-            <RightPanel />
+            {/* Right Sidebar */}
             {/* Footer */}
         </div>
     )
