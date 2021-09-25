@@ -1,4 +1,4 @@
-.left-section{
+.leftSection{
     background-color: rgba(29, 31, 41,1);
     /* background-color:wheat; */
     height : 82.5vh;
@@ -10,10 +10,11 @@
     border-radius: 20px;
     padding: 0.85%;
     position: sticky;
+    box-shadow: 0 2px 3px grey;
    
 }
 
-.left-section::-webkit-scrollbar{
+.leftSection::-webkit-scrollbar{
     display: none;
 }
 
@@ -24,14 +25,14 @@
     
 }
 
-.section-container{
+.sectionContainer{
     margin-bottom: 2px;
     font-size: 12px;
     margin-left: 2px;
     margin-top: 20px;
 }
 
-.section-name{
+.sectionName{
     font-size: 12px;
     margin-left: 6px;
     color: white;
@@ -39,7 +40,7 @@
 }
 
 
-.individual-section{
+.individualSection{
     display:flex;
     align-items: flex-start;
     justify-content: space-evenly;
@@ -55,13 +56,13 @@
 
 }
 
-.individual-section:hover{
+.individualSection:hover{
     background-color:rgb(88, 88, 88);
         color: rgb(71, 71, 68);
         text-decoration: none;
 }
 
-.section-icon-holder{
+.sectionIconHolder{
     max-width: 50%;
     /* background-color: green; */
     height: 100%;
@@ -69,13 +70,13 @@
 
 }
 
-.section-image{
+.sectionImage{
     width: 80%;
     height: 100%; 
     object-fit: contain;
 }
 
-.section-text-holder{
+.sectionTextHolder{
    
     width:70%;
     height: 100%;
@@ -85,7 +86,7 @@
     /* background-color: aqua; */
     
 }
-.section-text{
+.sectionText{
     /* background-color:white; */
     align-self: center;
     width: 100%;
@@ -112,7 +113,7 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
-.star-button{
+.starButton{
     width: 50%;
     align-self: center;
     /* background-color: peru; */

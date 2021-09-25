@@ -1,214 +1,214 @@
 import React, { Component } from 'react';
-import '../LeftSection/LeftSection.css'
+import classes from '../LeftSection/LeftSection.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 export class LeftSection extends Component {
 
   render() {
     return(
-        <section class = "left-section">
-                <a class= "individual-section" id ="friends" href="/login">
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+        <section class = {classes.leftSection}>
+                <a class= {classes.individualSection} id ="friends" href="/login">
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                     </div>
-                    <div class ="section-text-holder">
-                        <h3 class="section-text">Friends</h3>
+                    <div class ={classes.sectionTextHolder}>
+                        <h3 class={classes.sectionText}>Friends</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
 
-            <div class = "section-container">
-                <h4 class = "section-name"> Popular Sections</h4>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+            <div class = {classes.sectionContainer}>
+                <h4 class = {classes.sectionName}> Popular Sections</h4>
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
             </div>
 
-            <div class = "section-container">
-                <h4 class = "section-name"> All Sections</h4>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+            <div class = {classes.sectionContainer}>
+                <h4 class = {classes.sectionName}> All Sections</h4>
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
-                <a class= "individual-section" id="science" href ="/login" >
-                    <div class ="section-icon-holder">
-                        <img class ="section-image" src="images/signin-image.jpg " alt="sign in image" /> 
+                <a class= {classes.individualSection} id="science" href ="/login" >
+                    <div class ={classes.sectionIconHolder}>
+                        <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                         </div>
-                    <div class ="section-text-holder">
-                    <h3 class="section-text">Science</h3>
+                    <div class ={classes.sectionTextHolder}>
+                    <h3 class={classes.sectionText}>Science</h3>
                     </div>
-                    <div class = "star">
-                        <StarBorderIcon class = "star-button"/>
+                    <div class = {classes.star}>
+                        <StarBorderIcon class = {classes.starButton}/>
                     </div>
                 </a>
             </div>
