@@ -1,0 +1,31 @@
+.Feed{
+    box-sizing: border-box;
+    width: 500px;
+    background-color: #e7e4e4;
+    padding: 10px;
+    border-radius: 15px;
+}
+.Feed > div{
+    margin-bottom: 10px;
+}
+.Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.NamePhoto{
+    display: flex;
+    direction: row;
+    align-items: center;
+}
+.NamePhoto > p{
+    margin-left: 10px;
+}
