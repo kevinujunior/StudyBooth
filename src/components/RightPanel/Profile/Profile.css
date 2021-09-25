@@ -55,6 +55,11 @@
     color: white;
     font-weight: 600;
     margin: 5px;
+    transition: all 0.3s;
+}
+
+.stats button:hover{
+    background-color: #0f8cda;
 }
 
 .stats > div{

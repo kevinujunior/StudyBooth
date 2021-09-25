@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 import classes from './Home.css'
-import RightPanel from './RightPanel/RightPanel'
+import RightPanel from './RightSection/RightPanel'
 import LeftSection from './LeftSection/LeftSection';
 function Home() {
     return (
