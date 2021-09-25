@@ -1,11 +1,13 @@
 .RightPanel{
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    height: 100vh;
+    width: 330px;
+    
 }
 
 .RightPanel > div {
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 1000px){

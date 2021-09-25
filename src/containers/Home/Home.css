@@ -1,8 +1,11 @@
-
-
 .main{
   display: flex;
   justify-content: space-between;
+  height: 90vh;
+}
+
+.main > div{
+  margin: 10px;
 }
 
 .home > h4{

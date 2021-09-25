@@ -2,7 +2,7 @@
     background-color: rgba(29, 31, 41,1);
     /* background-color:wheat; */
     height : 82.5vh;
-    width:16%;
+    width:20%;
     display: list-item;
     /* margin-top:0px; */
     margin-left:1%;
@@ -119,4 +119,11 @@ a:-webkit-any-link {
     /* background-color: peru; */
     object-fit: contain;
     fill:rgb(54, 54, 54)
+}
+
+
+@media (max-width: 1000px){
+    .leftSection{
+        display: none;
+    }
 }

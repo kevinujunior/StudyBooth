@@ -1,0 +1,21 @@
+.MainSection {
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.Line{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+.Feed > div{
+    margin-bottom: 10px;
+}
