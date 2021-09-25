@@ -1,0 +1,68 @@
+.Profile{
+    height: 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+
+}
+
+.Info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.Info img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.stats > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stats button {
+    font-size: 12px;
+    outline: none;
+    padding: 6px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+.stats div{
+    margin: 5px;
+}
+
+.Intrest {
+    /* border: 1px solid black; */
+    width: 100%;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.line{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
