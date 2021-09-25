@@ -1,6 +1,5 @@
-import React from 'react'
-import './HeaderMobile.css'
-import './Header.css'
+import React from 'react';
+import classes from './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../../assets/logo3.png'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -14,41 +13,41 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 function Header() {
     return (
-        <div className="header">
-            <div className="header__left">
-                <div className="header__menu">        
+        <div className={classes.header}>
+            <div className={classes.header__left}>
+                <div className={classes.header__menu}>        
                     <IconButton>
                         <MenuIcon />
                     </IconButton>
                 </div>
                 <img src={logo} alt="" />
-                <div className="header__input">
-                    <button class="btn-search"><i class="fas fa-search"><SearchIcon/></i></button>
-                    <input type="text" class="input-search" placeholder="Type to Search..."></input>
+                <div className={classes.header__input}>
+                    <button class={classes.btn_search}><i class="fas fa-search"><SearchIcon/></i></button>
+                    <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>
                 </div>                
             </div>
-            <div className="header__middle">
-                <div className="header__option header__option--active">
+            <div className={classes.header__middle}>
+                <div className={[classes.header__option, classes.header__optionActive].join(' ')}>
                     <HomeRoundedIcon />        
                     <p>Home</p>
                 </div>
-                <div className="header__option">
+                <div className={classes.header__option}>
                     <BorderColorRoundedIcon />
                     <p>Classroom</p>
                 </div>
-                <div className="header__option">
+                <div className={classes.header__option}>
                     <PeopleOutlineRoundedIcon />
                     <p>People</p>
                 </div>
             </div>
-            <div className="header__right">
+            <div className={classes.header__right}>
                 <IconButton>
                     <NotificationsNoneRoundedIcon />
                 </IconButton>
                 <IconButton>
                     <MessageRoundedIcon />
                 </IconButton>
-                <div className="header__info">
+                <div className={classes.header__info}>
                     <Avatar />
                     <h4>UserName</h4>
                 </div>
