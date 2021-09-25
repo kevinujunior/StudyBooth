@@ -6,7 +6,7 @@ import Signup from './components/auth/Signup';
 import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
 function App() {
-  const user = "divyanshu";
+  const user = 'udit';
   return (
     <div className="app">
       <Router>

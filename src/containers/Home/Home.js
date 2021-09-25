@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 import './Home.css'
+import'./LeftSection/LeftSection'
+import LeftSection from './LeftSection/LeftSection'
 
 
 function Home() {
@@ -8,8 +10,9 @@ function Home() {
         <div className="home">
             {/* Header */}
             <Header />
-            <h4>Home</h4>
+            {/* <h4>Home</h4> */}
             {/* Left Sidebar */}
+            <LeftSection/>
             {/* Feed */}
             {/* Right Sidebar */}
             {/* Footer */}
