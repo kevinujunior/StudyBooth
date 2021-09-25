@@ -12,6 +12,9 @@ function Home() {
                 <RightPanel />
                 <RightPanel />
             </div>
+            {/* <h4>Home</h4> */}
+            {/* Left Sidebar */}
+            <LeftSection/>
             {/* Feed */}
             {/* Right Sidebar */}
             {/* Footer */}
