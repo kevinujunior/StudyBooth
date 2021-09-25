@@ -7,3 +7,9 @@
 .RightPanel > div {
     margin: 10px;
 }
+
+@media (max-width: 900px){
+    .RightPanel{
+        display: none;
+    }
+}
