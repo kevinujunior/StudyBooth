@@ -2,7 +2,7 @@
     box-sizing: border-box;
     width: 500px;
     background-color: #e7e4e4;
-    padding: 10px;
+    padding: 20px;
     border-radius: 15px;
 }
 .Feed > div{
@@ -28,4 +28,40 @@
 }
 .NamePhoto > p{
     margin-left: 10px;
+}
+
+.Interact{
+    margin-top: 5px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.Icons{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.IconLeft{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.IconRight{
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.PostInfo{
+    padding: 0px 5px;
+}
+
+#cool{
+    color:  purple;
 }
