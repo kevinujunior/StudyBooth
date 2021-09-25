@@ -6,7 +6,7 @@ export class LeftSection extends Component {
   render() {
     return(
         <section class = {classes.leftSection}>
-                <a class= {classes.individualSection} id ="friends" href="/login">
+                <a class= {classes.individualSection} id ={classes.friends}href="/login">
                     <div class ={classes.sectionIconHolder}>
                         <img class ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
                     </div>

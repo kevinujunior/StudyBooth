@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../auth/css/Login-Signup.css'
+import classes from '../auth/css/Login-Signup.css'
 export class Login extends Component {
 
   render() {
     return(
      
-        <div class = "login-main">
+        <div class = {classes.login_main}>
         <section class="sign-in">
         <div class="container">
             <div class="signin-content">

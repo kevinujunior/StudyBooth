@@ -2,7 +2,7 @@
     background-color: rgba(29, 31, 41,1);
     /* background-color:wheat; */
     height : 82.5vh;
-    width:20%;
+    width:24%;
     display: list-item;
     /* margin-top:0px; */
     margin-left:1%;
@@ -19,7 +19,7 @@
 }
 
 #friends{
-    margin-top: 100px;
+    margin-top: 80px;
     margin-bottom: 30px;
     margin-left: 2px;
     
@@ -108,17 +108,17 @@
     height: 100%;
 }
 
-a:-webkit-any-link {
+/* a:-webkit-any-link {
     color: pink;
     cursor: pointer;
-}
+} */
 
 .starButton{
     width: 50%;
     align-self: center;
     /* background-color: peru; */
     object-fit: contain;
-    fill:rgb(54, 54, 54)
+    fill:rgb(69, 69, 69)
 }
 
 
