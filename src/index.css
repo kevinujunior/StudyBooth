@@ -6,6 +6,7 @@ body {
   /* overflow-y : scroll; */
   /* when i scroll horizonatally no scrollbar on bottom */
   /* overflow-x : hidden; */
+  overflow-y:hidden;
 }
 
 :root,
