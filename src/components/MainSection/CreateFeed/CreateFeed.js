@@ -6,7 +6,8 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ArticleIcon from '@mui/icons-material/Article';
-
+import { IconButton
+ } from '@mui/material';
 const createFeed = () => {
 
     return (
@@ -16,10 +17,18 @@ const createFeed = () => {
                 <input type="text" placeholder="share some experiences..."/>
             </div>
             <div className={classes.Choose}>
-                <InsertPhotoIcon />
-                <VideoCameraBackIcon />
-                <AddLinkIcon />
-                <ArticleIcon />
+                <IconButton>
+                    <InsertPhotoIcon />
+                </IconButton>
+                <IconButton>
+                    <VideoCameraBackIcon />
+                </IconButton>
+                <IconButton>
+                    <AddLinkIcon />
+                </IconButton>
+                <IconButton>
+                    <ArticleIcon />
+                </IconButton>
             </div>
         </div>
     );

@@ -8,7 +8,9 @@
     padding: 20px;
     overflow-y: scroll;
     background-color: white;
- 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Line{
@@ -19,4 +21,9 @@
 
 .Feed > div{
     margin-bottom: 10px;
+}
+
+
+.Activity{
+    margin-left: 10px;
 }

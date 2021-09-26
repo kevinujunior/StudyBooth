@@ -1,7 +1,7 @@
 .main{
   display: flex;
   justify-content: space-between;
-  height: 90vh;
+  height: 86vh;
 }
 
 .main > div{

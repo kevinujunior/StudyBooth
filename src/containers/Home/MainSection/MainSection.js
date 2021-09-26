@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import classes from './MainSection.css';
 
 import CreateFeed from '../../../components/MainSection/CreateFeed/CreateFeed';
-import Feed from '../../../components/MainSection/Feed/Feed';
+import Feed from '../../../components/MainSection/Feed/Post/Post';
+import TodaysWord from '../../../components/MainSection/TodaysWrod/TodaysWord';
+import Activity from '../../../components/MainSection/Activity/Activity';
 
 class MainSection extends Component {
 
@@ -17,6 +19,8 @@ class MainSection extends Component {
                 </div>
                 <div className={classes.Activity}>
                     {/* Activity */}
+                    <TodaysWord />
+                    <Activity />
                 </div>
             </div>
         );
