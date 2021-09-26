@@ -1,0 +1,21 @@
+.TodaysWord{
+    max-width: 300px;
+    min-width: 200px;
+    background-color: #F9F9F9;
+    padding: 15px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.TodaysWord > h3{
+    font-size: 20px;
+    text-align: center;
+}
+
+.TodaysWord > div {
+    padding: 5px;
+}
+
+.TodaysWord > p{
+    color: black;
+}
