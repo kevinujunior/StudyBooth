@@ -1,11 +1,10 @@
 .Post{
     box-sizing: border-box;
-    min-width: 350px;
-    max-width: 650px;
     background-color: #e7e4e4;
     padding: 20px;
     border-radius: 15px;
-    margin-bottom: 20px;
+    margin: 15px 5px;
+    min-width: 300px;
 }
 .Post > div{
     margin-bottom: 10px;
@@ -33,8 +32,16 @@
     margin-left: 10px;
 }
 
+.PostImage{
+    height: 300px;
+    display: flex;
+    align-items: center;
+}
 .PostImage > img {
-    width: 100%;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
 }
 
 .Interact{
@@ -46,8 +53,8 @@
 }
 
 .Icons{
+    width: 100%;
     box-sizing: border-box;
-    padding-right: 20px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -62,7 +69,7 @@
 }
 
 .IconRight{
-    width: 15%;
+    width: 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -76,3 +83,4 @@
 #cool{
     color:  purple;
 }
+

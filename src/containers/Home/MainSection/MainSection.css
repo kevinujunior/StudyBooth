@@ -6,7 +6,6 @@
     width: 100%;
     border-radius: 10px;
     padding: 20px;
-    overflow-y: scroll;
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -17,19 +16,38 @@
     height: 1px;
     width: 100%;
     background-color: black;
+    /* margin: 0 10px; */
 }
 
 .Feed > div{
     margin-bottom: 10px;
 }
 
-
-.Activity{
-    margin-left: 20px;
+.Feed{
+    flex: 1.5;
+    scrollbar-width: thin;
+    overflow-y: scroll;
 }
 
-@media (max-width: 750px){
+.Activity{
+    flex:1;
+    margin-left: 20px;
+    overflow-y: scroll;
+}
+
+.Activity::-webkit-scrollbar{
+    display: none;
+}
+
+@media (max-width: 600px){
     .Activity{
         display: none;
     }
+    .Feed{
+        width: 100%;
+    }
+    .MainSection{
+        padding:10px;
+    }
 }
+

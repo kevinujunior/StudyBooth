@@ -1,6 +1,4 @@
 .TodaysWord{
-    max-width: 300px;
-    min-width: 200px;
     background-color: #F9F9F9;
     padding: 15px;
     border-radius: 15px;
@@ -13,10 +11,14 @@
 }
 
 .TodaysWord > div {
-    padding: 5px;
+    padding-left: 5px;
 }
 
 .TodaysWord > p{
     color: black;
-    
+    padding-left: 5px;
+}
+
+.TodaysWord > div > p{
+    font-size: 12px;
 }

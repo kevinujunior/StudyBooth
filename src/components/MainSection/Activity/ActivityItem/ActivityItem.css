@@ -5,10 +5,18 @@
     justify-content: space-between;
     border-bottom: 1px solid lightgrey;
     padding: 7px;
+    /* margin-top: 5px; */
+    align-items: center;
 }
 
-.ActivityItem img{
-    height: 30px;
-    width: 30px;
+.ActivityItem > img{
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
+}
+
+.MyImage > img{
+    height: 40px;
+    width: 40px;
+    border-radius: none !important;
 }

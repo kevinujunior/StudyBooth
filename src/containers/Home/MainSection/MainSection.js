@@ -4,7 +4,7 @@ import classes from './MainSection.css';
 
 import CreateFeed from '../../../components/MainSection/CreateFeed/CreateFeed';
 import Feed from '../../../components/MainSection/Feed/Feed';
-import TodaysWord from '../../../components/MainSection/TodaysWrod/TodaysWord';
+import TodaysWord from '../../../components/MainSection/TodaysWord/TodaysWord';
 import Activity from '../../../components/MainSection/Activity/Activity';
 
 class MainSection extends Component {
