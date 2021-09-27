@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import classes from './MainSection.css';
 
 import CreateFeed from '../../../components/MainSection/CreateFeed/CreateFeed';
-import Feed from '../../../components/MainSection/Feed/Post/Post';
+import Feed from '../../../components/MainSection/Feed/Feed';
 import TodaysWord from '../../../components/MainSection/TodaysWrod/TodaysWord';
 import Activity from '../../../components/MainSection/Activity/Activity';
 

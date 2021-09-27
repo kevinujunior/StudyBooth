@@ -1,12 +1,13 @@
-.Feed{
+.Post{
     box-sizing: border-box;
-    width: 500px;
+    min-width: 350px;
+    max-width: 650px;
     background-color: #e7e4e4;
     padding: 20px;
-  
     border-radius: 15px;
+    margin-bottom: 20px;
 }
-.Feed > div{
+.Post > div{
     margin-bottom: 10px;
 
 }
@@ -32,14 +33,21 @@
     margin-left: 10px;
 }
 
+.PostImage > img {
+    width: 100%;
+}
+
 .Interact{
     margin-top: 5px;
     display: flex;
     width: 100%;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .Icons{
+    box-sizing: border-box;
+    padding-right: 20px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -59,6 +67,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
 
 .PostInfo{
     padding: 0px 5px;

@@ -8,18 +8,18 @@ import ShareIcon from '@mui/icons-material/Share';
 import DownloadIcon from '@mui/icons-material/Download';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {IconButton } from '@mui/material';
-const Feed = () => {
+const Feed = (props) => {
     return (
-        <div className={classes.Feed}>
+        <div className={classes.Post}>
             <div className={classes.Header}>
                 <div className={classes.NamePhoto}>
-                    <img src = "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" />
-                    <p>Alien</p>
+                    <img src = {props.profileImage} alt=""/>
+                    <p>{props.name}</p>
                 </div>
-                <p>Science</p>
+                <p>{props.category}</p>
             </div>
-            <div className={classes.Post}>
-                <img src = "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" />
+            <div className={classes.PostImage}>
+                <img src = {props.postImage}  alt=""/>
             </div>
             <div className={classes.Interact}>
                 <div className={classes.Icons}>
@@ -47,8 +47,8 @@ const Feed = () => {
                     </div>
                 </div>
                 <div className={classes.PostInfo}>
-                    <h4 id={classes.cool}>Alien</h4>
-                    <p>See this is my thopda.</p>
+                    <h4 >{props.name}</h4>
+                    <p>{props.about}</p>
                 </div>
             </div>
         </div>

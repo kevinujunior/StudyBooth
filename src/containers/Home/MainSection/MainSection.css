@@ -10,7 +10,7 @@
     background-color: white;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .Line{
@@ -25,5 +25,11 @@
 
 
 .Activity{
-    margin-left: 10px;
+    margin-left: 20px;
+}
+
+@media (max-width: 750px){
+    .Activity{
+        display: none;
+    }
 }
