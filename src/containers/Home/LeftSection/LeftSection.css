@@ -1,16 +1,18 @@
 .leftSection{
-    background-color: rgba(29, 31, 41,1);
-    /* background-color:wheat; */
+    /* background-color: rgba(29, 31, 41,1); */
+    background-color: white;
+   
     height : 82.5vh;
     width:24%;
     display: list-item;
-    /* margin-top:0px; */
+    min-width: 150px;
+    max-width: 200px;
     margin-left:1%;
     overflow-y :auto;
     border-radius: 20px;
-    padding: 0.85%;
+    padding: 10px;
     position: sticky;
-    box-shadow: 0 2px 3px grey;
+    box-shadow: 0 1px 2px grey;
    
 }
 
@@ -28,14 +30,15 @@
 .sectionContainer{
     margin-bottom: 2px;
     font-size: 12px;
-    margin-left: 2px;
+    margin-left: 1%;
     margin-top: 20px;
 }
 
 .sectionName{
     font-size: 12px;
     margin-left: 6px;
-    color: white;
+    /* color: white; */
+    color:black;
     margin-bottom: 2px;
 }
 
@@ -44,12 +47,13 @@
     display:flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    /* background-color: pink; */
-    height: 32px;
+
+    height: 35px;
+    max-height: 35px;
     width: 100%;
-    padding-left: 5px;
+    padding-left: 0px;
     text-decoration: none;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     transition-duration: 200ms;
     border-radius: 5px;
     
@@ -57,21 +61,23 @@
 }
 
 .individualSection:hover{
-    background-color:rgb(88, 88, 88);
-        color: rgb(71, 71, 68);
+    background-color:rgb(224, 223, 223);
+        /* color: rgb(71, 71, 68); */
+        color: rgb(178, 178, 178);
         text-decoration: none;
 }
 
 .sectionIconHolder{
-    max-width: 50%;
+    max-width: 100%;
     /* background-color: green; */
     height: 100%;
-    margin-right: 8px;
+    margin-right: 1px;
+    margin-left:2px ;
 
 }
 
 .sectionImage{
-    width: 80%;
+    width: 100%;
     height: 100%; 
     object-fit: contain;
 }
@@ -79,44 +85,41 @@
 .sectionTextHolder{
    
     width:70%;
-    height: 100%;
+
     padding-left: 5px;
     display: inherit;
     justify-content:flex-start;
-    /* background-color: aqua; */
+
+    align-self: center;
     
 }
 .sectionText{
     /* background-color:white; */
     align-self: center;
     width: 100%;
-    /* height: 100%; */
-    font-size: 13px;
+    font-size: 14px;
     object-fit: contain;
-    color:white;
-   font-weight: 400;
+    /* color:white; */
+    color:black;
+   font-weight: 630;
    font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
 
 .star{
-    /* background-color:white; */
+  
     display: flex;
     justify-content: space-around;
     object-fit: contain;
-    width: 20%;
+    width: 18%;
     height: 100%;
 }
 
-/* a:-webkit-any-link {
-    color: pink;
-    cursor: pointer;
-} */
+
 
 .starButton{
-    width: 50%;
+    width: 70%;
     align-self: center;
-    /* background-color: peru; */
     object-fit: contain;
     fill:rgb(69, 69, 69)
 }
