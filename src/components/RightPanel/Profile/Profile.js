@@ -30,7 +30,7 @@ const profile = () => {
                     </div>
                     <div>
                         <button>Edit Profile</button>
-                        <button>View Profile stats</button>
+                        <button>Profile stats</button>
                     </div>
                 </div>
             </div>

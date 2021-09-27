@@ -8,6 +8,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom:10px;
+      
         /* positioning */
         position: sticky;
         z-index: 100;

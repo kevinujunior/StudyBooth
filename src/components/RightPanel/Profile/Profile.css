@@ -7,7 +7,7 @@
     box-shadow: 0 2px 3px #ccc;
     align-items: center;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 25px;
     background-color: white;
 }
 
@@ -48,10 +48,10 @@
 }
 
 .stats button {
-    font-size: 12px;
+    font-size: 11.5px;
     outline: none;
-    padding: 6px;
-    border-radius: 10px;
+    padding: 7px;
+    border-radius: 14px;
     border: none;
     cursor: pointer;
     background-color: #1DA1F2;
