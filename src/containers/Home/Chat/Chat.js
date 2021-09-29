@@ -4,6 +4,9 @@ import classes from './Chat.css';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {IconButton} from '@mui/material';
+
+import PersonalChat from '../../../components/Home/Chat/PersonalChat/Chat';
+
 class Chat extends Component {
 
     render(){
@@ -25,7 +28,7 @@ class Chat extends Component {
                     </div>
                 </div>
                 <div>
-
+                    <PersonalChat />
                 </div>
             </div>
         );
