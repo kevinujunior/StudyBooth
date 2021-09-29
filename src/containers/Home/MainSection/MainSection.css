@@ -24,7 +24,7 @@
 }
 
 .Feed{
-    flex: 1.5;
+    flex: 1.7;
     scrollbar-width: thin;
     overflow-y: scroll;
 }
@@ -39,15 +39,24 @@
     display: none;
 }
 
+@media (max-width: 900px){
+    .Feed{
+        flex: 1.5;
+    }
+    .Activity{
+        margin-left: 10px;
+    }
+    .MainSection{
+        padding:10px;
+    }
+}
+
 @media (max-width: 600px){
     .Activity{
         display: none;
     }
     .Feed{
         width: 100%;
-    }
-    .MainSection{
-        padding:10px;
     }
 }
 
