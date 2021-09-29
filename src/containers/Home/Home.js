@@ -13,8 +13,7 @@ function Home() {
             <div className={classes.main}>
                 <LeftSection/>
                 <MainSection />
-                {/* <RightPanel /> */}
-                <Chat />
+                <RightPanel />
             </div>
             {/* <h4>Home</h4> */}
             {/* Left Sidebar */}
