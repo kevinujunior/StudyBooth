@@ -7,16 +7,17 @@
     padding: 7px;
     /* margin-top: 5px; */
     align-items: center;
+    font-size: 11.5px;
 }
 
 .ActivityItem > img{
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 36x;
     border-radius: 50%;
 }
 
 .MyImage > img{
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 36px;
     border-radius: none !important;
 }
