@@ -1,0 +1,43 @@
+.Chat{
+    height: 100%;
+    max-width: 320px;
+    min-width: 300px;
+    background-color: white;
+    padding:10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 3px #ccc;
+    border: 1px solid #eee;
+}
+
+.Header {
+    width: 100%;
+    background-color: #F9F9F9;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.Switch{
+    display: inline-block;
+    margin:auto;
+}
+
+.Switch > button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 5px;
+}
+
+.ActiveButton {
+    border-bottom: 2px solid grey !important;
+}
+
+.Option{
+    display: inline-block;
+    float: right;
+}

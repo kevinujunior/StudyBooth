@@ -2,7 +2,7 @@ import React from 'react'
 import './HeaderMobile.css'
 import classes from './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
-import logo from '../../assets/logo3.png'
+import logo from '../../../assets/logo3.png'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';

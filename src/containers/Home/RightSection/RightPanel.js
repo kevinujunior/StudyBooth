@@ -1,8 +1,8 @@
 import React , {Component} from "react";
 
 //This Component will be used to render right Panel of home page.
-import Profile from "../../../components/RightPanel/Profile/Profile";
-import TopNews from "../../../components/RightPanel/TopNews/TopNews";
+import Profile from "../../../components/Home/RightPanel/Profile/Profile";
+import TopNews from "../../../components/Home/RightPanel/TopNews/TopNews";
 import classes from './RightPanel.css';
 
 

@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 
 import classes from './MainSection.css';
 
-import CreateFeed from '../../../components/MainSection/CreateFeed/CreateFeed';
-import Feed from '../../../components/MainSection/Feed/Feed';
-import TodaysWord from '../../../components/MainSection/TodaysWord/TodaysWord';
-import Activity from '../../../components/MainSection/Activity/Activity';
+import CreateFeed from '../../../components/Home/MainSection/CreateFeed/CreateFeed';
+import Feed from '../../../components/Home/MainSection/Feed/Feed';
+import TodaysWord from '../../../components/Home/MainSection/TodaysWord/TodaysWord';
+import Activity from '../../../components/Home/MainSection/Activity/Activity';
 
 class MainSection extends Component {
 
