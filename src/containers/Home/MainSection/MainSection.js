@@ -14,14 +14,13 @@ class MainSection extends Component {
             <div className={classes.MainSection}>
                 <div className={classes.Feed}>
                     <CreateFeed />
-                    <div className={classes.Line}></div>
+                    {/* <div className={classes.Line}></div> */}
                     <Feed />
                 </div>
-                <div className={classes.Activity}>
-                    {/* Activity */}
+                {/* <div className={classes.Activity}>
                     <TodaysWord />
                     <Activity />
-                </div>
+                </div> */}
             </div>
         );
     }

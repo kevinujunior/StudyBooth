@@ -9,9 +9,17 @@ import PersonalChat from '../../../components/Home/Chat/PersonalChat/Chat';
 
 class Chat extends Component {
 
+    componentDidUpdate(){
+        console.log(this.props)
+    }
     render(){
+        let chatclasses = [classes.Chat];
+
+        if(this.props.isActive){
+            chatclasses.push(classes.ActiveChat)
+        }
         return (
-            <div className={classes.Chat}>
+            <div className={chatclasses.join(" ")}>
                 <div className={classes.Header}>
                     <div></div>
                     <div className={classes.Switch}>

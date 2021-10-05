@@ -1,11 +1,12 @@
 .CreateFeed {
     box-sizing: border-box;
-    background-color: #e7e4e4;
+    background-color: #e0dfdf;
     padding: 10px;
-    /* min-width: 300px;
-    max-width: 650px; */
+    min-width: 300px;
+    max-width: 550px;
     border-radius: 15px;
-    margin: 0 5px;
+    /* margin: 0 5px; */
+    margin: 10px auto;
 }
 
 .Type{
