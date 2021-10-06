@@ -32,11 +32,6 @@ class Home extends Component {
                     <RightPanel />
                 </div>
                 <Chat isActive = {this.state.isChatActive} />
-                {/* <h4>Home</h4> */}
-                {/* Left Sidebar */}
-                {/* Feed */}
-                {/* Right Sidebar */}
-                {/* Footer */}
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}
                 </button>
