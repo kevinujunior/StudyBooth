@@ -33,7 +33,7 @@ const Feed = (props) => {
                 <div className={classes.Icons}>
                     <div className={classes.IconLeft}>
                         <IconButton>
-                            <ThumbUpIcon style={{color: "green"}}/>
+                            <ThumbUpIcon style={{color: "coral"}}/>
                         </IconButton>
                         <IconButton>
                             <ThumbDownIcon style={{color: "lightblue"}}/>
@@ -41,7 +41,7 @@ const Feed = (props) => {
                     </div>
                     <div className={classes.VerticalLine}></div>
                     <div className={classes.Comment}>
-                        <input type="text" placeholder="write a comment"/>
+                        <input type="text" placeholder="write a comment..."/>
                     </div>
                 </div>
                 

@@ -3,7 +3,9 @@
     flex-direction: column;
     height: 100%;
     max-width: 320px;
-    position: relative;
+    position: sticky;
+    right: 0px;
+    top: 90px;
 }
 
 

@@ -2,7 +2,7 @@
     /* background-color: rgba(29, 31, 41,1); */
     background-color: white;
    
-    height : 97%;
+    height : 85vh;
     width:25%;
     display: list-item;
     min-width: 150px;
@@ -11,9 +11,10 @@
     overflow-y :auto;
     border-radius: 10px;
     padding: 10px;
-    position: sticky;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-   
+    position: sticky;
+    right: 0px;
+    top: 90px;
    
 }
 

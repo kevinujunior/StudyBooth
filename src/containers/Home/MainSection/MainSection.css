@@ -47,9 +47,6 @@
     .Activity{
         margin-left: 10px;
     }
-    .MainSection{
-        padding:10px;
-    }
 }
 
 @media (max-width: 600px){
@@ -58,6 +55,9 @@
     }
     .Feed{
         width: 100%;
+    }
+    .MainSection{
+        padding: 0px;
     }
 }
 

@@ -7,7 +7,7 @@
   justify-content: center;
   max-width:1400px;
   margin: auto;
-
+  position: relative;
 }
 
 .main > div{
