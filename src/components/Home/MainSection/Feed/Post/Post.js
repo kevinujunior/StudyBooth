@@ -3,10 +3,10 @@ import classes from './Post.css';
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import CommentIcon from '@mui/icons-material/Comment';
-import ShareIcon from '@mui/icons-material/Share';
-import DownloadIcon from '@mui/icons-material/Download';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+// import ShareIcon from '@mui/icons-material/Share';
+// import DownloadIcon from '@mui/icons-material/Download';
+// import BookmarkIcon from '@mui/icons-material/Bookmark';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {IconButton } from '@mui/material';
 const Feed = (props) => {
     return (
@@ -16,7 +16,15 @@ const Feed = (props) => {
                     <img src = {props.profileImage} alt=""/>
                     <p>{props.name}</p>
                 </div>
-                <p>{props.category}</p>
+                <div className={classes.Category}>
+                    <IconButton>
+                        <MoreVertIcon />
+                    </IconButton>
+                    <p>{props.category}</p>
+                </div>
+            </div>
+            <div className={classes.PostInfo}>
+                <p>{props.about}</p>
             </div>
             <div className={classes.PostImage}>
                 <img src = {props.postImage}  alt=""/>
@@ -30,26 +38,13 @@ const Feed = (props) => {
                         <IconButton>
                             <ThumbDownIcon style={{color: "lightblue"}}/>
                         </IconButton>
-                        <IconButton>
-                            <CommentIcon />
-                        </IconButton>
-                        <IconButton>
-                             <ShareIcon />
-                        </IconButton>
                     </div>
-                    <div className={classes.IconRight}>
-                        <IconButton>
-                            <DownloadIcon />
-                        </IconButton>
-                        <IconButton>
-                             <BookmarkIcon />
-                        </IconButton>
+                    <div className={classes.VerticalLine}></div>
+                    <div className={classes.Comment}>
+                        <input type="text" placeholder="write a comment"/>
                     </div>
                 </div>
-                <div className={classes.PostInfo}>
-                    <h4 >{props.name}</h4>
-                    <p>{props.about}</p>
-                </div>
+                
             </div>
         </div>
     )
