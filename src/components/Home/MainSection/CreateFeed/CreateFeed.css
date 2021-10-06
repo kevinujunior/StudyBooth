@@ -1,12 +1,15 @@
 .CreateFeed {
     box-sizing: border-box;
     background-color: #e0dfdf;
-    padding: 10px;
+    padding: 10px 20px;
     min-width: 300px;
     max-width: 550px;
     border-radius: 15px;
     /* margin: 0 5px; */
-    margin: 10px auto;
+    margin: 0px auto 10px auto;
+    background-color: white;
+    border: 1px solid #eee;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .Type{
@@ -21,12 +24,29 @@
     width: 50px;
     border-radius: 50%;
 }
-.Type input{
-    margin-left: 20px;
+.Type textarea{
+    margin: 10px 10px 0px 10px;
     height: 35px;
     outline: none;
-    border-radius: 15px;
+    border: none;
     background-color: #F3F3F3;
+    word-break: break-all;
+    width: 100%;
+    min-height: 50px;
+    background-color: white;
+    font-family: inherit;
+    font-weight: 600;
+    word-break: normal;
+    font-size: 14px;
+    color: grey;
+    padding: 5px;
+}
+
+.line{
+    height: 0.2px;
+    width: 100%;
+    background-color: grey;
+    margin: 10px auto;
 }
 
 
