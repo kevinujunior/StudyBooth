@@ -37,6 +37,7 @@ const Feed = (props) => {
                         <IconButton>
                             <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
                         </IconButton>
+                        <p>69</p>
                     </div>
                     <div className={classes.VerticalLine}></div>
                     <div className={classes.Comment}>
