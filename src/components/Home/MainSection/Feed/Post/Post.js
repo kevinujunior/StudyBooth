@@ -35,7 +35,7 @@ const Feed = (props) => {
                 <div className={classes.Icons}>
                     <div className={classes.IconLeft}>
                         <IconButton>
-                            <FavoriteBorderOutlinedIcon />
+                            <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
                         </IconButton>
                     </div>
                     <div className={classes.VerticalLine}></div>
@@ -43,7 +43,7 @@ const Feed = (props) => {
                         <input type="text" placeholder="write a comment..."/>
                     </div>
                     <IconButton>
-                        <SendRoundedIcon />
+                        <SendRoundedIcon style={{color:"#1e90ff"}}/>
                     </IconButton>
                 </div>
                 

@@ -32,13 +32,6 @@ const Feed = () => {
             postImage:"https://memeguy.com/photos/images/ai-or-unsupervised-machine-learning--381874.jpg",
             about: "6mm thickness 😊👌",
         },
-        {
-            name: "Jeff Bezos",
-            category: "Money",
-            profileImage : "https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg",
-            postImage:"https://pbs.twimg.com/profile_images/669103856106668033/UF3cgUk4_400x400.jpg",
-            about: "My scalp is shining like sun cool.(*crying inside)",
-        },
     ];
 
     let postList = posts.map((post,index) => {
