@@ -1,12 +1,14 @@
 import React from 'react';
 import classes from './Post.css';
 
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 // import ShareIcon from '@mui/icons-material/Share';
 // import DownloadIcon from '@mui/icons-material/Download';
 // import BookmarkIcon from '@mui/icons-material/Bookmark';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 const Feed = (props) => {
     return (
@@ -17,10 +19,10 @@ const Feed = (props) => {
                     <p>{props.name}</p>
                 </div>
                 <div className={classes.Category}>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
                     <p>{props.category}</p>
+                    <IconButton>
+                        <MoreHorizIcon />
+                    </IconButton>
                 </div>
             </div>
             <div className={classes.PostInfo}>
@@ -33,16 +35,16 @@ const Feed = (props) => {
                 <div className={classes.Icons}>
                     <div className={classes.IconLeft}>
                         <IconButton>
-                            <ThumbUpIcon style={{color: "coral"}}/>
-                        </IconButton>
-                        <IconButton>
-                            <ThumbDownIcon style={{color: "lightblue"}}/>
+                            <FavoriteBorderOutlinedIcon />
                         </IconButton>
                     </div>
                     <div className={classes.VerticalLine}></div>
                     <div className={classes.Comment}>
                         <input type="text" placeholder="write a comment..."/>
                     </div>
+                    <IconButton>
+                        <SendRoundedIcon />
+                    </IconButton>
                 </div>
                 
             </div>

@@ -19,6 +19,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0px !important;
 }
 
 .Header img{
@@ -76,12 +77,10 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.IconButton {
-    margin: 0px 5px;
-}
+
 .Comment{
     margin-left: 5px;
-    width: 80%;
+    width: 100%;
 }
 .Comment input{
     padding: 5px 5px;
@@ -98,9 +97,7 @@
     width: 1px;
     background-color: grey;
 }
-.PostInfo{
-    padding: 0px 5px;
-}
+
 
 #cool{
     color:  purple;
