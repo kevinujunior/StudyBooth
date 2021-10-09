@@ -31,13 +31,13 @@
     border: none;
     background-color: #F3F3F3;
     word-break: break-all;
-    width: 100%;
+    min-width: 90%;
     min-height: 50px;
     background-color: white;
     font-family: inherit;
-    font-weight: 600;
+    font-weight: 500;
     word-break: normal;
-    font-size: 14px;
+    font-size: 15px;
     color: grey;
     padding: 5px;
 }

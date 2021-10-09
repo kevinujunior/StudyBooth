@@ -1,11 +1,12 @@
 .RightPanel{
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-width: 320px;
+    height: 100vh;
+    max-width: 300px;
     position: sticky;
     right: 0px;
-    top: 90px;
+    top: 80px;
+    font-family: "Work Sans";
 }
 
 

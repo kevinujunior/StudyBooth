@@ -5,14 +5,9 @@
 .main{
   display: flex;
   justify-content: center;
-  max-width:1400px;
   margin: auto;
   position: relative;
-}
-
-.main > div{
-  margin: 10px;
-  margin-top: 0px;
+  max-width: 1400px;
 }
 
 .home > h4{

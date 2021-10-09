@@ -2,39 +2,32 @@ import React , {Component} from 'react'
 import Header from '../../components/Home/Header/Header'
 import classes from './Home.css'
 import RightPanel from './RightSection/RightPanel'
-import LeftSection from './LeftSection/LeftSection';
+import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
-import Chat from './Chat/Chat';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 
 class Home extends Component {
 
     state = {
-        isChatActive: false,
+        mainVisible : "Feed",
     }
     
-    switchChatState  = (currentState) => {
-        console.log("state changed")
+    changeMainsComponent= (component) => {
         this.setState({
-            isChatActive: !currentState,
+            mainVisible: component,
         })
     }
-    
+
     render(){
-        let ButtonIcon = <ChatBubbleIcon />;
+  
         return (
             <div className={classes.Home}>
                 {/* Header */}
                 <Header />
                 <div className={classes.main}>
-                    <LeftSection/>
-                    <MainSection />
+                    <LeftPanel changeMain = {this.changeMainsComponent}/> {/* Home visiblity will be controlled from dashboard of left panel*/}
+                    <MainSection show={this.state.mainVisible} /> {/* from home we will control what should be visible in Main */}
                     <RightPanel />
                 </div>
-                <Chat isActive = {this.state.isChatActive} />
-                <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
-                    {ButtonIcon}
-                </button>
             </div>
         )
     }

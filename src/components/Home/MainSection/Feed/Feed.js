@@ -32,6 +32,7 @@ const Feed = () => {
             postImage:"https://memeguy.com/photos/images/ai-or-unsupervised-machine-learning--381874.jpg",
             about: "6mm thickness 😊👌",
         },
+        
     ];
 
     let postList = posts.map((post,index) => {

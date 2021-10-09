@@ -1,0 +1,8 @@
+.LeftPanel{
+    position: sticky;
+    top: 80px;
+    left: 0px;
+    height: 100%;
+    font-family:"Work Sans","Open Sans";
+    max-width: 300px;
+}

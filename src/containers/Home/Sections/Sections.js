@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from '../LeftSection/LeftSection.css'
+import classes from './LeftSection.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 export class LeftSection extends Component {
 

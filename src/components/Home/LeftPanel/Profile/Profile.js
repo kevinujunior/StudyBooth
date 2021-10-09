@@ -13,42 +13,27 @@ const profile = () => {
                     <p>Alien</p>
                     <p style={{fontSize:"13px"}}>Lives on mars.</p>
                 </div>
-                <div className={classes.stats}>
+            </div>
+            <div className={classes.stats}>
                     <div>
                         <div>
+                            <p><b>1</b></p>
                             <p>Post</p>
-                            <p>0</p>
                         </div>
                         <div>
+                            <p><b>100</b></p>
                             <p>Following</p>
-                            <p>100</p>
                         </div>
                         <div>
+                            <p><b>1.2M</b></p>
                             <p>Followers</p>
-                            <p>1.2M</p>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <button>Edit Profile</button>
                         <button>Profile stats</button>
-                    </div>
+                    </div> */}
                 </div>
-            </div>
-            <div className={classes.line}></div>
-            <div className = {classes.Intrest}> 
-                <p>Intrested In</p>
-                <div>
-                    <p>Science, Technology, Maths </p>
-                </div>
-                <p>Top skills</p>
-                <div>
-                    <p>Only Mastii </p>
-                </div>
-                <p>Bookmarks</p>
-                <div>
-                    <p>Reverse an array </p>
-                </div>
-            </div>
         </div>
     )
 }
