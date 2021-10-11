@@ -28,8 +28,7 @@ class DashBoard extends Component{
             <div className = {classes.DashBoard}>
                 <Profile />
                 <div>
-                    <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => this.changeSelected("Feed")} switchMain = {() => this.props.changeMain("Feed")}/>
-                    <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => this.changeSelected("Chat")} switchMain = {() => this.props.changeMain("Chat")}/>
+                    <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => this.changeSelected("Feed")}/>
                     <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
                     <Sections visible = {this.state.selected === "Sections"} />
                     <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>

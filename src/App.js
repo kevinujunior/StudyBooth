@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {!user ? <LandingPage /> : <Home />}
+            {user ? <LandingPage /> : <Home />}
           </Route>
           <Route exact path="/signup" component ={Signup}/>
           <Route exact path="/login" component = {Login} />

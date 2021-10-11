@@ -8,7 +8,7 @@ class LeftPanel extends Component{
     render(){
         return (
             <div className={classes.LeftPanel}>
-                <DashBoard changeMain = {this.props.changeMain}/>
+                <DashBoard />
             </div>
         )
     }

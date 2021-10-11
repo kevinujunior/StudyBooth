@@ -15,6 +15,9 @@ class Chat extends Component {
     render(){
         let chatclasses = [classes.Chat];
 
+        if(this.props.isActive){
+            chatclasses.push(classes.ActiveChat)
+        }
         return (
             <div className={chatclasses.join(" ")}>
                 <div className={classes.Header}>
