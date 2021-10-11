@@ -1,0 +1,39 @@
+.ActionPopUp{
+    background-color: white;
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    padding: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    visibility: hidden;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.Visible{
+    visibility: visible;
+    opacity: 1;
+}
+
+.ActionPopUp div{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.ActionPopUp div:hover{
+    background-color: #eee;
+}
+
+.ActionPopUp div > p {
+    margin-left: 10px;
+}
+
+.grey {
+    color: grey;
+}

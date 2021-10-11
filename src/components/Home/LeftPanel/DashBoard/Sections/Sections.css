@@ -1,6 +1,6 @@
 .Sections{
     margin-left: 20px;
-    display: none;
+    display:none;
 }
 
 .Visible {
@@ -9,3 +9,4 @@
 .Sections p{
     font-size: 14px;
 }
+
