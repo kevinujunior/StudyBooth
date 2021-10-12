@@ -8,7 +8,6 @@ import Signup from './components/auth/Signup';
 import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
 import * as actions from './store/actions/auth';
-
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
@@ -19,7 +18,8 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              { !this.isAuthenticated ? <Home /> : <LandingPage />}
+              {/* { this.isAuthenticated ? <Home /> : <LandingPage />} */}
+              <Home />
             </Route>
             <Route exact path="/signup" component ={Signup}/>
             <Route exact path="/login" component = {Login} />
