@@ -29,35 +29,19 @@
     height: 35px;
     outline: none;
     border: none;
-    background-color: transparent;
+    background-color: #F3F3F3;
     word-break: break-all;
     min-width: 90%;
     min-height: 50px;
+    background-color: white;
     font-family: inherit;
     font-weight: 500;
     word-break: normal;
     font-size: 15px;
     color: grey;
     padding: 5px;
-    transition: all 0.3s;
-
 }
 
-.Dark{
-    background-color: #1E2021;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    border:none;
-}
-
-.Dark .IconColor{
-    color: white;
-    border-color: white;
-}
-
-.IconColor{
-    color: grey;
-    border-color: #eee;
-}
 .line{
     height: 0.2px;
     width: 100%;

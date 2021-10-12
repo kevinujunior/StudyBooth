@@ -2,17 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducer from './Store/reducer'
+import { createStore,compose,applyMiddleware } from 'redux';
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
 
-const store =  createStore(reducer); //we have created a store and now we pass that into provider
+import reducer from './store/reducers/auth';
 
+const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(reducer, composeEnhances(
+    applyMiddleware(thunk)
+));
+
+const app = (
+  <Provider store={store}>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+  </Provider>
+)
 ReactDOM.render(
-  <Provider store = {store}> {/* provider is needed to connect redux to react so react can use the store*/}
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  app,
   document.getElementById('root')
 );

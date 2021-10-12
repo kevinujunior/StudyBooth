@@ -6,17 +6,9 @@
     left: 0px;
     width: 100%;
     z-index: 100;
+    border: 1px solid rgb(219, 219, 219);
     box-sizing: border-box;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-}
-
-.Dark{
-    background-image:linear-gradient(to right,#603FEE,#8D41EE);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-
-.Dark .IconColor{
-    color: white;
 }
 
 
@@ -65,12 +57,6 @@
     border:none;
     cursor: pointer;
     background-color: transparent;
-}
-
-.Buttons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .HamburgerButton{

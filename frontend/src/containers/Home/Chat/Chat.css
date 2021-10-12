@@ -13,29 +13,11 @@
     transition: all 0.5s;
 }
 
-.Dark{
-    background-color: #1E2021;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    border:none;
-    color: white;
-}
-
-.Dark p{
-    color: white;
-}
-.Dark .Switch{
-    color: white;
-}
-
-.Dark .IconColor{
-    color: white;
-}
-
 .Header {
     width: 100%;
+    background-color: #F9F9F9;
     display: flex;
     justify-content: space-between;
-    background-color: inherit;
 }
 
 
@@ -51,8 +33,7 @@
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
-    margin: 0px 20px;
-    color: inherit;
+    margin: 0px 5px;
 }
 
 .ActiveButton {

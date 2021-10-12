@@ -1,48 +1,22 @@
 import React from 'react';
 import classes from './Post.css';
 
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+// import ShareIcon from '@mui/icons-material/Share';
+// import DownloadIcon from '@mui/icons-material/Download';
+// import BookmarkIcon from '@mui/icons-material/Bookmark';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
-import ActionPopUp from './ActionPopup/ActionPopup';
-
-import {connect } from 'react-redux';
-
-
-class Post extends Component{
-
-    state = {
-        isActionsVisible : false,
-    }
-
-    toggleActions = (actionState) =>{
-        console.log("called")
-        this.setState({
-            isActionsVisible: !actionState,
-        })
-    }
-    
-    render(){
-        let postClasses = [classes.Post]
-        if(this.props.theme === 'dark') postClasses.push(classes.Dark);
-
-        return (
-            <div className={postClasses.join(" ")}>
-                <div className={classes.Header}>
-                    <div className={classes.NamePhoto}>
-                        <img src = {this.props.profileImage} alt=""/>
-                        <p>{this.props.name}</p>
-                    </div>
-                    <div className={classes.Category}>
-                        <p>{this.props.category}</p>
-                        <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}>
-                            <MoreHorizIcon />
-                        </IconButton>
-                    </div>
-                </div>
-                <div className={classes.PostInfo}>
-                    <p>{this.props.about}</p>
+const Feed = (props) => {
+    return (
+        <div className={classes.Post}>
+            <div className={classes.Header}>
+                <div className={classes.NamePhoto}>
+                    <img src = {props.profileImage} alt=""/>
+                    <p>{props.name}</p>
                 </div>
                 <div className={classes.Category}>
                     <p>{props.category}</p>
@@ -79,10 +53,4 @@ class Post extends Component{
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        theme: state.theme,
-    }
-}
-
-export default connect(mapStateToProps)(Post);
+export default Feed;
