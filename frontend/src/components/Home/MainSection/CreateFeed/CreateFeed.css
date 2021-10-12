@@ -73,9 +73,17 @@
     justify-content: space-around;
 }
 
+@media (max-width: 1000px){
+
+    .Type textarea{
+        min-width: 80%;
+    }
+}
+
 @media (max-width: 600px){
 
     .CreateFeed{
         margin-top: 5px;
     }
 }
+

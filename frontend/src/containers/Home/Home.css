@@ -41,6 +41,8 @@
 }
 
 
-/* .home{
-  max-width: 1600px;
-} */
+@media (max-width:400px){
+  .SwitchButton{
+    display: none;
+  }
+}
