@@ -1,16 +1,13 @@
 import React ,{Component} from 'react';
 import classes from './Post.css';
 
-// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-// import ShareIcon from '@mui/icons-material/Share';
-// import DownloadIcon from '@mui/icons-material/Download';
-// import BookmarkIcon from '@mui/icons-material/Bookmark';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
+
+import {connect } from 'react-redux';
 
 
 class Post extends Component{
@@ -27,8 +24,11 @@ class Post extends Component{
     }
     
     render(){
+        let postClasses = [classes.Post]
+        if(this.props.theme === 'dark') postClasses.push(classes.Dark);
+
         return (
-            <div className={classes.Post}>
+            <div className={postClasses.join(" ")}>
                 <div className={classes.Header}>
                     <div className={classes.NamePhoto}>
                         <img src = {this.props.profileImage} alt=""/>
@@ -71,4 +71,10 @@ class Post extends Component{
     }
 }
 
-export default Post;
+const mapStateToProps = state => {
+    return {
+        theme: state.theme,
+    }
+}
+
+export default connect(mapStateToProps)(Post);

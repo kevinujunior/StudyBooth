@@ -1,29 +1,29 @@
-import React from 'react'
-import './HeaderMobile.css'
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actionsTypes from '../../../Store/actions';
+
 import classes from './Header1.css';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../../../assets/Study_Booth.png'
-// import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-// import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
-// import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
-// import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-// import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ToggleButton from '../../UI/ToggleButton/ToggleButton';
 
 function Header(props) {
+    let headerClasses = [classes.Header];
+    if(props.theme === 'dark'){
+        headerClasses.push(classes.Dark);
+    }
+
     return (
-        <div className={classes.Header}>
+        <div className={headerClasses.join(" ")}>
             <div className={classes.HeaderContent}>
                 <div >        
-                    {/* <IconButton>
-                        <MenuIcon />
-                    </IconButton> */}
                     <img src={logo} alt="" />
                     <div className={classes.HamburgerButton}>
                         <IconButton onClick={props.onHamburgerClick}>
-                            <MenuIcon />
+                            <MenuIcon className={classes.IconColor}/>
                         </IconButton>
                     </div>
                 </div>
@@ -31,9 +31,10 @@ function Header(props) {
                     <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>
                     <button class={classes.btnSearch}>{<SearchIcon/>}</button>
                 </div>   
-                <div>
+                <div className={classes.Buttons}>
+                    <ToggleButton theme={props.theme} onClick = {() => props.onChangeTheme(props.theme)}/>
                     <IconButton>
-                        <NotificationsNoneRoundedIcon />
+                        <NotificationsNoneRoundedIcon className={classes.IconColor}/>
                     </IconButton>
                 </div>             
             </div>
@@ -41,4 +42,23 @@ function Header(props) {
     )
 }
 
-export default Header
+//here we have access to whole store and we can splice the data we want/
+const mapStateToProps = state => {
+    return {
+        theme: state.theme,
+        primaryColor: state.primaryColor
+    }
+}
+
+const mapDispathToProps = dispatch => {
+    return {
+        onChangeTheme: (theme) => {
+            //here we are changing theme of basis of current theme
+            if(theme === 'light') return dispatch({type: actionsTypes.DARK_THEME})
+            return dispatch({type: actionsTypes.LIGHT_THEME})
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(Header);
+//connect is a method to connect react component to store, it's like a subscription 

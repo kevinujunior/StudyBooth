@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import classes from './CreateFeed.css';
 
@@ -7,10 +8,12 @@ import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ArticleIcon from '@mui/icons-material/Article';
 import { IconButton, Button} from '@mui/material';
-const createFeed = () => {
+const createFeed = (props) => {
 
+    let createFeedClasses = [classes.CreateFeed]
+    if(props.theme === 'dark') createFeedClasses.push(classes.Dark);
     return (
-        <div className={classes.CreateFeed}>
+        <div className={createFeedClasses.join(" ")}>
             <div className={classes.Type}>
                 <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"/>
                 <textarea type="text" placeholder="share some experiences..."/>
@@ -18,21 +21,27 @@ const createFeed = () => {
             <div className={classes.line}></div>
             <div className={classes.Choose}>
                 <IconButton>
-                    <InsertPhotoIcon />
+                    <InsertPhotoIcon className={classes.IconColor}/>
                 </IconButton>
                 <IconButton>
-                    <VideoCameraBackIcon />
+                    <VideoCameraBackIcon className={classes.IconColor}/>
                 </IconButton>
                 <IconButton>
-                    <AddLinkIcon />
+                    <AddLinkIcon className={classes.IconColor}/>
                 </IconButton>
                 <IconButton>
-                    <ArticleIcon />
+                    <ArticleIcon className={classes.IconColor}/>
                 </IconButton>
-                <Button variant="outlined" size="small" style={{color:"grey", borderColor: "grey"}}>Share</Button>
+                <Button variant="outlined" size="small"  className={classes.IconColor}>Share</Button>
             </div>
         </div>
     );
 }
 
-export default createFeed;
+const mapStateToProps = state => {
+    return {
+        theme: state.theme,
+    }
+}
+
+export default connect(mapStateToProps)(createFeed);

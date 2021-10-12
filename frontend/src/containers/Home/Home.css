@@ -1,5 +1,11 @@
 .Home{
   position: relative;
+  transition: all 0.3s;
+  background-color: '#FAFAFA',
+}
+
+.Dark {
+  background-color: #121416;
 }
 
 .main{
