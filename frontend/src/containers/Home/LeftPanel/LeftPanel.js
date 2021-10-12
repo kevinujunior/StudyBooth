@@ -14,7 +14,7 @@ class LeftPanel extends Component{
         }
         return (
             <div className={classNames.join(' ')}>
-                <DashBoard changeMain = {this.props.changeMain}/>
+                <DashBoard />
             </div>
         )
     }

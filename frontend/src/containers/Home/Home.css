@@ -1,5 +1,10 @@
 .Home{
   position: relative;
+  transition: all 0.3s;
+}
+
+.Dark {
+  background-color: #121416;
 }
 
 .main{
