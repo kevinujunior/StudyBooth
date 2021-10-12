@@ -63,3 +63,9 @@
         margin-top: 5px;
     }
 }
+
+@media (max-width: 800px){
+    .Type textarea{
+        min-width: 80%;
+    }
+}

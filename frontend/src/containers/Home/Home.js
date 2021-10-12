@@ -11,6 +11,7 @@ class Home extends Component {
 
     state = {
         isChatActive: false,
+        isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
     }
 
     switchChatState  = (currentState) => {
@@ -20,14 +21,21 @@ class Home extends Component {
         })
     }
 
+    onHamburgerClick = (currentState) => {
+        console.log("clicked")
+        this.setState({
+            isLeftPanelVisible: !currentState,
+        })
+    }
+
     render(){
         let ButtonIcon = <ChatBubbleIcon />;
         return (
             <div className={classes.Home}>
                 {/* Header */}
-                <Header />
+                <Header onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/>
                 <div className={classes.main}>
-                    <LeftPanel/> {/* Home visiblity will be controlled from dashboard of left panel*/}
+                    <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> {/* Home visiblity will be controlled from dashboard of left panel*/}
                     <MainSection/> {/* from home we will control what should be visible in Main */}
                     <RightPanel />
                 </div>

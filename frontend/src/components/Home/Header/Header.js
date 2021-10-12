@@ -9,10 +9,10 @@ import logo from '../../../assets/Study_Booth.png'
 // import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 // import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
-import { Avatar, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Header() {
+function Header(props) {
     return (
         <div className={classes.Header}>
             <div className={classes.HeaderContent}>
@@ -21,6 +21,11 @@ function Header() {
                         <MenuIcon />
                     </IconButton> */}
                     <img src={logo} alt="" />
+                    <div className={classes.HamburgerButton}>
+                        <IconButton onClick={props.onHamburgerClick}>
+                            <MenuIcon />
+                        </IconButton>
+                    </div>
                 </div>
                 <div className={classes.Input}>
                     <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>

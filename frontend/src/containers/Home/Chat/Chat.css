@@ -6,7 +6,6 @@
     /* overflow-y: scroll; */
     box-sizing: border-box;
     box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
-    border: 1px solid #eee;
     position: fixed;
     right: -100%;
     top: 79px;
@@ -49,4 +48,24 @@
 .Option{
     display: inline-block;
     float: right;
+}
+
+@media (max-width: 700px){
+    .Chat{
+        top:60px;
+        max-width: 300px;
+    }
+
+}
+
+@media (max-width:580px) {
+    .Chat{
+        top: 52px;
+    }
+}
+
+@media (max-width: 400px){
+    .Chat{
+        display: none;
+    }
 }
