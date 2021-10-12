@@ -1,4 +1,5 @@
 import React , {Component} from "react";
+import {connect} from 'react-redux';
 
 //This Component will be used to render right Panel of home page.
 import classes from './RightPanel.css';
@@ -9,14 +10,20 @@ class RightPanel extends Component {
 
   
     render(){
-
-
+        let classNames = [classes.RightPanel];
+        if(this.props.theme === 'dark') classNames.push(classes.Dark)
         return (
-            <div className={classes.RightPanel}>
+            <div className={classNames.join(" ")}>
                 <Activity />
             </div>
         );
     }
 }
 
-export default RightPanel;
+const mapStateToProps = state => {
+    return {
+        theme: state.theme,
+    }
+}
+
+export default connect(mapStateToProps)(RightPanel);

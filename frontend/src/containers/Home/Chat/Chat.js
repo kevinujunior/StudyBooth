@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import classes from './Chat.css';
+import {connect } from 'react-redux';
 
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {IconButton} from '@mui/material';
+
 
 import PersonalChat from '../../../components/Home/Chat/PersonalChat/Chat';
 
@@ -14,7 +16,10 @@ class Chat extends Component {
     }
     render(){
         let chatclasses = [classes.Chat];
-
+        if(this.props.theme === 'dark') chatclasses.push(classes.Dark)
+        if(this.props.isActive){
+            chatclasses.push(classes.ActiveChat)
+        }
         return (
             <div className={chatclasses.join(" ")}>
                 <div className={classes.Header}>
@@ -25,10 +30,10 @@ class Chat extends Component {
                     </div>
                     <div className={classes.Option}>
                         <IconButton>
-                            <SearchIcon />
+                            <SearchIcon className={classes.IconColor}/>
                         </IconButton>
                         <IconButton>
-                            <MoreVertIcon />
+                            <MoreVertIcon className={classes.IconColor} />
                         </IconButton>
                     </div>
                 </div>
@@ -40,4 +45,10 @@ class Chat extends Component {
     }
 }
 
-export default Chat;
+const mapStateToProps = state => {
+    return {
+        theme: state.theme,
+    }
+}
+
+export default connect(mapStateToProps)(Chat);

@@ -1,8 +1,45 @@
 .LeftPanel{
     position: sticky;
-    top: 80px;
-    left: 0px;
+    top: 77px;
+    left: 0%;
     height: 100%;
     font-family:"Work Sans","Open Sans";
     max-width: 300px;
+    transition: all 0.3s;
+    background-color: white;
+    transition: all 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.Visible{
+    left: 0%;
+}
+
+.Dark{
+    background-color: #1E2021;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border:none;
+}
+
+.Dark p{
+    color: white;
+}
+
+@media (max-width: 700px){
+    .LeftPanel{
+        top: 60px;
+    }
+}
+
+@media (max-width: 580px){
+    .LeftPanel{
+        position: fixed;
+        left: -100%;
+        top: 50px;
+        z-index: 100;
+        width: 80%;
+    }
+    .Visible{
+        left: 0%;
+    }
 }

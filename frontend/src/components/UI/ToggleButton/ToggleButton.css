@@ -1,0 +1,29 @@
+.ToggleButton{
+    height: 24px;
+    width: 50px;
+    border-radius: 20px;
+    background-color: lightgray;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    box-sizing: border-box;
+    padding:2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.Circle{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: grey;
+    position: absolute;
+    transition: all 0.3s;
+    cursor: pointer;
+    left: 5%;
+    transition: all 0.3s;
+}
+
+
+.right{
+    transform:translateX(130%)
+}

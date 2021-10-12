@@ -4,6 +4,9 @@ import classes from './Home.css'
 import RightPanel from './RightSection/RightPanel'
 import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
+import Chat from './Chat/Chat';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import {connect } from 'react-redux';
 
 class Home extends Component {
 
@@ -17,10 +20,16 @@ class Home extends Component {
         })
     }
 
+
     render(){
-  
+        let ButtonIcon = <ChatBubbleIcon />;
+        let homeClasses = [classes.Home];
+        if(this.props.theme === 'dark'){
+            homeClasses.push(classes.Dark);
+        }
+       
         return (
-            <div className={classes.Home}>
+            <div className={homeClasses.join(" ")} >
                 {/* Header */}
                 <Header />
                 <div className={classes.main}>
@@ -33,4 +42,9 @@ class Home extends Component {
     }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        theme: state.theme,
+    }
+}
+export default connect(mapStateToProps)(Home)
