@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import React from 'react';
 import classes from './Post.css';
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -44,31 +44,39 @@ class Post extends Component{
                 <div className={classes.PostInfo}>
                     <p>{this.props.about}</p>
                 </div>
-                <div className={classes.PostImage}>
-                    <img src = {this.props.postImage}  alt=""/>
+                <div className={classes.Category}>
+                    <p>{props.category}</p>
+                    <IconButton>
+                        <MoreHorizIcon />
+                    </IconButton>
                 </div>
-                <div className={classes.Interact}>
-                    <div className={classes.Icons}>
-                        <div className={classes.IconLeft}>
-                            <IconButton>
-                                <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
-                            </IconButton>
-                            <p>69</p>
-                        </div>
-                        <div className={classes.VerticalLine}></div>
-                        <div className={classes.Comment}>
-                            <input type="text" placeholder="write a comment..."/>
-                        </div>
-                        <IconButton>
-                            <SendRoundedIcon style={{color:"#1e90ff"}}/>
-                        </IconButton>
-                    </div>
-                    
-                </div>
-                <ActionPopUp Visible={this.state.isActionsVisible}/>
             </div>
-        )
-    }
+            <div className={classes.PostInfo}>
+                <p>{props.about}</p>
+            </div>
+            <div className={classes.PostImage}>
+                <img src = {props.postImage}  alt=""/>
+            </div>
+            <div className={classes.Interact}>
+                <div className={classes.Icons}>
+                    <div className={classes.IconLeft}>
+                        <IconButton>
+                            <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
+                        </IconButton>
+                        <p>69</p>
+                    </div>
+                    <div className={classes.VerticalLine}></div>
+                    <div className={classes.Comment}>
+                        <input type="text" placeholder="write a comment..."/>
+                    </div>
+                    <IconButton>
+                        <SendRoundedIcon style={{color:"#1e90ff"}}/>
+                    </IconButton>
+                </div>
+                
+            </div>
+        </div>
+    )
 }
 
 const mapStateToProps = state => {

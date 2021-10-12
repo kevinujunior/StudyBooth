@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 
 //This Component will be used to render right Panel of home page.
 import classes from './RightPanel.css';
-import Activity from "../../../components/Home/RightPanel/Activity/Activity";
-import TopNews from '../../../components/Home/RightPanel/TopNews/TopNews'
+import Activity from "../../../components/Home/RightPanel/Activity/Activity"
 
 
 class RightPanel extends Component {
@@ -16,7 +15,6 @@ class RightPanel extends Component {
         return (
             <div className={classNames.join(" ")}>
                 <Activity />
-                <TopNews  />
             </div>
         );
     }

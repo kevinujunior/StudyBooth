@@ -5,9 +5,7 @@ import DashBoard from '../../../components/Home/LeftPanel/DashBoard/DashBoard';
 import {connect} from 'react-redux';
 
 class LeftPanel extends Component{
-    componentDidUpdate(){
-        console.log(this.props)
-    }
+    
     render(){
         let classNames = [classes.LeftPanel];
         if(this.props.theme === 'dark') classNames.push(classes.Dark)
@@ -15,8 +13,8 @@ class LeftPanel extends Component{
             classNames.push(classes.Visible)
         }
         return (
-            <div className={classNames.join(" ")}>
-                <DashBoard />
+            <div className={classes.LeftPanel}>
+                <DashBoard changeMain = {this.props.changeMain}/>
             </div>
         )
     }

@@ -27,7 +27,9 @@ function Header(props) {
                         </IconButton>
                     </div>
                 </div>
-                <div className={classes.Input}>
+                <img src={logo} alt="" />
+                <div className={classes.header__input}>
+                    <button class={classes.btnSearch}><i class="fas fa-search"><SearchIcon/></i></button>
                     <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>
                     <button class={classes.btnSearch}>{<SearchIcon/>}</button>
                 </div>   

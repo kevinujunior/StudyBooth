@@ -11,21 +11,12 @@ import {connect } from 'react-redux';
 class Home extends Component {
 
     state = {
-        isChatActive: false,
-        isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
+        mainVisible : "Feed",
     }
-
-    switchChatState  = (currentState) => {
-        console.log("state changed")
+    
+    changeMainsComponent= (component) => {
         this.setState({
-            isChatActive: !currentState,
-        })
-    }
-
-    onHamburgerClick = (currentState) => {
-        console.log("clicked")
-        this.setState({
-            isLeftPanelVisible: !currentState,
+            mainVisible: component,
         })
     }
 
@@ -40,16 +31,12 @@ class Home extends Component {
         return (
             <div className={homeClasses.join(" ")} >
                 {/* Header */}
-                <Header onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/>
+                <Header />
                 <div className={classes.main}>
-                    <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> {/* Home visiblity will be controlled from dashboard of left panel*/}
-                    <MainSection/> {/* from home we will control what should be visible in Main */}
+                    <LeftPanel changeMain = {this.changeMainsComponent}/> {/* Home visiblity will be controlled from dashboard of left panel*/}
+                    <MainSection show={this.state.mainVisible} /> {/* from home we will control what should be visible in Main */}
                     <RightPanel />
                 </div>
-                <Chat isActive = {this.state.isChatActive} />
-                <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
-                    {ButtonIcon}
-                </button>
             </div>
         )
     }
