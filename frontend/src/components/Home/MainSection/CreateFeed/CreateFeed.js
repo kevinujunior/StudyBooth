@@ -40,7 +40,7 @@ const createFeed = (props) => {
 
 const mapStateToProps = state => {
     return {
-        theme: state.theme,
+        theme: state.theme.theme,
     }
 }
 

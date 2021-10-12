@@ -31,7 +31,7 @@
     }
 }
 
-@media (max-width: 580px){
+@media (max-width: 630px){
     .LeftPanel{
         position: fixed;
         left: -100%;

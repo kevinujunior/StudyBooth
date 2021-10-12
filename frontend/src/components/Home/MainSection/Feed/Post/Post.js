@@ -1,6 +1,5 @@
-import React ,{Component} from 'react';
+import React, {Component} from 'react';
 import classes from './Post.css';
-
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -28,7 +27,7 @@ class Post extends Component{
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
         return (
-            <div className={postClasses.join(" ")}>
+            <div className={postClasses.join(' ')}>
                 <div className={classes.Header}>
                     <div className={classes.NamePhoto}>
                         <img src = {this.props.profileImage} alt=""/>
@@ -67,13 +66,13 @@ class Post extends Component{
                 </div>
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
             </div>
-        )
-    }
+    )
+  }
 }
 
 const mapStateToProps = state => {
     return {
-        theme: state.theme,
+        theme: state.theme.theme,
     }
 }
 

@@ -10,7 +10,7 @@ import { faRobot, faFlask, faSquareRootAlt } from '@fortawesome/free-solid-svg-i
 const Sections = (props) => {
 
     let ClassNames = [classes.Sections];
-    if(props.visible){
+    if(!props.visible){
         ClassNames.push(classes.Visible)
     }
     return (

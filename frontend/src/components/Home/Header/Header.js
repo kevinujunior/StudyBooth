@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actionsTypes from '../../../Store/actions';
+import * as actionsTypes from '../../../store/actions/actionTypes';
 
 import classes from './Header1.css';
 import SearchIcon from '@mui/icons-material/Search';
@@ -45,8 +45,7 @@ function Header(props) {
 //here we have access to whole store and we can splice the data we want/
 const mapStateToProps = state => {
     return {
-        theme: state.theme,
-        primaryColor: state.primaryColor
+        theme: state.theme.theme,
     }
 }
 

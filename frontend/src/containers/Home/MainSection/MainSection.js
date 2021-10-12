@@ -8,7 +8,6 @@ import Feed from '../../../components/Home/MainSection/Feed/Feed';
 
 class MainSection extends Component {
 
-
     render(){
         
         return (

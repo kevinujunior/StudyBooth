@@ -1,7 +1,7 @@
 import React , {Component} from 'react'
-import Header from '../../components/Home/Header/Header'
-import classes from './Home.css'
-import RightPanel from './RightSection/RightPanel'
+import Header from '../../components/Home/Header/Header';
+import classes from './Home.css';
+import RightPanel from './RightSection/RightPanel';
 import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
 import Chat from './Chat/Chat';
@@ -16,14 +16,12 @@ class Home extends Component {
     }
 
     switchChatState  = (currentState) => {
-        console.log("state changed")
         this.setState({
             isChatActive: !currentState,
         })
     }
 
     onHamburgerClick = (currentState) => {
-        console.log("clicked")
         this.setState({
             isLeftPanelVisible: !currentState,
         })
@@ -39,14 +37,13 @@ class Home extends Component {
        
         return (
             <div className={homeClasses.join(" ")} >
-                {/* Header */}
                 <Header onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/>
                 <div className={classes.main}>
-                    <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> {/* Home visiblity will be controlled from dashboard of left panel*/}
-                    <MainSection/> {/* from home we will control what should be visible in Main */}
+                    <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
+                    <MainSection /> 
                     <RightPanel />
                 </div>
-                <Chat isActive = {this.state.isChatActive} />
+                <Chat isActive={this.state.isChatActive}/>
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}
                 </button>
@@ -57,7 +54,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        theme: state.theme,
+        theme: state.theme.theme,
     }
 }
 export default connect(mapStateToProps)(Home)
