@@ -27,7 +27,7 @@
   border-radius: 50%;
   outline: none;
   border: none;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: 0 2px 3px #ccc;
   background-color: coral;
   color: white;
   padding-top: 5px;
@@ -39,9 +39,3 @@
 /* .home{
   max-width: 1600px;
 } */
-
-@media (max-width:400px) {
-  .SwitchButton{
-    display: none;
-  }
-}

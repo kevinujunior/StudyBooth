@@ -1,32 +1,8 @@
 .LeftPanel{
     position: sticky;
     top: 80px;
-    left: 0%;
+    left: 0px;
     height: 100%;
     font-family:"Work Sans","Open Sans";
     max-width: 300px;
-    transition: all 0.3s;
-}
-
-.Visible{
-    left: 0%;
-}
-
-@media (max-width: 700px){
-    .LeftPanel{
-        top: 60px;
-    }
-}
-
-@media (max-width: 580px){
-    .LeftPanel{
-        position: fixed;
-        left: -100%;
-        top: 52px;
-        z-index: 100;
-        width: 80%;
-    }
-    .Visible{
-        left: 0%;
-    }
 }

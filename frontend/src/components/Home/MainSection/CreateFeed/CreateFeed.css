@@ -4,7 +4,7 @@
     padding: 10px 20px;
     min-width: 300px;
     max-width: 550px;
-    border-radius: 10px;
+    border-radius: 15px;
     /* margin: 0 5px; */
     margin: 0px auto 10px auto;
     background-color: white;
@@ -61,11 +61,5 @@
 
     .CreateFeed{
         margin-top: 5px;
-    }
-}
-
-@media (max-width: 800px){
-    .Type textarea{
-        min-width: 80%;
     }
 }
