@@ -1,26 +1,6 @@
-.leftSection{
-    /* background-color: rgba(29, 31, 41,1); */
-    background-color: white;
-   
-    height : 85vh;
-    width:25%;
-    display: list-item;
-    min-width: 150px;
-    max-width: 210px;
-    margin-left:1%;
-    overflow-y :auto;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    position: sticky;
-    right: 0px;
-    top: 90px;
-   
-}
 
-.leftSection::-webkit-scrollbar{
-    display: none;
-}
+
+
 
 #friends{
     margin-top: 80px;
@@ -29,12 +9,7 @@
     
 }
 
-.sectionContainer{
-    margin-bottom: 2px;
-    font-size: 12px;
-    margin-left: 1%;
-    margin-top: 20px;
-}
+
 
 .sectionName{
     font-size: 12.5px;
@@ -58,6 +33,8 @@
     margin-bottom: 4px;
     transition-duration: 200ms;
     border-radius: 5px;
+    margin-right:3px;
+    margin-top: 4px;
     
 
 }
@@ -79,7 +56,7 @@
 }
 
 .sectionImage{
-    width: 95%;
+    width: 90%;
     height: 100%; 
     object-fit: contain;
 }
@@ -126,9 +103,9 @@
     fill:rgb(69, 69, 69)
 }
 
-
+/* 
 @media (max-width: 1200px){
     .leftSection{
         display: none;
     }
-}
+} */

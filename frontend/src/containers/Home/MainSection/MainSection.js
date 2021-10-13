@@ -4,7 +4,7 @@ import classes from './MainSection.css';
 
 import CreateFeed from '../../../components/Home/MainSection/CreateFeed/CreateFeed';
 import Feed from '../../../components/Home/MainSection/Feed/Feed';
-
+import SectionList from "../Sections/SectionList"
 
 class MainSection extends Component {
 
@@ -15,8 +15,10 @@ class MainSection extends Component {
                 <div className={classes.Feed}>
                     <CreateFeed />
                     <Feed />
+                
                 </div>
             </div>
+        
         );
     }
 }

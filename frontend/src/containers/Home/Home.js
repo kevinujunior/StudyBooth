@@ -48,6 +48,7 @@ class Home extends Component {
                     {ButtonIcon}
                 </button>
             </div>
+           
         )
     }
 }
