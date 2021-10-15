@@ -38,17 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # User Apps
+    
+    # installed packages
     'rest_framework',
     'rest_framework.authtoken',
-    'students',
-    'users',
+    
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'corsheaders',
+    
+    #created apps
+    'students',
+    'users',
+    'feed',
 ]
 
 SITE_ID = 1
