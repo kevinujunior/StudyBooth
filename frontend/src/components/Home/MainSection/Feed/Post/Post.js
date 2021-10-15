@@ -35,7 +35,8 @@ class Post extends Component{
                     </div>
                     <div className={classes.Category}>
                         <p>{this.props.category}</p>
-                        <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}>
+                        {/* <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}> */}
+                        <IconButton onClick = {this.toggleActions.bind(this,this.state.isActionsVisible)}>
                             <MoreHorizIcon />
                         </IconButton>
                     </div>

@@ -21,7 +21,11 @@ export class Signup extends Component {
                             <form onSubmit={this.handleSubmit} method="POST" class={classes.registerForm} id={classes.registerForm}>
                                 <div class={classes.formGroup}>
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                    <input type="text" name="name" id="name" placeholder="Username"/>
+                                </div>
+                                <div class={classes.formGroup}>
+                                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                    <input type="text" name="name" id="name" placeholder="Full Name"/>
                                 </div>
                                 <div class={classes.formGroup}>
                                     <label for="email"><i class="zmdi zmdi-email"></i></label>

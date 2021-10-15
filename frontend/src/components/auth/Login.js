@@ -32,7 +32,7 @@ export class Login extends Component {
                             <div class={classes.formGroup}>
                                 
                                 <label for="your_name"><i class={classes.materialIconsName}></i></label>
-                                <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+                                <input type="text" name="your_name" id="your_name" placeholder="Username"/>
                             </div>
                             <div class={classes.formGroup}>
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
