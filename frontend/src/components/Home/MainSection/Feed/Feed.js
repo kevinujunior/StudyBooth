@@ -10,18 +10,31 @@ const Feed = () => {
         setPost(response.data);
       });
     }, []);
+  
     if (!post) return null;
     console.log(post)
+    // let postList = posts.map((post,index) => {
+    //     return <Post 
+    //         key={post.id}
+    //         name={post.postText}
+    //         postImage={post.postFile}
+    //         profileImage={post.postFile}
+    //         category={post.category}
+    //         about={post.postSection}
+    //     />
+    // });
+    const number_of_posts = Object.keys(post).length
     return (
         <div>
-            <Post 
-            key={post[0].id}
-            name={post[0].postText}
-            postImage={post[0].postFile}
-            profileImage={post[0].postFile}
-            category={post[0].category}
-            about={post[0].postSection}
-        />
+            {[...Array(number_of_posts)].map((x, i) => 
+                <Post
+                key={post[i].id}
+                name={post[i].postText}
+                postImage={post[i].postFile}
+                profileImage={post[i].postFile}
+                category={post[i].category}
+                about={post[i].postSection}
+                />)}
         </div>
     )
 }
