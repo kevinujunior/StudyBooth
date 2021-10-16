@@ -1,9 +1,9 @@
-import { Avatar,IconButton} from "@mui/material-ui/core"
-import{ AttachFile, MoreVert, SearchOutlined } from "@mui/material-ui/icons"
+import { Avatar,IconButton} from "@mui/material"
+import{ AttachFile, MoreVert, SearchOutlined } from "@mui/icons-material"
 import React, { useState,useEffect } from "react"
-import { InsertEmoticonIcon,MicIcon } from "@mui/material-ui/icons"
-import "./chatIn.css"
-import { useState } from "react"
+// import { InsertEmoticonIcon,MicIcon } from "@mui/icons-material"
+import classes from "./chatIn.css"
+// import { useState } from "react"
 
 function ChatIn() {
     const [input, setInput] = useState("")
@@ -17,16 +17,16 @@ function ChatIn() {
       console.log("You typed >>>",input)
     };
     return(
-        <div className="chat">
-            <div className="chat_header">
+        <div className={classes.chat}>
+            <div className={classes.chat_header}>
                <Avatar sec={'https://avatar.dicebear.com/api/human/${loading}.svg'} />
                
-               <div className="chat_headerInfo">
+               <div className={classes.chat_headerInfo}>
                   <h3>Room name</h3>
                   <p>last seen at ...</p>
                </div>
 
-               <div className="chat_headerRight">
+               <div className={classes.chat_headerRight}>
                    <IconButton>
                        <SearchOutlined />  
                     </IconButton>
@@ -38,17 +38,17 @@ function ChatIn() {
                     </IconButton>
 
                </div>
-            <div className="chat_body">
+            <div className={classes.chat_body}>
               <p className={`chat_message ${true && 
                 "chat_receiver"}`}>
-              <span className="chat_name">rajkumar</span>
+              <span className={classes.chat_name}>rajkumar</span>
               Hey Guys
-               <span className="chat_timestamp">5:25pm</span>
+               <span className={classes.chat_timestamp}>5:25pm</span>
               </p>
             </div>
             
-            <div className="chat_footer">
-              <InsertEmoticonIcon/>
+            <div className={classes.chat_footer}>
+              {/* <InsertEmoticonIcon/> */}
               <form>
                   <input value={input}
                   onChange={e =>
@@ -58,7 +58,7 @@ function ChatIn() {
                   <button onClick={sendMessage} 
                    type="submit">Send</button>
               </form>
-              <MicIcon />
+              {/* <MicIcon /> */}
 
             </div>
             </div>

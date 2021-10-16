@@ -1,10 +1,10 @@
 .ActionPopUp{
-    background-color: white;
+    background-color: inherit;
     position: absolute;
     top: 55px;
     right: 20px;
     padding: 10px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    box-shadow: inherit;
     box-sizing: border-box;
     border-radius: 5px;
     visibility: hidden;

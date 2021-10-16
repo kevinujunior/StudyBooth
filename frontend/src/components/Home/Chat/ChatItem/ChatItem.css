@@ -10,10 +10,18 @@
     cursor: pointer;
 }
 
+
+
 .ChatItem:hover{
     background-color:#dadada ;
     border-radius: 5px;
 }
+
+.Dark ~ .ChatItem:hover{ /* apply css on same level*/
+    background-color: rgb(90, 90, 90);
+}
+
+
 
 .ChatItem img{
     height: 40px;

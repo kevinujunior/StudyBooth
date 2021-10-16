@@ -1,9 +1,14 @@
 import React from "react";
 import classes from './ChatItem.css';
+import {connect} from 'react-redux';
 
-const ChatItem = () => {
+const ChatItem = (props) => {
+    let chatClass = [classes.ChatItem];
+    if(props.theme === 'dark'){
+        chatClass.push(classes.Dark);
+    } 
     return (
-        <div className={classes.ChatItem}>
+        <div className={chatClass.join(' ')}>
             <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" alt="lull"/>
             <div className={classes.ChatPreview}>
                 <div>
@@ -21,4 +26,10 @@ const ChatItem = () => {
     );
 }
 
-export default ChatItem;
+const mapStateToProps = (state) => {
+    return {
+        theme: state.theme.theme
+    }
+}
+
+export default  connect(mapStateToProps)(ChatItem);
