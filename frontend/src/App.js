@@ -18,8 +18,8 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              { this.isAuthenticated ? <Home /> : <LandingPage />}
-              {/* <Home /> */}
+              {/* { this.isAuthenticated ? <Home /> : <LandingPage />} */}
+              <Home />
             </Route>
             <Route exact path="/signup" component ={Signup}/>
             <Route exact path="/login" component = {Login} />
