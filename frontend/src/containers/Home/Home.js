@@ -42,9 +42,9 @@ class Home extends Component {
                 <div className={classes.main}>
                     <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
                     <MainSection /> 
+                    <ChatIn />
                     <RightPanel />
                 </div>
-                <ChatIn />
                 <Chat isActive={this.state.isChatActive}/>
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}

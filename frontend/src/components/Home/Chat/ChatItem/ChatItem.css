@@ -11,7 +11,10 @@
 }
 
 
+.rajkumar{
+    background-color:red ;
 
+}
 .ChatItem:hover{
     background-color:#dadada ;
     border-radius: 5px;
