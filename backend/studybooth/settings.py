@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     
     #created apps
+    'core',
     'students',
     'users',
     'feed',
@@ -62,6 +63,9 @@ SITE_ID = 1
 AUTH_USER_MODEL = 'users.User'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# MEDIA_ROOT =  None
+# MEDIA_URL = ""
 
 #custom
 REST_AUTH_REGISTER_SERIALIZERS = {

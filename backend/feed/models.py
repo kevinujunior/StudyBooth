@@ -35,7 +35,7 @@ class Comment(models.Model):
 class Like(models.Model):
     post = models.ForeignKey("feed.Post", on_delete=CASCADE)
     likeUser = models.ForeignKey("users.User", on_delete=CASCADE)
-    like = models.BooleanField(default=False)
+    # like = models.BooleanField(default=False)
     likedAt = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
