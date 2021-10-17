@@ -53,7 +53,7 @@ class Post extends Component{
                             <IconButton>
                                 <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
                             </IconButton>
-                            <p>69</p>
+                            <p>{this.props.likes}</p>
                         </div>
                         <div className={classes.VerticalLine}></div>
                         <div className={classes.Comment}>
