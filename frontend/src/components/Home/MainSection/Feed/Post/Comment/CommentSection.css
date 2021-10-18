@@ -1,0 +1,21 @@
+.CommentSection{
+    width: 100%;
+    margin-top: 10px;
+    display: none;
+}
+
+.Visible{
+    display: block;
+}
+.LoadMore{
+    margin-top: 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: grey;
+}
+
+.LoadMore:hover{
+    font-weight: bold;
+}

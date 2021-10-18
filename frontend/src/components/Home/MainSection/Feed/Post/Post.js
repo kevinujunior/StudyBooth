@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import classes from './Post.css';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
+import CommentSection from './Comment/CommentSection';
 
 import {connect } from 'react-redux';
 
@@ -13,12 +15,20 @@ class Post extends Component{
 
     state = {
         isActionsVisible : false,
+        isCommentVisibe : false,
     }
 
     toggleActions = (actionState) =>{
-        console.log("called")
+        // console.log("called")
         this.setState({
             isActionsVisible: !actionState,
+        })
+    }
+
+    toggleCommentSection = (commentSectionState) => {
+        console.log('comment active')
+        this.setState({
+            isCommentVisibe: !commentSectionState,
         })
     }
     
@@ -37,7 +47,7 @@ class Post extends Component{
                         <p>{this.props.category}</p>
                         {/* <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}> */}
                         <IconButton onClick = {this.toggleActions.bind(this,this.state.isActionsVisible)}>
-                            <MoreHorizIcon />
+                            <MoreHorizIcon className={classes.IconColor}/>
                         </IconButton>
                     </div>
                 </div>
@@ -53,7 +63,11 @@ class Post extends Component{
                             <IconButton>
                                 <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
                             </IconButton>
-                            <p>{this.props.likes}</p>
+                            <p>{this.props.likesCount}</p>
+                            <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
+                                <CommentOutlinedIcon style={{color:"grey"}}/>
+                            </IconButton>
+                            <p>{this.props.commentCount}</p>
                         </div>
                         <div className={classes.VerticalLine}></div>
                         <div className={classes.Comment}>
@@ -66,6 +80,7 @@ class Post extends Component{
                     
                 </div>
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
+                <CommentSection theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
             </div>
     )
   }

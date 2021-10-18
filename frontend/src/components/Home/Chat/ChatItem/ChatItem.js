@@ -9,7 +9,7 @@ const ChatItem = (props) => {
     } 
     return (
         <div className={chatClass.join(' ')}>
-            <div className="rajkumar">dfiushsiisdid</div>
+            {/* <div className="rajkumar">dfiushsiisdid</div> */}
             <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" alt="lull"/>
             <div className={classes.ChatPreview}>
                 <div>

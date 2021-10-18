@@ -34,7 +34,7 @@ const Feed = () => {
                 profileImage={post[i].postFile}
                 category={post[i].category}
                 about={post[i].postSection}
-                likes={post[i].likeCount}
+                likesCount={post[i].likeCount}
                 />)}
         </div>
     )
