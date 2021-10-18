@@ -45,7 +45,7 @@ class CommentItem extends Component {
                         <button>Show replies</button>
                     </div>
                     <div className={replyBoxClasses.join(' ')}>
-                        <input></input>
+                        <input placeholder="enter a reply..."></input>
                         <IconButton>
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>

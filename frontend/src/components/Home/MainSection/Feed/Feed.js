@@ -32,9 +32,10 @@ const Feed = () => {
                 name={post[i].postText}
                 postImage={post[i].postFile}
                 profileImage={post[i].postFile}
-                category={post[i].category}
-                about={post[i].postSection}
+                category={post[i].postSection}
+                about={post[i].postCaption}
                 likesCount={post[i].likeCount}
+                time={post[i].createdAt}
                 />)}
         </div>
     )
