@@ -36,6 +36,7 @@ const Feed = () => {
                 about={post[i].postCaption}
                 likesCount={post[i].likeCount}
                 time={post[i].createdAt}
+                commentCount={post[i].commentCount}
                 />)}
         </div>
     )

@@ -128,7 +128,8 @@
 
 
 .Time{
-    margin-top: -5px;
-    font-style: initial;
+    /* margin-top: -5px; */
+    font-style: italic;
     font-size: 12px;
+    font-weight: bold;
 }

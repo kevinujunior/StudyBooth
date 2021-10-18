@@ -45,6 +45,7 @@ class Post extends Component{
                     <div className={classes.NamePhoto}>
                         <img src = {this.props.profileImage} alt=""/>
                         <p>{this.props.name}</p>
+                        <p className={classes.Time}>{time <= 24 ? time+"hr ago": Math.floor(time/24)+"d ago"}</p>
                     </div>
                     <div className={classes.Category}>
                         <p>{this.props.category}</p>
@@ -56,7 +57,7 @@ class Post extends Component{
                 </div>
                 <div className={classes.PostInfo}>
                     <p>{this.props.about}</p>
-                    <p className={classes.Time}>{time <= 24 ? time+"hr ago": Math.floor(time/24)+"d ago"}</p>
+                    
                 </div>
                 <div className={classes.PostImage}>
                     <img src = {this.props.postImage}  alt=""/>
