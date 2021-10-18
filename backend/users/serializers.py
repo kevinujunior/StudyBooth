@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from django.db import transaction
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from .models import User
+from .models import  User, UserFollowing
+
+# from .serializers import UserSerializer
 
 
 #custom serializer for rest_auth 
@@ -17,13 +19,46 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.save()
         return user
     
+  
+
+class UserFollowingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserFollowing
+        fields = ["id", "currUser","followingUser",]  
+        
+class FollowingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserFollowing
+        fields = ["id", "followingUser",]
+
+
+
+
+class FollowerSerializer(serializers.ModelSerializer): 
+    followerUser = serializers.SerializerMethodField()
+    class Meta:
+        model = UserFollowing
+        fields = ["id", "followerUser",]
     
+    def get_followerUser(self,obj):
+        return obj.currUser.id
+
 
 class UserSerializer(serializers.ModelSerializer):
-  
+    following = serializers.SerializerMethodField()
+    followers = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ['id', 'username', 'fullName', 'email',]
+        fields = ['id', 'username', 'fullName', 'email','following','followers']
+        
+    def get_following(self, obj):
+        return FollowingSerializer(obj.following.all(), many=True).data
+
+    def get_followers(self, obj):
+        return FollowerSerializer(obj.followers.all(), many=True).data
+        
     
 
-    
+

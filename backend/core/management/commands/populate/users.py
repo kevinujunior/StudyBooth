@@ -1,7 +1,7 @@
 import os, django
-
+from users.models import UserFollowing
 from faker import Faker
-
+import random
 from users.models import User
 
 fake = Faker()
@@ -15,6 +15,8 @@ def populate(N):
         add_superuser()
     for _ in range(N):
         add_user()
+    # for _ in range(50):
+    #     add_user_following()
 
 
 def add_superuser():
@@ -39,4 +41,10 @@ def add_user():
         password=password,
 
     )
-   
+
+def add_user_following():
+    users = User.objects.all()
+    UserFollowing.objects.create(
+        currUser = users[random.randint(0, users.count() - 1)],
+        followingUser = users[random.randint(0, users.count() - 1)] ,
+    )

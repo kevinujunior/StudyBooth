@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -12,6 +11,8 @@
 /studybooth
 .gitignore
 backend/env
+
+
 # misc
 .DS_Store
 .env.local
@@ -23,6 +24,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
-=======
-node_modules/
->>>>>>> 57c0b059a8362cb148685143db331bfeaeb63612
