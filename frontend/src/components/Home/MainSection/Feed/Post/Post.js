@@ -56,7 +56,7 @@ class Post extends Component{
                 </div>
                 <div className={classes.PostInfo}>
                     <p>{this.props.about}</p>
-                    <p className={classes.Time}>{time <= 24 ? time+"hr": Math.floor(time/24)+"d"}</p>
+                    <p className={classes.Time}>{time <= 24 ? time+"hr ago": Math.floor(time/24)+"d ago"}</p>
                 </div>
                 <div className={classes.PostImage}>
                     <img src = {this.props.postImage}  alt=""/>
