@@ -44,6 +44,7 @@ export const authLogin = (username, password) => {
             password: password
         })
         .then(res =>{
+            console.log(res);
             const token = res.data.key;
             const expirationDate = new Date(new Date().getTime() + 3600*1000);
             localStorage.setItem('token',token);
@@ -57,14 +58,16 @@ export const authLogin = (username, password) => {
     }
 }
 
-export const authSignup = (username, email, password1, password2) => {
+export const authSignup = (username, fullname,email, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
         axios.post('http://127.0.0.1:8000/dj-rest-auth/registration/',{
             username: username,
+            fullname: fullname,
             email: email,
             password1: password1,
-            password2: password2
+            password2: password2,
+            
         })
         .then(res =>{
             const token = res.data.key;

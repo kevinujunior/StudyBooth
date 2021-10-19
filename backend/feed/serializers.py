@@ -9,11 +9,11 @@ from users.models import User
 class PostSerializer(serializers.ModelSerializer):
     commentCount = serializers.SerializerMethodField(read_only=True)
     likeCount = serializers.SerializerMethodField(read_only= True)
-    
+    # postSection = serializers.SerializerMethodField(read_only = True)
   
     class Meta:
         model = Post
-        fields = ['id','postCaption', "postFile", "postText", 'likeCount', 'commentCount', 'user', 'postSection']
+        fields = ['id','postCaption', "postFile",  'likeCount', 'commentCount', 'user', 'postSection','createdAt']
         
     def get_commentCount(self,obj):
         commentcount = Comment.objects.filter(post = obj)
@@ -22,7 +22,10 @@ class PostSerializer(serializers.ModelSerializer):
     def get_likeCount(self,obj):
         likecount = Like.objects.filter(post = obj)
         return len(likecount)
-        
+    
+    # def get_postSection(self,obj):
+    #     postSection = obj.postSection.sectionName
+    #     return postSection
     
 
 class CommentSerializer(serializers.ModelSerializer):

@@ -6,7 +6,7 @@ export class Signup extends Component {
     handleSubmit = (e) => {
         //signUp
         e.preventDefault();
-        this.props.onAuth(e.target[0].value,e.target[1].value,e.target[2].value,e.target[3].value)
+        this.props.onAuth(e.target[0].value,e.target[1].value,e.target[2].value,e.target[3].value,e.target[4].value)
         this.props.history.push('/');
     }  
     render() {
@@ -21,7 +21,7 @@ export class Signup extends Component {
                             <form onSubmit={this.handleSubmit} method="POST" class={classes.registerForm} id={classes.registerForm}>
                                 <div class={classes.formGroup}>
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input type="text" name="name" id="name" placeholder="Username"/>
+                                    <input type="text" name="username" id="name" placeholder="Username"/>
                                 </div>
                                 <div class={classes.formGroup}>
                                     <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username,email,password1,password2) => dispatch(actions.authSignup(username, email,password1,password2))
+        onAuth: (username,fullname,email,password1,password2) => dispatch(actions.authSignup(username,fullname, email,password1,password2))
     }
 }
 

@@ -10,16 +10,21 @@ import Login from './components/auth/Login';
 import * as actions from './store/actions/auth';
 class App extends Component {
   componentDidMount() {
+
     this.props.onTryAutoSignup();
   }
+  componentDidUpdate(){
+    console.log(this.props);
+  }
+  
   render(){
     return (
       <div className="app">
         <Router>
           <Switch>
             <Route exact path="/">
-              {/* { this.isAuthenticated ? <Home /> : <LandingPage />} */}
-              <Home />
+              { this.isAuthenticated ? <Home /> : <LandingPage />}
+              {/* <Home /> */}
             </Route>
             <Route exact path="/signup" component ={Signup}/>
             <Route exact path="/login" component = {Login} />
@@ -32,7 +37,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return{
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.auth.token !== null
   }
 }
 
