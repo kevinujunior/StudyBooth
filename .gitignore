@@ -24,6 +24,7 @@ yarn-error.log*
 package-lock.json
 node_modules/
 **/__pycache__/
+*.pyc
 # **/db.sqlite3
 media/
 
