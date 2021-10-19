@@ -9,9 +9,9 @@ class Post(models.Model):
     user = models.ForeignKey("users.User", on_delete=CASCADE)
     postCaption = models.TextField(null=False)
     postFile = models.FileField(upload_to="postFile", null=True)
-    postText = models.TextField(null=True)
-    likeCount = models.IntegerField(default=0)
-    commentCount = models.IntegerField(default=0)
+    # postText = models.TextField(null=True)
+    # likeCount = models.IntegerField(default=0)
+    # commentCount = models.IntegerField(default=0)
     postSection = models.ForeignKey("feed.Section", on_delete=CASCADE)
     createdAt = models.DateTimeField(auto_now_add=True)
     

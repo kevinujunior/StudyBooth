@@ -19,10 +19,10 @@ class PostViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
     # http_method_names = ['post','get','delete']
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
-    # def get_queryset(self):
-    #      queryset = Post.objects.filter(user=self.request.user)
-    #      return queryset
+    def get_queryset(self):
+         queryset = Post.objects.all()
+         queryset = queryset.order_by("-createdAt")
+         return queryset
     
  
 
