@@ -37,19 +37,23 @@ function ChatIn() {
                        <MoreVert />  
                     </IconButton>
 
-               </div>
+               </div> </div>
             <div className={classes.chat_body}>
-              <p className={`chat_message ${true && 
-                "chat_receiver"}`}>
-              <span className={classes.chat_name}>rajkumar</span>
+              {/* <p className={`classes.chat_message ${true && 
+                "chat_receiver"}`}> */}
+                <Avatar  sec={'https://avatar.dicebear.com/api/human/${loading}.svg'} />
+                <p className={classes.chat_message}>
+                  
+              {/* <span className={classes.chat_name}>rajkumar</span> */}
               Hey Guys
                <span className={classes.chat_timestamp}>5:25pm</span>
               </p>
             </div>
+           
             
             <div className={classes.chat_footer}>
               {/* <InsertEmoticonIcon/> */}
-              <form>
+               <form>
                   <input value={input}
                   onChange={e =>
                   setInput(e.target.value)}
@@ -60,7 +64,6 @@ function ChatIn() {
               </form>
               {/* <MicIcon /> */}
 
-            </div>
             </div>
         </div>
     )
