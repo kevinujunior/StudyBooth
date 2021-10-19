@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 /backend
-**/__pycache__/
-*.pyc
+# **/__pycache__/
+# *.pyc
