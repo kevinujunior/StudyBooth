@@ -36,16 +36,16 @@ class Post extends Component{
         let postClasses = [classes.Post]
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
-        let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*3600)); //time in hours
+        let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes
 
-
+        console.log(time)
         return (
             <div className={postClasses.join(' ')}>
                 <div className={classes.Header}>
                     <div className={classes.NamePhoto}>
                         <img src = {this.props.profileImage} alt=""/>
                         <p>{this.props.name}</p>
-                        <p className={classes.Time}>{time <= 24 ? time+"hr ago": Math.floor(time/24)+"d ago"}</p>
+                        <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
                     </div>
                     <div className={classes.Category}>
                         <p>{this.props.category}</p>
