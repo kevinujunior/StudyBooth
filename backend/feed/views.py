@@ -1,11 +1,14 @@
 
+from users.models import UserFollowing
 from feed.serializers import CommentSerializer, LikeSerializer, PostSerializer, SectionSerializer
 from users.serializers import UserSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from .models import Post, Comment, Like, Section
-# Create your views here.
+from users.models import User
+from django.db.models import Q
+# Create your views here
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -16,13 +19,17 @@ class SectionViewSet(viewsets.ModelViewSet):
     
     
 class PostViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
-    # http_method_names = ['post','get','delete']
+    permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
+    # queryset = Post.objects.all()
+    
     def get_queryset(self):
-         queryset = Post.objects.all()
-         queryset = queryset.order_by("-createdAt")
-         return queryset
+        curruser = self.request.user
+        following = UserFollowing.objects.filter(currUser = curruser)
+        queryset = Post.objects.filter(
+            Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        queryset = queryset.order_by("-createdAt")
+        return queryset
     
  
 
