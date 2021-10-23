@@ -9,6 +9,7 @@ import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneR
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleButton from '../../UI/ToggleButton/ToggleButton';
+import AddIcon from '@mui/icons-material/Add';
 
 function Header(props) {
     let headerClasses = [classes.Header];
@@ -27,9 +28,17 @@ function Header(props) {
                         </IconButton>
                     </div>
                 </div>
-                <div className={classes.Input}>
-                    <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>
-                    <button class={classes.btnSearch}>{<SearchIcon/>}</button>
+                <div className={classes.SearchAndCreate}>
+                    <div className={classes.Input}>
+                        <input type="text" class={classes.inputSearch} placeholder="Type to Search..."></input>
+                        <button class={classes.btnSearch}>{<SearchIcon/>}</button>
+                    </div>
+                    <div>
+                        <button  className={classes.CreatePostButton} onClick={props.onCreateFeedClick}>
+                            <p>Create Post</p>
+                            <AddIcon style={{color:'white', marginLeft:'5px'}} />
+                        </button>
+                    </div>
                 </div>   
                 <div className={classes.Buttons}>
                     <ToggleButton theme={props.theme} onClick = {() => props.onChangeTheme(props.theme)}/>

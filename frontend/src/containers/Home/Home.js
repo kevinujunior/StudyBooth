@@ -8,12 +8,15 @@ import Chat from './Chat/Chat';
 import ChatIn from './Chat/chatIn';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
+import Modal from '../../components/UI/Modal/Modal';
+import CreateFeed from '../../components/Home/MainSection/CreateFeed/CreateFeed';
 
 class Home extends Component {
 
     state = {
         isChatActive: false,
         isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
+        isCreteFeedVisible: false,
     }
 
     switchChatState  = (currentState) => {
@@ -28,6 +31,12 @@ class Home extends Component {
         })
     }
 
+    onCreateFeedClick = (currentState) => {
+        console.log("modal closed")
+        this.setState({
+            isCreteFeedVisible: !currentState,
+        })
+    }
 
     render(){
         let ButtonIcon = <ChatBubbleIcon />;
@@ -38,7 +47,13 @@ class Home extends Component {
        
         return (
             <div className={homeClasses.join(" ")} >
-                <Header onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/>
+                <Header 
+                    onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
+                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}
+                />
+                <Modal show={this.state.isCreteFeedVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}>
+                    <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)} />
+                </Modal>
                 <div className={classes.main}>
                     <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
                     <MainSection /> 

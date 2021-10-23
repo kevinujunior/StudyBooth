@@ -33,6 +33,31 @@
     height: 70px;
 }
 
+.SearchAndCreate{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+
+.CreatePostButton{
+    background-color: #1DA1F2;
+    padding:8px 14px;
+    border-radius:50px;
+    margin-left: 20px;
+    outline: none;
+    border: none;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.CreatePostButton p{
+    color: white;
+}
+
 .Input{
     display: flex;
     flex-direction: row;

@@ -13,9 +13,8 @@ class MainSection extends Component {
         return (
             <div className={classes.MainSection}>
                 <div className={classes.Feed}>
-                    <CreateFeed />
+                    {/* <CreateFeed /> */}
                     <Feed />
-                
                 </div>
             </div>
         
