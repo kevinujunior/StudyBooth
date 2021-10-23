@@ -25,8 +25,7 @@ package-lock.json
 node_modules/
 **/__pycache__/
 *.pyc
-# **/db.sqlite3
-media/
+**/db.sqlite3
 *.log
 *.pot
 *.pyc
@@ -34,6 +33,6 @@ __pycache__/
 local_settings.py
 *.sqlite3
 db.sqlite3-journal
-media
+
 
 
