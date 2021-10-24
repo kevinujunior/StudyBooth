@@ -42,7 +42,15 @@ class  createFeed extends Component {
           console.log("bhai")
         formData.append('postFile' , this.state.selectedfile)
         }
-      formData.append('user' , 2)
+      formData.append('user' ,1)
+    //   {
+    //     "id": 2,
+    //     "username": "9999999999",
+    //     "fullName": "Raghav Shukla",
+    //     "email": "",
+    //     "following": [],
+    //     "followers": []
+    // })
     
 
       const config = {

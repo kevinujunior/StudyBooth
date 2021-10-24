@@ -85,7 +85,7 @@ class Post extends Component{
                     
                 </div>
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
-                <CommentSection theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
+                <CommentSection comments ={this.props.comments} theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
             </div>
     )
   }

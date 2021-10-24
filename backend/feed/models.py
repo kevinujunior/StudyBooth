@@ -43,7 +43,7 @@ class Like(models.Model):
     
 
 class Section(models.Model):
-    sectionName = models.CharField(max_length=50, unique=True)
+    sectionName = models.CharField(max_length=50, unique=True,)
     sectionPic = models.ImageField(upload_to="sectionPic",)
     
     

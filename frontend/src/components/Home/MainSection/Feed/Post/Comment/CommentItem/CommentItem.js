@@ -11,6 +11,10 @@ class CommentItem extends Component {
         isReplyBoxVisible: false,
     }
     
+    componentDidMount() {
+      
+        console.log(this.props)
+}
     toggleReplyBox = (currState) => {
         this.setState({
             isReplyBoxVisible: !currState,
@@ -18,7 +22,7 @@ class CommentItem extends Component {
     }
 
     render(){
-
+        let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
         let cmtItemClasses = [classes.CommentItem];
         let replyBoxClasses = [classes.ReplyBox];
         if(this.props.theme === 'dark'){
@@ -36,10 +40,10 @@ class CommentItem extends Component {
                 </div>
                 <div className={classes.Comment}>
                     <div className={classes.CommentInfo}>
-                        <p>@username</p>
-                        <p>11:40 pm</p>
+                        <p>{this.props.user}</p>
+                        <p>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
                     </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                    <p>{this.props.comment}</p>
                     <div className={classes.Actions}>
                         <button onClick={() => this.toggleReplyBox(this.state.isReplyBoxVisible)}>Reply</button>
                         <button>Show replies</button>
