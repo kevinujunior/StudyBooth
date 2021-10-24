@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import classes from './MainSection.css';
 
-import CreateFeed from '../../../components/Home/MainSection/CreateFeed/CreateFeed';
+import CreateFeed from '../../../components/Home/MainSection/CreatePost/CreatePost';
 import Feed from '../../../components/Home/MainSection/Feed/Feed';
 import SectionList from "../Sections/SectionList"
 

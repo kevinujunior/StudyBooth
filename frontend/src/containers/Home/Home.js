@@ -9,7 +9,7 @@ import ChatIn from './Chat/chatIn';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
-import CreateFeed from '../../components/Home/MainSection/CreateFeed/CreateFeed';
+import CreateFeed from '../../components/Home/MainSection/CreatePost/CreatePost';
 
 class Home extends Component {
 

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import classes from './CreateFeed.css';
+import classes from './CreatePost.css';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ArticleIcon from '@mui/icons-material/Article';
 import { IconButton, Button} from '@mui/material';
 import axios from 'axios';
-
+import * as actions from '../../../../store/actions/feed'
 
 class  createFeed extends Component {
 
@@ -16,14 +16,11 @@ class  createFeed extends Component {
         postCaption : "",
         selectedfile: null,
         fileType: "",
-
     }
 
     fileSelectHandler = (event) => {
-        if(event.target.files[0] === null) 
-        {
-            return;
-        }
+        if(event.target.files[0] === null) return;
+
         this.setState({
             selectedfile: event.target.files[0],
             fileType: event.target.files[0].type,
@@ -40,22 +37,16 @@ class  createFeed extends Component {
 
         formData.append('postCaption' , this.state.postCaption)
         if(this.state.selectedfile!==null){
-            console.log("bhai")
             formData.append('postFile' , this.state.selectedfile)
         }
         formData.append('user' ,1)
     
-
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         }
 
-
-        axios.post("http://localhost:8000/feed/posts/", formData ,config)
-        .then(response =>{
-            console.log(response);
-        });
-
+        this.props.onCreateNewPost(formData, config); //we are handling new post request on store/feed
+        
         this.props.closeModal();
     }
 
@@ -79,13 +70,6 @@ class  createFeed extends Component {
             default:
                 return null;
         }
-    }
-
-    componentWillMount(){
-        console.log("create feed unmount")
-        this.setState({
-            selectedfile:null,
-        })
     }
 
     render(){
@@ -123,7 +107,13 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(createFeed);
+const mapDispatchToProps = dispatch => {
+    return {
+        onCreateNewPost : (formData, config) => dispatch(actions.createNewPost(formData, config))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(createFeed);
 
 function UploadButton  (props) {
     return (

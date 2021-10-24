@@ -28,6 +28,7 @@ export const checkAuthTimeout = expirationTime => {
         }, expirationTime*1000)
     }
 }
+
 export const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('expirationDate');

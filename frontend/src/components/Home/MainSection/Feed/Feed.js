@@ -1,49 +1,41 @@
 import React, { Component } from 'react';
 import Post from './Post/Post';
-import axios from 'axios';
 import Spinner from '../../../UI/Spinner/Spinner'
+
+import {connect } from 'react-redux';
+import * as actions from '../../../../store/actions/feed';
 
 class Feed extends Component {
     
-    state = {
-        posts : null,
-    }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/feed/posts/')
-        .then(response =>{
-            const posts = response.data;
-            this.setState({posts: posts});
-        });
+        this.props.onFetchFeed();
     }
-    
-
     
     render () {
         
         let posts  = <Spinner />;
         
-        if(this.state.posts != null){
-            const number_of_posts = Object.keys(this.state.posts).length;
+        if(this.props.posts != null){
+            const number_of_posts = Object.keys(this.props.posts).length;
             posts = [...Array(number_of_posts)].map((x, i) => {
                 return <Post
-                    key={this.state.posts[i].id}
-                    name={this.state.posts[i].userFields.username}
-                    postImage={this.state.posts[i].postFile}
-                    profileImage={this.state.posts[i].postFile}
-                    category={!this.state.posts[i].postSection ? null : this.state.posts[i].postSection.sectionName}
-                    // category = {this.state.posts[i].postSection}
-                    about={this.state.posts[i].postCaption}
-                    likesCount={this.state.posts[i].likeCount}
-                    time={this.state.posts[i].createdAt}
-                    commentCount={this.state.posts[i].commentCount}
-                    comments = {this.state.posts[i].comments}
+                    key={this.props.posts[i].id}
+                    name={this.props.posts[i].userFields.username}
+                    postImage={this.props.posts[i].postFile}
+                    profileImage={this.props.posts[i].postFile}
+                    category={!this.props.posts[i].postSection ? null : this.props.posts[i].postSection.sectionName}
+                    // category = {this.props.posts[i].postSection}
+                    about={this.props.posts[i].postCaption}
+                    likesCount={this.props.posts[i].likeCount}
+                    time={this.props.posts[i].createdAt}
+                    commentCount={this.props.posts[i].commentCount}
+                    comments = {this.props.posts[i].comments}
                 /> 
             })
         }
 
         return (
-    
             <div>
                 {posts}
             </div>
@@ -51,4 +43,17 @@ class Feed extends Component {
     }
 
 }
-export default Feed;
+
+const mapStateToProps = state => {
+    return {
+        posts: state.feed.posts,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchFeed: () => dispatch(actions.fetchFeed())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Feed);

@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 
 import themeReducer from './store/reducers/theme';
 import authReducer from './store/reducers/auth';
+import feedReducer from './store/reducers/feed';
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -15,6 +16,7 @@ const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   theme: themeReducer,
   auth: authReducer,
+  feed: feedReducer,
 })
 
 
