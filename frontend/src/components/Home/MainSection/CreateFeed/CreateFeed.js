@@ -13,25 +13,49 @@ import axios from 'axios';
 class  createFeed extends Component {
 
     state = {
+        postCaption : "",
         selectedfile: null,
         fileType: "",
-        
+
     }
 
     fileSelectHandler = (event) => {
-        if(event.target.files[0] == null) return;
+        console.log("bruhhuhuh");
+        if(event.target.files[0] === null) 
+        {
+            return;
+        }
         this.setState({
             selectedfile: event.target.files[0],
             fileType: event.target.files[0].type,
         })
     }
 
-    makePost = () => {
-        axios.post("url",{
 
-        }).then((res) => {
-            console.log(res);
-        })
+
+    makePost = () => {
+
+      const formData = new FormData();
+
+      formData.append('postCaption' , this.state.postCaption)
+      if(this.state.selectedfile!==null){
+          console.log("bhai")
+        formData.append('postFile' , this.state.selectedfile)
+        }
+      formData.append('user' , 2)
+    
+
+      const config = {
+        headers: { 'content-type': 'multipart/form-data' }
+    }
+      console.log(this.state.selectedfile);
+
+
+      axios.post("http://localhost:8000/feed/posts/", formData ,config)
+      .then(response =>{
+        console.log(response);
+    });
+
         this.props.closeModal();
     }
 
@@ -71,7 +95,7 @@ class  createFeed extends Component {
             <div className={createFeedClasses.join(" ")}>
                 <div className={classes.Type}>
                     <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"/>
-                    <textarea type="text" placeholder="share some experiences..." onInput={(event) => this.auto_grow(event)}/>
+                    <textarea type="text" value ={this.state.postCaption} placeholder="share some experiences..." onChange={(event) => this.setState({postCaption: event.target.value})}  onInput={(event) => this.auto_grow(event)}/>
                 </div>
                 <div className={classes.Content}>
                     {this.getContentRenderer()}
@@ -82,9 +106,11 @@ class  createFeed extends Component {
                         <InsertPhotoIcon className={classes.IconColor}/>
                     </UploadButton>
                     <UploadButton accept="video/*" onChange={this.fileSelectHandler}>
-                        <VideoCameraBackIcon className={classes.IconColor}/>   
+                        <VideoCameraBackIcon className={classes.IconColor}/>
                     </UploadButton>
+                    {/* <input type="file"  onChange={this.fileSelectHandler}/> */}
                     <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.makePost}>Share</Button>
+                   
                 </div>
             </div>
         );

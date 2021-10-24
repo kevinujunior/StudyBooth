@@ -20,7 +20,8 @@ class App extends Component {
       <div className="app">
         <Router>
           <Switch>
-            <Route exact path="/" component={ this.props.isAuthenticated ? Home : LandingPage}/>
+            {/* <Route exact path="/" component={ this.props.isAuthenticated ? Home : LandingPage}/> */}
+            <Home />
             <Route exact path="/signup" component ={Signup}/>
             <Route exact path="/login" component = {Login} />
           </Switch>

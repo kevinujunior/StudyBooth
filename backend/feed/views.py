@@ -19,15 +19,16 @@ class SectionViewSet(viewsets.ModelViewSet):
     
     
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     # queryset = Post.objects.all()
     
     def get_queryset(self):
-        curruser = self.request.user
-        following = UserFollowing.objects.filter(currUser = curruser)
-        queryset = Post.objects.filter(
-            Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        queryset = Post.objects.all()
+        # curruser = self.request.user
+        # following = UserFollowing.objects.filter(currUser = curruser)
+        # queryset = Post.objects.filter(
+        #     Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
         queryset = queryset.order_by("-createdAt")
         return queryset
     
