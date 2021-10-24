@@ -11,10 +11,7 @@ class CommentItem extends Component {
         isReplyBoxVisible: false,
     }
     
-    componentDidMount() {
-      
-        console.log(this.props)
-}
+    
     toggleReplyBox = (currState) => {
         this.setState({
             isReplyBoxVisible: !currState,
@@ -41,7 +38,7 @@ class CommentItem extends Component {
                 <div className={classes.Comment}>
                     <div className={classes.CommentInfo}>
                         <p>{this.props.user}</p>
-                        <p>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
+                        <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
                     </div>
                     <p>{this.props.comment}</p>
                     <div className={classes.Actions}>

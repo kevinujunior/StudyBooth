@@ -20,7 +20,6 @@ class  createFeed extends Component {
     }
 
     fileSelectHandler = (event) => {
-        console.log("bruhhuhuh");
         if(event.target.files[0] === null) 
         {
             return;
@@ -34,35 +33,28 @@ class  createFeed extends Component {
 
 
     makePost = () => {
+        //if user has not selected image and not written some caption then we should return.
+        if(this.state.postCaption == null && this.state.selectedfile ==null) return;
 
-      const formData = new FormData();
+        const formData = new FormData();
 
-      formData.append('postCaption' , this.state.postCaption)
-      if(this.state.selectedfile!==null){
-          console.log("bhai")
-        formData.append('postFile' , this.state.selectedfile)
+        formData.append('postCaption' , this.state.postCaption)
+        if(this.state.selectedfile!==null){
+            console.log("bhai")
+            formData.append('postFile' , this.state.selectedfile)
         }
-      formData.append('user' ,1)
-    //   {
-    //     "id": 2,
-    //     "username": "9999999999",
-    //     "fullName": "Raghav Shukla",
-    //     "email": "",
-    //     "following": [],
-    //     "followers": []
-    // })
+        formData.append('user' ,1)
     
 
-      const config = {
-        headers: { 'content-type': 'multipart/form-data' }
-    }
-      console.log(this.state.selectedfile);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
 
 
-      axios.post("http://localhost:8000/feed/posts/", formData ,config)
-      .then(response =>{
-        console.log(response);
-    });
+        axios.post("http://localhost:8000/feed/posts/", formData ,config)
+        .then(response =>{
+            console.log(response);
+        });
 
         this.props.closeModal();
     }
@@ -79,7 +71,7 @@ class  createFeed extends Component {
         let file = this.state.fileType.split('/')[0];
         switch (file) {
             case "image":
-                return <img src={this.state.selectedfile ? URL.createObjectURL(this.state.selectedfile) : null}/>;
+                return <img src={this.state.selectedfile ? URL.createObjectURL(this.state.selectedfile) : null} alt=""/>;
             case "video":
                 return <video controls>
                     <source src={this.state.selectedfile ? URL.createObjectURL(this.state.selectedfile) : null}></source>
@@ -102,7 +94,7 @@ class  createFeed extends Component {
         return (
             <div className={createFeedClasses.join(" ")}>
                 <div className={classes.Type}>
-                    <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"/>
+                    <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" alt=""/>
                     <textarea type="text" value ={this.state.postCaption} placeholder="share some experiences..." onChange={(event) => this.setState({postCaption: event.target.value})}  onInput={(event) => this.auto_grow(event)}/>
                 </div>
                 <div className={classes.Content}>

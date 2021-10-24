@@ -19,14 +19,12 @@ class Post extends Component{
     }
 
     toggleActions = (actionState) =>{
-        // console.log("called")
         this.setState({
             isActionsVisible: !actionState,
         })
     }
 
     toggleCommentSection = (commentSectionState) => {
-        console.log('comment active')
         this.setState({
             isCommentVisibe: !commentSectionState,
         })
@@ -55,13 +53,15 @@ class Post extends Component{
                         </IconButton>
                     </div>
                 </div>
+
                 <div className={classes.PostInfo}>
-                    <p>{this.props.about}</p>
-                    
+                    <p>{this.props.about}</p> 
                 </div>
+
                 <div className={classes.PostImage}>
                     <img src = {this.props.postImage}  alt=""/>
                 </div>
+
                 <div className={classes.Interact}>
                     <div className={classes.Icons}>
                         <div className={classes.IconLeft}>
@@ -82,8 +82,8 @@ class Post extends Component{
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
-                    
                 </div>
+
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
                 <CommentSection comments ={this.props.comments} theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
             </div>

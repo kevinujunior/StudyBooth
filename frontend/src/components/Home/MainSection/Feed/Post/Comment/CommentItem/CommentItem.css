@@ -38,6 +38,12 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.Time{
+    font-weight: normal;
+    font-style: italic;
+    font-size: 7px;
+}
+
 .CommentInfo p{
     color: grey;
     font-weight: bold;
@@ -81,3 +87,4 @@
 .ReplyBox input:focus{
     border: none;
 }
+
