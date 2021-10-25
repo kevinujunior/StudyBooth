@@ -32,6 +32,7 @@ class Feed extends Component {
                     time={this.props.posts[i].createdAt}
                     commentCount={this.props.posts[i].commentCount}
                     comments = {this.props.posts[i].comments}
+                    isLikedByuser = {true}
                 /> 
             })
         }

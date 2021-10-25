@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import classes from './Post.css';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
-import axios from 'axios';
 import {connect } from 'react-redux';
 import * as actions from '../../../../../store/actions/feed';
 
@@ -17,20 +17,20 @@ class Post extends Component{
     state = {
         isActionsVisible : false,
         isCommentVisibe : false,
-        loadedPost : null,
         commentText : "",
     }
 
     postComment = () => {
 
             const data = {
-                post : this.state.loadedPost,
+                post : this.props.id,
                 commentText : this.state.commentText,
                 commentatorUser : 1,
             }
             this.props.onComment(data);
             this.setState({
                 isCommentVisibe: true,
+                commentText:""
             })
         
     }
@@ -38,7 +38,6 @@ class Post extends Component{
     commentHandler = (event) => {
         // if(event.target.files[0] === null) return;
         this.setState({
-            loadedPost: this.props.id,
             commentText: event.target.value,
         })
     }
@@ -91,7 +90,7 @@ class Post extends Component{
                     <div className={classes.Icons}>
                         <div className={classes.IconLeft}>
                             <IconButton>
-                                <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/>
+                                {this.props.isLikedByuser ? <FavoriteIcon style={{color:"crimson"}}/> : <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/> }
                             </IconButton>
                             <p>{this.props.likesCount}</p>
                             <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
@@ -101,10 +100,10 @@ class Post extends Component{
                         </div>
                         <div className={classes.VerticalLine}></div>
                         <div className={classes.Comment}>
-                            <input type="text" value ={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
+                            <input type="text" value={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
                         </div>
-                        <IconButton>
-                            <SendRoundedIcon style={{color:"#1e90ff"}} onClick={this.postComment}/>
+                        <IconButton onClick={this.postComment}>
+                            <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
                 </div>

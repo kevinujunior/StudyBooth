@@ -16,7 +16,7 @@ class CommentSection extends Component{
             CmtSectionClass.push(classes.Visible)
         }
 
-        const comments = this.props.comments.map(comment =>{
+        const comments = this.props.comments.reverse().map(comment =>{
             return  <CommentItem
             theme = {this.props.theme}
             key={comment.id}
