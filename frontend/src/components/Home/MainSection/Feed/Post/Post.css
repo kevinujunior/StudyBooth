@@ -1,10 +1,10 @@
 .Post{
     box-sizing: border-box;
     background-color: #e0dfdf;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     border-radius: 15px;
     margin: 15px 5px;
-    /* min-width: 300px; */
+    min-width: 300px;
     max-width: 550px;
     margin: 10px auto;
     background-color: white;
@@ -138,4 +138,12 @@
     font-style: italic;
     font-size: 12px;
     font-weight: bold;
+}
+
+@media (max-width:450px){
+    .Post{
+        padding: 15px;
+        margin: 7px 0px;
+        border-radius: 0px;
+    }
 }

@@ -36,8 +36,9 @@
         position: fixed;
         left: -100%;
         top: 50px;
-        z-index: 100;
+        z-index: 150;
         width: 80%;
+        height: 100%;
     }
     .Visible{
         left: 0%;
