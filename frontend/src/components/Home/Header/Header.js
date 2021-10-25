@@ -36,7 +36,7 @@ function Header(props) {
                     <div>
                         <button  className={classes.CreatePostButton} onClick={props.onCreateFeedClick}>
                             <p>Create Post</p>
-                            <AddIcon style={{color:'white', marginLeft:'5px'}} />
+                            <AddIcon style={{color:'white', marginLeft:'6px'}} />
                         </button>
                     </div>
                 </div>   

@@ -11,14 +11,29 @@
 }
 
 .Dark{
-    background-color:#161B22;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    background-color:#1E2021;
+    border-bottom: 0.5px solid rgb(51, 51, 51);
+    /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em; */
 }
 
 .Dark .IconColor{
     color: white;
 }
 
+.Dark .Input{
+    background-color:#313033 ;
+    border: none;
+}
+
+.Dark .Input input{
+    color: white;
+    opacity: 0.85;
+}
+
+.Dark .btnSearch{
+    color: white;
+    opacity: 0.9;
+}
 
 .HeaderContent{
     max-width: 1200px;
@@ -42,7 +57,7 @@
 
 .CreatePostButton{
     background-color: #1DA1F2;
-    padding:8px 14px;
+    padding:6px 14px;
     border-radius:50px;
     margin-left: 20px;
     outline: none;

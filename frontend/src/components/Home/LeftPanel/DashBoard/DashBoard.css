@@ -1,11 +1,13 @@
 .DashBoard{
-    height: 100vh;
-    overflow-y: scroll;
+    height: 100%;
     width: 100%;
     min-width: 300px;
     background-color: inherit;
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .DashBoard::-webkit-scrollbar{
@@ -16,4 +18,38 @@
     margin-top: 20px;
     width: 100%;
     border-top: 1px solid #eee;
+}
+
+.Component1{
+    position: absolute;
+    left: 0%;
+    transition: all 0.3s;
+    width: 100%;
+}
+.Component2{
+    position: absolute;
+    right: -100%;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.Component2 > button {
+    border: none;
+    background:transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 0% ;
+}
+
+.SlideLeft_c1{
+    left: -100%;
+}
+.SlideLeft_c2{
+    right: 0%;
+}
+.SlideRight_c1{
+    left: 2%;
+}
+.SlideRight_c2{
+    right: -100%;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SectionItems from '../DashBoardItems/DashBoardItem';
+import SectionItems from '../../../../../containers/Home/Sections/SectionList';
 import classes from './Sections.css';
 
 
@@ -15,9 +15,10 @@ const Sections = (props) => {
     }
     return (
         <div className={ClassNames.join(" ")}>
-            <SectionItems name="Maths" icon = {<FontAwesomeIcon icon={faSquareRootAlt} />}/>
+            {/* <SectionItems name="Maths" icon = {<FontAwesomeIcon icon={faSquareRootAlt} />}/>
             <SectionItems name="Science" icon = {<FontAwesomeIcon icon={faFlask} />}/>
-            <SectionItems name="Machine learning" icon = {<FontAwesomeIcon icon={faRobot} />}/>
+            <SectionItems name="Machine learning" icon = {<FontAwesomeIcon icon={faRobot} />}/> */}
+            <SectionItems />
         </div>
     );
 }

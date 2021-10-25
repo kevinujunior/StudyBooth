@@ -26,6 +26,7 @@
 
 .Dark p{
     color: white;
+    opacity: 0.7;
 }
 .Dark .Switch{
     color: white;

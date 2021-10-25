@@ -39,12 +39,14 @@
     border:none;
 }
 
+
 .Dark .IconColor{
     color: white;
     border-color: white;
 }
 .Dark .Type textarea{
     color: white;
+    opacity: 0.7;
 }
 
 .IconColor{

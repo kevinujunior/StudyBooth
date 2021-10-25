@@ -1,21 +1,13 @@
 .leftSection{
     /* background-color: rgba(29, 31, 41,1); */
-    background-color: white;
-   
-    height : 90vh;
-    width:25%;
-    display: list-item;
+    background-color: inherit;
+    height: 65vh;
     min-width: 150px;
-    max-width: 210px;
-    margin-left:1%;
-    overflow-y :auto;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    position: sticky;
-    right: 0px;
-    top: 90px;
-   
+    max-width: 100%;
+    overflow-y: scroll;
+    /* margin-bottom: 50px; */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .leftSection::-webkit-scrollbar{
@@ -23,7 +15,7 @@
 }
 
 #friends{
-    margin-top: 80px;
+    /* margin-top: 80px; */
     margin-bottom: 30px;
     margin-left: 2px;
     

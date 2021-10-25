@@ -16,18 +16,24 @@
 
 .Dark{
     background-color: #1E2021;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
     border:none;
     color: white;
 }
 .Dark p{
     color: white;
+    opacity: 0.7;
 }
 .Dark input{
     color: white;
+    opacity: 0.85;
 }
 .Dark .IconColor{
     color: lightgray;
+}
+
+.Dark img{
+    opacity: 0.9;
 }
 
 .Post > div{
