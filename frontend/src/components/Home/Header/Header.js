@@ -34,17 +34,24 @@ function Header(props) {
                         <button class={classes.btnSearch}>{<SearchIcon/>}</button>
                     </div>
                     <div>
-                        <button  className={classes.CreatePostButton} onClick={props.onCreateFeedClick}>
+                        <button  className={classes.CreatePostButton1} onClick={props.onCreateFeedClick}>
                             <p>Create Post</p>
-                            <AddIcon style={{color:'white', marginLeft:'6px'}} />
+                            <AddIcon style={{color:'white'}} />
                         </button>
                     </div>
                 </div>   
                 <div className={classes.Buttons}>
-                    <ToggleButton theme={props.theme} onClick = {() => props.onChangeTheme(props.theme)}/>
-                    <IconButton>
-                        <NotificationsNoneRoundedIcon className={classes.IconColor}/>
-                    </IconButton>
+                    <div className={classes.ToggleBtn}>
+                        <ToggleButton theme={props.theme} onClick = {() => props.onChangeTheme(props.theme)} />
+                    </div>
+                    <div className={classes.NotfBtn}>
+                        <IconButton >
+                            <NotificationsNoneRoundedIcon className={classes.IconColor}/>
+                        </IconButton>
+                    </div>
+                    <button  className={classes.CreatePostButton2} onClick={props.onCreateFeedClick}>
+                        <AddIcon style={{color:'white'}} />
+                    </button>
                 </div>             
             </div>
         </div>

@@ -55,7 +55,7 @@
 }
 
 
-.CreatePostButton{
+.CreatePostButton1{
     background-color: #1DA1F2;
     padding:6px 14px;
     border-radius:50px;
@@ -69,7 +69,19 @@
     cursor: pointer;
 }
 
-.CreatePostButton p{
+.CreatePostButton2{
+    background-color: #1DA1F2;
+    padding:5px 10px;
+    border-radius:20px;
+    border: none;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.CreatePostButton1 p{
     color: white;
 }
 
@@ -116,6 +128,23 @@
 .HamburgerButton{
     display: none;
 }
+
+.NotfBtn{
+    display: block;
+}
+
+@media (max-width:850px) {
+    .NotfBtn{
+        display: none;
+    }
+    
+}
+@media (max-width:780px) {
+    .CreatePostButton1 p{
+        display: none;
+    }
+}
+
 @media (max-width: 700px){
     .Input input{
         width: 300px;
@@ -124,6 +153,7 @@
     .HeaderContent  img{
         height: 50px;
     }
+    
 }
 
 
@@ -135,6 +165,19 @@
         display: none;
     }
     .HamburgerButton{
+        display: block;
+    }
+    
+}
+
+@media (max-width:550px) {
+    .ToggleBtn{
+        display: none !important;
+    }
+    .CreatePostButton1{
+        display: none;
+    }
+    .CreatePostButton2{
         display: block;
     }
 }
@@ -152,4 +195,10 @@
         height: 40px;
     }
     
+}
+
+@media (max-width:400px){
+    .CreatePostButton2{
+        padding: 2px 6px;
+    }
 }
