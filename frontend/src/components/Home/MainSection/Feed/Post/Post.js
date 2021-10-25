@@ -9,6 +9,7 @@ import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
 import axios from 'axios';
 import {connect } from 'react-redux';
+import * as actions from '../../../../../store/actions/feed';
 
 
 class Post extends Component{
@@ -27,18 +28,15 @@ class Post extends Component{
                 commentText : this.state.commentText,
                 commentatorUser : 1,
             }
-            axios.post("http://localhost:8000/feed/comments/", data)
-            .then(response =>{
-             console.log(this.state.loadedPost)
+            this.props.onComment(data);
+            this.setState({
+                isCommentVisibe: true,
             })
-            .catch(err => console.log(err));
         
     }
 
     commentHandler = (event) => {
         // if(event.target.files[0] === null) return;
-        console.log("hello")
-        console.log(this.props.id)
         this.setState({
             loadedPost: this.props.id,
             commentText: event.target.value,
@@ -124,4 +122,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = dispatch => {
+    return {
+        onComment : (data) => dispatch(actions.createNewComment(data)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

@@ -7,7 +7,6 @@ import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ArticleIcon from '@mui/icons-material/Article';
 import { IconButton, Button} from '@mui/material';
-import axios from 'axios';
 import * as actions from '../../../../store/actions/feed'
 
 class  createFeed extends Component {

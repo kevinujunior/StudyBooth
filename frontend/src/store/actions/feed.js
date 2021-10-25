@@ -32,3 +32,13 @@ export const createNewPost = (formData, config) => {
         .catch(err => console.log(err));
     }
 }
+
+export const createNewComment = (data) => {
+    return dispatch => {
+        axios.post("http://localhost:8000/feed/comments/", data)
+        .then(response =>{
+            dispatch(fetchFeed())
+        })
+        .catch(err => console.log(err));
+    }
+}
