@@ -29,10 +29,10 @@ def populate(total):
 def populate_section(total):
     for _ in range(total):
         sectionName=fake.word(),
-        sectionPic =  fake.image_url()
+       
         Section.objects.create(
             sectionName = sectionName[0],
-            sectionPic =sectionPic,
+            sectionPic ="/sectionPic/" + str(random.randint(1,7)) +".jpg",
         )
         
 

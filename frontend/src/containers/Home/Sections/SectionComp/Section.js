@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import classes from './Section.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-const Section = (props) => {
+class Section extends Component {
+
+    // state = {
+    //     isRepliesVisible: false,
+    //     isReplyBoxVisible: false,
+    // }
+    
+
+    render(){
     return(
         <div>
-             <a className= {classes.individualSection} href="/login">
+             <a className= {classes.individualSection} >
                     <div className ={classes.sectionIconHolder}>
-                        <img className ={classes.sectionImage} src="images/signin-image.jpg " alt="sign in image" /> 
+                        <img className ={classes.sectionImage} src={this.props.sectionPic} alt="lol" /> 
                     </div>
                     <div className ={classes.sectionTextHolder}>
-                        <h3 className={classes.sectionText}>{props.name}</h3>
+                        <h3 className={classes.sectionText}>{this.props.sectionName}</h3>
                     </div>
                     <div className = {classes.star}>
                         <StarBorderIcon className = {classes.starButton}/>
@@ -20,6 +28,7 @@ const Section = (props) => {
        
         
     )
+    }
 }
 
 export default Section;

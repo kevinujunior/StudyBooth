@@ -13,7 +13,9 @@
 .leftSection::-webkit-scrollbar{
     display: none;
 }
-
+.a{
+    color: black;
+}
 #friends{
     /* margin-top: 80px; */
     margin-bottom: 30px;
