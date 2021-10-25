@@ -7,7 +7,7 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
-
+import axios from 'axios';
 import {connect } from 'react-redux';
 
 
@@ -16,6 +16,33 @@ class Post extends Component{
     state = {
         isActionsVisible : false,
         isCommentVisibe : false,
+        loadedPost : null,
+        commentText : "",
+    }
+
+    postComment = () => {
+
+            const data = {
+                post : this.state.loadedPost,
+                commentText : this.state.commentText,
+                commentatorUser : 1,
+            }
+            axios.post("http://localhost:8000/feed/comments/", data)
+            .then(response =>{
+             console.log(this.state.loadedPost)
+            })
+            .catch(err => console.log(err));
+        
+    }
+
+    commentHandler = (event) => {
+        // if(event.target.files[0] === null) return;
+        console.log("hello")
+        console.log(this.props.id)
+        this.setState({
+            loadedPost: this.props.id,
+            commentText: event.target.value,
+        })
     }
 
     toggleActions = (actionState) =>{
@@ -76,10 +103,10 @@ class Post extends Component{
                         </div>
                         <div className={classes.VerticalLine}></div>
                         <div className={classes.Comment}>
-                            <input type="text" placeholder="write a comment..."/>
+                            <input type="text" value ={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
                         </div>
                         <IconButton>
-                            <SendRoundedIcon style={{color:"#1e90ff"}}/>
+                            <SendRoundedIcon style={{color:"#1e90ff"}} onClick={this.postComment}/>
                         </IconButton>
                     </div>
                 </div>

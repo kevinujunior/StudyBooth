@@ -21,6 +21,7 @@ class Feed extends Component {
             posts = [...Array(number_of_posts)].map((x, i) => {
                 return <Post
                     key={this.props.posts[i].id}
+                    id  = {this.props.posts[i].id}
                     name={this.props.posts[i].userFields.username}
                     postImage={this.props.posts[i].postFile}
                     profileImage={this.props.posts[i].postFile}

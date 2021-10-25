@@ -21,7 +21,7 @@ class CommentSection extends Component{
             theme = {this.props.theme}
             key={comment.id}
             comment = {comment.commentText}
-            user = {comment.commentatorUser.username}
+            user = {comment.userFields.username}
             createdAt = {comment.createdAt}
             />    
         })

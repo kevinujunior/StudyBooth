@@ -51,16 +51,16 @@ class PostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     
-    """don't delet this comment we might need it later"""
+    """don't delete this comment we might need it later"""
     # username = serializers.SerializerMethodField(read_only=True)
-    commentatorUser = UserSerializer()
+    userFields = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id','post', 'commentatorUser','commentText', 'createdAt',]
+        fields = ['id','post', 'commentatorUser','commentText', 'createdAt','userFields']
     
-    # def get_username(self,obj):
-    #     username = obj.commentatorUser.username
-    #     return username
+    def get_userFields(self,obj):
+        user = obj.commentatorUser
+        return UserSerializer(user).data
     
 
 

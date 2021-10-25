@@ -38,7 +38,15 @@ class CommentViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
     # http_method_names = ['post','get']
     serializer_class = CommentSerializer
-    queryset = Comment.objects.all()
+    # queryset = Comment.objects.all()
+    def get_queryset(self):
+        queryset = Comment.objects.all()
+        # curruser = self.request.user
+        # following = UserFollowing.objects.filter(currUser = curruser)
+        # queryset = Post.objects.filter(
+        #     Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        queryset = queryset.order_by("-createdAt")
+        return queryset
     
 
 class LikeViewSet(viewsets.ModelViewSet):
