@@ -1,6 +1,6 @@
 .ToggleButton{
-    height: 24px;
-    width: 50px;
+    height: 30px;
+    width: 60px;
     border-radius: 20px;
     background-color: lightgray;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
@@ -9,21 +9,26 @@
     position: relative;
     display: flex;
     align-items: center;
+    flex-direction: row;
 }
-
+.LightBody{
+    background-color: white;
+}
+.DarkBody{
+    background-color: lightgray;
+}
 .Circle{
-    height: 20px;
-    width: 20px;
+    height: 25px;
     border-radius: 50%;
-    background-color: grey;
+    /* background-color: grey; */
     position: absolute;
     transition: all 0.3s;
     cursor: pointer;
-    left: 5%;
+    left: 7%;
     transition: all 0.3s;
 }
 
 
 .right{
-    transform:translateX(130%)
+    transform:translateX(120%);
 }

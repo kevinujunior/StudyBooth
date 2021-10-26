@@ -11,7 +11,7 @@ import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import ClassOutlinedIcon from '@mui/icons-material/ClassOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 
 
@@ -44,7 +44,7 @@ class DashBoard extends Component{
                     </div>
                 </div>
                 <div className={[classes.Component2, this.state.selected === "Sections" ? classes.SlideLeft_c2 : classes.SlideRight_c2].join(" ")}>
-                    <IconButton onClick = {() => this.changeSelected("Feed")}><CloseIcon /></IconButton>
+                    <button onClick = {() => this.changeSelected("Feed")}><ArrowBackIcon /></button>
                     <SectionItems />
                 </div>
             </div>

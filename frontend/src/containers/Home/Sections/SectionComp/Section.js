@@ -7,15 +7,8 @@ import * as actions from '../../../../store/actions/feed';
 
 class Section extends Component {
 
-    // state = {
-    //     isRepliesVisible: false,
-    //     isReplyBoxVisible: false,
-    // }
-    state = {
-        posts : [],
-    }
 
-    sectionHandler = () => {
+    filterFeed = () => {
         this.props.onFilterFeedBySection(this.props.id);
         document.documentElement.scrollTop = 0; //scrolling to top 
     }
@@ -24,7 +17,7 @@ class Section extends Component {
     render(){
         return(
             <div>
-                <a className= {classes.individualSection} onClick = {this.sectionHandler} >
+                <a className= {classes.individualSection} onClick = {this.filterFeed} >
                         <div className ={classes.sectionIconHolder}>
                             <img className ={classes.sectionImage} src={this.props.sectionPic} alt="lol" /> 
                         </div>

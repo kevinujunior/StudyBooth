@@ -8,14 +8,13 @@
     /* margin-bottom: 50px; */
     padding: 20px;
     box-sizing: border-box;
+    color: inherit;
 }
 
 .leftSection::-webkit-scrollbar{
     display: none;
 }
-.a{
-    color: black;
-}
+
 #friends{
     /* margin-top: 80px; */
     margin-bottom: 30px;
@@ -31,10 +30,9 @@
 }
 
 .sectionName{
+    color: inherit;
     font-size: 12.5px;
     margin-left: 6px;
-    /* color: white; */
-    color:grey;
     margin-bottom: 2px;
 }
 

@@ -34,11 +34,16 @@
 }
 
 .Component2 > button {
+    background-color: lightskyblue;
     border: none;
-    background:transparent;
     cursor: pointer;
     position: absolute;
+    border-radius: 20px 0px 0px 20px;
     right: 0% ;
+    top: 2%;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .SlideLeft_c1{

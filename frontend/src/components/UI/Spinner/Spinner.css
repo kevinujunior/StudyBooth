@@ -1,6 +1,7 @@
 .Container{
   margin-top: 100px;
-  width: 550px;
+  max-width: 100%;
+  min-width: 450px;
 }
 
 .Loader,
