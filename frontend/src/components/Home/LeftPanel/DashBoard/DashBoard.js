@@ -13,7 +13,8 @@ import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
-
+import {connect } from 'react-redux';
+import * as actions from '../../../../store/actions/feed';
 
 class DashBoard extends Component{
 
@@ -33,7 +34,11 @@ class DashBoard extends Component{
                 <Profile />
                 <div className={[classes.Component1, this.state.selected === "Sections" ? classes.SlideLeft_c1 : classes.SlideRight_c1].join(" ")}>
                     <div>
-                        <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => this.changeSelected("Feed")} />
+                        <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => {
+                            this.changeSelected("Feed");
+                            this.props.onFetchFeed();
+                            document.documentElement.scrollTop = 0;
+                        }} />
                         <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
                         <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>
@@ -52,4 +57,10 @@ class DashBoard extends Component{
     }
 }
 
-export default DashBoard;
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchFeed: () => dispatch(actions.fetchFeed())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(DashBoard);
