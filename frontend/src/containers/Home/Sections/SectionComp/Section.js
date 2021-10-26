@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Section.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import axios from 'axios';
 
 class Section extends Component {
 
@@ -8,12 +9,26 @@ class Section extends Component {
     //     isRepliesVisible: false,
     //     isReplyBoxVisible: false,
     // }
-    
+    state = {
+        posts : [],
+    }
+
+    sectionHandler = () => {
+            axios.get("http://localhost:8000/feed/posts/?section="+this.props.id)
+            .then(response =>{
+                const posts= response.data
+                this.setState({posts: posts})
+                console.log(response)
+                console.log(this.props.id)
+            })
+            
+        }
+
 
     render(){
     return(
         <div>
-             <a className= {classes.individualSection} >
+             <a className= {classes.individualSection} onClick = {this.sectionHandler} >
                     <div className ={classes.sectionIconHolder}>
                         <img className ={classes.sectionImage} src={this.props.sectionPic} alt="lol" /> 
                     </div>

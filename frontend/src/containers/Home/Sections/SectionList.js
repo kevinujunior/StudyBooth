@@ -23,6 +23,7 @@ class SectionList extends Component {
   render() {
     const sections = this.state.sections.map( section => {
         return <Section 
+        id={section.id}
         key ={section.id} 
         sectionName={section.sectionName} 
         sectionPic = {section.sectionPic} />

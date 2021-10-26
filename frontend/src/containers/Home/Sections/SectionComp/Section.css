@@ -47,6 +47,7 @@ a{
         /* color: rgb(71, 71, 68); */
         color: rgb(178, 178, 178);
         text-decoration: none;
+        cursor:pointer;
 }
 
 .sectionIconHolder{

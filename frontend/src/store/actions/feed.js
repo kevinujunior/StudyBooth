@@ -42,3 +42,4 @@ export const createNewComment = (data) => {
         .catch(err => console.log(err));
     }
 }
+
