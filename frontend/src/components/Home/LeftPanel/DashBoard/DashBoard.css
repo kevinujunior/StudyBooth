@@ -1,4 +1,5 @@
 .DashBoard{
+    border-right: inherit;
     height: 100vh;
     width: 100%;
     min-width: 300px;
@@ -8,7 +9,14 @@
     position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
+    
 }
+
+/* .Dark{
+    background-color:rgb(2, 1, 1);
+    border: 10px solid rgb(17, 16, 16);
+} */
+
 
 .DashBoard::-webkit-scrollbar{
     display: none;

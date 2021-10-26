@@ -11,8 +11,8 @@
 }
 
 .Dark{
-    background-color:#1E2021;
-    border-bottom: 0.5px solid rgb(51, 51, 51);
+    background-color:black;
+    border-bottom: 0.5px solid rgb(32, 32, 32);
     /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em; */
 }
 
@@ -42,10 +42,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 60px;
 }
 
 .HeaderContent  img{
-    height: 70px;
+    height: 40px;
+    margin-top: auto;
+    /* height: 70px; */
 }
 
 .SearchAndCreate{
