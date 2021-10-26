@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 export const setPosts = (posts) => {
-    console.log("posts fetched.")
     return {
         type: actionTypes.FETECH_FEED,
         posts: posts,
@@ -43,3 +42,15 @@ export const createNewComment = (data) => {
     }
 }
 
+export const fetchFeedFilterBySection = (id) => {
+    return dispatch => {
+        axios.get('http://localhost:8000/feed/posts/?section='+id)
+        .then(response =>{
+            const posts = response.data;
+            dispatch(setPosts(posts))
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+}

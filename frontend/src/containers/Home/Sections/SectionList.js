@@ -10,14 +10,13 @@ class SectionList extends Component {
     }
 
     componentDidMount = () => {
-            axios.get("http://localhost:8000/feed/sections/")
-            .then(response =>{
-                const sections = response.data
-                this.setState({sections: sections})
-                console.log(response)
-            })
-            
-        }
+        axios.get("http://localhost:8000/feed/sections/")
+        .then(response =>{
+            const sections = response.data
+            this.setState({sections: sections})
+            console.log(response)
+        }) 
+    }
 
 
   render() {
@@ -41,7 +40,6 @@ class SectionList extends Component {
             <div class = {classes.sectionContainer}>
                 <h4 class = {classes.sectionName}> All Sections</h4>
                 {sections}
-                
             </div>
 
         </section>
