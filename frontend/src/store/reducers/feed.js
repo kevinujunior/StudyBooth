@@ -6,6 +6,28 @@ const initialState = {
     sections: null,
 }
 
+
+const updatePostComment = (state, action) => {
+
+    let posts = [...state.posts];
+    let index = posts.findIndex(post => post.id === action.data.post); //finding post by post id
+    //after finding the post index pushing the new comment into it.
+    let comments = [...posts[index].comments];
+    comments.push(action.data);
+
+    posts[index] ={
+        ...posts[index],
+        comments: comments,
+        commentCount: posts[index].commentCount+1,
+    }
+
+    return {
+        ...state,
+        posts,
+    };
+}
+
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CREATE_NEW_POST: 
@@ -18,7 +40,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 refreshFeed: false,
             }
-        case actionTypes.FETECH_FEED: //when ever fetch feed we set the new posts.
+        case actionTypes.FETCH_FEED: //when ever fetch feed we set the new posts.
             return {
                 ...state,
                 posts: action.posts,
@@ -28,6 +50,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 sections: action.sections
             }
+        case actionTypes.UPDATE_POST_COMMENT:
+            return updatePostComment(state, action);
         default:
             return state;
     }

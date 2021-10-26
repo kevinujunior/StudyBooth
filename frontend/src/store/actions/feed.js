@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const setPosts = (posts) => {
     return {
-        type: actionTypes.FETECH_FEED,
+        type: actionTypes.FETCH_FEED,
         posts: posts,
     }
 }
@@ -17,12 +17,21 @@ export const setSections = (sections) => {
     }
 }
 
+export const updatePostComment = (data) => {
+    console.log(data)
+    return {
+        type: actionTypes.UPDATE_POST_COMMENT,
+        data : data,
+    }
+}
+
 export const fetchFeed = () => {
     //this is the method to fetch the feed.
     return dispatch => {
         axios.get('http://localhost:8000/feed/posts/')
         .then(response =>{
             const posts = response.data;
+            console.log(posts)
             dispatch(setPosts(posts))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
@@ -45,7 +54,7 @@ export const createNewComment = (data) => {
     return dispatch => {
         axios.post("http://localhost:8000/feed/comments/", data)
         .then(response =>{
-            dispatch(fetchFeed()) //when ever we create a new comment we fetch the feed again we have to imporve this.
+            dispatch(updatePostComment(response.data));
         })
         .catch(err => console.log(err));
     }

@@ -9,6 +9,7 @@ export const DARK_THEME = 'DARK_THEME';
 export const CREATE_NEW_POST = 'CREATE_NEW_POST' ;
 
 export const REFRESH_FEED = 'REFRESH_FEED';
-export const FETECH_FEED = 'FETECH_FEED';
+export const FETCH_FEED = 'FETCH_FEED';
+export const UPDATE_POST_COMMENT = 'UPDATE_POST_COMMENT';
 
 export const FETCH_SECTIONS = 'FETCH_SECTIONS';
