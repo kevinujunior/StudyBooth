@@ -27,8 +27,14 @@ export const updatePostComment = (data) => {
 
 export const fetchFeed = () => {
     //this is the method to fetch the feed.
+    const config = {
+        headers: {
+            "Authorization": "Token "+localStorage.getItem('token') ,
+            "Content-Type": "application/json",
+         }
+      };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/posts/')
+        axios.get('http://localhost:8000/feed/posts/',config)
         .then(response =>{
             const posts = response.data;
             console.log(posts)
