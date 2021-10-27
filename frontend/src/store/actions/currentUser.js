@@ -13,13 +13,18 @@ export const fetchCurrentUser = () => {
     const config = {
         headers: {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
+            "accept": "application/json",
+            // 'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+            
         }
+        
     };
     return dispatch => {
         let userId = localStorage.getItem('user');
-        axios.get('http://localhost:8000/users/userview/1', config)
+        axios.get('http://localhost:8000/users/userview/'+userId,config)
         .then(response =>{
+            console.log("hello")
             console.log(response.data)
             dispatch(setCurrentUser(response.data));
         })

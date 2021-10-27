@@ -72,6 +72,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
 }
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,8 +80,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'studybooth.urls'
@@ -164,17 +165,23 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3030',
-    'http://localhost:3000',
-] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3030',
+#     'http://localhost:3000',
+# ] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ORIGIN_WHITELIST = [
+#     'http://127.0.0.1:8000',
+#     'http://localhost:3000',
+# ]
 # CORS_ALLOWED_ORIGIN_REGEXES = [
 #     'http://localhost:3030',
 #     'http://localhost:3000',
 # ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -110,6 +110,7 @@ export const fetchSection = () => {
         axios.get("http://localhost:8000/feed/section/",config)
         .then(response =>{
             dispatch(setSections(response.data));
+            console.log(response.data)
         })
         .catch(err => console.log(err));
     }
