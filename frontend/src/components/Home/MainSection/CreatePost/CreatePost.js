@@ -9,7 +9,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { IconButton, Button} from '@mui/material';
 import * as actions from '../../../../store/actions/feed'
 
-class  createFeed extends Component {
+class  createPost extends Component {
 
     state = {
         postCaption : "",
@@ -71,6 +71,7 @@ class  createFeed extends Component {
     render(){
         let createFeedClasses = [classes.CreateFeed]
         if(this.props.theme === 'dark') createFeedClasses.push(classes.Dark);
+        
         return (
             <div className={createFeedClasses.join(" ")}>
                 <div className={classes.Type}>
@@ -109,7 +110,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(createFeed);
+export default connect(mapStateToProps, mapDispatchToProps)(createPost);
 
 function UploadButton  (props) {
     return (

@@ -16,7 +16,7 @@ class Home extends Component {
     state = {
         isChatActive: false,
         isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
-        isCreteFeedVisible: false,
+        isCreatePostVisible: false,
     }
 
     switchChatState  = (currentState) => {
@@ -34,7 +34,7 @@ class Home extends Component {
     onCreateFeedClick = (currentState) => {
         console.log("modal closed")
         this.setState({
-            isCreteFeedVisible: !currentState,
+            isCreatePostVisible: !currentState,
         })
     }
 
@@ -49,10 +49,10 @@ class Home extends Component {
             <div className={homeClasses.join(" ")} >
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
-                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}
+                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
                 />
-                <Modal show={this.state.isCreteFeedVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}>
-                    <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)} />
+                <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
+                    {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                 </Modal>
                 <div className={classes.main}>
                     <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
