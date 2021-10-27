@@ -38,13 +38,10 @@ class  createFeed extends Component {
         if(this.state.selectedfile!==null){
             formData.append('postFile' , this.state.selectedfile)
         }
-        formData.append('user' ,1)
+        formData.append('user' ,localStorage.getItem('user'))
     
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
-
-        this.props.onCreateNewPost(formData, config); //we are handling new post request on store/feed
+       
+        this.props.onCreateNewPost(formData); //we are handling new post request on store/feed
         
         this.props.closeModal();
     }

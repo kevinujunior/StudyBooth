@@ -29,7 +29,7 @@ export const fetchFeed = () => {
     //this is the method to fetch the feed.
     const config = {
         headers: {
-            "Authorization": "Token "+localStorage.getItem('token') ,
+            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
          }
       };
@@ -46,7 +46,14 @@ export const fetchFeed = () => {
     }
 }
 
-export const createNewPost = (formData, config) => {
+export const createNewPost = (formData) => {
+    const config = {
+        headers: {
+            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
+            "Content-Type": "application/json",
+         }
+      };
+
     return dispatch => {
         axios.post("http://localhost:8000/feed/posts/", formData ,config)
         .then(response =>{
@@ -57,8 +64,14 @@ export const createNewPost = (formData, config) => {
 }
 
 export const createNewComment = (data) => {
+    const config = {
+        headers: {
+            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
+            "Content-Type": "application/json",
+         }
+      };
     return dispatch => {
-        axios.post("http://localhost:8000/feed/comments/", data)
+        axios.post("http://localhost:8000/feed/comments/", data,config)
         .then(response =>{
             dispatch(updatePostComment(response.data));
         })
@@ -68,8 +81,14 @@ export const createNewComment = (data) => {
 
 export const fetchFeedFilterBySection = (id) => {
     //here we are getting the section id and the we are filtering feed on basis of that.
+    const config = {
+        headers: {
+            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
+            "Content-Type": "application/json",
+         }
+      };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/posts/?section='+id)
+        axios.get('http://localhost:8000/feed/posts/?section='+id,config)
         .then(response =>{
             const posts = response.data;
             dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
@@ -81,8 +100,14 @@ export const fetchFeedFilterBySection = (id) => {
 }
 
 export const fetchSection = () => {
+    const config = {
+        headers: {
+            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
+            "Content-Type": "application/json",
+         }
+      };
     return dispatch => {
-        axios.get("http://localhost:8000/feed/sections/")
+        axios.get("http://localhost:8000/feed/sections/",config)
         .then(response =>{
             dispatch(setSections(response.data));
         })
