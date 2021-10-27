@@ -66,9 +66,13 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 class CommentUserSerializer(serializers.ModelSerializer):
-    
+    # userPic = serializers.SerializerMethodField()
     class Meta:
         model = User
         fields = ['id', 'username', 'userPic']
+        
+    # def get_userPic(self,obj):
+    #     request = self.context.get("request")
+    #     return request.build_absolute_uri(obj.userPic.url)
         
     
