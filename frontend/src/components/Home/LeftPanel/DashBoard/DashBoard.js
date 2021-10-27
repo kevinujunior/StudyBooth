@@ -14,8 +14,7 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 import {connect } from 'react-redux';
-import * as feedActions from '../../../../store/actions/feed';
-import * as authActions from '../../../../store/actions/auth'
+import * as actions from '../../../../store/actions/index';
 
 
 class DashBoard extends Component{
@@ -61,8 +60,8 @@ class DashBoard extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFeed: () => dispatch(feedActions.fetchFeed()),
-        onLogOut : () => dispatch(authActions.logout()),
+        onFetchFeed: () => dispatch(actions.fetchFeed()),
+        onLogOut : () => dispatch(actions.logout()),
     }
 }
 

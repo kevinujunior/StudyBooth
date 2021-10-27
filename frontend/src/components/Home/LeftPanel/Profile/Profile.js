@@ -1,7 +1,10 @@
 import React from "react";
 import classes from './Profile.css';
+import {connect} from 'react-redux';
 
 const profile = () => {
+
+    
     return (
         <div className={classes.Profile}>
             <div className = {classes.Info}>
@@ -38,4 +41,9 @@ const profile = () => {
     )
 }
 
-export default profile;
+const mapStateToProps = state => {
+    return {
+        userData: state.currentUser.data,
+    }
+}
+export default connect(mapStateToProps)(profile);

@@ -3,7 +3,7 @@ import Post from './Post/Post';
 import Spinner from '../../../UI/Spinner/Spinner'
 
 import {connect } from 'react-redux';
-import * as actions from '../../../../store/actions/feed';
+import * as actions from '../../../../store/actions/index';
 
 class Feed extends Component {
     

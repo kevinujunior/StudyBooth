@@ -9,7 +9,7 @@ import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
 import {connect } from 'react-redux';
-import * as actions from '../../../../../store/actions/feed';
+import * as actions from '../../../../../store/actions/index';
 
 
 class Post extends Component{

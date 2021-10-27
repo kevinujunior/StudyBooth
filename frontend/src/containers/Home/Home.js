@@ -10,6 +10,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateFeed from '../../components/Home/MainSection/CreatePost/CreatePost';
+import * as actions from '../../store/actions/index'
 
 class Home extends Component {
 
@@ -36,6 +37,10 @@ class Home extends Component {
         this.setState({
             isCreatePostVisible: !currentState,
         })
+    }
+
+    componentDidMount() {
+        this.props.onFetchCurrentUserDetail();
     }
 
     render(){
@@ -75,4 +80,10 @@ const mapStateToProps = (state) => {
         theme: state.theme.theme,
     }
 }
-export default connect(mapStateToProps)(Home)
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchCurrentUserDetail: () => dispatch(actions.fetchCurrentUser()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
