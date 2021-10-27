@@ -47,23 +47,29 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    following = serializers.SerializerMethodField()
-    followers = serializers.SerializerMethodField()
-    # userPic = serializers.SerializerMethodField()
+    # following = serializers.SerializerMethodField()
+    # followers = serializers.SerializerMethodField()
+    followingCount = serializers.SerializerMethodField()
+    followerCount= serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ['id', 'username', 'fullName', 'userPic','email','following','followers']
+        fields = ['id', 'username', 'fullName', 'userPic','email','followingCount','followerCount']
         
     def get_following(self, obj):
         return FollowingSerializer(obj.following.all(), many=True).data
 
     def get_followers(self, obj):
         return FollowerSerializer(obj.followers.all(), many=True).data
-        
-    # def get_userPic(self,obj):
-    #     request = self.context.get("request")
-    #     return request.build_absolute_uri(obj.userPic.url)
     
+    def get_followingCount(self,obj):
+        following = UserFollowing.objects.filter(currUser = obj)
+        return len(following)
+
+    def get_followerCount(self,obj):
+        follower = UserFollowing.objects.filter(followingUser = obj)
+        return len(follower)
+        
+
 
 class CommentUserSerializer(serializers.ModelSerializer):
     # userPic = serializers.SerializerMethodField()
@@ -74,5 +80,14 @@ class CommentUserSerializer(serializers.ModelSerializer):
     # def get_userPic(self,obj):
     #     request = self.context.get("request")
     #     return request.build_absolute_uri(obj.userPic.url)
+    
+    # def get_userPic(self, obj):
+    #         request = self.context.get('request')
+    #         if self.context.get('request'):
+    #             if obj.userPic and hasattr(obj.userPic, 'url'):
+    #                 photo_url = obj.userPic.url
+    #             return request.build_absolute_uri(photo_url)
+    #         else:
+    #                 return None
         
     
