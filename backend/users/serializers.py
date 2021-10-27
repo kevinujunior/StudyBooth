@@ -74,5 +74,14 @@ class CommentUserSerializer(serializers.ModelSerializer):
     # def get_userPic(self,obj):
     #     request = self.context.get("request")
     #     return request.build_absolute_uri(obj.userPic.url)
+    
+    # def get_userPic(self, obj):
+    #         request = self.context.get('request')
+    #         if self.context.get('request'):
+    #             if obj.userPic and hasattr(obj.userPic, 'url'):
+    #                 photo_url = obj.userPic.url
+    #             return request.build_absolute_uri(photo_url)
+    #         else:
+    #                 return None
         
     

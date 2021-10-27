@@ -67,13 +67,17 @@ class CommentListViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
     http_method_names = ['get']
     serializer_class = CommentListSerializer
-    # queryset = Comment.objects.all()
+    
     def get_queryset(self):
-        queryset = Comment.objects.all()
+        # queryset = Post.objects.all()
         # curruser = self.request.user
         # following = UserFollowing.objects.filter(currUser = curruser)
         # queryset = Post.objects.filter(
         #     Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        queryset = Comment.objects.all()
+        if self.request.query_params.get("post", None):
+            id = self.request.query_params.get("post", None)
+            queryset = Comment.objects.filter(post__id = id)
         queryset = queryset.order_by("-createdAt")
         return queryset
     
