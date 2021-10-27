@@ -25,7 +25,7 @@ class Feed extends Component {
                     name={this.props.posts[i].userName}
                     postImage={this.props.posts[i].postFile}
                     profileImage={this.props.posts[i].userPic}
-                    category={!this.props.posts[i].postSection ? null : this.props.posts[i].postSection.sectionName}
+                    category={!this.props.posts[i].sectionName ? null : this.props.posts[i].sectionName}
                     // category = {this.props.posts[i].postSection}
                     about={this.props.posts[i].postCaption}
                     likesCount={this.props.posts[i].likeCount}
