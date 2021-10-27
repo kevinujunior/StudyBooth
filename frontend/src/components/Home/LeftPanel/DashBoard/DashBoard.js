@@ -14,7 +14,9 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 import {connect } from 'react-redux';
-import * as actions from '../../../../store/actions/feed';
+import * as feedActions from '../../../../store/actions/feed';
+import * as authActions from '../../../../store/actions/auth'
+
 
 class DashBoard extends Component{
 
@@ -45,7 +47,7 @@ class DashBoard extends Component{
                         <DashBoardItems name="Questions" icon = {<HelpOutlineOutlinedIcon />} active = {this.state.selected === "Questions"} onClick = {() => this.changeSelected("Questions")}/>
                     </div>
                     <div className = {classes.Bottom}>
-                        <DashBoardItems name="Logout" icon = {<LogoutOutlinedIcon />}/>
+                        <DashBoardItems name="Logout" icon = {<LogoutOutlinedIcon />} onClick = {this.props.onLogOut}/>
                     </div>
                 </div>
                 <div className={[classes.Component2, this.state.selected === "Sections" ? classes.SlideLeft_c2 : classes.SlideRight_c2].join(" ")}>
@@ -59,7 +61,8 @@ class DashBoard extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFeed: () => dispatch(actions.fetchFeed())
+        onFetchFeed: () => dispatch(feedActions.fetchFeed()),
+        onLogOut : () => dispatch(authActions.logout()),
     }
 }
 

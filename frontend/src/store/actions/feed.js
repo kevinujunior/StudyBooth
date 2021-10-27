@@ -17,11 +17,11 @@ export const setSections = (sections) => {
     }
 }
 
-export const updatePostComment = (data) => {
-    console.log(data)
+export const updatePostComment = (commentData) => {
+    console.log(commentData)
     return {
         type: actionTypes.UPDATE_POST_COMMENT,
-        data : data,
+        data : commentData,
     }
 }
 
@@ -32,7 +32,7 @@ export const fetchFeed = () => {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
          }
-      };
+    };
     return dispatch => {
         axios.get('http://localhost:8000/feed/posts/',config)
         .then(response =>{
