@@ -22,9 +22,9 @@ class Feed extends Component {
                 return <Post
                     key={this.props.posts[i].id}
                     id  = {this.props.posts[i].id}
-                    name={this.props.posts[i].userFields.username}
+                    name={this.props.posts[i].userName}
                     postImage={this.props.posts[i].postFile}
-                    profileImage={this.props.posts[i].postFile}
+                    profileImage={this.props.posts[i].userPic}
                     category={!this.props.posts[i].postSection ? null : this.props.posts[i].postSection.sectionName}
                     // category = {this.props.posts[i].postSection}
                     about={this.props.posts[i].postCaption}

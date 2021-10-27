@@ -16,12 +16,14 @@ class CommentSection extends Component{
             CmtSectionClass.push(classes.Visible)
         }
 
+        const url = "http://localhost:8000"
         const comments = this.props.comments.reverse().map(comment =>{
             return  <CommentItem
             theme = {this.props.theme}
+            user = {comment.commentatorUser.username}
             key={comment.id}
             comment = {comment.commentText}
-            user = {comment.userFields.username}
+            userPic = {`${url}${comment.commentatorUser.userPic}`}
             createdAt = {comment.createdAt}
             />    
         })
