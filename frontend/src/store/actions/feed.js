@@ -31,7 +31,7 @@ export const fetchFeed = () => {
         headers: {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
-         }
+        }
     };
     return dispatch => {
         axios.get('http://localhost:8000/feed/get_post/',config)
@@ -104,7 +104,7 @@ export const fetchSection = () => {
         headers: {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
-         }
+        }
       };
     return dispatch => {
         axios.get("http://localhost:8000/feed/section/",config)

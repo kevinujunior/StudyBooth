@@ -94,7 +94,7 @@ export const authSignup = (username, fullname,email, password1, password2) => {
 
 export const authCheckState = () => {
     return dispatch => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('access_token');
         if(token === undefined) {
             dispatch(logout());
         } else {
