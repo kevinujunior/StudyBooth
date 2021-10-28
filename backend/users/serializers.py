@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.db import transaction
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from .models import  User, UserFollowing
-
+from feed.models import Post
 # from .serializers import UserSerializer
 
 
@@ -51,9 +51,10 @@ class UserSerializer(serializers.ModelSerializer):
     # followers = serializers.SerializerMethodField()
     followingCount = serializers.SerializerMethodField()
     followerCount= serializers.SerializerMethodField()
+    postCount= serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ['id', 'username', 'fullName', 'userPic','email','followingCount','followerCount']
+        fields = ['id', 'username', 'fullName', 'userPic','email','userBio','postCount','followingCount','followerCount']
         
     def get_following(self, obj):
         return FollowingSerializer(obj.following.all(), many=True).data
@@ -68,6 +69,10 @@ class UserSerializer(serializers.ModelSerializer):
     def get_followerCount(self,obj):
         follower = UserFollowing.objects.filter(followingUser = obj)
         return len(follower)
+    
+    def get_postCount(self,obj):
+        posts = Post.objects.filter(user = obj)
+        return len(posts)
         
 
 

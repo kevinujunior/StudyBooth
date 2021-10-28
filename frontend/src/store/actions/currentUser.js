@@ -22,7 +22,7 @@ export const fetchCurrentUser = () => {
     };
     return dispatch => {
         let userId = localStorage.getItem('user');
-        axios.get('http://localhost:8000/users/userview/'+userId,config)
+        axios.get('http://localhost:8000/users/userview/'+userId+"/",config)
         .then(response =>{
             console.log("hello")
             console.log(response.data)
