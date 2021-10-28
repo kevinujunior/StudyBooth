@@ -12,6 +12,8 @@ import {connect } from 'react-redux';
 import * as actions from '../../../../../store/actions/index';
 
 
+
+
 class Post extends Component{
 
     state = {
@@ -109,7 +111,7 @@ class Post extends Component{
                 </div>
 
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
-                <CommentSection id={this.props.id} theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
+                { this.state.isCommentVisibe ? <CommentSection id={this.props.id} theme={this.props.theme}/> : null}
             </div>
     )
   }

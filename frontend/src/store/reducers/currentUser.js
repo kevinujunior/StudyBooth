@@ -1,11 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    profilePic: null,
-    username: null,
-    fullname: null,
-    following: null,
-    followers: null,
+    data:null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +9,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CURRENT_USER_FETCH:
             return {
                 ...state,
+                data: action.userdata,
             }
         default:
             return state;

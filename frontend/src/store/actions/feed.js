@@ -37,7 +37,6 @@ export const fetchFeed = () => {
         axios.get('http://localhost:8000/feed/get_post/',config)
         .then(response =>{
             const posts = response.data;
-            console.log(posts)
             dispatch(setPosts(posts))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
@@ -110,7 +109,6 @@ export const fetchSection = () => {
         axios.get("http://localhost:8000/feed/section/",config)
         .then(response =>{
             dispatch(setSections(response.data));
-            console.log(response.data)
         })
         .catch(err => console.log(err));
     }

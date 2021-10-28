@@ -33,20 +33,17 @@ class CommentSection extends Component{
         if(this.props.theme === 'dark'){
             CmtSectionClass.push(classes.Dark)
         }
-        if(this.props.Visible){
-            CmtSectionClass.push(classes.Visible)
-        }
 
-        let comments;
+        let comments = <p>Loading...</p>;
         if(this.state.comments){
-            comments = this.state.comments.reverse().map(comment =>{
+            comments = this.state.comments.map(comment =>{
                 return  <CommentItem
-                theme = {this.props.theme}
-                user = {comment.commentatorUser.username}
-                key={comment.id}
-                comment = {comment.commentText}
-                userPic = {comment.commentatorUser.userPic}
-                createdAt = {comment.createdAt}
+                    theme = {this.props.theme}
+                    user = {comment.commentatorUser.username}
+                    key={comment.id}
+                    comment = {comment.commentText}
+                    userPic = {comment.commentatorUser.userPic}
+                    createdAt = {comment.createdAt}
                 />    
             })
         }

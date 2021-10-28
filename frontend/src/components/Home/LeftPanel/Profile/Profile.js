@@ -2,7 +2,7 @@ import React from "react";
 import classes from './Profile.css';
 import {connect} from 'react-redux';
 
-const profile = () => {
+const profile = (props) => {
 
     
     return (
@@ -11,24 +11,24 @@ const profile = () => {
                 <div className={classes.InfoBox}>
                     {/* photo and name*/}
                     <div>
-                        <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" />
+                        <img src={props.userData ? props.userData.userPic : "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"} />
                     </div>
-                    <p>Alien</p>
+                    <p>{props.userData ? props.userData.fullName : 'Alien'}</p>
                     <p style={{fontSize:"13px"}}>Lives on mars.</p>
                 </div>
             </div>
             <div className={classes.stats}>
                     <div>
                         <div>
-                            <p><b>1</b></p>
+                            <p><b>{props.userData ? props.userData.postCount ? 0 : 0 : 0 }</b></p>
                             <p>Post</p>
                         </div>
                         <div>
-                            <p><b>100</b></p>
+                            <p><b>{props.userData ? props.userData.followingCount : 0 }</b></p>
                             <p>Following</p>
                         </div>
                         <div>
-                            <p><b>1.2M</b></p>
+                            <p><b>{props.userData ? props.userData.followerCount : 0 }</b></p>
                             <p>Followers</p>
                         </div>
                     </div>
