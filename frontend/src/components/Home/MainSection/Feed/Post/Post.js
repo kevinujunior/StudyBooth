@@ -9,7 +9,9 @@ import {IconButton } from '@mui/material';
 import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
 import {connect } from 'react-redux';
-import * as actions from '../../../../../store/actions/feed';
+import * as actions from '../../../../../store/actions/index';
+
+
 
 
 class Post extends Component{
@@ -109,7 +111,7 @@ class Post extends Component{
                 </div>
 
                 <ActionPopUp Visible={this.state.isActionsVisible}/>
-                <CommentSection comments ={this.props.comments} theme={this.props.theme} Visible={this.state.isCommentVisibe}/>
+                { this.state.isCommentVisibe ? <CommentSection id={this.props.id} theme={this.props.theme}/> : null}
             </div>
     )
   }

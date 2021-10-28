@@ -10,13 +10,14 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateFeed from '../../components/Home/MainSection/CreatePost/CreatePost';
+import * as actions from '../../store/actions/index'
 
 class Home extends Component {
 
     state = {
         isChatActive: false,
         isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
-        isCreteFeedVisible: false,
+        isCreatePostVisible: false,
     }
 
     switchChatState  = (currentState) => {
@@ -34,8 +35,12 @@ class Home extends Component {
     onCreateFeedClick = (currentState) => {
         console.log("modal closed")
         this.setState({
-            isCreteFeedVisible: !currentState,
+            isCreatePostVisible: !currentState,
         })
+    }
+
+    componentDidMount() {
+        this.props.onFetchCurrentUserDetail();
     }
 
     render(){
@@ -49,10 +54,10 @@ class Home extends Component {
             <div className={homeClasses.join(" ")} >
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
-                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}
+                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
                 />
-                <Modal show={this.state.isCreteFeedVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)}>
-                    <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreteFeedVisible)} />
+                <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
+                    {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                 </Modal>
                 <div className={classes.main}>
                     <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
@@ -75,4 +80,10 @@ const mapStateToProps = (state) => {
         theme: state.theme.theme,
     }
 }
-export default connect(mapStateToProps)(Home)
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchCurrentUserDetail: () => dispatch(actions.fetchCurrentUser()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -3,7 +3,7 @@ import Post from './Post/Post';
 import Spinner from '../../../UI/Spinner/Spinner'
 
 import {connect } from 'react-redux';
-import * as actions from '../../../../store/actions/feed';
+import * as actions from '../../../../store/actions/index';
 
 class Feed extends Component {
     
@@ -22,16 +22,15 @@ class Feed extends Component {
                 return <Post
                     key={this.props.posts[i].id}
                     id  = {this.props.posts[i].id}
-                    name={this.props.posts[i].userFields.username}
+                    name={this.props.posts[i].userName}
                     postImage={this.props.posts[i].postFile}
-                    profileImage={this.props.posts[i].postFile}
-                    category={!this.props.posts[i].postSection ? null : this.props.posts[i].postSection.sectionName}
+                    profileImage={this.props.posts[i].userPic}
+                    category={!this.props.posts[i].sectionName ? null : this.props.posts[i].sectionName}
                     // category = {this.props.posts[i].postSection}
                     about={this.props.posts[i].postCaption}
                     likesCount={this.props.posts[i].likeCount}
                     time={this.props.posts[i].createdAt}
                     commentCount={this.props.posts[i].commentCount}
-                    comments = {this.props.posts[i].comments}
                     isLikedByuser = {true}
                 /> 
             })

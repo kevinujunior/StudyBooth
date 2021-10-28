@@ -8,7 +8,7 @@ from django.db.models.fields.related import ForeignKey
 class Post(models.Model):
     user = models.ForeignKey("users.User", on_delete=CASCADE)
     postCaption = models.TextField(null=False)
-    postFile = models.FileField(upload_to="postFile", null=True,blank=True)
+    postFile = models.FileField(upload_to="postFile/", null=True,blank=True)
     # postText = models.TextField(null=True)
     # likeCount = models.IntegerField(default=0)
     # commentCount = models.IntegerField(default=0)
@@ -44,7 +44,7 @@ class Like(models.Model):
 
 class Section(models.Model):
     sectionName = models.CharField(max_length=50, unique=True,)
-    sectionPic = models.ImageField(upload_to="sectionPic",)
+    sectionPic = models.ImageField(upload_to="sectionPic/",)
     
     
     def __str__(self) -> str:

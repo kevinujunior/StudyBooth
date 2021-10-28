@@ -31,13 +31,12 @@ export const fetchFeed = () => {
         headers: {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
-         }
+        }
     };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/posts/',config)
+        axios.get('http://localhost:8000/feed/get_post/',config)
         .then(response =>{
             const posts = response.data;
-            console.log(posts)
             dispatch(setPosts(posts))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
@@ -55,7 +54,7 @@ export const createNewPost = (formData) => {
       };
 
     return dispatch => {
-        axios.post("http://localhost:8000/feed/posts/", formData ,config)
+        axios.post("http://localhost:8000/feed/create_post/", formData ,config)
         .then(response =>{
             dispatch(fetchFeed()); //whenever we create a new post we fetch the feed again.
         })
@@ -71,7 +70,7 @@ export const createNewComment = (data) => {
          }
       };
     return dispatch => {
-        axios.post("http://localhost:8000/feed/comments/", data,config)
+        axios.post("http://localhost:8000/feed/create_comment/", data,config)
         .then(response =>{
             dispatch(updatePostComment(response.data));
         })
@@ -88,7 +87,7 @@ export const fetchFeedFilterBySection = (id) => {
          }
       };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/posts/?section='+id,config)
+        axios.get('http://localhost:8000/feed/get_post/?section='+id,config)
         .then(response =>{
             const posts = response.data;
             dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
@@ -104,10 +103,10 @@ export const fetchSection = () => {
         headers: {
             "Authorization": "Bearer "+localStorage.getItem('access_token') ,
             "Content-Type": "application/json",
-         }
+        }
       };
     return dispatch => {
-        axios.get("http://localhost:8000/feed/sections/",config)
+        axios.get("http://localhost:8000/feed/section/",config)
         .then(response =>{
             dispatch(setSections(response.data));
         })

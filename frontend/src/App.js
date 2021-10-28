@@ -7,10 +7,9 @@ import Home from './containers/Home/Home';
 import Signup from './components/auth/Signup';
 import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
-import * as actions from './store/actions/auth';
+import * as actions from './store/actions/index';
 class App extends Component {
   componentDidMount() {
-
     this.props.onTryAutoSignup();
   }
 

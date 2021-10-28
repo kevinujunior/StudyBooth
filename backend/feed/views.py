@@ -1,6 +1,14 @@
 
 from users.models import UserFollowing
-from feed.serializers import CommentSerializer, LikeSerializer, PostSerializer, SectionSerializer
+from feed.serializers import (
+    CommentSerializer, 
+    LikeSerializer, 
+    PostSerializer, 
+    SectionSerializer, 
+    PostListSerializer, 
+    CommentListSerializer, 
+    LikeListSerializer)
+
 from users.serializers import UserSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -20,16 +28,20 @@ class SectionViewSet(viewsets.ModelViewSet):
     # def get_queryset(self):
     #     sections = Section.objects.all()
     
-        
-        
-    
-    
+
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     # authentication_classes = (TokenAuthentication,)
     serializer_class = PostSerializer
-    # queryset = Post.objects.all()
+    queryset = Post.objects.all()
     
+
+
+class PostListViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    http_method_names = ['get']
+
+    serializer_class = PostListSerializer
     def get_queryset(self):
         queryset = Post.objects.all()
         curruser = self.request.user
@@ -44,26 +56,43 @@ class PostViewSet(viewsets.ModelViewSet):
         return queryset
     
  
-
+ 
 class CommentViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
-    # http_method_names = ['post','get']
     serializer_class = CommentSerializer
-    # queryset = Comment.objects.all()
+    queryset = Comment.objects.all()
+   
+   
+
+class CommentListViewSet(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated]
+    http_method_names = ['get']
+    serializer_class = CommentListSerializer
+    
     def get_queryset(self):
-        queryset = Comment.objects.all()
+        # queryset = Post.objects.all()
         # curruser = self.request.user
         # following = UserFollowing.objects.filter(currUser = curruser)
         # queryset = Post.objects.filter(
         #     Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        queryset = Comment.objects.all()
+        if self.request.query_params.get("post", None):
+            id = self.request.query_params.get("post", None)
+            queryset = Comment.objects.filter(post__id = id)
         queryset = queryset.order_by("-createdAt")
         return queryset
     
 
 class LikeViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
     # http_method_names = ['post','get']
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
+    
+
+class LikeListViewSet(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated]
+    http_method_names = ['get']
+    serializer_class = LikeListSerializer
+    queryset = Like.objects.all()
+    
     
 

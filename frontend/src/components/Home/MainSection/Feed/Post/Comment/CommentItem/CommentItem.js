@@ -33,7 +33,7 @@ class CommentItem extends Component {
         return (
             <div className={cmtItemClasses.join(' ')}>
                 <div>
-                    <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" className={classes.CommentorImage}/>
+                    <img src={this.props.userPic} className={classes.CommentorImage}/>
                 </div>
                 <div className={classes.Comment}>
                     <div className={classes.CommentInfo}>

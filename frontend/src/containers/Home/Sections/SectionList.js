@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './SectionList.css'
 import Section from './SectionComp/Section';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/feed';
+import * as actions from '../../../store/actions/index';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
 class SectionList extends Component {
