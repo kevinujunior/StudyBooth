@@ -61,8 +61,7 @@ class Post extends Component{
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
         let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes
-
-        console.log(time)
+        
         return (
             <div className={postClasses.join(' ')}>
                 <div className={classes.Header}>

@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from  'axios';
+import axios from  '../../axios_base';
 
 export const authStart = () => {
     return {
@@ -21,13 +21,13 @@ export const authFail = error => {
     }
 }
 
-export const checkAuthTimeout = expirationTime => {
-    return dispatch => {
-        setTimeout(() =>{
-            dispatch(logout());
-        }, expirationTime*1000)
-    }
-}
+// export const checkAuthTimeout = expirationTime => {
+//     return dispatch => {
+//         setTimeout(() =>{
+//             dispatch(logout());
+//         }, expirationTime*1000)
+//     }
+// }
 
 export const logout = () => {
     localStorage.removeItem('user');
@@ -40,7 +40,7 @@ export const logout = () => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/dj-rest-auth/login/',{
+        axios.post('dj-rest-auth/login/',{
             username: username,
             password: password
         })
@@ -55,7 +55,7 @@ export const authLogin = (username, password) => {
             localStorage.setItem('user', user);
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
-            dispatch(checkAuthTimeout(3600));
+            // dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
             dispatch(authFail(err))
@@ -66,7 +66,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, fullname,email, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/dj-rest-auth/registration/',{
+        axios.post('dj-rest-auth/registration/',{
             username: username,
             fullName: fullname,
             email: email,
@@ -84,11 +84,23 @@ export const authSignup = (username, fullname,email, password1, password2) => {
             localStorage.setItem('user', user);
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
-            dispatch(checkAuthTimeout(3600));
+            // dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
             dispatch(authFail(err))
         })
+    }
+}
+
+export const fetchAccessToken = () => {
+    return dispatch => {
+        axios.post('dj-rest-auth/token/refresh/', {
+            refresh: localStorage.getItem('refresh_token'),
+        } )
+        .then(res => {
+            localStorage.setItem('refresh_token', res.data.access )
+        })
+        .catch(res => console.log(res))
     }
 }
 
@@ -98,14 +110,15 @@ export const authCheckState = () => {
         if(token === undefined) {
             dispatch(logout());
         } else {
-            const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()) {
-                dispatch(logout());
-            }
-            else {
-                dispatch(authSuccess(token));
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime() )/1000) );
-            }
+            dispatch(authSuccess(token));
+            // const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            // if (expirationDate <= new Date()) {
+            //     dispatch(logout());
+            // }
+            // else {
+            //     dispatch(authSuccess(token));
+            //     // dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime() )/1000) );
+            // }
         }
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './CommentSection.css';
 import CommentItem from './CommentItem/CommentItem';
-import axios from 'axios';
+import axios from '../../../../../../axios_base';
 
 class CommentSection extends Component{
     
@@ -10,14 +10,8 @@ class CommentSection extends Component{
     }
 
     componentDidMount(){
-        const config = {
-            headers: {
-                "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-                "Content-Type": "application/json",
-            }
-        };
 
-        axios.get("http://localhost:8000/feed/get_comment/?post="+this.props.id, config)
+        axios.get("feed/get_comment/?post="+this.props.id,)
         .then(res => {
             this.setState({
                 comments: res.data,

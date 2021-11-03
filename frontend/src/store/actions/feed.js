@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from  '../../axios_base';
 
 
 export const setPosts = (posts) => {
@@ -27,89 +27,66 @@ export const updatePostComment = (commentData) => {
 
 export const fetchFeed = () => {
     //this is the method to fetch the feed.
-    const config = {
-        headers: {
-            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
-        }
-    };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/get_post/',config)
+        axios.get('feed/get_post/')
         .then(response =>{
+            console.log(response)
             const posts = response.data;
             dispatch(setPosts(posts))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
-            console.log(err);
+            console.log(err)
         });
     }
 }
 
 export const createNewPost = (formData) => {
-    const config = {
-        headers: {
-            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
-         }
-      };
 
     return dispatch => {
-        axios.post("http://localhost:8000/feed/create_post/", formData ,config)
+        axios.post("feed/create_post/", formData)
         .then(response =>{
             dispatch(fetchFeed()); //whenever we create a new post we fetch the feed again.
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err)
+        });
     }
 }
 
 export const createNewComment = (data) => {
-    const config = {
-        headers: {
-            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
-         }
-      };
     return dispatch => {
-        axios.post("http://localhost:8000/feed/create_comment/", data,config)
+        axios.post("feed/create_comment/", data)
         .then(response =>{
             dispatch(updatePostComment(response.data));
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err)
+        });
     }
 }
 
 export const fetchFeedFilterBySection = (id) => {
     //here we are getting the section id and the we are filtering feed on basis of that.
-    const config = {
-        headers: {
-            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
-         }
-      };
     return dispatch => {
-        axios.get('http://localhost:8000/feed/get_post/?section='+id,config)
+        axios.get('feed/get_post/?section='+id)
         .then(response =>{
             const posts = response.data;
             dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
         })
         .catch(err => {
-            console.log(err);
+            console.log(err)
         });
     }
 }
 
 export const fetchSection = () => {
-    const config = {
-        headers: {
-            "Authorization": "Bearer "+localStorage.getItem('access_token') ,
-            "Content-Type": "application/json",
-        }
-      };
+
     return dispatch => {
-        axios.get("http://localhost:8000/feed/section/",config)
+        axios.get('feed/section/')
         .then(response =>{
             dispatch(setSections(response.data));
         })
-        .catch(err => console.log(err));
+        
     }
 }
+
