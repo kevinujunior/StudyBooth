@@ -27,7 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     commentCount = serializers.SerializerMethodField(read_only=True)
     likeCount = serializers.SerializerMethodField(read_only= True)
-    comments  = serializers.SerializerMethodField()
+    # comments  = serializers.SerializerMethodField()
     userName =  serializers.SerializerMethodField()
     userPic = serializers.SerializerMethodField()
     sectionName = serializers.SerializerMethodField()
@@ -35,7 +35,7 @@ class PostListSerializer(serializers.ModelSerializer):
   
     class Meta:
         model = Post
-        fields = ['id','postCaption', "postFile",  'likeCount', 'commentCount', 'user','userName','userPic','sectionName','createdAt','comments']
+        fields = ['id','postCaption', "postFile",  'likeCount', 'commentCount', 'user','userName','userPic','sectionName','createdAt']
         
         
     def get_commentCount(self,obj):
@@ -52,9 +52,9 @@ class PostListSerializer(serializers.ModelSerializer):
         else:
             return 
     
-    def get_comments(self,obj):
-        comments = Comment.objects.filter(post = obj)
-        return CommentListSerializer(comments,many = True).data
+    # def get_comments(self,obj):
+    #     comments = Comment.objects.filter(post = obj)
+    #     return CommentListSerializer(comments,many = True).data
     
     def get_userName(self,obj):
         user_username= obj.user.username
