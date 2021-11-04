@@ -6,6 +6,7 @@ from .models import Comment
 from .models import Like
 from users.models import User
 from users.serializers import UserSerializer
+from django.db.models import Q
 
 class SectionSerializer(serializers.ModelSerializer):
   
@@ -31,12 +32,13 @@ class PostListSerializer(serializers.ModelSerializer):
     userName =  serializers.SerializerMethodField()
     userPic = serializers.SerializerMethodField()
     sectionName = serializers.SerializerMethodField()
-    likedPost = serializers.SerializerMethodField()
+    isLiked = serializers.SerializerMethodField()
+    
 
   
     class Meta:
         model = Post
-        fields = ['id','postCaption', "postFile",  'likeCount', 'commentCount', 'user','userName','userPic','sectionName','createdAt']
+        fields = ['id','postCaption', "postFile",  'likeCount', 'commentCount', 'user','userName','userPic','sectionName','createdAt','isLiked']
         
         
     def get_commentCount(self,obj):
@@ -53,10 +55,6 @@ class PostListSerializer(serializers.ModelSerializer):
         else:
             return 
     
-    # def get_comments(self,obj):
-    #     comments = Comment.objects.filter(post = obj)
-    #     return CommentListSerializer(comments,many = True).data
-    
     def get_userName(self,obj):
         user_username= obj.user.username
         return user_username
@@ -72,7 +70,18 @@ class PostListSerializer(serializers.ModelSerializer):
             return obj.postSection.sectionName
         else:
             return 
-
+        
+        
+    def get_isLiked(self,obj):
+        request = self.context.get('request', None)
+        user = None
+        if request:
+            user = request.user
+        like = Like.objects.filter(likeUser=user,post = obj)
+        if(like):
+            return True
+        else:
+            return False
 
 class CommentSerializer(serializers.ModelSerializer):
     

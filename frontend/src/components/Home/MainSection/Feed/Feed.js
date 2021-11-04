@@ -10,7 +10,7 @@ class Feed extends Component {
 
     componentDidMount() {
         this.props.onFetchFeed();
-        this.poprs.onFetchLikes();
+        this.props.onFetchLikes();
     }
     
     render () {
@@ -32,7 +32,7 @@ class Feed extends Component {
                     likesCount={this.props.posts[i].likeCount}
                     time={this.props.posts[i].createdAt}
                     commentCount={this.props.posts[i].commentCount}
-                    isLikedByuser = {true}
+                    isLikedByuser = {this.props.posts[i].isLiked}
                 /> 
             })
         }
