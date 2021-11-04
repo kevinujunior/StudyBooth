@@ -10,6 +10,7 @@ class Feed extends Component {
 
     componentDidMount() {
         this.props.onFetchFeed();
+        this.poprs.onFetchLikes();
     }
     
     render () {
@@ -53,7 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFeed: () => dispatch(actions.fetchFeed())
+        onFetchFeed: () => dispatch(actions.fetchFeed()),
+        onFetchLikes : () => dispatch(actions.getLikes()),
     }
 }
 
