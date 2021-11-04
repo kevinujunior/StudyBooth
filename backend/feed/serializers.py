@@ -31,6 +31,7 @@ class PostListSerializer(serializers.ModelSerializer):
     userName =  serializers.SerializerMethodField()
     userPic = serializers.SerializerMethodField()
     sectionName = serializers.SerializerMethodField()
+    likedPost = serializers.SerializerMethodField()
 
   
     class Meta:
@@ -71,6 +72,7 @@ class PostListSerializer(serializers.ModelSerializer):
             return obj.postSection.sectionName
         else:
             return 
+
 
 class CommentSerializer(serializers.ModelSerializer):
     
@@ -115,6 +117,7 @@ class LikeSerializer(serializers.ModelSerializer):
     
 
 
+
 class LikeListSerializer(serializers.ModelSerializer):
     
   
@@ -127,9 +130,9 @@ class LikeListSerializer(serializers.ModelSerializer):
     
     
     def get_userName(self,obj):
-        user_username= obj.commentatorUser.username
+        user_username= obj.likeUser.username
         return user_username
     
     def get_userPic(self,obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(obj.commentatorUser.userPic)
+        return request.build_absolute_uri(obj.likeUser.userPic)
