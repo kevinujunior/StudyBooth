@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Section.css'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/feed';
 

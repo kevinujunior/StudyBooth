@@ -1,0 +1,70 @@
+.MainSection {
+    box-sizing: border-box;
+    /* border: 1px solid #eee; */
+    /* box-shadow: 0 2px 3px #ccc; */
+    height: 100%;
+    /* width: 100%; */
+    /* background-color: white; */
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    font-family: "Work Sans";
+    margin: 0px 20px 0px 20px;
+}
+
+.Line{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+    /* margin: 0 10px; */
+}
+
+.Feed > div{
+    margin-bottom: 10px;
+}
+
+.Feed{
+    margin-top: 0px;
+    flex: 1;
+}
+
+.Feed::-webkit-scrollbar{
+    display: none;
+}
+
+.Activity{
+    flex:1;
+    margin-left: 20px;
+    overflow-y: scroll;
+}
+
+.Activity::-webkit-scrollbar{
+    display: none;
+}
+
+@media (max-width: 900px){
+    .Feed{
+        flex: 1.5;
+    }
+    .Activity{
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 600px){
+    .Activity{
+        display: none;
+    }
+    .Feed{
+        width: 100%;
+    }
+    .MainSection{
+        padding: 0px;
+    }
+}
+
+@media (max-width:450px) {
+    .MainSection{
+        margin: 0px;
+    }
+}

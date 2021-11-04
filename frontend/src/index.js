@@ -5,7 +5,6 @@ import App from './App';
 import {Provider} from 'react-redux';
 import { createStore,compose,applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 
 import themeReducer from './store/reducers/theme';
 import authReducer from './store/reducers/auth';

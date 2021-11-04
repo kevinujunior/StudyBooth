@@ -1,0 +1,23 @@
+.DashBoard{
+    border-right: inherit;
+    height: 100vh;
+    width: 100%;
+    min-width: 300px;
+    background-color: inherit;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
+}
+
+.DashBoard::-webkit-scrollbar{
+    display: none;
+}
+
+.Bottom{
+    margin-top: 20px;
+    width: 100%;
+    border-top: 1px solid #eee;
+}

@@ -52,7 +52,6 @@ customAxios.interceptors.response.use((response) => {
             refresh: localStorage.getItem('refresh_token'),
         });
         if (res.status === 200) {
-            console.log("axios", res);
             localStorage.setItem('access_token', res.data.access);
             customAxios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
             return customAxios(originalRequest);

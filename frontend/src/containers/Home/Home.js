@@ -33,7 +33,6 @@ class Home extends Component {
     }
 
     onCreateFeedClick = (currentState) => {
-        console.log("modal closed")
         this.setState({
             isCreatePostVisible: !currentState,
         })

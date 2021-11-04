@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 
 import classes from './MainSection.css';
-
-import Feed from '../../../components/Home/MainSection/Feed/Feed';
+import Posts from '../../../components/Profile/MainSection/UserPosts'
 
 class MainSection extends Component {
 
@@ -11,8 +10,7 @@ class MainSection extends Component {
         return (
             <div className={classes.MainSection}>
                 <div className={classes.Feed}>
-                    {/* <CreateFeed /> */}
-                    <Feed />
+                    <Posts />
                 </div>
             </div>
         

@@ -7,7 +7,7 @@ export class Login extends Component {
         //signin
         e.preventDefault();
         this.props.onAuth(e.target[0].value,e.target[1].value)
-        this.props.history.push('/');
+        this.props.history.push('/home');
     }
     render() {
         let errorMessage = null;

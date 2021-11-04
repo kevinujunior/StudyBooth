@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actionsTypes from '../../../store/actions/actionTypes';
 
-import classes from './Header1.css';
+import classes from './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../../../assets/Study_Booth.png'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';

@@ -17,26 +17,26 @@ const profile = (props) => {
                     <p style={{fontSize:"13px"}}>Lives on mars.</p>
                 </div>
             </div>
-            <div className={classes.stats}>
+            {/* <div className={classes.stats}>
+                <div>
                     <div>
-                        <div>
-                            <p><b>{props.userData ? props.userData.postCount ? 0 : 0 : 0 }</b></p>
-                            <p>Post</p>
-                        </div>
-                        <div>
-                            <p><b>{props.userData ? props.userData.followingCount : 0 }</b></p>
-                            <p>Following</p>
-                        </div>
-                        <div>
-                            <p><b>{props.userData ? props.userData.followerCount : 0 }</b></p>
-                            <p>Followers</p>
-                        </div>
+                        <p><b>{props.userData ? props.userData.postCount ? 0 : 0 : 0 }</b></p>
+                        <p>Post</p>
                     </div>
-                    {/* <div>
-                        <button>Edit Profile</button>
-                        <button>Profile stats</button>
-                    </div> */}
+                    <div>
+                        <p><b>{props.userData ? props.userData.followingCount : 0 }</b></p>
+                        <p>Following</p>
+                    </div>
+                    <div>
+                        <p><b>{props.userData ? props.userData.followerCount : 0 }</b></p>
+                        <p>Followers</p>
+                    </div>
                 </div>
+                <div>
+                    <button>Edit Profile</button>
+                    <button>Profile stats</button>
+                </div>
+            </div> */}
         </div>
     )
 }
