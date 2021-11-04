@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from  '../../axios_base';
+import axios from  'axios';
 
 export const authStart = () => {
     return {
@@ -40,7 +40,7 @@ export const logout = () => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('dj-rest-auth/login/',{
+        axios.post('http://localhost:8000/dj-rest-auth/login/',{
             username: username,
             password: password
         })
@@ -66,7 +66,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, fullname,email, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('dj-rest-auth/registration/',{
+        axios.post('http://localhost:8000/dj-rest-auth/registration/',{
             username: username,
             fullName: fullname,
             email: email,
@@ -92,17 +92,6 @@ export const authSignup = (username, fullname,email, password1, password2) => {
     }
 }
 
-export const fetchAccessToken = () => {
-    return dispatch => {
-        axios.post('dj-rest-auth/token/refresh/', {
-            refresh: localStorage.getItem('refresh_token'),
-        } )
-        .then(res => {
-            localStorage.setItem('refresh_token', res.data.access )
-        })
-        .catch(res => console.log(res))
-    }
-}
 
 export const authCheckState = () => {
     return dispatch => {
