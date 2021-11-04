@@ -92,7 +92,16 @@ class LikeListViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
     http_method_names = ['get']
     serializer_class = LikeListSerializer
-    queryset = Like.objects.all()
+    # queryset = Like.objects.all()
+    def get_queryset(self):
+        queryset = Like.objects.all()
+       
+        
+        if self.request.query_params.get("user", None):
+            user = self.request.query_params.get("user", None)
+            queryset = Like.objects.filter(likeUser__id = user)
+        queryset = queryset.order_by("-likedAt")
+        return queryset
     
     
 
