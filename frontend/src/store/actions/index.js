@@ -4,7 +4,7 @@ export {
     fetchSection,
     createNewPost,
     createNewComment,
-    getLikes,
+    // getLikes,
 } from './feed'
 
 

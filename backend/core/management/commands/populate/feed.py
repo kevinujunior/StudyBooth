@@ -37,19 +37,17 @@ def populate_section(total):
         
 
 def populate_post(total):
-    for _ in range(total):
+    for i in range(total):
+        print("feed=",i)
         users = User.objects.all()
         sections = Section.objects.all()
         index =random.randint(0, users.count() - 1)
         Post.objects.create(
             user=users[index],
-            # userFields = users[index],
             postCaption = fake.text(max_nb_chars=20),
             # postFile = image_url_list[random.randint(0,len(image_url_list)-1)],
             postFile =  "/postFile/" + str(random.randint(1,7)) +".jpg",
-            # postText = fake.text(max_nb_chars =20),
-            # likeCount = fake.random_int(max=1000),
-            # commentCount = fake.random_int(max=1000),
+          
             postSection = sections[random.randint(0, sections.count() - 1)],
             createdAt = make_aware(datetime.now()),
         )
@@ -69,7 +67,8 @@ def populate_comment(total):
 
 
 def populate_like(total):
-    for _ in range(total):
+    for i in range(total):
+        print(i)
         posts = Post.objects.all()
         users = User.objects.all()
         index =random.randint(0, users.count() - 1)

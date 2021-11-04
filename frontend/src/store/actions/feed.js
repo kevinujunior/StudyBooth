@@ -52,16 +52,16 @@ export const createNewPost = (formData) => {
     }
 }
 
-export const getLikes = () => {
-    return dispath => {
-        let id = localStorage.getItem('user');
-        axios.get('feed/get_like/?user='+id)
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => console.log(err))
-    }
-}
+// export const getLikes = () => {
+//     return dispatch => {
+//         let id = localStorage.getItem('user');
+//         axios.get('feed/get_like/?user='+id)
+//         .then(res => {
+//             console.log(res)
+//         })
+//         .catch(err => console.log(err))
+//     }
+// }
 
 export const createNewComment = (data) => {
     return dispatch => {
