@@ -41,7 +41,7 @@ class Post extends Component{
             post: this.props.id,
             likeUser: localStorage.getItem('user'),
         }
-        this.props.onLike(data, this.props.isLikedByuser);
+        this.props.onLike(data, this.props.isLikedByuser, this.props.likeId);
     }
 
     commentHandler = (event) => {
@@ -132,7 +132,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onComment : (data) => dispatch(actions.createNewComment(data)),
-        onLike: (data, isLiked) => dispatch(actions.toggleLikeRequest(data, isLiked)),
+        onLike: (data, isLiked, likeId) => dispatch(actions.toggleLikeRequest(data, isLiked, likeId)),
     }
 }
 

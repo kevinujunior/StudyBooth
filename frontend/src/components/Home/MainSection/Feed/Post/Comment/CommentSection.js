@@ -9,7 +9,7 @@ class CommentSection extends Component{
         comments: null,
     }
 
-    componentDidMount(){
+    componentWillMount(){
 
         axios.get("feed/get_comment/?post="+this.props.id,)
         .then(res => {
