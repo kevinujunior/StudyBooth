@@ -27,6 +27,22 @@ const updatePostComment = (state, action) => {
 }
 
 
+const toggleLike = (state, postId) => {
+    let posts = [...state.posts];
+    let index = posts.findIndex(post => post.id === postId);
+
+    posts[index] = {
+        ...posts[index],
+        likeCount: posts[index].isLiked ? posts[index].likeCount-1: posts[index].likeCount+1, //if post in already like then decrease the count else increase the count.
+        isLiked: !posts[index].isLiked, //inverse the current like
+    }
+
+    return {
+        ...state,
+        posts,
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CREATE_NEW_POST: 
@@ -51,6 +67,8 @@ const reducer = (state = initialState, action) => {
             }
         case actionTypes.UPDATE_POST_COMMENT:
             return updatePostComment(state, action);
+        case actionTypes.TOGGLE_LIKE:
+            return toggleLike(state, action.id);
         default:
             return state;
     }

@@ -17,6 +17,13 @@ export const setSections = (sections) => {
     }
 }
 
+export const toggleLike = (postId) => {
+    return {
+        type: actionTypes.TOGGLE_LIKE,
+        id: postId,
+    }
+}
+
 export const updatePostComment = (commentData) => {
     console.log(commentData)
     return {
@@ -52,16 +59,6 @@ export const createNewPost = (formData) => {
     }
 }
 
-// export const getLikes = () => {
-//     return dispatch => {
-//         let id = localStorage.getItem('user');
-//         axios.get('feed/get_like/?user='+id)
-//         .then(res => {
-//             console.log(res)
-//         })
-//         .catch(err => console.log(err))
-//     }
-// }
 
 export const createNewComment = (data) => {
     return dispatch => {
@@ -72,6 +69,21 @@ export const createNewComment = (data) => {
         .catch(err => {
             console.log(err)
         });
+    }
+}
+
+export const toggleLikeRequest = (data, isLiked) => {
+    return dispatch => {
+        if(!isLiked){
+            axios.post('feed/create_like/',data)
+            .then(res => dispatch(toggleLike(data.post)))  //sending post id to toggle post like in redux store.
+            .catch(err => console.log(err));
+        }
+        else{
+            axios.delete('feed/create_like/',data)
+            .then(res => dispatch(toggleLike(data.post)))
+            .catch(err => console.log(err))
+        }
     }
 }
 

@@ -13,7 +13,6 @@ import * as actions from '../../../../../store/actions/index';
 
 
 
-
 class Post extends Component{
 
     state = {
@@ -35,6 +34,14 @@ class Post extends Component{
                 commentText:""
             })
         
+    }
+
+    postLike = () => {
+        const data ={
+            post: this.props.id,
+            likeUser: localStorage.getItem('user'),
+        }
+        this.props.onLike(data, this.props.isLikedByuser);
     }
 
     commentHandler = (event) => {
@@ -90,7 +97,7 @@ class Post extends Component{
                 <div className={classes.Interact}>
                     <div className={classes.Icons}>
                         <div className={classes.IconLeft}>
-                            <IconButton>
+                            <IconButton onClick = {this.postLike}>
                                 {this.props.isLikedByuser ? <FavoriteIcon style={{color:"crimson"}}/> : <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/> }
                             </IconButton>
                             <p>{this.props.likesCount}</p>
@@ -125,6 +132,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onComment : (data) => dispatch(actions.createNewComment(data)),
+        onLike: (data, isLiked) => dispatch(actions.toggleLikeRequest(data, isLiked)),
     }
 }
 

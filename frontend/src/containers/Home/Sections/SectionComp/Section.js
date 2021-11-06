@@ -17,18 +17,17 @@ class Section extends Component {
         return(
             <div>
                 <a className= {classes.individualSection} onClick = {this.filterFeed} >
-                        <div className ={classes.sectionIconHolder}>
-                            <img className ={classes.sectionImage} src={this.props.sectionPic} alt="lol" /> 
-                        </div>
-                        <div className ={classes.sectionTextHolder}>
-                            <h3 className={classes.sectionText}>{this.props.sectionName}</h3>
-                        </div>
-                        <div className = {classes.star}>
-                            <StarBorderIcon className = {classes.starButton}/>
-                        </div>
-                    </a>
+                    <div className ={classes.sectionIconHolder}>
+                        <img className ={classes.sectionImage} src={this.props.sectionPic} alt="lol" /> 
+                    </div>
+                    <div className ={classes.sectionTextHolder}>
+                        <h3 className={classes.sectionText}>{this.props.sectionName}</h3>
+                    </div>
+                    <div className = {classes.star}>
+                        <StarBorderIcon className = {classes.starButton}/>
+                    </div>
+                </a>
             </div>
-        
             
         )
     }

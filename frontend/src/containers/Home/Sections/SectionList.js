@@ -47,7 +47,7 @@ class SectionList extends Component {
   
 }
 
-const mapStateToProps =  state => {
+const mapStateToProps = state => {
     return {
         sections: state.feed.sections,
     }

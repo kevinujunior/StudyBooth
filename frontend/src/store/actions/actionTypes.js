@@ -6,7 +6,8 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const LIGHT_THEME = 'LIGHT_THEME';
 export const DARK_THEME = 'DARK_THEME';
 
-export const CREATE_NEW_POST = 'CREATE_NEW_POST' ;
+export const CREATE_NEW_POST = 'CREATE_NEW_POST';
+export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 
 export const REFRESH_FEED = 'REFRESH_FEED';
 export const FETCH_FEED = 'FETCH_FEED';
