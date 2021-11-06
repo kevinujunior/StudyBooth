@@ -38,8 +38,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class PostListViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    http_method_names = ['get']
+    # permission_classes = [IsAuthenticated]
+    # http_method_names = ['get']
 
     serializer_class = PostListSerializer
     def get_queryset(self):
@@ -65,7 +65,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class CommentListViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
-    http_method_names = ['get']
+    # http_method_names = ['get']
     serializer_class = CommentListSerializer
     
     def get_queryset(self):
