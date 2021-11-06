@@ -90,7 +90,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
 class LikeListViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
-    http_method_names = ['get']
+    # http_method_names = ['get']
     serializer_class = LikeListSerializer
     # queryset = Like.objects.all()
     def get_queryset(self):

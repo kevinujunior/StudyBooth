@@ -53,7 +53,8 @@ def populate_post(total):
         )
 
 def populate_comment(total):
-    for _ in range(total):
+    for i in range(total):
+        print("comment=",i)
         posts = Post.objects.all()
         users = User.objects.all()
         index =random.randint(0, users.count() - 1)
@@ -68,7 +69,7 @@ def populate_comment(total):
 
 def populate_like(total):
     for i in range(total):
-        print(i)
+        print("like=",i)
         posts = Post.objects.all()
         users = User.objects.all()
         index =random.randint(0, users.count() - 1)
