@@ -10,6 +10,8 @@ const Activity = () => {
             <h3>Your Activity</h3>
             <ActivityItem />
             <ActivityItem />
+           
+
         </div>
     );
 }
