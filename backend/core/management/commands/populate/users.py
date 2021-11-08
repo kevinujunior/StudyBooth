@@ -15,7 +15,7 @@ def populate(N):
     # user = User.objects.create_superuser(username='9999999999', password="admin",  fullName="Raghav Shukla")
     # for _ in range(2):
     #     add_superuser()
-    for i in range(100):
+    for i in range(N):
         print("user=",i)
         add_user()
     # for _ in range(50):
