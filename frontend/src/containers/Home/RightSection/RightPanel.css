@@ -1,16 +1,21 @@
+.RightPanel::-webkit-scrollbar {
+    display: none;
+  }
 .RightPanel{
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    top: 60px;
+    height: 91vh;
     max-width: 300px;
     position: sticky;
     right: 0px;
-    top: 55px;
     font-family: "Work Sans";
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     transition: all 0.3s;
     background-color: white;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .Dark{

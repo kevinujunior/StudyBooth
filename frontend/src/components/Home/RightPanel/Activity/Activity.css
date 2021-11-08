@@ -3,8 +3,9 @@
     background-color: inherit;
     width:100%;
     box-sizing: border-box;
-    height: 100vh;
-
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
 }
 
 .Activity>h3{
