@@ -138,12 +138,42 @@
 .NotfBtn{
     display: block;
 }
+.searchDropdown{
+    z-index:-100;
+    top: 10px;
+    position:absolute;
+    display: flex;
+    width:440px;
+    flex-direction: column;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 50px 5px 5px 5px;
+    align-items: left;
+}
+.searchDropdown > ul{
+  list-style: none;
+  display: flexbox;
+}
+.searchDropdown ul > li{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.searchDropdown ul > li > p{
+    padding: 5px 210px 10px 10px;
+    size: 50px;
+    font-weight: bolder;
+}
 
+.searchDropdown ul > li > Button{
+    font-size: 15;
+}
 @media (max-width:850px) {
     .NotfBtn{
         display: none;
     }
-    
 }
 @media (max-width:780px) {
     .CreatePostButton1 p{
