@@ -4,7 +4,6 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 const ToggleButton = (props) => {
     
-    console.log(props)
     let CirlceClassNames = [classes.Circle];
     let BodyClassName = [classes.ToggleButton];
     if(props.theme === 'dark'){

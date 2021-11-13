@@ -149,7 +149,7 @@
     border: 1px solid #ccc;
     border-radius: 20px;
     box-sizing: border-box;
-    padding: 50px 5px 5px 5px;
+    padding: 40px 5px 5px 5px;
     align-items: left;
 }
 .searchDropdown > ul{
@@ -158,12 +158,14 @@
 }
 .searchDropdown ul > li{
     padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
     display: flex;
     flex-direction: row;
 }
 .searchDropdown ul > li > p{
     padding: 5px 210px 10px 10px;
-    size: 50px;
+    size: 25px;
     font-weight: bolder;
 }
 

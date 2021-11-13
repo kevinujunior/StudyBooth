@@ -21,49 +21,76 @@ function Header(props) {
     let [searchDropdown,setSearchDropdown] = useState({});
     let [dropdownMenu,setDropdownMenu] = useState();
     const [followData,setFollowData] = useState({});
+    const [following,setFollowing] = useState([]);
     let headerClasses = [classes.Header];
     if(props.theme === 'dark'){
         headerClasses.push(classes.Dark);
     }
-     
+    const fetchFollowing = () =>{
+        var arr = new Array();
+        axios.get(`http://localhost:8000/users/followingview/`)
+        .then(response =>{
+            const data = response.data
+            const n = data.length
+            for(var i=0;i<n;i++)
+                arr.push(data[i]['followingUser'])
+            setFollowing(arr)
+            }
+        )
+        .catch(err => {
+            console.log(err)
+        });
+    }
+
+    const postFollow = data =>{
+        console.log("inside postfollow")
+        axios.post(`http://localhost:8000/users/followingview/`, data)
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
+
     const fetchSearch = () => {
         axios.get(`http://localhost:8000/users/userview/?user=${searchinput}`)
         .then(response =>{
             const search = response.data
-            console.log("searching..")
             setSearchDropdown(search)
-            // console.log(search)
-            console.log(Object.entries(searchDropdown)) 
-            // if(Object.entries(searchDropdown) > 0)    
-            const postFollow = (data) =>{
-                axios.post(`http://localhost:8000/users/followingview/`, data)
-                .then(response =>{
-                    console.log(response);
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-            }
 
+            // if(Object.entries(searchDropdown) > 0)    
+            fetchFollowing()
+            // console.log(search[0]["id"])
+            console.log(following.includes(1))
             const number_of_users = Object.keys(search).length;
             setDropdownMenu([...Array(number_of_users)].map((x, i) => {
-                return  <li value={search[i]["username"]}>
+                if(following.indexOf(search[i]["id"]) != -1){
+                    return  <li value={search[i]["username"]}>
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                         <p>{search[i]["fullName"]}</p>
                         <Button 
                         variant="contained" 
-                        size="small"
-                        onClick={postFollow({
-                            currUser: 1,
-                            followingUser: search[i]["id"]})}>Follow</Button>
+                        size="small" disabled>Follow</Button>
                         </li> 
+                }else{
+                    return  <li value={search[i]["username"]}>
+                    <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
+                    <p>{search[i]["fullName"]}</p>
+                    <Button 
+                    variant="contained" 
+                    size="small"
+                    onClick= {postFollow({
+                        currUser: props.userData.id,
+                        followingUser: search[i]["id"]})} >Follow</Button>
+                    </li>
+                }
             }))
-             })
+            })
         .catch(err => {
             console.log(err)
         });      
     } 
-
 
     return (
         <div className={headerClasses.join(" ")}>
@@ -125,9 +152,9 @@ function Header(props) {
 const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
+        userData: state.currentUser.data,
     }
 }
-
 const mapDispathToProps = dispatch => {
     return {
         onChangeTheme: (theme) => {
