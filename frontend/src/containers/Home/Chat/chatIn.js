@@ -1,7 +1,7 @@
 import { Avatar,IconButton} from "@mui/material"
 import{ AttachFile, MoreVert, SearchOutlined } from "@mui/icons-material"
 import React, { useState,useEffect } from "react"
-// import { InsertEmoticonIcon,MicIcon } from "@mui/icons-material"
+import { InsertEmoticonOutlined , Mic,Send} from "@mui/icons-material"
 import classes from "./chatIn.css"
 // import { useState } from "react"
 
@@ -41,7 +41,6 @@ function ChatIn() {
             <div className={classes.chat_body}>
               {/* <p className={`classes.chat_message ${true && 
                 "chat_receiver"}`}> */}
-                <Avatar  sec={'https://avatar.dicebear.com/api/human/${loading}.svg'} />
                 <p className={classes.chat_message}>
                   
               {/* <span className={classes.chat_name}>rajkumar</span> */}
@@ -52,21 +51,38 @@ function ChatIn() {
            
             
             <div className={classes.chat_footer}>
-              {/* <InsertEmoticonIcon/> */}
+              <InsertEmoticonOutlined
+              style={styles.button}
+              />
                <form>
                   <input value={input}
                   onChange={e =>
                   setInput(e.target.value)}
                    placeholder="Type a message"
                    type="text"/>
-                  <button onClick={sendMessage} 
-                   type="submit">Send</button>
+                  {/* <button onClick={sendMessage} 
+                   type="submit">Send</button> */}
               </form>
-              {/* <MicIcon /> */}
-
+              <Send
+              style={styles.send}/>
+              <Mic
+              style={styles.mic}/>
             </div>
         </div>
     )
 }
+const styles = {
+  button: {
+    marginLeft : -20,
+    marginRight : 10,
+  },
+  send: {
+    marginLeft : 5,
+    marginRight : 5,
+  },
+  mic : {
+    marginRight : -20,
+  }
+};
 
 export default ChatIn;
