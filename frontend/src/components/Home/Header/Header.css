@@ -156,13 +156,21 @@
   list-style: none;
   display: flexbox;
 }
+
 .searchDropdown ul > li{
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-right: 10px;
     display: flex;
     flex-direction: row;
 }
+.searchDropdown ul > li:hover { 
+    background-color: #88ccf7bb; 
+    background-blend-mode: lighten;
+    border-radius: 20px;
+}
+
 .searchDropdownMenu__fullname {
     font-weight: bolder;
     margin-left: 60px;

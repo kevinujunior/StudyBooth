@@ -120,6 +120,11 @@ function Header(props) {
                         class={classes.inputSearch}     
                         value={searchinput}
                         onChange={e => setSearchInput(e.target.value)}
+                        onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                triggerSearch()
+                            }
+                          }}
                         placeholder="Type to Search...">
                         </input>
                         <button class={classes.btnSearch} onClick={triggerSearch}>{<SearchIcon/>}</button>
