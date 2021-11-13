@@ -163,14 +163,24 @@
     display: flex;
     flex-direction: row;
 }
-.searchDropdown ul > li > p{
-    padding: 5px 210px 10px 10px;
-    size: 25px;
+.searchDropdownMenu__fullname {
     font-weight: bolder;
+    margin-left: 60px;
+}
+.searchDropdownMenu__username {
+    font-weight: normal;
+    margin-top: 12px;
+    margin-left: 60px;
+} 
+.searchDropdown ul > li > p{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
 }
 
 .searchDropdown ul > li > Button{
-    font-size: 15;
+    align-self: right;
+    margin-left: 290px;
 }
 @media (max-width:850px) {
     .NotfBtn{

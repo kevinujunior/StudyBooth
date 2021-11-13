@@ -20,7 +20,7 @@ function Header(props) {
     const [searchinput, setSearchInput] = useState("");
     let [searchDropdown,setSearchDropdown] = useState({});
     let [dropdownMenu,setDropdownMenu] = useState();
-    const [followData,setFollowData] = useState({});
+    const [dropdown,setDropdown] = useState();
     const [following,setFollowing] = useState([]);
     let headerClasses = [classes.Header];
     if(props.theme === 'dark'){
@@ -68,7 +68,8 @@ function Header(props) {
                 if(following.indexOf(search[i]["id"]) != -1){
                     return  <li value={search[i]["username"]}>
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
-                        <p>{search[i]["fullName"]}</p>
+                        <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
+                        <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
                         <Button 
                         variant="contained" 
                         size="small" disabled>Follow</Button>
@@ -76,7 +77,8 @@ function Header(props) {
                 }else{
                     return  <li value={search[i]["username"]}>
                     <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
-                    <p>{search[i]["fullName"]}</p>
+                    <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
+                    <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
                     <Button 
                     variant="contained" 
                     size="small"
@@ -91,7 +93,15 @@ function Header(props) {
             console.log(err)
         });      
     } 
-
+    const triggerSearch = () => {
+        fetchSearch()
+        setDropdown(
+            <div className={classes.searchDropdown}>
+                <ul class={classes.searchDropdownMenu} aria-label="submenu">
+                    {dropdownMenu}
+                </ul>
+            </div>)
+    }
     return (
         <div className={headerClasses.join(" ")}>
             <div className={classes.HeaderContent}>
@@ -112,14 +122,9 @@ function Header(props) {
                         onChange={e => setSearchInput(e.target.value)}
                         placeholder="Type to Search...">
                         </input>
-                        <button class={classes.btnSearch} onClick={fetchSearch}>{<SearchIcon/>}</button>
+                        <button class={classes.btnSearch} onClick={triggerSearch}>{<SearchIcon/>}</button>
                     </div>
-                    
-                <div className={classes.searchDropdown}>
-                    <ul class={classes.searchDropdownMenu} aria-label="submenu">
-                        {dropdownMenu}
-                    </ul>
-                </div>
+                    {dropdown}
                     <div>
                         <button  className={classes.CreatePostButton1} onClick={props.onCreateFeedClick}>
                             <p>Create Post</p>
