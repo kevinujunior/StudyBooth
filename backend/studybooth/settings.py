@@ -49,12 +49,14 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'corsheaders',
+    'channels',
     
     #created apps
     'core',
     'students',
     'users',
     'feed',
+    'chat',
 ]
 
 SITE_ID = 1
@@ -114,6 +116,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+        }
     }
 }
 
@@ -194,3 +199,14 @@ REST_FRAMEWORK = {
 }
 
 REST_USE_JWT = True
+# Channels
+ASGI_APPLICATION = 'studybooth.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
