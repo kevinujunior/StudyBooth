@@ -15,9 +15,14 @@ class Profile extends Component{
         this.props.onFetchFeed();
         this.props.onFetchCurrentUser();
     }
+
     render(){
+        let profileClasses = [classes.Profile];
+        if(this.props.theme === 'dark'){
+            profileClasses.push(classes.Dark);
+        }
         return (
-            <div>
+            <div className={profileClasses.join(" ")}>
                 <Navbar />
                 <div className={classes.main}>
                     <LeftPanel />
@@ -28,10 +33,15 @@ class Profile extends Component{
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        theme: state.theme.theme
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         onFetchCurrentUser: () => dispatch(actions.fetchCurrentUser()),
         onFetchFeed: () => dispatch(actions.fetchFeed())
     }
 }
-export default connect(null, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

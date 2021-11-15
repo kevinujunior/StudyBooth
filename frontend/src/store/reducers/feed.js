@@ -11,9 +11,6 @@ const updatePostComment = (state, action) => {
 
     let posts = [...state.posts];
     let index = posts.findIndex(post => post.id === action.data.post); //finding post by post id
-    //after finding the post index pushing the new comment into it.
-    // let comments = [...posts[index].comments];
-    // comments.push(action.data);
 
     posts[index] ={
         ...posts[index],

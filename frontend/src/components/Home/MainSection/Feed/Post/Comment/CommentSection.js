@@ -9,8 +9,7 @@ class CommentSection extends Component{
         comments: null,
     }
 
-    componentWillMount(){
-
+    fetchComment(){
         axios.get("feed/get_comment/?post="+this.props.id,)
         .then(res => {
             this.setState({
@@ -20,6 +19,10 @@ class CommentSection extends Component{
         .catch(err => console.log(err))
     }
 
+    componentWillMount(){
+        this.fetchComment();
+    }
+
     render(){
     
         // console.log(this.state.comments).
@@ -27,7 +30,7 @@ class CommentSection extends Component{
         if(this.props.theme === 'dark'){
             CmtSectionClass.push(classes.Dark)
         }
-
+        
         let comments = <p>Loading...</p>;
         if(this.state.comments){
             comments = this.state.comments.map(comment =>{
