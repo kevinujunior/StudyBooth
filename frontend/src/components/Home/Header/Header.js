@@ -26,6 +26,7 @@ function Header(props) {
     if(props.theme === 'dark'){
         headerClasses.push(classes.Dark);
     }
+
     const fetchFollowing = () =>{
         var arr = new Array();
         axios.get(`http://localhost:8000/users/followingview/`)
@@ -93,6 +94,7 @@ function Header(props) {
             console.log(err)
         });      
     } 
+    
     const triggerSearch = () => {
         fetchSearch()
         setDropdown(
@@ -102,6 +104,7 @@ function Header(props) {
                 </ul>
             </div>)
     }
+
     return (
         <div className={headerClasses.join(" ")}>
             <div className={classes.HeaderContent}>

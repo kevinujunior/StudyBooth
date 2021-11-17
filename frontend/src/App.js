@@ -1,7 +1,7 @@
 
 import classes from './App.css';
 import React, {Component } from 'react';
-import { BrowserRouter as Router,  Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router,  Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './containers/Home/Home';
 import Signup from './components/auth/Signup';
@@ -24,7 +24,9 @@ class App extends Component {
             <Route exact path="/signup" component ={Signup}/> 
             <Route exact path="/login" component = { Login}/>
             <Route exact path="/profile" component = { this.props.isAuthenticated ? Profile : Login} />
-            <Route exact path='/' component={LandingPage} />
+            <Route exact path='/' >
+              {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
+            </Route>
           </Switch>
         </Router>
       </div>
