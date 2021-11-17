@@ -48,9 +48,9 @@ def add_user():
 
     )
 
-def add_user_following():
-    users = User.objects.all()
-    UserFollowing.objects.create(
-        currUser = users[random.randint(0, users.count() - 1)],
-        followingUser = users[random.randint(0, users.count() - 1)] ,
-    )
+# def add_user_following():
+#     users = User.objects.all()
+#     UserFollowing.objects.create(
+#         currUser = users[random.randint(0, users.count() - 1)],
+#         followingUser = users[random.randint(0, users.count() - 1)] ,
+#     )
