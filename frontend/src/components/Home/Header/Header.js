@@ -83,9 +83,11 @@ function Header(props) {
                     <Button 
                     variant="contained" 
                     size="small"
-                    onClick= {postFollow({
+                    onClick= {function(e) {
+                        postFollow({
                         currUser: props.userData.id,
-                        followingUser: search[i]["id"]})} >Follow</Button>
+                        followingUser: search[i]["id"]});
+                        }} >Follow</Button>
                     </li>
                 }
             }))

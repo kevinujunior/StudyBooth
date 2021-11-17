@@ -61,7 +61,7 @@ class Home extends Component {
                 <div className={classes.main}>
                     <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
                     <MainSection /> 
-                    {/* <ChatIn /> */}
+                    <ChatIn />
                     <RightPanel />
                 </div>
                 <Chat isActive={this.state.isChatActive}/>
