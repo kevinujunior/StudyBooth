@@ -1,3 +1,5 @@
+
+import feed.serializers as fs
 from rest_framework import serializers
 from django.db import transaction
 from dj_rest_auth.registration.serializers import RegisterSerializer
@@ -74,7 +76,68 @@ class UserSerializer(serializers.ModelSerializer):
         posts = Post.objects.filter(user = obj)
         return len(posts)
         
+class UserFollowingSerializer(serializers.ModelSerializer):
+    followingCount = serializers.SerializerMethodField()
+    followerCount= serializers.SerializerMethodField()
+    postCount= serializers.SerializerMethodField()
+    viewUserPosts = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'fullName', 'userPic','email','userBio','postCount','followingCount','followerCount','viewUserPosts',]
+        
+    def get_following(self, obj):
+        return FollowingSerializer(obj.following.all(), many=True).data
 
+    def get_followers(self, obj):
+        return FollowerSerializer(obj.followers.all(), many=True).data
+    
+    def get_followingCount(self,obj):
+        following = UserFollowing.objects.filter(currUser = obj)
+        return len(following)
+
+    def get_followerCount(self,obj):
+        follower = UserFollowing.objects.filter(followingUser = obj)
+        return len(follower)
+    
+    def get_postCount(self,obj):
+        posts = Post.objects.filter(user = obj)
+        return len(posts)
+    
+    def get_viewUserPosts(self,obj):
+        posts = Post.objects.filter(user= obj)
+        return fs.PostListSerializer(posts,many=True).data
+  
+
+
+class UserNotFollowingSerializer(serializers.ModelSerializer):
+    followingCount = serializers.SerializerMethodField()
+    followerCount= serializers.SerializerMethodField()
+    postCount= serializers.SerializerMethodField()
+    isFollowedByCurrUser = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'fullName', 'userPic','email','userBio','postCount','followingCount','followerCount','isFollowedByCurrUser']
+        
+    def get_following(self, obj):
+        return FollowingSerializer(obj.following.all(), many=True).data
+
+    def get_followers(self, obj):
+        return FollowerSerializer(obj.followers.all(), many=True).data
+    
+    def get_followingCount(self,obj):
+        following = UserFollowing.objects.filter(currUser = obj)
+        return len(following)
+
+    def get_followerCount(self,obj):
+        follower = UserFollowing.objects.filter(followingUser = obj)
+        return len(follower)
+    
+    def get_postCount(self,obj):
+        posts = Post.objects.filter(user = obj)
+        return len(posts)
+
+    def get_isFollowedByCurrUser(self,obj):
+        return False
 
 class CommentUserSerializer(serializers.ModelSerializer):
     # userPic = serializers.SerializerMethodField()
@@ -96,3 +159,16 @@ class CommentUserSerializer(serializers.ModelSerializer):
     #                 return None
         
     
+
+class ProfileSerializer(serializers.Serializer):
+    viewUser = serializers.SerializerMethodField()
+    isFollowedByCurrUser = serializers.SerializerMethodField()
+    class Meta:
+        model = UserFollowing
+        fields = ['viewUser','isFollowedByCurrUSer']
+        
+    def get_viewUser(self,obj):
+        return UserFollowingSerializer(obj.followingUser).data
+    
+    def get_isFollowedByCurrUser(self,obj):
+        return True

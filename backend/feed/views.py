@@ -16,7 +16,7 @@ from rest_framework.decorators import action
 from .models import Post, Comment, Like, Section
 from users.models import User
 from django.db.models import Q
-# Create your views here
+from rest_framework.response import Response
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -38,11 +38,12 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class PostListViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     # http_method_names = ['get']
 
     serializer_class = PostListSerializer
     def get_queryset(self):
+    
         queryset = Post.objects.all()
         curruser = self.request.user
         following = UserFollowing.objects.filter(currUser = curruser)
@@ -74,6 +75,7 @@ class CommentListViewSet(viewsets.ModelViewSet):
         # following = UserFollowing.objects.filter(currUser = curruser)
         # queryset = Post.objects.filter(
         #     Q(user__in= following.values_list('followingUser',flat = True)) | Q(user = curruser))
+        
         queryset = Comment.objects.all()
         if self.request.query_params.get("post", None):
             id = self.request.query_params.get("post", None)
