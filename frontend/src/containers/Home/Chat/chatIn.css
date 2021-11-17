@@ -100,6 +100,14 @@
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
 }
+/* .emot{
+    display: flex;
+    top : 100px;
+    margin-right: 500px;
+} */
+.menu{
+    right: 40;
+}
 .chat_footer > form{
     flex: 1;
     display: flex;
