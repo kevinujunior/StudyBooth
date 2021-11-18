@@ -66,7 +66,7 @@ function Header(props) {
             const number_of_users = Object.keys(search).length;
             setDropdownMenu([...Array(number_of_users)].map((x, i) => {
                 if(following.indexOf(search[i]["id"]) != -1){
-                    return  <li value={search[i]["username"]}>
+                    return  <li key={i} value={search[i]["username"]}>
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                         <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                         <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
@@ -75,7 +75,7 @@ function Header(props) {
                         size="small" disabled>Follow</Button>
                         </li> 
                 }else{
-                    return  <li value={search[i]["username"]}>
+                    return  <li key={i} value={search[i]["username"]}>
                     <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                     <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                     <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
