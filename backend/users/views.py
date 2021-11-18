@@ -59,10 +59,18 @@ class ProfileViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data)
            
             else:
-                user_details = User.objects.filter(id = viewUser)
-                serializer = UserNotFollowingSerializer(user_details,many=True)
-                print(type(Response(serializer.data)))
-                return Response(serializer.data)
+                x = int(viewUser)
+                y = int(user.id)
+                if(x!=y):
+                    print(type(user.id),"hello", type(viewUser))
+                    user_details = User.objects.filter(id = viewUser)
+                    serializer = UserNotFollowingSerializer(user_details,many=True)
+                    return Response(serializer.data)
+                else:
+                    print("yo yo")
+                    user_details = User.objects.filter(id = viewUser)
+                    serializer = UserFollowingSerializer(user_details,many=True)
+                    return Response(serializer.data)
 
         serializer = ProfileSerializer(follow_users,many=True)
         return Response(serializer.data)
