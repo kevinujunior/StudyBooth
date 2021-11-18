@@ -12,6 +12,7 @@
     z-index: 300;
     /* margin-right: 20px; */
     border-radius: 10px;
+    height: 70vh;
 }
 
 .chat_header{
@@ -81,6 +82,8 @@
 }
 
 
+
+
 .chat_receiver{
     margin: auto;
     background-color: #dcf8c6;
@@ -96,6 +99,14 @@
     height: 60px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+}
+/* .emot{
+    display: flex;
+    top : 100px;
+    margin-right: 500px;
+} */
+.menu{
+    right: 40;
 }
 .chat_footer > form{
     flex: 1;
@@ -114,3 +125,4 @@
     padding: 10px;
     color:grey;
 }
+

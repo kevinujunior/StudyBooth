@@ -4,16 +4,53 @@ import Navbar from '../../components/Home/Header/Header'
 import LeftPanel from './LeftPanel/LeftPanel';
 import RightPanel from './RightPanel/RightPanel';
 import MainSection from './MainSection/MainSection';
-
+import { withRouter } from 'react-router';
 import classes from './Profile.css';
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index';
+import axios from '../../axios_base'
 
 
 class Profile extends Component{
 
-    componentDidMount(){
+    state = {
+        userData: null,
+        posts: null,
+    }
+
+    componentWillMount(){
+
+        console.log(this.props.location)
         this.props.onFetchFeed();
         this.props.onFetchCurrentUser();
+
+        let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
+
+        //this will fetch the user profile details
+        axios.get('users/profileview/?viewUser='+userId)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                userData: res.data,
+            })
+        })
+        .catch(err => console.log(err))
+
+
+        axios.get('/users/followingview/?followingUser='+userId)
+        .then(res => {
+            if(res.data.length >= 1 || userId === localStorage.getItem('user')){
+                axios.get('feed/get_post/?viewUserPost='+userId)
+                .then(res => {
+                    this.setState({
+                        posts: res.data,
+                    })
+                })
+                .catch(err => console.log(err))
+            }
+        })
+        .catch(err => console.log(err))
+
+
     }
 
     render(){
@@ -26,8 +63,8 @@ class Profile extends Component{
                 <Navbar />
                 <div className={classes.main}>
                     <LeftPanel />
-                    <MainSection />
-                    <RightPanel />
+                    <MainSection posts={this.state.posts ? this.state.posts : null}/>
+                    <RightPanel user={this.state.userData}/>
                 </div>
             </div>
         );
@@ -44,4 +81,4 @@ const mapDispatchToProps = dispatch => {
         onFetchFeed: () => dispatch(actions.fetchFeed())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile));

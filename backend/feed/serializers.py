@@ -1,11 +1,10 @@
+
 from django.db.models.fields import NullBooleanField
 from users.serializers import CommentUserSerializer
 from rest_framework import serializers
 from .models import Post, Section
 from .models import Comment
 from .models import Like
-from users.models import User
-from users.serializers import UserSerializer
 from django.db.models import Q
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -63,7 +62,10 @@ class PostListSerializer(serializers.ModelSerializer):
     def get_userPic(self,obj):
         request = self.context.get('request')
         photo_url = obj.user.userPic.url
-        return request.build_absolute_uri(photo_url)
+        if(request):
+            return request.build_absolute_uri(photo_url)
+        else:
+            return None
     
     
     def get_sectionName(self,obj):

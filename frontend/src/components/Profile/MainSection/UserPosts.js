@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './UserPosts.css';
-import {connect} from 'react-redux'
 
 class Posts extends Component{
 
@@ -22,11 +21,6 @@ class Posts extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        posts: state.feed.posts,
-    }
-}
 
 
-export default connect(mapStateToProps)(Posts);
+export default Posts;
