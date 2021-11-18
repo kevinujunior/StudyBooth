@@ -8,10 +8,9 @@ class Posts extends Component{
         let posts = <p>Loading...</p>
 
         console.log(this.props.posts)
-        let base = "http://127.0.0.1:8000"
         if(this.props.posts){
             posts = [...Array(this.props.posts.length)].map((_,i) => {
-                return <img src={base+this.props.posts[i].postFile} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
+                return <img src={this.props.posts[i].postFile} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
             })
         }
         return(

@@ -4,7 +4,7 @@ import Navbar from '../../components/Home/Header/Header'
 import LeftPanel from './LeftPanel/LeftPanel';
 import RightPanel from './RightPanel/RightPanel';
 import MainSection from './MainSection/MainSection';
-
+import { withRouter } from 'react-router';
 import classes from './Profile.css';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios_base'
@@ -18,9 +18,11 @@ class Profile extends Component{
     }
 
     componentWillMount(){
+
+        console.log(this.props.location)
         this.props.onFetchFeed();
         this.props.onFetchCurrentUser();
-        axios.get('users/profileview/?viewUser='+1)
+        axios.get('users/profileview/?viewUser='+this.props.location.userId)
         .then(res => {
             console.log(res.data)
             this.setState({
@@ -29,7 +31,7 @@ class Profile extends Component{
         })
         .catch(err => console.log(err))
 
-        axios.get('feed/get_post/?viewUserPost='+1)
+        axios.get('feed/get_post/?viewUserPost='+this.props.location.userId)
         .then(res => {
             console.log(res.data)
             this.setState({
@@ -50,7 +52,7 @@ class Profile extends Component{
                 <Navbar />
                 <div className={classes.main}>
                     <LeftPanel />
-                    <MainSection posts={this.state.userData ? this.state.userData[0] ? this.state.userData[0].viewUser : null : null}/>
+                    <MainSection posts={this.state.posts ? this.state.posts : null}/>
                     <RightPanel user={this.state.userData}/>
                 </div>
             </div>
@@ -68,4 +70,4 @@ const mapDispatchToProps = dispatch => {
         onFetchFeed: () => dispatch(actions.fetchFeed())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile));

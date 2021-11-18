@@ -10,6 +10,7 @@ import ActionPopUp from './ActionPopup/ActionPopup';
 import CommentSection from './Comment/CommentSection';
 import {connect } from 'react-redux';
 import * as actions from '../../../../../store/actions/index';
+import {withRouter} from 'react-router-dom'
 
 
 
@@ -64,6 +65,7 @@ class Post extends Component{
     }
     
     render(){
+
         let postClasses = [classes.Post]
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
@@ -72,7 +74,12 @@ class Post extends Component{
         return (
             <div className={postClasses.join(' ')}>
                 <div className={classes.Header}>
-                    <div className={classes.NamePhoto}>
+                    <div className={classes.NamePhoto} onClick={() => {
+                        this.props.history.push({
+                            pathname: '/profile',
+                            userId: this.props.userId,
+                        });
+                    }}>
                         <img src = {this.props.profileImage} alt=""/>
                         <p>{this.props.name}</p>
                         <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
@@ -136,4 +143,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Post));

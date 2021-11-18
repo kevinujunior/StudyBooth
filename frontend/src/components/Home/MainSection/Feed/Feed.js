@@ -22,6 +22,7 @@ class Feed extends Component {
                 return <Post
                     key={this.props.posts[i].id}
                     id  = {this.props.posts[i].id}
+                    userId = {this.props.posts[i].user}
                     name={this.props.posts[i].userName}
                     postImage={this.props.posts[i].postFile}
                     profileImage={this.props.posts[i].userPic}
