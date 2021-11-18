@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './UserPosts.css';
-import {connect} from 'react-redux'
 
 class Posts extends Component{
 
@@ -9,9 +8,10 @@ class Posts extends Component{
         let posts = <p>Loading...</p>
 
         console.log(this.props.posts)
+        let base = "http://127.0.0.1:8000"
         if(this.props.posts){
             posts = [...Array(this.props.posts.length)].map((_,i) => {
-                return <img src={this.props.posts[i].postFile} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
+                return <img src={base+this.props.posts[i].postFile} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
             })
         }
         return(
@@ -22,11 +22,6 @@ class Posts extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        posts: state.feed.posts,
-    }
-}
 
 
-export default connect(mapStateToProps)(Posts);
+export default Posts;

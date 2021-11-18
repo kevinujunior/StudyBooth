@@ -6,14 +6,38 @@ import RightPanel from './RightPanel/RightPanel';
 import MainSection from './MainSection/MainSection';
 
 import classes from './Profile.css';
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index';
+import axios from '../../axios_base'
 
 
 class Profile extends Component{
 
-    componentDidMount(){
+    state = {
+        userData: null,
+        posts: null,
+    }
+
+    componentWillMount(){
         this.props.onFetchFeed();
         this.props.onFetchCurrentUser();
+        axios.get('users/profileview/?viewUser='+1)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                userData: res.data,
+            })
+        })
+        .catch(err => console.log(err))
+
+        axios.get('feed/get_post/?viewUserPost='+1)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                posts: res.data,
+            })
+        })
+        .catch(err => console.log(err))
+
     }
 
     render(){
@@ -26,8 +50,8 @@ class Profile extends Component{
                 <Navbar />
                 <div className={classes.main}>
                     <LeftPanel />
-                    <MainSection />
-                    <RightPanel />
+                    <MainSection posts={this.state.userData ? this.state.userData[0] ? this.state.userData[0].viewUser : null : null}/>
+                    <RightPanel user={this.state.userData}/>
                 </div>
             </div>
         );

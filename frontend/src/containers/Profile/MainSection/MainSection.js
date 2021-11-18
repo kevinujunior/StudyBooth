@@ -10,7 +10,7 @@ class MainSection extends Component {
         return (
             <div className={classes.MainSection}>
                 <div className={classes.Feed}>
-                    <Posts />
+                    <Posts posts={this.props.posts}/>
                 </div>
             </div>
         
