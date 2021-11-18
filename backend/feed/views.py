@@ -54,6 +54,11 @@ class PostListViewSet(viewsets.ModelViewSet):
             section = self.request.query_params.get("section", None)
             queryset = Post.objects.filter(postSection__id = section)
         queryset = queryset.order_by("-createdAt")
+        
+        if self.request.query_params.get("viewUserPost", None):
+            viewUserPost = self.request.query_params.get("viewUserPost", None)
+            queryset = Post.objects.filter(user = viewUserPost)
+        queryset = queryset.order_by("-createdAt")
         return queryset
     
  
