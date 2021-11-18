@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from users.serializers import ProfileSerializer
 from users.serializers import UserFollowingSerializer
-from users.serializers import UserSerializer, UserNotFollowingSerializer
+from users.serializers import UserSerializer, UserNotFollowingSerializer, UserFollowsSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import  User, UserFollowing
@@ -31,6 +31,15 @@ class UserFollowingViewSet(viewsets.ModelViewSet):
 
     serializer_class = UserFollowingSerializer
     queryset = UserFollowing.objects.all()
+    
+    def get_queryset(self):
+        queryset = UserFollowing.objects.all() 
+        user = self.request.user
+        if self.request.query_params.get("followingUser", None):
+            followingUser = self.request.query_params.get("followingUser", None)
+            queryset = queryset.filter(currUser=user, followingUser = followingUser)
+        return queryset
+        
     
 
 
@@ -69,7 +78,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
                 else:
                     print("yo yo")
                     user_details = User.objects.filter(id = viewUser)
-                    serializer = UserFollowingSerializer(user_details,many=True)
+                    serializer = UserFollowsSerializer(user_details,many=True)
                     return Response(serializer.data)
 
         serializer = ProfileSerializer(follow_users,many=True)

@@ -76,7 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
         posts = Post.objects.filter(user = obj)
         return len(posts)
         
-class UserFollowingSerializer(serializers.ModelSerializer):
+class UserFollowsSerializer(serializers.ModelSerializer):
     followingCount = serializers.SerializerMethodField()
     followerCount= serializers.SerializerMethodField()
     postCount= serializers.SerializerMethodField()
