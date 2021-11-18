@@ -16,9 +16,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 
 function Header(props) {
 
-    
     const [searchinput, setSearchInput] = useState("");
-    let [searchDropdown,setSearchDropdown] = useState({});
     let [dropdownMenu,setDropdownMenu] = useState();
     const [dropdown,setDropdown] = useState();
     const [following,setFollowing] = useState([]);
@@ -58,8 +56,6 @@ function Header(props) {
         axios.get(`http://localhost:8000/users/userview/?user=${searchinput}`)
         .then(response =>{
             const search = response.data
-            setSearchDropdown(search)
-
             // if(Object.entries(searchDropdown) > 0)    
             fetchFollowing()
             // console.log(search[0]["id"])
