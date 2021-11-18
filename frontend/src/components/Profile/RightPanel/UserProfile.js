@@ -3,9 +3,9 @@ import classes from './UserProfile.css';
 const UserProfile = (props) => {
 
     console.log(props.user)
-    let userData = props.user ? props.user : null;
+    let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
     let base = "http://127.0.0.1:8000"
-    console.log(props.user ? base+userData.userPic : null)
+    console.log(userData ? base+userData.userPic : null)
     return (
         <div className={classes.UserProfile}>
             <img src={userData ? base+userData.userPic : null} alt=""></img>

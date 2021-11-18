@@ -22,7 +22,11 @@ class Profile extends Component{
         console.log(this.props.location)
         this.props.onFetchFeed();
         this.props.onFetchCurrentUser();
-        axios.get('users/profileview/?viewUser='+this.props.location.userId)
+
+        let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
+
+        //this will fetch the user profile details
+        axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
             console.log(res.data)
             this.setState({
@@ -31,14 +35,21 @@ class Profile extends Component{
         })
         .catch(err => console.log(err))
 
-        axios.get('feed/get_post/?viewUserPost='+this.props.location.userId)
+
+        axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-            console.log(res.data)
-            this.setState({
-                posts: res.data,
-            })
+            if(res.data.length >= 1 || userId === localStorage.getItem('user')){
+                axios.get('feed/get_post/?viewUserPost='+userId)
+                .then(res => {
+                    this.setState({
+                        posts: res.data,
+                    })
+                })
+                .catch(err => console.log(err))
+            }
         })
         .catch(err => console.log(err))
+
 
     }
 
