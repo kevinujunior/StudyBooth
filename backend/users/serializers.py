@@ -80,10 +80,10 @@ class UserFollowsSerializer(serializers.ModelSerializer):
     followingCount = serializers.SerializerMethodField()
     followerCount= serializers.SerializerMethodField()
     postCount= serializers.SerializerMethodField()
-    viewUserPosts = serializers.SerializerMethodField()
+    # viewUserPosts = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ['id', 'username', 'fullName', 'userPic','email','userBio','postCount','followingCount','followerCount','viewUserPosts',]
+        fields = ['id', 'username', 'fullName', 'userPic','email','userBio','postCount','followingCount','followerCount',]
         
     def get_following(self, obj):
         return FollowingSerializer(obj.following.all(), many=True).data
@@ -103,9 +103,9 @@ class UserFollowsSerializer(serializers.ModelSerializer):
         posts = Post.objects.filter(user = obj)
         return len(posts)
     
-    def get_viewUserPosts(self,obj):
-        posts = Post.objects.filter(user= obj)
-        return fs.PostListSerializer(posts,many=True).data
+    # def get_viewUserPosts(self,obj):
+    #     posts = Post.objects.filter(user= obj)
+    #     return fs.PostListSerializer(posts,many=True).data
   
 
 
@@ -168,7 +168,7 @@ class ProfileSerializer(serializers.Serializer):
         fields = ['viewUser','isFollowedByCurrUSer']
         
     def get_viewUser(self,obj):
-        return UserFollowingSerializer(obj.followingUser).data
+        return UserFollowsSerializer(obj.followingUser).data
     
     def get_isFollowedByCurrUser(self,obj):
         return True
