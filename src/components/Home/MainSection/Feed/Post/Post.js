@@ -27,7 +27,7 @@ class Post extends Component{
             const data = {
                 post : this.props.id,
                 commentText : this.state.commentText,
-                commentatorUser : 1,
+                commentatorUser : localStorage.getItem('user'),
             }
             this.props.onComment(data);
             this.setState({
