@@ -27,7 +27,7 @@ function Header(props) {
 
     const fetchFollowing = () =>{
         var arr = new Array();
-        axios.get(`http://localhost:8000/users/followingview/`)
+        axios.get(`https://study-booth-backend.herokuapp.com/users/followingview/`)
         .then(response =>{
             const data = response.data
             const n = data.length
@@ -43,7 +43,7 @@ function Header(props) {
 
     const postFollow = data =>{
         console.log("inside postfollow")
-        axios.post(`http://localhost:8000/users/followingview/`, data)
+        axios.post(`https://study-booth-backend.herokuapp.com/users/followingview/`, data)
         .then(response =>{
             console.log(response);
         })
@@ -53,7 +53,7 @@ function Header(props) {
     }
 
     const fetchSearch = () => {
-        axios.get(`http://localhost:8000/users/userview/?user=${searchinput}`)
+        axios.get(`https://study-booth-backend.herokuapp.com/users/userview/?user=${searchinput}`)
         .then(response =>{
             const search = response.data
             // if(Object.entries(searchDropdown) > 0)    
