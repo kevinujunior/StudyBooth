@@ -1,0 +1,40 @@
+.ActionPopUp{
+    background-color: inherit;
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    padding: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    visibility: hidden;
+    transition: all 0.3s;
+    opacity: 0;
+    z-index: 90;
+}
+
+.Visible{
+    visibility: visible;
+    opacity: 1;
+}
+
+.ActionPopUp div{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.ActionPopUp div:hover{
+    background-color: #eee;
+}
+
+.ActionPopUp div > p {
+    margin-left: 10px;
+}
+
+.grey {
+    color: grey;
+}

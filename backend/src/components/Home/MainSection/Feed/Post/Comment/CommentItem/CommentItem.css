@@ -1,0 +1,90 @@
+.CommentItem{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    margin: 5px 0px 10px 0px;
+    transition: all 0.3s;
+}
+
+.CommentorImage{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.Dark .Comment{
+    background-color: #393b3b;
+}
+
+.Dark .Comment p{
+    color: white;
+    opacity: 0.8;
+}
+
+
+.Comment {
+    width: 100%;
+    background-color: #F2F2F2;
+    padding: 5px 10px 10px 10px;
+    border-radius: 5px;
+}
+.Comment p{
+    font-size: 13px;
+    color: black;
+}
+.CommentInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Time{
+    font-weight: normal !important;
+    font-size: 11.5px !important;
+}
+
+.CommentInfo p{
+    color: grey;
+    font-weight: bold;
+}
+
+.Actions{
+    margin: 3px 0px 3px 0px;
+}
+
+.Actions  button{
+    margin-right: 12px;
+    border: none;
+    background-color: transparent;
+    color: grey;
+    cursor: pointer;
+}
+
+.Actions  button:hover{
+    font-weight: bold;
+}
+
+.ReplyBox{
+    display: none;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+
+}
+
+.Visible{
+    display: flex;
+}
+
+.ReplyBox input{
+    background-color: transparent;
+    padding: 0px 5px 0px 5px;
+    border: none;
+    outline: none;
+}
+.ReplyBox input:focus{
+    border: none;
+}
+

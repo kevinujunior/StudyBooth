@@ -1,0 +1,260 @@
+.Header{
+    background-color: white;
+    margin: auto;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    transition: all 0.3s;
+    margin-bottom: 0.5px;
+
+}
+
+.Dark{
+    background-color:black;
+    border-bottom: 0.5px solid rgb(32, 32, 32);
+    /* box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em; */
+}
+
+.Dark .IconColor{
+    color: white;
+}
+
+.Dark .Input{
+    background-color:#313033 ;
+    border: none;
+}
+
+.Dark .Input input{
+    color: white;
+    opacity: 0.85;
+}
+
+.Dark .btnSearch{
+    color: white;
+    opacity: 0.9;
+}
+
+.HeaderContent{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.HeaderContent  img{
+    height: 40px;
+    margin-top: auto;
+    /* height: 70px; */
+}
+
+.SearchAndCreate{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+
+.CreatePostButton1{
+    background-color: #1DA1F2;
+    padding:6px 14px;
+    border-radius:50px;
+    margin-left: 20px;
+    outline: none;
+    border: none;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.CreatePostButton2{
+    background-color: #1DA1F2;
+    padding:5px 10px;
+    border-radius:20px;
+    border: none;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.CreatePostButton1 p{
+    color: white;
+}
+
+.Input{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding: 5px 10px 5px 5px;
+    align-items: center;
+}
+
+.MenuIcon {
+    display: none;
+}
+
+.Input input{
+    background-color: transparent;
+    width: 400px;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+}
+
+.Input input:focus{
+    outline: none;
+    border: none;
+}
+
+.Input button{
+    border:none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.Buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.HamburgerButton{
+    display: none;
+}
+
+.NotfBtn{
+    display: block;
+}
+.searchDropdown{
+    z-index:-100;
+    top: 10px;
+    position:absolute;
+    display: flex;
+    width:440px;
+    flex-direction: column;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 40px 5px 5px 5px;
+    align-items: left;
+}
+.searchDropdown > ul{
+  list-style: none;
+  display: flexbox;
+}
+
+.searchDropdown ul > li{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.searchDropdown ul > li:hover { 
+    background-color: #88ccf7bb; 
+    background-blend-mode: lighten;
+    border-radius: 20px;
+}
+
+.searchDropdownMenu__fullname {
+    font-weight: bolder;
+    margin-left: 60px;
+}
+.searchDropdownMenu__username {
+    font-weight: normal;
+    margin-top: 12px;
+    margin-left: 60px;
+} 
+.searchDropdown ul > li > p{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchDropdown ul > li > Button{
+    align-self: right;
+    margin-left: 290px;
+}
+@media (max-width:850px) {
+    .NotfBtn{
+        display: none;
+    }
+}
+@media (max-width:780px) {
+    .CreatePostButton1 p{
+        display: none;
+    }
+}
+
+@media (max-width: 700px){
+    .Input input{
+        width: 300px;
+    }
+
+    .HeaderContent  img{
+        height: 50px;
+    }
+    
+}
+
+
+@media (max-width:630px) {
+    .HeaderContent{
+        height: 50px;
+    }
+    .HeaderContent img{
+        display: none;
+    }
+    .HamburgerButton{
+        display: block;
+    }
+    
+}
+
+@media (max-width:550px) {
+    .ToggleBtn{
+        display: none !important;
+    }
+    .CreatePostButton1{
+        display: none;
+    }
+    .CreatePostButton2{
+        display: block;
+    }
+}
+
+@media (max-width: 500px){
+    .Input input{
+        width: 200px;
+    }
+    .Input{
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .HeaderContent  img{
+        height: 40px;
+    }
+    
+}
+
+@media (max-width:400px){
+    .CreatePostButton2{
+        padding: 2px 6px;
+    }
+}

@@ -1,0 +1,90 @@
+.Chat{
+    min-height: 100vh;
+    width: 450px;
+    background-color: white;
+    padding:10px;
+    /* overflow-y: scroll; */
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    border: 1px solid #eee;
+    position: fixed;
+    right: -100%;
+    top: 77px;
+    transition: all 0.5s;
+}
+
+.ActiveChat{
+    right: 0%;
+}
+
+.Dark{
+    background-color: #1E2021;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border:none;
+    color: white;
+}
+
+.Dark p{
+    color: white;
+    opacity: 0.7;
+}
+.Dark .Switch{
+    color: white;
+}
+
+.Dark .IconColor{
+    color: white;
+}
+
+.Header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: inherit;
+}
+
+
+.Switch{
+    display: inline-block;
+    margin:auto;
+}
+
+.Switch > button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 20px;
+    color: inherit;
+}
+
+.ActiveButton {
+    border-bottom: 2px solid grey !important;
+}
+
+.Option{
+    display: inline-block;
+    float: right;
+}
+
+@media (max-width: 700px){
+    .Chat{
+        top:60px;
+        max-width: 300px;
+    }
+
+}
+
+@media (max-width:630px) {
+    .Chat{
+        top: 52px;
+    }
+}
+
+@media (max-width: 400px){
+    .Chat{
+        display: none;
+    }
+}

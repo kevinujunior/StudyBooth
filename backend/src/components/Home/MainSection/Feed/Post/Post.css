@@ -1,0 +1,151 @@
+.Post{
+    box-sizing: border-box;
+    background-color: #e0dfdf;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 5px;
+    min-width: 300px;
+    max-width: 550px;
+    margin: 10px auto;
+    background-color: white;
+    border: 1px solid #eee;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    position: relative;
+    /* transition: all 0.3s; */
+}
+
+.Dark{
+    background-color:rgb(15, 15, 15);
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+    border: 0.5px solid rgb(20, 20, 20);
+
+    color: white;
+}
+.Dark p{
+    color: white;
+    opacity: 0.7;
+}
+.Dark input{
+    color: white;
+    opacity: 0.85;
+}
+.Dark .IconColor{
+    color: lightgray;
+}
+
+.Dark img{
+    opacity: 0.9;
+}
+
+.Post > div{
+    margin-bottom: 10px;
+}
+.Header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px !important;
+}
+
+.Header img{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border: 0.5px solid lightgray;
+}
+
+.NamePhoto{
+    display: flex;
+    direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+.NamePhoto > p{
+    margin-left: 10px;
+}
+.Category{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.PostImage{
+    display: flex;
+    align-items: center;
+}
+.PostImage > img {
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.Interact{
+    margin-top: 5px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-bottom: 0px !important;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 5px;
+}
+
+.Icons{
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.IconLeft{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px 0px 0px;
+}
+
+.Comment{
+    margin-left: 5px;
+    width: 100%;
+}
+.Comment input{
+    padding: 5px 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.Comment input:focus{
+    border: none;
+    outline: none;
+}
+
+.VerticalLine{
+    height: 25px;
+    width: 1px;
+    background-color: grey;
+}
+
+
+#cool{
+    color:  purple;
+}
+
+
+.Time{
+    /* margin-top: -5px; */
+    font-style: italic;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@media (max-width:450px){
+    .Post{
+        padding: 15px;
+        margin: 7px 0px;
+        border-radius: 0px;
+    }
+}

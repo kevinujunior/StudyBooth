@@ -69,11 +69,10 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 print(MEDIA_ROOT)
-# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'),]
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'build/static'),]
 VENV_PATH = os.path.dirname(BASE_DIR)
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -107,7 +106,7 @@ ROOT_URLCONF = 'studybooth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {

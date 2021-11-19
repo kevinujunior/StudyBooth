@@ -1,0 +1,97 @@
+.Profile{
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 20px;
+    /* border-radius: 10px; */
+    border-bottom: 1px solid #eee;
+    background-color: inherit;
+    width: 100%;
+}
+
+.Info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.Info > div{
+    margin-bottom: 5px;
+}
+.InfoBox{
+    width: 100px;
+}
+.InfoBox img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0px 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.stats > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stats > div> div > p:nth-child(2n){
+    font-size: 13px;
+}
+
+.stats button {
+    font-size: 11.5px;
+    outline: none;
+    padding: 7px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    background-color: #1DA1F2;
+    color: white;
+    font-weight: 600;
+    margin: 5px;
+    transition: all 0.3s;
+}
+
+.stats button:hover{
+    background-color: #0f8cda;
+}
+
+/* .stats > div{
+    margin: 5px;
+} */
+
+/* .Intrest {
+    border: 1px solid black;
+    width: 100%;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.line{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+.Intrest > p{
+    font-weight: bold;
+}
+.Intrest > div{
+    margin-left: 5px;
+}
+.Intrest > div > p {
+    font-size: 13px;
+} */

@@ -1,0 +1,32 @@
+.RightPanel{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 300px;
+    position: sticky;
+    right: 0px;
+    top: 55px;
+    font-family: "Work Sans";
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    transition: all 0.3s;
+    background-color: white;
+    overflow-y: hidden;
+}
+
+.Dark{
+    background-color:rgb(2, 1, 1);
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+    border: 2px solid rgb(17, 16, 16);
+    color: white;
+}
+.Dark p{
+    color: white;
+    opacity: 0.7;
+}
+
+
+@media (max-width: 1000px){
+    .RightPanel{
+        display: none;
+    }
+}

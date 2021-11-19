@@ -1,0 +1,16 @@
+.NewsItem{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.NewsItem > div{
+    margin-top: 10px;
+}
+
+.NewsItem img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}

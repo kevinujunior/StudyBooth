@@ -1,0 +1,10 @@
+.Sections{
+    margin-left: 50px;
+}
+
+.Visible {
+    display: none;
+}
+.Sections p{
+    font-size: 14px;
+}
