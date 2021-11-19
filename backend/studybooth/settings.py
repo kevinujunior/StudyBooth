@@ -12,21 +12,21 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-
+from decouple import config
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p-$41r-f&_ftj$m@94yt8%-4w29&+o90g_=o=c&ocktbx!sc4i'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -63,12 +63,20 @@ SITE_ID = 1
 
 #custom
 AUTH_USER_MODEL = 'users.User'
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'backend/media')
 MEDIA_URL = '/media/'
 
+print(MEDIA_ROOT)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static') ,'backend']
+VENV_PATH = os.path.dirname(BASE_DIR)
+
+
+print(STATICFILES_DIRS)
 # MEDIA_ROOT =  None
 # MEDIA_URL = ""
-
 #custom
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
@@ -83,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -91,7 +100,8 @@ ROOT_URLCONF = 'studybooth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,8 +110,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+              
+                
             ],
-            
+            # 'libraries' : {
+            #     'staticfiles': 'django.templatetags.static', 
+            # }
         },
     },
 ]
@@ -115,9 +129,9 @@ WSGI_APPLICATION = 'studybooth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'backend/db.sqlite3',
         'TEST': {
-            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
+            'NAME': os.path.join(BASE_DIR, 'backend/db_test.sqlite3')
         }
     }
 }
@@ -159,7 +173,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -172,7 +186,7 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 # CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3030',
+#     'http://localhost:8000',
 #     'http://localhost:3000',
 # ] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
 # CORS_ALLOW_ALL_ORIGINS = True
@@ -186,7 +200,7 @@ ACCOUNT_EMAIL_REQUIRED = False
 # ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -210,3 +224,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
+django_heroku.settings(locals())

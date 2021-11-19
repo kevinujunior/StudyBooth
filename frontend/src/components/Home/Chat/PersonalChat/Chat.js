@@ -6,11 +6,6 @@ const Chat = () => {
     return(
         <div>
             <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
         </div>
     );
 }

@@ -16,9 +16,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 
 function Header(props) {
 
-    
     const [searchinput, setSearchInput] = useState("");
-    let [searchDropdown,setSearchDropdown] = useState({});
     let [dropdownMenu,setDropdownMenu] = useState();
     const [dropdown,setDropdown] = useState();
     const [following,setFollowing] = useState([]);
@@ -58,8 +56,6 @@ function Header(props) {
         axios.get(`http://localhost:8000/users/userview/?user=${searchinput}`)
         .then(response =>{
             const search = response.data
-            setSearchDropdown(search)
-
             // if(Object.entries(searchDropdown) > 0)    
             fetchFollowing()
             // console.log(search[0]["id"])
@@ -67,7 +63,7 @@ function Header(props) {
             const number_of_users = Object.keys(search).length;
             setDropdownMenu([...Array(number_of_users)].map((x, i) => {
                 if(following.indexOf(search[i]["id"]) != -1){
-                    return  <li value={search[i]["username"]}>
+                    return  <li key={i} value={search[i]["username"]}>
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                         <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                         <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
@@ -76,7 +72,7 @@ function Header(props) {
                         size="small" disabled>Follow</Button>
                         </li> 
                 }else{
-                    return  <li value={search[i]["username"]}>
+                    return  <li key={i} value={search[i]["username"]}>
                     <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                     <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                     <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
