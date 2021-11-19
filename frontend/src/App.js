@@ -20,10 +20,14 @@ class App extends Component {
       <div className={classes.app}>
         <Router>
           <Switch>
-            <Route exact path="/home" component={ this.props.isAuthenticated ? Home : Login}/>
+            <Route exact path="/home"> 
+              {this.props.isAuthenticated ? <Home /> : <Redirect to="/login" /> }
+            </Route>
             <Route exact path="/signup" component ={Signup}/> 
             <Route exact path="/login" component = { Login}/>
-            <Route exact path="/profile" component = { this.props.isAuthenticated ? Profile : Login} />
+            <Route exact path="/profile" >
+              {this.props.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
+            </Route>
             <Route exact path='/' >
               {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
             </Route>

@@ -1,0 +1,45 @@
+.NFP{
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.UserInfo {
+    flex : 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.UserInfo img{
+    max-height: 200px;
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+.stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0px 5px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.stats > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stats p{
+    font-size: 15px;
+}
+
+.posts{
+    flex: 2;
+}
