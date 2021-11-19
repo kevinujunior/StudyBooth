@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.b7b26c82.chunk.css",
-    "main.js": "/static/js/main.0aaf15dd.chunk.js",
-    "main.js.map": "/static/js/main.0aaf15dd.chunk.js.map",
+    "main.css": "/static/css/main.1768eacd.chunk.css",
+    "main.js": "/static/js/main.65812a95.chunk.js",
+    "main.js.map": "/static/js/main.65812a95.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.eeafe35b.js",
     "runtime-main.js.map": "/static/js/runtime-main.eeafe35b.js.map",
-    "static/js/2.2aa9188d.chunk.js": "/static/js/2.2aa9188d.chunk.js",
-    "static/js/2.2aa9188d.chunk.js.map": "/static/js/2.2aa9188d.chunk.js.map",
+    "static/js/2.0f9facd6.chunk.js": "/static/js/2.0f9facd6.chunk.js",
+    "static/js/2.0f9facd6.chunk.js.map": "/static/js/2.0f9facd6.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.b7b26c82.chunk.css.map": "/static/css/main.b7b26c82.chunk.css.map",
-    "static/js/2.2aa9188d.chunk.js.LICENSE.txt": "/static/js/2.2aa9188d.chunk.js.LICENSE.txt",
+    "static/css/main.1768eacd.chunk.css.map": "/static/css/main.1768eacd.chunk.css.map",
+    "static/js/2.0f9facd6.chunk.js.LICENSE.txt": "/static/js/2.0f9facd6.chunk.js.LICENSE.txt",
     "static/media/Login-Signup.css": "/static/media/poppins-v5-latin-regular.df9fdb2a.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.eeafe35b.js",
-    "static/js/2.2aa9188d.chunk.js",
-    "static/css/main.b7b26c82.chunk.css",
-    "static/js/main.0aaf15dd.chunk.js"
+    "static/js/2.0f9facd6.chunk.js",
+    "static/css/main.1768eacd.chunk.css",
+    "static/js/main.65812a95.chunk.js"
   ]
 }
