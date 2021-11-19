@@ -40,7 +40,7 @@ export const logout = () => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://localhost:8000/dj-rest-auth/login/',{
+        axios.post('https://study-booth-backend.herokuapp.com/dj-rest-auth/login/',{
             username: username,
             password: password
         })
@@ -66,7 +66,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, fullname,email, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://localhost:8000/dj-rest-auth/registration/',{
+        axios.post('https://study-booth-backend.herokuapp.com/dj-rest-auth/registration/',{
             username: username,
             fullName: fullname,
             email: email,

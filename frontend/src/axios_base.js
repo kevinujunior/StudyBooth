@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const customAxios = axios.create({
-    baseURL: `http://127.0.0.1:8000/`,
+    baseURL: `https://study-booth-backend.herokuapp.com/`,
     headers: {
         "Content-Type": "application/json",
     }
@@ -39,7 +39,7 @@ customAxios.interceptors.response.use((response) => {
     }, async function (error) {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && originalRequest.url === 'http://127.0.0.1:8000/dj-rest-auth/token/refresh/') {
+    if (error.response.status === 401 && originalRequest.url === 'https://study-booth-backend.herokuapp.com/dj-rest-auth/token/refresh/') {
         return Promise.reject(error);
     }
 
