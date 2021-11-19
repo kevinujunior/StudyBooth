@@ -15,7 +15,7 @@ import os
 from decouple import config
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -63,10 +63,10 @@ SITE_ID = 1
 
 #custom
 AUTH_USER_MODEL = 'users.User'
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'backend/media')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-print(MEDIA_ROOT)
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
@@ -74,7 +74,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static') ,'backend']
 VENV_PATH = os.path.dirname(BASE_DIR)
 
 
-print(STATICFILES_DIRS)
 # MEDIA_ROOT =  None
 # MEDIA_URL = ""
 #custom
@@ -129,9 +128,9 @@ WSGI_APPLICATION = 'studybooth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'backend/db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         'TEST': {
-            'NAME': os.path.join(BASE_DIR, 'backend/db_test.sqlite3')
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
         }
     }
 }
