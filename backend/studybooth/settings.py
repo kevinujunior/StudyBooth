@@ -15,7 +15,7 @@ import os
 from decouple import config
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'channels',
+    'whitenoise.runserver_nostatic',  
+
     
     #created apps
     'core',
@@ -63,18 +65,24 @@ SITE_ID = 1
 
 #custom
 AUTH_USER_MODEL = 'users.User'
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'backend/media')
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 print(MEDIA_ROOT)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static') ,'backend']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'),]
+
 VENV_PATH = os.path.dirname(BASE_DIR)
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8000',
+# ]
 
 
-print(STATICFILES_DIRS)
+# print(STATICFILES_DIRS)
 # MEDIA_ROOT =  None
 # MEDIA_URL = ""
 #custom
@@ -90,7 +98,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
@@ -129,9 +136,9 @@ WSGI_APPLICATION = 'studybooth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'backend/db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         'TEST': {
-            'NAME': os.path.join(BASE_DIR, 'backend/db_test.sqlite3')
+            'NAME': os.path.join(BASE_DIR, 'db_test.sqlite3')
         }
     }
 }
@@ -184,23 +191,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = False
 
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://localhost:3000',
-# ] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ORIGIN_WHITELIST = [
-#     'http://127.0.0.1:8000',
-#     'http://localhost:3000',
-# ]
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     'http://localhost:3030',
-#     'http://localhost:3000',
-# ]
-
-CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -213,6 +203,8 @@ REST_FRAMEWORK = {
 }
 
 REST_USE_JWT = True
+
+
 # Channels
 ASGI_APPLICATION = 'studybooth.asgi.application'
 

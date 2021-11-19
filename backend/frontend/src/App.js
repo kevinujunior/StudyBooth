@@ -10,8 +10,8 @@ import Login from './components/auth/Login';
 import Profile from './containers/Profile/Profile';
 import * as actions from './store/actions/index';
 import axios from 'axios';
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+// axios.defaults.xsrfCookieName = 'csrftoken'
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();

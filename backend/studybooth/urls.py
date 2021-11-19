@@ -19,6 +19,8 @@ from students import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
+from django.views.decorators.cache import never_cache
+index = never_cache(TemplateView.as_view(template_name='index.html'))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +31,9 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('chat/', include('chat.urls')),
-    # re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name='index.html')),
+    # re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name='index.html')),s
+    # path('', TemplateView.as_view(template_name='index.html')),
+    re_path('', index, name='index'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
