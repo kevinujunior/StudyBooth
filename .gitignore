@@ -42,3 +42,4 @@ db.sqlite3-journal
 
 
 workspace.code-workspace
+backend/.env

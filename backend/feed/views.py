@@ -21,7 +21,7 @@ from rest_framework.response import Response
 
 class SectionViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]
-    http_method_names = ['post','get']
+    # http_method_names = ['post','get']
     serializer_class = SectionSerializer
     queryset = Section.objects.all()
     

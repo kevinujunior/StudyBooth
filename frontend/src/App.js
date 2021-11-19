@@ -9,6 +9,9 @@ import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
 import Profile from './containers/Profile/Profile';
 import * as actions from './store/actions/index';
+import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
@@ -20,10 +23,14 @@ class App extends Component {
       <div className={classes.app}>
         <Router>
           <Switch>
-            <Route exact path="/home" component={ this.props.isAuthenticated ? Home : Login}/>
+            <Route exact path="/home"> 
+              {this.props.isAuthenticated ? <Home /> : <Redirect to="/login" /> }
+            </Route>
             <Route exact path="/signup" component ={Signup}/> 
             <Route exact path="/login" component = { Login}/>
-            <Route exact path="/profile" component = { this.props.isAuthenticated ? Profile : Login} />
+            <Route exact path="/profile" >
+              {this.props.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
+            </Route>
             <Route exact path='/' >
               {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
             </Route>
