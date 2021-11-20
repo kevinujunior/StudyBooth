@@ -4,7 +4,6 @@ const customAxios = axios.create({
     baseURL: `https://study-booth-backend.herokuapp.com/`,
     headers: {
         "Content-Type": "application/json",
-        // 'Access-Control-Allow-Origin': 'http://localhost:3000/',
     }
 });
 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Navbar from '../../components/Home/Header/Header'
-import LeftPanel from './LeftPanel/LeftPanel';
+import NotFollowedProfile  from './NotFollowedProfile/NotFollowedProfile';
 import RightPanel from './RightPanel/RightPanel';
 import MainSection from './MainSection/MainSection';
 import { withRouter } from 'react-router';
 import classes from './Profile.css';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios_base'
+import axios from '../../axios_base';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 class Profile extends Component{
@@ -15,6 +16,7 @@ class Profile extends Component{
     state = {
         userData: null,
         posts: null,
+        loading: true,
     }
 
     componentWillMount(){
@@ -25,6 +27,7 @@ class Profile extends Component{
 
         let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
 
+        console.log('userId', userId)
         //this will fetch the user profile details
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
@@ -35,18 +38,27 @@ class Profile extends Component{
         })
         .catch(err => console.log(err))
 
-
+        //this will fetch the user posts if followed by current user or current user watching his/her profile.
         axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-            if(res.data.length >= 1 || userId === localStorage.getItem('user')){
+            console.log(userId)
+            if(res.data.length >= 1 || userId == localStorage.getItem('user')){ 
+                //res.data will have length greater than 1 if current user follow other user.
                 axios.get('feed/get_post/?viewUserPost='+userId)
                 .then(res => {
                     this.setState({
                         posts: res.data,
+                        loading: false,
                     })
                 })
                 .catch(err => console.log(err))
             }
+            else{
+                this.setState({
+                    loading:false,
+                })
+            }
+
         })
         .catch(err => console.log(err))
 
@@ -61,11 +73,12 @@ class Profile extends Component{
         return (
             <div className={profileClasses.join(" ")}>
                 <Navbar />
-                <div className={classes.main}>
-                    <LeftPanel />
-                    <MainSection posts={this.state.posts ? this.state.posts : null}/>
-                    <RightPanel user={this.state.userData}/>
-                </div>
+                {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
+                    <Spinner /> 
+                </div>: <div className={classes.main}>
+                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} />}
+                    {this.state.posts ? <MainSection posts={this.state.posts}/> : null}
+                </div>}
             </div>
         );
     }

@@ -4,7 +4,8 @@ import classes from './Home.css';
 import RightPanel from './RightSection/RightPanel';
 import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
-
+import Chat from './Chat/Chat';
+import ChatIn from './Chat/chatIn';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
@@ -41,6 +42,8 @@ class Home extends Component {
         this.props.onFetchCurrentUserDetail();
     }
 
+    
+
     render(){
         let ButtonIcon = <ChatBubbleIcon />;
         let homeClasses = [classes.Home];
@@ -63,7 +66,7 @@ class Home extends Component {
                     {/* <ChatIn /> */}
                     <RightPanel />
                 </div>
-                {/* <Chat isActive={this.state.isChatActive}/> */}
+                <Chat isActive={this.state.isChatActive}/>
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}
                 </button>

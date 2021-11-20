@@ -1,8 +1,10 @@
 .UserProfile{
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.UserProfile > img{
+.UserProfile img{
     border-radius: 10px;
 }
 
@@ -37,4 +39,15 @@
 
 .InfoBlocks{
     margin-top: 8px;
+}
+
+@media (max-width: 1060px){
+    .UserProfile{
+        flex-direction: row;
+    }
+
+    .UserProfile  img{
+        max-height: 150px;
+        max-width: 200px;
+    }
 }

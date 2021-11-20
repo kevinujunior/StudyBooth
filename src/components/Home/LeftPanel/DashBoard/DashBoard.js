@@ -4,7 +4,7 @@ import classes from './DashBoard.css';
 import DashBoardItems from './DashBoardItems/DashBoardItem';
 import Profile from '../Profile/Profile'
 import SectionItems from '../../../../containers/Home/Sections/SectionList';
-
+import ToggleButton from '../../../UI/ToggleButton/ToggleButton';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
@@ -15,6 +15,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 import {connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index';
+import * as actionsTypes from '../../../../store/actions/actionTypes';
 
 
 class DashBoard extends Component{
@@ -47,6 +48,9 @@ class DashBoard extends Component{
                     </div>
                     <div className = {classes.Bottom}>
                         <DashBoardItems name="Logout" icon = {<LogoutOutlinedIcon />} onClick = {this.props.onLogOut}/>
+                        <div className={classes.ToggleBtn}>
+                            <ToggleButton theme={this.props.theme} onClick = {() => this.props.onChangeTheme(this.props.theme)} />
+                        </div>
                     </div>
                 </div>
                 <div className={[classes.Component2, this.state.selected === "Sections" ? classes.SlideLeft_c2 : classes.SlideRight_c2].join(" ")}>
@@ -58,11 +62,22 @@ class DashBoard extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        theme: state.theme.theme,
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onFetchFeed: () => dispatch(actions.fetchFeed()),
         onLogOut : () => dispatch(actions.logout()),
+        onChangeTheme: (theme) => {
+            //here we are changing theme of basis of current theme
+            if(theme === 'light') return dispatch({type: actionsTypes.DARK_THEME})
+            return dispatch({type: actionsTypes.LIGHT_THEME})
+        },
     }
 }
 
-export default connect(null, mapDispatchToProps)(DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

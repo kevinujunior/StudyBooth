@@ -32,6 +32,8 @@ export const authFail = error => {
 export const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('expirationDate');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -100,14 +102,6 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             dispatch(authSuccess(token));
-            // const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            // if (expirationDate <= new Date()) {
-            //     dispatch(logout());
-            // }
-            // else {
-            //     dispatch(authSuccess(token));
-            //     // dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime() )/1000) );
-            // }
         }
     }
 }

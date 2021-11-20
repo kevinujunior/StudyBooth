@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from './CommentItem.css';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
+import {withRouter} from 'react-router-dom'
 
 
 class CommentItem extends Component {
@@ -18,6 +19,7 @@ class CommentItem extends Component {
         });
     }
 
+
     render(){
         let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
         let cmtItemClasses = [classes.CommentItem];
@@ -32,7 +34,10 @@ class CommentItem extends Component {
 
         return (
             <div className={cmtItemClasses.join(' ')}>
-                <div>
+                <div onClick={() => this.props.history.push({
+                    pathname: '/profile',
+                    userId: this.props.userId,
+                })} style={{'cursor':'pointer'}}>
                     <img src={this.props.userPic} className={classes.CommentorImage}/>
                 </div>
                 <div className={classes.Comment}>
@@ -57,4 +62,4 @@ class CommentItem extends Component {
     }
 }
 
-export default CommentItem;
+export default withRouter(CommentItem);

@@ -54,6 +54,11 @@
     align-items: center;
 }
 
+.ToggleBtn{
+    display: none;
+    padding-left: 10%;
+}
+
 .SlideLeft_c1{
     left: -100%;
 }
@@ -65,4 +70,10 @@
 }
 .SlideRight_c2{
     right: -100%;
+}
+
+@media (max-width:630px) {
+    .ToggleBtn{
+        display: block;
+    }
 }
