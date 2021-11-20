@@ -39,7 +39,6 @@ class Header extends Component {
     }
 
     fetchSearch = () => {
-        console.log("jskand")
         let users = null;
         axios.get(`users/userview/?user=${this.state.searchInput}`)
         .then(response =>{
