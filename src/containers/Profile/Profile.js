@@ -27,7 +27,7 @@ class Profile extends Component{
 
         let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
 
-        console.log('userId', userId)
+        console.log('viewUserId', userId)
         //this will fetch the user profile details
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
@@ -76,7 +76,7 @@ class Profile extends Component{
                 {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
-                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} />}
+                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} followingUserId = {this.props.location.userId} />}
                     {this.state.posts ? <MainSection posts={this.state.posts}/> : null}
                 </div>}
             </div>
