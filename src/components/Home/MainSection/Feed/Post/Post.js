@@ -80,7 +80,8 @@ class Post extends Component{
                             userId: this.props.userId,
                         });
                     }}>
-                        <img src = {this.props.profileImage} alt=""/>
+                        <img src = {this.props.profileImage? this.props.profileImage:"https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""/>
+                        
                         <p>{this.props.name}</p>
                         <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
                     </div>
