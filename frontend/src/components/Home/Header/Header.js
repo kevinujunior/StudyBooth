@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState, Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actionsTypes from '../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
@@ -12,7 +12,7 @@ import ToggleButton from '../../UI/ToggleButton/ToggleButton';
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../../axios_base';
 import Spinner from '../../UI/Spinner/Spinner';
-
+import onClickOutside from 'react-onclickoutside'
 
 class Header extends Component {
 
@@ -22,7 +22,11 @@ class Header extends Component {
         following: null,
         dropdown: null,
     }
-
+    handleClickOutside = () => {
+        this.setState({
+            dropdown: null,
+        })
+     }
     postFollow = data =>{
         console.log("inside postfollow")
         axios.post(`users/followingview/`, data)
@@ -35,13 +39,16 @@ class Header extends Component {
     }
 
     fetchSearch = () => {
+        console.log("jskand")
         let users = null;
         axios.get(`users/userview/?user=${this.state.searchInput}`)
         .then(response =>{
             const search = response.data   
             console.log(search)
             // console.log(following.includes(1))
-            const number_of_users = Object.keys(search).length;
+            var number_of_users = Object.keys(search).length;
+            if(number_of_users>10){
+                number_of_users = 10;}
             users = [...Array(number_of_users)].map((x, i) => {
                 return  <li key={i} value={search[i]["username"]} onClick={() => {
                     this.props.history.push({
@@ -62,14 +69,13 @@ class Header extends Component {
         .catch(err => {
             console.log(err)
         }); 
-    
     } 
-    
     triggerSearch = () => {
         this.fetchSearch();
     }
-
+    
     render(){
+        
         let headerClasses = [classes.Header];
         if(this.props.theme === 'dark'){
             headerClasses.push(classes.Dark);
@@ -156,5 +162,5 @@ const mapDispathToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispathToProps)(withRouter(Header));
+export default connect(mapStateToProps, mapDispathToProps)(withRouter(onClickOutside(Header)));
 //connect is a method to connect react component to store, it's like a subscription 
