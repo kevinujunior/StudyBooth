@@ -89,7 +89,11 @@ class Header extends Component {
             <div className={headerClasses.join(" ")}>
                 <div className={classes.HeaderContent}>
                     <div>        
-                        <img src={logo} alt=""  id={classes.fuckoff} />
+                        <img src={logo} alt=""  id={classes.fuckoff} onClick={() => {
+                            this.props.history.push({
+                                pathname: '/',
+                            });
+                        }} />
                         <div className={classes.HamburgerButton}>
                             <IconButton onClick={this.props.onHamburgerClick}>
                                 <MenuIcon className={classes.IconColor}/>
