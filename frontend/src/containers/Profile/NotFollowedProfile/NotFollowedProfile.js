@@ -3,7 +3,7 @@ import classes from './NFP.css';
 
 const NotFollowedProfile = (props) => {
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
-    let base = "http://127.0.0.1:8000"
+    let base = "https://study-booth-backend.herokuapp.com"
     return (
         <div className={classes.NFP}>
             <div className={classes.UserInfo}>

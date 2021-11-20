@@ -10,7 +10,8 @@ class Posts extends Component{
         console.log(this.props.posts)
         if(this.props.posts){
             posts = [...Array(this.props.posts.length)].map((_,i) => {
-                return <img src={this.props.posts[i].postFile} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
+                console.log(this.props.posts[i].postFile)
+                return <img src={this.props.posts[i].postFile?this.props.posts[i].postFile:"https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} onError={(e)=>{e.target.onerror = null; e.target.src="https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"}} className={classes.ImgBox} key={this.props.posts[i].id} alt=""/>;
             })
         }
         return(
