@@ -42,6 +42,8 @@ class Home extends Component {
         this.props.onFetchCurrentUserDetail();
     }
 
+    
+
     render(){
         let ButtonIcon = <ChatBubbleIcon />;
         let homeClasses = [classes.Home];

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from '../auth/css/Login-Signup.css'
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import * as actions from '../../store/actions/auth'
 export class Login extends Component {
     handleSubmit = (e) => {
@@ -79,4 +80,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Login));

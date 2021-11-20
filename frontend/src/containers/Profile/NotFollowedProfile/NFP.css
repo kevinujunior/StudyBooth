@@ -6,7 +6,9 @@
     align-items: center;
 }
 
-
+.NFP h2{
+    text-align: center;
+}
 .UserInfo {
     flex : 1;
     display: flex;
@@ -42,4 +44,10 @@
 
 .posts{
     flex: 2;
+}
+
+@media (max-width:600px) {
+    .NFP{
+        flex-direction: column;
+    }
 }

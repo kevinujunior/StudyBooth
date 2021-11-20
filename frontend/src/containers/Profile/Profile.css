@@ -10,8 +10,20 @@
 
 .main{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     margin: auto;
     position: relative;
     max-width: 1400px;
+}
+
+.emptyBox{
+    height: 100vh;
+    width: 100vw;
+}
+
+@media (max-width: 1060px ){
+    .main{
+        flex-direction: column;
+        align-items: center;
+    }
 }

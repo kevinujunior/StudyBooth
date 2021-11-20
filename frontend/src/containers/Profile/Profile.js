@@ -27,6 +27,7 @@ class Profile extends Component{
 
         let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
 
+        console.log('userId', userId)
         //this will fetch the user profile details
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
@@ -40,7 +41,8 @@ class Profile extends Component{
         //this will fetch the user posts if followed by current user or current user watching his/her profile.
         axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-            if(res.data.length >= 1 || userId === localStorage.getItem('user')){ 
+            console.log(userId)
+            if(res.data.length >= 1 || userId == localStorage.getItem('user')){ 
                 //res.data will have length greater than 1 if current user follow other user.
                 axios.get('feed/get_post/?viewUserPost='+userId)
                 .then(res => {
@@ -71,7 +73,9 @@ class Profile extends Component{
         return (
             <div className={profileClasses.join(" ")}>
                 <Navbar />
-                {this.state.loading ? <Spinner /> : <div className={classes.main}>
+                {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
+                    <Spinner /> 
+                </div>: <div className={classes.main}>
                     {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} />}
                     {this.state.posts ? <MainSection posts={this.state.posts}/> : null}
                 </div>}

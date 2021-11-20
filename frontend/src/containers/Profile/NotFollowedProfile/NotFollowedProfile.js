@@ -7,7 +7,7 @@ const NotFollowedProfile = (props) => {
     return (
         <div className={classes.NFP}>
             <div className={classes.UserInfo}>
-                <img src={userData ? base+userData.userPic : null} alt=""></img>
+                <img src={userData ? base+userData.userPic : "https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""></img>
                 <h2>{userData ? userData.fullName : null}</h2>
                 <div className={classes.stats}>
                     <div>
