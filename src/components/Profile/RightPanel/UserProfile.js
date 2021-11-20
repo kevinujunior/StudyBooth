@@ -4,12 +4,12 @@ const UserProfile = (props) => {
 
     console.log(props.user)
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
-    let base = "http://127.0.0.1:8000"
+    let base = "https://study-booth-backend.herokuapp.com"
     console.log(userData ? base+userData.userPic : null)
     return (
         <div className={classes.UserProfile}>
             <div>
-                <img src={userData ? base+userData.userPic : "https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""></img>
+                <img src={userData.userPic ? base+userData.userPic : "https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""></img>
                 <h2 style={{'textAlign':'center'}}>{userData ? userData.fullName : null}</h2>
                 <div className={classes.stats}>
                     <div>
