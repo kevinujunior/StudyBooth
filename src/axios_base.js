@@ -14,7 +14,6 @@ const requestHandler = request => {
 };
 
 
-
 const errorHandler = error => {
     if(error.response.status === 401){
         customAxios.post('dj-rest-auth/token/refresh/', {
