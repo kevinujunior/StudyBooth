@@ -1,24 +1,11 @@
 import React from 'react';
 import classes from './NFP.css';
 import { Button } from '@mui/material';
-import axios from '../../../axios_base'
 
 const NotFollowedProfile = (props) => {
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
     let base = "https://study-booth-backend.herokuapp.com"
 
-    console.log(props.followingUserId)
-    const postFollow = () =>{
-        let currUserId = localStorage.getItem('user')
-        axios.post("users/followingview/",{
-            currUser : currUserId,
-            followingUser : props.followingUserId
-        }).then(
-            res => console.log(res)
-            )
-        .catch(err=>console.log(err))
-        
-    }
     return (
         <div className={classes.NFP}>
             <div className={classes.UserInfo}>
@@ -43,7 +30,7 @@ const NotFollowedProfile = (props) => {
             </div>
             <div className={classes.posts}>
                 {/* <h2>You don't follow this user</h2> */}
-                <Button variant="outlined" onClick={postFollow}>Follow</Button>
+                <Button variant="outlined" onClick={() => props.postFollow()}>Follow</Button>
             </div>
         </div>
     );

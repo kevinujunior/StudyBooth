@@ -10,7 +10,6 @@ import * as actions from '../../store/actions/index';
 import axios from '../../axios_base';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
-
 class Profile extends Component{
 
     state = {
@@ -19,15 +18,27 @@ class Profile extends Component{
         loading: true,
     }
 
-    componentWillMount(){
+    postFollow = () =>{
+        //this postFollow function will be called from NFP
+        console.log("post follow called ");
 
-        console.log(this.props.location)
-        this.props.onFetchFeed();
-        this.props.onFetchCurrentUser();
+        let currUserId = localStorage.getItem('user')
+        axios.post("users/followingview/",{
+            currUser : currUserId,
+            followingUser : this.props.location.userId
+        }).then(res => {
+            //if we followed the user of whom we were viewing profile then we should refresh userData
+            this.setState({
+                loading:true
+            })
+            this.fetchUserData();
+        })
+        .catch(err=>console.log(err))
+    }
 
+    fetchUserData(){
         let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
 
-        console.log('viewUserId', userId)
         //this will fetch the user profile details
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
@@ -41,8 +52,8 @@ class Profile extends Component{
         //this will fetch the user posts if followed by current user or current user watching his/her profile.
         axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-            console.log(userId)
-            if(res.data.length >= 1 || userId == localStorage.getItem('user')){ 
+
+            if(res.data.length >= 1 || userId === localStorage.getItem('user')){ 
                 //res.data will have length greater than 1 if current user follow other user.
                 axios.get('feed/get_post/?viewUserPost='+userId)
                 .then(res => {
@@ -55,14 +66,17 @@ class Profile extends Component{
             }
             else{
                 this.setState({
-                    loading:false,
+                    loading:false, //after fetching the data we should set loading false,
                 })
             }
 
         })
         .catch(err => console.log(err))
+    }
 
-
+    componentWillMount(){
+        this.props.onFetchCurrentUser();
+        this.fetchUserData()
     }
 
     render(){
@@ -76,7 +90,7 @@ class Profile extends Component{
                 {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
-                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} followingUserId = {this.props.location.userId} />}
+                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} postFollow={this.postFollow}  />}
                     {this.state.posts ? <MainSection posts={this.state.posts}/> : null}
                 </div>}
             </div>

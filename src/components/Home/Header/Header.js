@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from 'react';
+import React, {  Component,  } from 'react';
 import { connect } from 'react-redux';
 import * as actionsTypes from '../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
@@ -6,36 +6,24 @@ import classes from './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../../../assets/Study_Booth.png'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-import { Avatar, Button, IconButton } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleButton from '../../UI/ToggleButton/ToggleButton';
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../../axios_base';
-import Spinner from '../../UI/Spinner/Spinner';
 import onClickOutside from 'react-onclickoutside'
 
 class Header extends Component {
 
     state = {
         searchInput:"",
-        isDropdownVisible:false,
-        following: null,
         dropdown: null,
     }
+
     handleClickOutside = () => {
         this.setState({
             dropdown: null,
         })
-     }
-    postFollow = data =>{
-        console.log("inside postfollow")
-        axios.post(`users/followingview/`, data)
-        .then(response =>{
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err)
-        });
     }
 
     fetchSearch = () => {
@@ -43,23 +31,26 @@ class Header extends Component {
         axios.get(`users/userview/?user=${this.state.searchInput}`)
         .then(response =>{
             const search = response.data   
-            console.log(search)
-            // console.log(following.includes(1))
+            
             var number_of_users = Object.keys(search).length;
-            if(number_of_users>10){
-                number_of_users = 10;}
-            users = [...Array(number_of_users)].map((x, i) => {
-                return  <li key={i} value={search[i]["username"]} onClick={() => {
-                    this.props.history.push({
-                        pathname: '/profile',
-                        userId: search[i]["id"],
-                    });
-                }}>
-                    <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
-                    <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
-                    <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
-                </li> 
-            }) 
+
+            if(number_of_users === 0) {
+                users = <li><p>No user found :-( </p></li>
+            }
+            else{
+                users = [...Array(number_of_users)].map((x, i) => {
+                    return  <li key={i} value={search[i]["username"]} onClick={() => {
+                        this.props.history.push({
+                            pathname: '/profile',
+                            userId: search[i]["id"],
+                        });
+                    }}>
+                        <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
+                        <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
+                        <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
+                    </li> 
+                })
+            } 
 
             this.setState({
                 dropdown:users,
@@ -69,6 +60,7 @@ class Header extends Component {
             console.log(err)
         }); 
     } 
+
     triggerSearch = () => {
         this.fetchSearch();
     }
@@ -103,18 +95,18 @@ class Header extends Component {
                     <div className={classes.SearchAndCreate}>
                         <div className={classes.Input}>
                             <input 
-                            type="text" 
-                            class={classes.inputSearch}     
-                            value={this.state.searchinput}
-                            onChange={e => this.setState({
-                                searchInput: e.target.value,
-                            })}
-                            onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    this.triggerSearch()
-                                }
-                              }}
-                            placeholder="Type to Search...">
+                                type="text" 
+                                class={classes.inputSearch}     
+                                value={this.state.searchinput}
+                                onChange={e => this.setState({
+                                    searchInput: e.target.value,
+                                })}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                        this.triggerSearch()
+                                    }
+                                }}
+                                placeholder="Type to Search...">
                             </input>
                             <button class={classes.btnSearch} onClick={this.triggerSearch}>{<SearchIcon/>}</button>
                             {dropdownMenu}
@@ -129,7 +121,7 @@ class Header extends Component {
                     
                     <div className={classes.Buttons}>
                         <div className={classes.ToggleBtn}>
-                            <ToggleButton theme={this.props.theme} onClick = {() => this.props.onChangeTheme(this.state.theme)} />
+                            <ToggleButton theme={this.props.theme} onClick = {() => this.props.onChangeTheme(this.props.theme)} />
                         </div>
                         <div className={classes.NotfBtn}>
                             <IconButton >
