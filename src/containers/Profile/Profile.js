@@ -36,6 +36,14 @@ class Profile extends Component{
         .catch(err=>console.log(err))
     }
 
+    postUnfollow= () => { 
+        axios.get('users/followingview/unfollow/?user='+this.props.location.userId)
+        .then(res => this.setState({
+            posts:null,
+        }))
+        .catch(err => console.log(err))
+    }
+
     fetchUserData(){
         let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
 
@@ -90,7 +98,7 @@ class Profile extends Component{
                 {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
-                    {this.state.posts ? <RightPanel user={this.state.userData}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} postFollow={this.postFollow}  />}
+                    {this.state.posts ? <RightPanel user={this.state.userData} postUnfollow={this.postUnfollow}/> : <NotFollowedProfile user={this.state.userData ? this.state.userData[0] : null} postFollow={this.postFollow}  />}
                     {this.state.posts ? <MainSection posts={this.state.posts}/> : null}
                 </div>}
             </div>
