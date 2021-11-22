@@ -37,7 +37,7 @@ class Profile extends Component{
     }
 
     postUnfollow= () => { 
-        axios.get('users/followingview/unfollow/?user='+this.props.location.userId)
+        axios.delete('users/unfollow/'+this.props.location.userId)
         .then(res => this.setState({
             posts:null,
         }))
