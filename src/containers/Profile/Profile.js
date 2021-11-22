@@ -23,17 +23,20 @@ class Profile extends Component{
         console.log("post follow called ");
 
         let currUserId = localStorage.getItem('user')
-        axios.post("users/followingview/",{
-            currUser : currUserId,
-            followingUser : this.props.location.userId
-        }).then(res => {
-            //if we followed the user of whom we were viewing profile then we should refresh userData
-            this.setState({
-                loading:true
+        let testid = this.props.location.userId
+        if(testid!==currUserId)
+           { axios.post("users/followingview/",{
+                currUser : currUserId,
+                followingUser : this.props.location.userId
+            }).then(res => {
+                //if we followed the user of whom we were viewing profile then we should refresh userData
+                this.setState({
+                    loading:true
+                })
+                this.fetchUserData();
             })
-            this.fetchUserData();
-        })
-        .catch(err=>console.log(err))
+            .catch(err=>console.log(err))
+        }
     }
 
     postUnfollow= () => { 
