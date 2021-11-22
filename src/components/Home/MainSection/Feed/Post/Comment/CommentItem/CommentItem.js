@@ -38,7 +38,7 @@ class CommentItem extends Component {
                     pathname: '/profile',
                     userId: this.props.userId,
                 })} style={{'cursor':'pointer'}}>
-                    <img src={this.props.userPic} className={classes.CommentorImage}/>
+                    <img src={this.props.userPic ? this.props.userPic : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtpifVQVd-5cglJ6GahRdGyMVW_ZbY_CJD5w&usqp=CAU"} className={classes.CommentorImage} alt="xxx"/>
                 </div>
                 <div className={classes.Comment}>
                     <div className={classes.CommentInfo}>

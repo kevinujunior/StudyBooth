@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './UserProfile.css';
+import { Button } from '@mui/material';
+
 const UserProfile = (props) => {
 
     console.log(props.user)
@@ -8,7 +10,7 @@ const UserProfile = (props) => {
     console.log(userData ? base+userData.userPic : null)
     return (
         <div className={classes.UserProfile}>
-            <div>
+            <div style={{'display':'flex', 'alignItems':'center', 'flexDirection':'column'}}>
                 <img src={userData.userPic ? base+userData.userPic : "https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""></img>
                 <h2 style={{'textAlign':'center'}}>{userData ? userData.fullName : null}</h2>
                 <div className={classes.stats}>
@@ -27,6 +29,7 @@ const UserProfile = (props) => {
                         </div>
                     </div>
                 </div>
+                <Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>
             </div>
             <div>
                 <div style={{'padding':'10px'}}>

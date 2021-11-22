@@ -14,7 +14,7 @@ class Feed extends Component {
     
     render () {
         
-        let posts  = <Spinner />;
+        let posts  = <Spinner/>;
         
         if(this.props.posts != null && this.props.posts.length > 0){
             const number_of_posts = Object.keys(this.props.posts).length;
@@ -37,6 +37,8 @@ class Feed extends Component {
                 /> 
             })
         }
+
+        if(this.props.posts != null && this.props.posts.length === 0) posts = <Post about="Hey new user please make a post.. :-)"/>;
 
         return (
             <div>

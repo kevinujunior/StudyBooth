@@ -2,17 +2,27 @@ import React, { Component } from 'react';
 import classes from '../auth/css/Login-Signup.css'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth'
+import { Redirect } from 'react-router';
 export class Signup extends Component {
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         //signUp
         e.preventDefault();
         this.props.onAuth(e.target[0].value,e.target[1].value,e.target[2].value,e.target[3].value,e.target[4].value)
-        this.props.history.push('/');
     }  
+
     render() {
-        return(
+        let errorMessage = null;
         
+        if (this.props.error){
+            console.log(this.props.error)
+            errorMessage = (
+                <p style={{'fontSize':'13px', 'fontStyle':'italic', 'fontWeight':'bold', 'color':'crimson', }}>{this.props.error === 'This field may not be blank.' ? "Please enter all the fields." : this.props.error}</p>
+            )
+        }
+
+        return(
         <div class = {classes.signupMain}>
+            {this.props.isAuthenticated ? <Redirect to="/home"/> : null}
         <section class={classes.signup}>
                 <div class={classes.container}>
                     <div class= {classes.signupContent}>
@@ -39,6 +49,7 @@ export class Signup extends Component {
                                     <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                     <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
                                 </div>
+                                {errorMessage}
                                 <div class={classes.formGroup}>
                                     <input type="checkbox" name="remember-me" id="remember-me" class={classes.agreeTerm} />
                                 <label for="remember-me" class={classes.labelAgreeTerm}><span><span></span></span>I agree all statements in  <a href="#" class={classes.termService}>Terms of service</a></label>
@@ -47,8 +58,6 @@ export class Signup extends Component {
                                     <input type="submit" name="signup" id={classes.signup} class={classes.formSubmit} value="Register"/>
                                 </div>
                             </form>
-
-
                         </div>
                         <div class={classes.signupImage}>
                             <figure>
@@ -68,8 +77,8 @@ export class Signup extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        loading: state.loading,
-        error: state.error
+        isAuthenticated : state.auth.token,
+        error: state.auth.error
     }
 }
 

@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from  'axios';
+import axios, {AxiosError} from  'axios';
 
 export const authStart = () => {
     return {
@@ -47,7 +47,7 @@ export const authLogin = (username, password) => {
             password: password
         })
         .then(res =>{
-            console.log(res.data.user)
+            console.log(res)
             const access_token = res.data.access_token;
             const refresh_token = res.data.refresh_token;
             const user = res.data.user.pk;
@@ -60,7 +60,8 @@ export const authLogin = (username, password) => {
             // dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
-            dispatch(authFail(err))
+            console.log(err.response.data)
+            dispatch(authFail(Object.values(err.response.data)[0][0]))
         })
     }
 }
@@ -89,7 +90,7 @@ export const authSignup = (username, fullname,email, password1, password2) => {
             // dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
-            dispatch(authFail(err))
+            dispatch(authFail(Object.values(err.response.data)[0][0]))
         })
     }
 }

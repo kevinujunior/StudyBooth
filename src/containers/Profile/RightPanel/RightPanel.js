@@ -14,7 +14,7 @@ class RightPanel extends Component {
         if(this.props.theme === 'dark') classNames.push(classes.Dark)
         return (
             <div className={classNames.join(" ")}>
-                <UserProfile user={this.props.user ? this.props.user[0] : null } />
+                <UserProfile user={this.props.user ? this.props.user[0] : null } postUnfollow={this.props.postUnfollow}/>
             </div>
         );
     }
