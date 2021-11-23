@@ -4,10 +4,12 @@ import { Button } from '@mui/material';
 
 const UserProfile = (props) => {
 
-    console.log(props.user)
+    
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
     let base = "https://study-booth-backend.herokuapp.com"
-    console.log(userData ? base+userData.userPic : null)
+
+    const currUser = localStorage.getItem('user')
+
     return (
         <div className={classes.UserProfile}>
             <div style={{'display':'flex', 'alignItems':'center', 'flexDirection':'column'}}>
@@ -29,7 +31,12 @@ const UserProfile = (props) => {
                         </div>
                     </div>
                 </div>
-                <Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>
+                {
+                Number(currUser)!==props.user.id ? 
+                (<Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>) 
+                : null
+                    }
+                
             </div>
             <div>
                 <div style={{'padding':'10px'}}>
