@@ -5,9 +5,7 @@ import CommentItem from './CommentItem/CommentItem';
 class CommentSection extends Component{
 
     componentWillMount(){
-        if(!this.props.comments){
-            this.props.fetchComment();
-        }
+        this.props.fetchComment();
     }
 
     render(){
@@ -19,6 +17,7 @@ class CommentSection extends Component{
         }
 
         let comments = <p>Loading...</p>;
+        console.log(this.props.comments)
         if(this.props.comments){
             comments = this.props.comments.map(comment =>{
                 return  <CommentItem

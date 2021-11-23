@@ -12,7 +12,7 @@ import {connect } from 'react-redux';
 import * as actions from '../../../../../store/actions/index';
 import {withRouter} from 'react-router-dom'
 import axios from '../../../../../axios_base';
-import onClickOutside from 'react-onclickoutside'
+
 
 class Post extends Component{
 
@@ -22,13 +22,14 @@ class Post extends Component{
         commentText : "",
         cmtCount: this.props.commentCount,
         comments:null,
+        loading:false,
     }
-
-    
-
 
     postComment = async () => {
         if(this.state.commentText === "" || this.state.commentText === " ") return; //we have to manage for empty comment
+        this.setState({
+            loading:true,
+        })
         const data = {
             post : this.props.id,
             commentText : this.state.commentText,
@@ -38,30 +39,40 @@ class Post extends Component{
         this.setState({
             isCommentVisibe: true,
             commentText:"",
+            loading: false,
         })
         this.fetchComment();
-        
     }
 
     fetchComment= () => {
-
+        this.setState({
+            loading:true,
+        })
         axios.get("feed/get_comment/?post="+this.props.id,)
         .then(res => {
             console.log(res)
             this.setState({
                 comments: res.data,
+                loading:false,
                 cmtCount: res.data.length,
             })
         })
         .catch(err => console.log(err))
     }
 
-    postLike = () => {
+    postLike = async () => {
         const data ={
             post: this.props.id,
             likeUser: localStorage.getItem('user'),
         }
-        this.props.onLike(data, this.props.isLikedByuser, this.props.likeId);
+        this.setState({
+            loading:true,
+        })
+        await this.props.onLike(data, this.props.isLikedByuser, this.props.likeId);
+        this.setState({
+            loading:false,
+        })
+        
     }
 
     commentHandler = (event) => {
@@ -92,6 +103,9 @@ class Post extends Component{
         
         return (
             <div className={postClasses.join(' ')}>
+                {this.state.loading ?<div className={classes.loader}>
+                        <div className={classes.bar}></div>
+                    </div> : null }
                 <div className={classes.Header}>
                     <div className={classes.NamePhoto} onClick={() => {
                         this.props.history.push({
@@ -143,7 +157,12 @@ class Post extends Component{
                     </div>
                 </div>:null}
 
-                <ActionPopUp Visible={this.state.isActionsVisible} userId={this.props.userId} onDeletePost={() => this.props.onDeletePost(this.props.id)}/>
+                <ActionPopUp Visible={this.state.isActionsVisible} userId={this.props.userId} onDeletePost={() => {
+                    this.setState({
+                        loading:true,
+                    })
+                    this.props.onDeletePost(this.props.id)
+                }}/>
                 { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments}/>  : null}
             </div>
     )

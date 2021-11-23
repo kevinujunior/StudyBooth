@@ -31,11 +31,10 @@ const UserProfile = (props) => {
                         </div>
                     </div>
                 </div>
-                {
-                Number(currUser)!==props.user.id ? 
+                
+                {Number(currUser)!==props.user.id ? 
                 (<Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>) 
-                : null
-                    }
+                : null}
                 
             </div>
             <div>

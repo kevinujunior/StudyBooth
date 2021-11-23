@@ -9,13 +9,11 @@ const CommentActionPopUp = (props) => {
     if(props.Visible){
         classN.push(classes.Visible);
     }
-    
-    let currUserID = localStorage.getItem('user');
 
     return (
         
         <div className={classN.join(" ")}>
-            {currUserID == props.userId ? <div onClick={props.deleteCmt}> <DeleteIcon className={classes.grey} /><p>Delete</p></div> : null}
+            <div onClick={props.deleteCmt}> <DeleteIcon className={classes.grey} /><p>Delete</p></div>
         </div>
     );
 }

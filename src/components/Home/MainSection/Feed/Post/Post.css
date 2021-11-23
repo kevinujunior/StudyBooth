@@ -1,17 +1,20 @@
 .Post{
     box-sizing: border-box;
     background-color: #e0dfdf;
-    padding: 20px;
+    padding:0px 20px 20px 20px;
     border-radius: 8px;
     margin: 15px 5px;
     min-width: 300px;
     max-width: 550px;
+    height: auto;
     margin: 10px auto;
     background-color: white;
     border: 1px solid #eee;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     position: relative;
     /* transition: all 0.3s; */
+    overflow-y: visible;
+    overflow-x: clip;
 }
 
 .Dark{
@@ -46,6 +49,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0px !important;
+    margin-top: 15px;
 }
 
 .Header img{
@@ -75,7 +79,7 @@
 }
 .PostImage > img {
     width: auto;
-    max-height: 100%;
+    max-height: 400px;
     max-width: 100%;
     margin: auto;
 }
@@ -142,9 +146,38 @@
     font-weight: bold;
 }
 
+@keyframes loader-animation {
+    0% {
+      left: -100%;
+    }
+    49% {
+      left: 100%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: -100%;
+    }
+  }
+  .loader {
+    height: 5px;
+    width: 100%;
+  }
+  .loader .bar {
+    width: 100%;
+    position: absolute;
+    height: 5px;
+    background-color: dodgerblue;
+    animation-name: loader-animation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
 @media (max-width:450px){
     .Post{
-        padding: 15px;
+        padding: 0px 15px 15px 15px;
         margin: 7px 0px;
         border-radius: 0px;
     }

@@ -7,7 +7,7 @@ import ActionPopUp from '../../ActionPopup/CommentActionPopup';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {connect } from 'react-redux';
 import * as actions from '../../../../../../../store/actions/index';
-
+import onClickOutside from 'react-onclickoutside'
 
 
 class CommentItem extends Component {
@@ -25,6 +25,11 @@ class CommentItem extends Component {
         });
     }
 
+    handleClickOutside = () => {
+        this.setState({
+            isActionPopUpVisible:false,
+        })
+    }
 
     render(){
         let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
@@ -37,6 +42,7 @@ class CommentItem extends Component {
         if(this.state.isReplyBoxVisible){
             replyBoxClasses.push(classes.Visible)
         }
+        let currUserID = localStorage.getItem('user');
 
         return (
             <div className={cmtItemClasses.join(' ')}>
@@ -73,10 +79,10 @@ class CommentItem extends Component {
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
-                    <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
+                    {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
                         const res = await this.props.onCommentDelete(this.props.id);
                         if(res !== null) this.props.refreshComment();
-                    }}/>
+                    }}/> : null}
                 </div>
             </div>
         )
@@ -88,4 +94,4 @@ const mapDispatchToProps = dispatch => {
         onCommentDelete: (commentId) => actions.deleteComment(commentId)
     }
 }
-export default connect(null, mapDispatchToProps)(withRouter(CommentItem));
+export default connect(null, mapDispatchToProps)(withRouter(onClickOutside(CommentItem)));

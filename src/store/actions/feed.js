@@ -62,11 +62,14 @@ export const createNewPost = (formData) => {
 
 export const deletePost = (postId) => {
     return dispatch => {
-        axios.delete("feed/create_post/"+postId)
-        .then(res => {
-            dispatch(fetchFeed())
-        })
-        .catch(err => console.log(err))
+        return new Promise(resolve => 
+            axios.delete("feed/create_post/"+postId)
+            .then(res => {
+                dispatch(fetchFeed())
+                resolve("Success")
+            })
+            .catch(err => console.log(err))
+        );
     }
 }
 
@@ -95,15 +98,26 @@ export const deleteComment = (commentId) => {
 
 export const toggleLikeRequest = (data, isLiked,likeId) => {
     return dispatch => {
+        console.log("function called", isLiked)
         if(!isLiked){
-            axios.post('feed/create_like/',data)
-            .then(res => dispatch(toggleLike(data.post, res.data.id)))  //sending post id and like id to toggle post like in redux store.
-            .catch(err => console.log(err));
+            return new Promise(resolve => {
+                axios.post('feed/create_like/',data)
+                .then(res => {
+                    dispatch(toggleLike(data.post, res.data.id));
+                    resolve("Success")
+                })  //sending post id and like id to toggle post like in redux store.
+                .catch(err => console.log(err));
+            })
         }
         else{
-            axios.delete('feed/create_like/'+likeId,data)
-            .then(res => dispatch(toggleLike(data.post)))
-            .catch(err => console.log(err))
+            return new Promise(resolve => {
+                axios.delete('feed/create_like/'+likeId,data)
+                .then(res => {
+                    dispatch(toggleLike(data.post));
+                    resolve("Success")
+                })
+                .catch(err => console.log(err))
+            })
         }
     }
 }
