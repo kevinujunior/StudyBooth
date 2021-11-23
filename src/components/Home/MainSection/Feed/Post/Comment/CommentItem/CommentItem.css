@@ -5,6 +5,7 @@
     align-items:flex-start;
     margin: 5px 0px 10px 0px;
     transition: all 0.3s;
+    position: relative;
 }
 
 .CommentorImage{

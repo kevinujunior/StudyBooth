@@ -3,6 +3,11 @@ import classes from './CommentItem.css';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import {withRouter} from 'react-router-dom'
+import ActionPopUp from '../../ActionPopup/CommentActionPopup';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import {connect } from 'react-redux';
+import * as actions from '../../../../../../../store/actions/index';
+
 
 
 class CommentItem extends Component {
@@ -10,6 +15,7 @@ class CommentItem extends Component {
     state = {
         isRepliesVisible: false,
         isReplyBoxVisible: false,
+        isActionPopUpVisible: false,
     }
     
     
@@ -43,23 +49,43 @@ class CommentItem extends Component {
                 <div className={classes.Comment}>
                     <div className={classes.CommentInfo}>
                         <p>{this.props.user}</p>
-                        <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
+
+                        <div style={{'display':'flex', 'alignItems':'center'}}>
+                            <p className={classes.Time}>{time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago"}</p>
+
+                            <MoreHorizIcon style={{'marginLeft':'5px', 'cursor':'pointer'}} className={classes.IconColor} onClick = {() => {this.setState({
+                                isActionPopUpVisible: !this.state.isActionPopUpVisible
+                            })}}/>
+                        </div>
+
                     </div>
+
                     <p>{this.props.comment}</p>
+
                     <div className={classes.Actions}>
                         <button onClick={() => this.toggleReplyBox(this.state.isReplyBoxVisible)}>Reply</button>
                         <button>Show replies</button>
                     </div>
+
                     <div className={replyBoxClasses.join(' ')}>
                         <input placeholder="enter a reply..."></input>
                         <IconButton>
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
+                    <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
+                        const res = await this.props.onCommentDelete(this.props.id);
+                        if(res !== null) this.props.refreshComment();
+                    }}/>
                 </div>
             </div>
         )
     }
 }
 
-export default withRouter(CommentItem);
+const mapDispatchToProps = dispatch => {
+    return {
+        onCommentDelete: (commentId) => actions.deleteComment(commentId)
+    }
+}
+export default connect(null, mapDispatchToProps)(withRouter(CommentItem));

@@ -6,13 +6,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
-import ActionPopUp from './ActionPopup/ActionPopup';
+import ActionPopUp from './ActionPopup/PostActionPopup';
 import CommentSection from './Comment/CommentSection';
 import {connect } from 'react-redux';
 import * as actions from '../../../../../store/actions/index';
 import {withRouter} from 'react-router-dom'
-
-
+import axios from '../../../../../axios_base';
+import onClickOutside from 'react-onclickoutside'
 
 class Post extends Component{
 
@@ -20,21 +20,40 @@ class Post extends Component{
         isActionsVisible : false,
         isCommentVisibe : false,
         commentText : "",
+        cmtCount: this.props.commentCount,
+        comments:null,
     }
 
-    postComment = () => {
+    
 
-            const data = {
-                post : this.props.id,
-                commentText : this.state.commentText,
-                commentatorUser : localStorage.getItem('user'),
-            }
-            this.props.onComment(data);
-            this.setState({
-                isCommentVisibe: true,
-                commentText:""
-            })
+
+    postComment = async () => {
+        if(this.state.commentText === "" || this.state.commentText === " ") return; //we have to manage for empty comment
+        const data = {
+            post : this.props.id,
+            commentText : this.state.commentText,
+            commentatorUser : localStorage.getItem('user'),
+        }
+        await this.props.onComment(data);
+        this.setState({
+            isCommentVisibe: true,
+            commentText:"",
+        })
+        this.fetchComment();
         
+    }
+
+    fetchComment= () => {
+
+        axios.get("feed/get_comment/?post="+this.props.id,)
+        .then(res => {
+            console.log(res)
+            this.setState({
+                comments: res.data,
+                cmtCount: res.data.length,
+            })
+        })
+        .catch(err => console.log(err))
     }
 
     postLike = () => {
@@ -112,7 +131,7 @@ class Post extends Component{
                             <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
                                 <CommentOutlinedIcon style={{color:"grey"}}/>
                             </IconButton>
-                            <p>{this.props.commentCount}</p>
+                            <p>{this.state.cmtCount}</p>
                         </div>
                         <div className={classes.VerticalLine}></div>
                         <div className={classes.Comment}>
@@ -124,8 +143,8 @@ class Post extends Component{
                     </div>
                 </div>:null}
 
-                <ActionPopUp Visible={this.state.isActionsVisible}/>
-                { this.state.isCommentVisibe ? <CommentSection id={this.props.id} theme={this.props.theme}/> : null}
+                <ActionPopUp Visible={this.state.isActionsVisible} userId={this.props.userId} onDeletePost={() => this.props.onDeletePost(this.props.id)}/>
+                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments}/>  : null}
             </div>
     )
   }
@@ -139,8 +158,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onComment : (data) => dispatch(actions.createNewComment(data)),
+        onComment : (data) => actions.createNewComment(data),
         onLike: (data, isLiked, likeId) => dispatch(actions.toggleLikeRequest(data, isLiked, likeId)),
+        onDeletePost : (postId) => dispatch(actions.deletePost(postId))
     }
 }
 

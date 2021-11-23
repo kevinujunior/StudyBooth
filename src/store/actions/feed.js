@@ -60,17 +60,37 @@ export const createNewPost = (formData) => {
     }
 }
 
+export const deletePost = (postId) => {
+    return dispatch => {
+        axios.delete("feed/create_post/"+postId)
+        .then(res => {
+            dispatch(fetchFeed())
+        })
+        .catch(err => console.log(err))
+    }
+}
+
 
 export const createNewComment = (data) => {
-    return dispatch => {
+    return new Promise(resolve => 
         axios.post("feed/create_comment/", data)
         .then(response =>{
-            dispatch(updatePostComment(response.data));
+            resolve("Success")
         })
         .catch(err => {
             console.log(err)
-        });
-    }
+        })
+    );
+}
+
+export const deleteComment = (commentId) => {
+    
+    return new Promise(resolve => axios.delete("feed/create_comment/"+commentId)
+    .then(res => {
+        resolve("Success");
+    })
+    .catch(err => console.log(err)));
+    
 }
 
 export const toggleLikeRequest = (data, isLiked,likeId) => {

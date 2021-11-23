@@ -5,6 +5,8 @@ export {
     createNewPost,
     createNewComment,
     toggleLikeRequest,
+    deletePost,
+    deleteComment,
 } from './feed'
 
 
