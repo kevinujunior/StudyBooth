@@ -181,4 +181,7 @@
         margin: 7px 0px;
         border-radius: 0px;
     }
+    .loader .bar{
+        height: 3px;
+    }
 }

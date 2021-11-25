@@ -51,10 +51,19 @@ class Post extends Component{
         axios.get("feed/get_comment/?post="+this.props.id,)
         .then(res => {
             console.log(res)
+            
+            let count = 0;
+            if(res.data){
+                count = res.data.length;
+
+                for(let i=0; i<res.data.length; i++){
+                    count+=res.data[i].replies.length;
+                }
+            }
             this.setState({
                 comments: res.data,
                 loading:false,
-                cmtCount: res.data.length,
+                cmtCount: count,
             })
         })
         .catch(err => console.log(err))
@@ -163,7 +172,7 @@ class Post extends Component{
                     })
                     this.props.onDeletePost(this.props.id)
                 }}/>
-                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments}/>  : null}
+                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id}/>  : null}
             </div>
     )
   }

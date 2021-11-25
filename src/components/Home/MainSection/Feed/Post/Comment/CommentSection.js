@@ -25,11 +25,13 @@ class CommentSection extends Component{
                     user = {comment.commentatorUser.username}
                     key={comment.id}
                     id={comment.id}
+                    postId={this.props.postId}
                     userId = {comment.commentatorUser.id}
                     comment = {comment.commentText}
                     userPic = {comment.commentatorUser.userPic}
                     createdAt = {comment.createdAt}
-                    refreshComment = {() => this.props.fetchComment()}
+                    refreshComment = {this.props.fetchComment}
+                    replies= {comment.replies}
                 />    
             })
         }

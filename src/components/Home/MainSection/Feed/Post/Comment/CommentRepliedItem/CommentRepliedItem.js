@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from './CommentItem.css';
+import classes from './CommentRepliedItem.css';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import {IconButton } from '@mui/material';
 import {withRouter} from 'react-router-dom'
@@ -9,17 +9,13 @@ import {connect } from 'react-redux';
 import * as actions from '../../../../../../../store/actions/index';
 import onClickOutside from 'react-onclickoutside';
 import axios from '../../../../../../../axios_base';
-import CommentRepliedItem from "../CommentRepliedItem/CommentRepliedItem";
 
 
 class CommentItem extends Component {
 
     state = {
-        isRepliesVisible: false,
         isReplyBoxVisible: false,
         isActionPopUpVisible: false,
-        reply:"",
-        replies:this.props.replies,
     }
     
     
@@ -35,34 +31,24 @@ class CommentItem extends Component {
         })
     }
 
-    createNewReplyComment = () => {
+    createNewComment = () => {
         const data = {
-            post : this.props.postId,
+            post : this.props.id,
             commentText : this.state.reply,
             commentatorUser : localStorage.getItem('user'),
-            parent: this.props.id,
         }
         axios.post("feed/create_comment/", data)
         .then(res =>{
-            this.props.refreshComment()
-            this.setState({
-                isRepliesVisible:!this.state.isRepliesVisible,
-                reply:""
-            })
+            console.log(res)
         })
         .catch(err => {
             console.log(err)
         })
     }
 
-    componentDidMount(){
-        console.log(this.props.replies)
-    }
-
-
     render(){
         let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
-        let cmtItemClasses = [classes.CommentItem];
+        let cmtItemClasses = [classes.CommentRepliedItem];
         let replyBoxClasses = [classes.ReplyBox];
         if(this.props.theme === 'dark'){
             cmtItemClasses.push(classes.Dark)
@@ -72,26 +58,6 @@ class CommentItem extends Component {
             replyBoxClasses.push(classes.Visible)
         }
         let currUserID = localStorage.getItem('user');
-
-
-        let replies = <p>Loading...</p>;
-        if(this.props.replies){
-            replies = this.props.replies.reverse().map(comment =>{
-                return  <CommentRepliedItem
-                    theme = {this.props.theme}
-                    user = {comment.commentatorUser.username}
-                    key={comment.id}
-                    id={comment.id}
-                    postId={this.props.postId}
-                    userId = {comment.commentatorUser.id}
-                    comment = {comment.commentText}
-                    userPic = {comment.commentatorUser.userPic}
-                    createdAt = {comment.createdAt}
-                    refreshComment = {this.props.fetchComment}
-                />    
-            })
-        }
-
 
         return (
             <div className={cmtItemClasses.join(' ')}>
@@ -117,18 +83,13 @@ class CommentItem extends Component {
 
                     <p>{this.props.comment}</p>
 
-                    <div className={classes.Actions}>
+                    {/* <div className={classes.Actions}>
                         <button onClick={() => this.toggleReplyBox(this.state.isReplyBoxVisible)}>Reply</button>
-                        <button onClick={() => this.setState({
-                            isRepliesVisible: !this.state.isRepliesVisible,
-                        })}>Show replies</button>
-                    </div>
+                    </div> */}
 
                     <div className={replyBoxClasses.join(' ')}>
-                        <input placeholder="enter a reply..." onChange={(e) => this.setState({
-                            reply: e.target.value,
-                        })}></input>
-                        <IconButton onClick={this.createNewReplyComment}>
+                        <input placeholder="enter a reply..."></input>
+                        <IconButton>
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
@@ -136,7 +97,6 @@ class CommentItem extends Component {
                         const res = await this.props.onCommentDelete(this.props.id);
                         if(res !== null) this.props.refreshComment();
                     }}/> : null}
-                    {this.state.isRepliesVisible ? <div style={{'marginTop':'10px'}}>{replies}</div> : null}
                 </div>
             </div>
         )
