@@ -19,13 +19,13 @@ class CommentItem extends Component {
         isReplyBoxVisible: false,
         isActionPopUpVisible: false,
         reply:"",
-        replies:this.props.replies,
     }
     
     
     toggleReplyBox = (currState) => {
         this.setState({
             isReplyBoxVisible: !currState,
+            isRepliesVisible: !currState ? false : this.state.isRepliesVisible,
         });
     }
 
@@ -44,11 +44,12 @@ class CommentItem extends Component {
         }
         axios.post("feed/create_comment/", data)
         .then(res =>{
-            this.props.refreshComment()
             this.setState({
-                isRepliesVisible:!this.state.isRepliesVisible,
-                reply:""
+                isRepliesVisible:true,
+                reply:"",
+                isReplyBoxVisible:false,
             })
+            this.props.refreshComment()
         })
         .catch(err => {
             console.log(err)
@@ -76,7 +77,7 @@ class CommentItem extends Component {
 
         let replies = <p>Loading...</p>;
         if(this.props.replies){
-            replies = this.props.replies.reverse().map(comment =>{
+            replies = this.props.replies.map(comment =>{
                 return  <CommentRepliedItem
                     theme = {this.props.theme}
                     user = {comment.commentatorUser.username}
@@ -87,7 +88,7 @@ class CommentItem extends Component {
                     comment = {comment.commentText}
                     userPic = {comment.commentatorUser.userPic}
                     createdAt = {comment.createdAt}
-                    refreshComment = {this.props.fetchComment}
+                    refreshComment = {this.props.refreshComment}
                 />    
             })
         }
@@ -121,6 +122,7 @@ class CommentItem extends Component {
                         <button onClick={() => this.toggleReplyBox(this.state.isReplyBoxVisible)}>Reply</button>
                         <button onClick={() => this.setState({
                             isRepliesVisible: !this.state.isRepliesVisible,
+                            isReplyBoxVisible: !this.state.isRepliesVisible ? false : this.state.isReplyBoxVisible,
                         })}>Show replies</button>
                     </div>
 
