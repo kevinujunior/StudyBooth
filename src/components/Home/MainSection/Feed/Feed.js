@@ -29,6 +29,10 @@ return (
 
 class Feed extends Component {
     
+  state = {
+    loading: true
+  };
+
 
     componentDidMount() {
         this.props.onFetchFeed();
@@ -36,7 +40,8 @@ class Feed extends Component {
     
     render () {
         
-        let posts  = <Spinner/>;
+        // let posts  = <Spinner/>;
+        let posts = [];
         const content = {
             animate: {
               transition: { staggerChildren: 0.1, delayChildren: 2.8 },
@@ -49,7 +54,7 @@ class Feed extends Component {
               y: 0,
               opacity: 1,
               transition: {
-                duration: 1.5,
+                duration: 1.3,
                 ease: [0.6, -0.05, 0.01, 0.99],
               },
             },
@@ -61,7 +66,7 @@ class Feed extends Component {
               y: 0,
               opacity: 1,
               transition: {
-                duration: 0.7,
+                duration: 1.0,
                 ease: [0.6, -0.05, 0.01, 0.99],
               },
             },
@@ -70,16 +75,7 @@ class Feed extends Component {
         if(this.props.posts != null && this.props.posts.length > 0){
             const number_of_posts = Object.keys(this.props.posts).length;
             posts = [...Array(number_of_posts)].map((x, i) => {
-                return <AnimatePresence>
-                <motion.div
-                animate={{
-                  scale: [0.1, 0.4, 0.7, 1.1, 1],
-                  borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-                  
-                }}
-                // transition={{ ease: "easeOut", duration: 2 }}
-              >
-                <Post
+                return <Post
                     key={this.props.posts[i].id}
                     id  = {this.props.posts[i].id}
                     userId = {this.props.posts[i].user}
@@ -95,8 +91,6 @@ class Feed extends Component {
                     isLikedByuser = {this.props.posts[i].isLiked}
                     likeId = {this.props.posts[i].likeId}
                 />
-                </motion.div> 
-                </AnimatePresence>
             })
         }
 
