@@ -58,7 +58,7 @@ class Feed extends Component {
     let scrollposition = document.documentElement.scrollTop;
     
     console.log(difference, scrollposition, Math.round(difference - scrollposition))
-    return Math.round(difference - scrollposition) === 0 ;
+    return Math.round(difference - scrollposition) <=1 ;
   }
 
     render () {
