@@ -5,7 +5,9 @@ import { Button } from '@mui/material';
 const NotFollowedProfile = (props) => {
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
     let base = "https://study-booth-backend.herokuapp.com"
-
+    const currUser = localStorage.getItem('user')
+    console.log(currUser)
+    console.log(props.user)
     return (
         <div className={classes.NFP}>
             <div className={classes.UserInfo}>
@@ -30,7 +32,9 @@ const NotFollowedProfile = (props) => {
             </div>
             <div className={classes.posts}>
                 {/* <h2>You don't follow this user</h2> */}
-                <Button variant="outlined" onClick={() => props.postFollow()}>Follow</Button>
+                {Number(currUser)!==props.user.viewUser.id ? 
+                (<Button variant="outlined" onClick={() => props.postFollow()}>Follow</Button>) 
+                : null}
             </div>
         </div>
     );
