@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
+import { useEffect } from 'react';
 
 
 export const setPosts = (posts, nextPageNo) => {
@@ -59,9 +60,12 @@ export const createNewPost = (formData) => {
         .then(response =>{
             dispatch(fetchFeed()); //whenever we create a new post we fetch the feed again.
         })
-        .catch(err => {
-            console.log(err)
-        });
+        .catch(function (error) {
+            if (error.response) {
+                const json = JSON.stringify(error.response.data);
+                localStorage.setItem("createPostError", json);
+            }
+          });
     }
 }
 
