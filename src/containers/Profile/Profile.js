@@ -14,8 +14,10 @@ class Profile extends Component{
 
     state = {
         userData: null,
-        posts: null,
+        posts: [],
         loading: true,
+        currPage:1,
+        userId : this.props.location.userId ? this.props.location.userId : localStorage.getItem('user')
     }
 
     postFollow = () =>{
@@ -48,7 +50,7 @@ class Profile extends Component{
     }
 
     fetchUserData(){
-        let userId = this.props.location.userId ? this.props.location.userId : localStorage.getItem('user');
+        let userId = this.state.userId;
 
         //this will fetch the user profile details
         axios.get('users/profileview/?viewUser='+userId)
@@ -63,17 +65,10 @@ class Profile extends Component{
         //this will fetch the user posts if followed by current user or current user watching his/her profile.
         axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-
+            console.log("im following", res)
             if(res.data.length >= 1 || userId === localStorage.getItem('user')){ 
                 //res.data will have length greater than 1 if current user follow other user.
-                axios.get('feed/get_post/?viewUserPost='+userId)
-                .then(res => {
-                    this.setState({
-                        posts: res.data,
-                        loading: false,
-                    })
-                })
-                .catch(err => console.log(err))
+                this.fetchUserPosts(userId);
             }
             else{
                 this.setState({
@@ -81,6 +76,21 @@ class Profile extends Component{
                 })
             }
 
+        })
+        .catch(err => console.log(err))
+    }
+
+    fetchUserPosts = (userId) => {
+
+        if(this.state.currPage == null) return;
+        axios.get(`feed/get_post/?page=${this.state.currPage}&viewUserPost=${userId}`)
+        .then(res => {
+            console.log(res)
+            this.setState({
+                posts: this.state.posts.concat(res.data.results),
+                loading: false,
+                currPage : res.data.next ? res.data.next[res.data.next.length-17] : null
+            })
         })
         .catch(err => console.log(err))
     }
@@ -96,7 +106,12 @@ class Profile extends Component{
             profileClasses.push(classes.Dark);
         }
         return (
-            <div className={profileClasses.join(" ")}>
+            <div className={profileClasses.join(" ")} onScroll ={(e) => {
+                //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
+                if(Math.round(e.target.scrollHeight -  e.target.scrollTop) === e.target.offsetHeight){
+                    this.fetchUserPosts(this.state.userId);
+                }
+            }}>
                 <Navbar />
                 {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
@@ -116,7 +131,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchCurrentUser: () => dispatch(actions.fetchCurrentUser()),
-        onFetchFeed: () => dispatch(actions.fetchFeed())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile));

@@ -1,7 +1,10 @@
 .Profile{
-    position: relative;
+    position: fixed;
     transition: all 0.3s;
     display: block;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
 }
 
 .Dark {

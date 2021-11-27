@@ -9,8 +9,8 @@ const UserProfile = (props) => {
     let base = "https://study-booth-backend.herokuapp.com"
 
     const currUser = localStorage.getItem('user')
-    console.log(typeof currUser)
-    console.log(typeof props.user.viewUser.id)
+    
+    console.log(userData)
 
     return (
         <div className={classes.UserProfile}>
@@ -34,7 +34,7 @@ const UserProfile = (props) => {
                     </div>
                 </div>
                 
-                {Number(currUser)!==props.user.viewUser.id ? 
+                {Number(currUser)!==userData.id ? 
                 (<Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>) 
                 : null}
                 
