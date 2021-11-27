@@ -19,7 +19,7 @@ export class Signup extends Component {
                 <p style={{'fontSize':'13px', 'fontStyle':'italic', 'fontWeight':'bold', 'color':'crimson', }}>{this.props.error === 'This field may not be blank.' ? "Please enter all the fields." : this.props.error}</p>
             )
         }
-
+        console.log(this.props)
         return(
         <div class = {classes.signupMain}>
             {this.props.isAuthenticated ? <Redirect to="/home"/> : null}
@@ -39,7 +39,7 @@ export class Signup extends Component {
                                 </div>
                                 <div class={classes.formGroup}>
                                     <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                    <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                    <input type="email" name="email" id="email" value={this.props.location.email} placeholder="Your Email"/>
                                 </div>
                                 <div class={classes.formGroup}>
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>

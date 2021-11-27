@@ -1,10 +1,12 @@
 import styled from 'styled-components'
-import React from 'react';
+import React, { useState } from 'react';
 import './css/LandingPage.css'
+import { useHistory } from 'react-router';
 
 const LandingPage = (props) => {
+    const [email, setemail] = useState();
+    let history = useHistory();
     return (
-
         <Container>
             <Nav>
                 <a href="/">
@@ -21,8 +23,15 @@ const LandingPage = (props) => {
                     <h1 class="welcome"> Welcome to StudyBooth.</h1>
                     <p class="about-text">lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum</p>
                     <div class="emailz"> 
-                          <input type="text" placeholder="Enter Email" name="email" id="email" required></input>
-                          <button type="submit" class="registerbtn-desktop" >Signup</button>                    
+                          <input type="text" placeholder="Enter Email" name="email" id="email" 
+                                value={email}
+                                onChange={e => setemail(e.target.value)} required></input>
+                          <button type="submit" class="registerbtn-desktop" 
+                          onClick={() => {
+                            history.push({
+                                pathname: '/signup',
+                                email: email,
+                            });}}>Signup</button>                    
                         </div>
                     </div>
                     <img src="/images/login_slider_2.png" alt =""/>
