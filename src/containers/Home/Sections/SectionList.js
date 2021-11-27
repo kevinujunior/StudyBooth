@@ -16,15 +16,15 @@ class SectionList extends Component {
 
         let sections  = <Spinner />;
 
-        if(this.props.sections != null){
-            sections = this.props.sections.map( section => {
-                return <Section 
-                id={section.id}
-                key ={section.id} 
-                sectionName={section.sectionName} 
-                sectionPic = {section.sectionPic} />
-            })
-        }
+        // if(this.props.sections != null){
+        //     sections = this.props.sections.map( section => {
+        //         return <Section 
+        //         id={section.id}
+        //         key ={section.id} 
+        //         sectionName={section.sectionName} 
+        //         sectionPic = {section.sectionPic} />
+        //     })
+        // }
 
         return(
             <section className = {classes.leftSection}>

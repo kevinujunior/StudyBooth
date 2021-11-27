@@ -2,10 +2,11 @@ import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
 
 
-export const setPosts = (posts) => {
+export const setPosts = (posts, nextPageNo) => {
     return {
         type: actionTypes.FETCH_FEED,
         posts: posts,
+        next : nextPageNo
     }
 }
 
@@ -33,13 +34,17 @@ export const updatePostComment = (commentData) => {
     }
 }
 
-export const fetchFeed = () => {
+export const fetchFeed = (pageNo) => {
     //this is the method to fetch the feed.
     return dispatch => {
-        axios.get('feed/get_post/')
+        if(pageNo == null) return;
+        axios.get(`feed/get_post/?page=${pageNo}`)
         .then(response =>{
-            const posts = response.data;
-            dispatch(setPosts(posts))  //after getting the post we are setting post in global state.
+            console.log(response)
+            const posts = response.data.results;
+            const nextNo = response.data.next ? response.data.next[response.data.next.length-1] : null;
+            console.log(nextNo)
+            dispatch(setPosts(posts,nextNo))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
             console.log(err)
@@ -128,7 +133,7 @@ export const fetchFeedFilterBySection = (id) => {
         axios.get('feed/get_post/?section='+id)
         .then(response =>{
             const posts = response.data;
-            dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
+            // dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
         })
         .catch(err => {
             console.log(err)

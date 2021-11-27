@@ -2,8 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     refreshFeed: false,
-    posts : null,
+    posts : [],
     sections: null,
+    nextPageNo: 1,
 }
 
 
@@ -41,6 +42,19 @@ const toggleLike = (state, postId, likeId) => {
     }
 }
 
+const updatePosts = (newPosts, state, nextPage) => {
+    let posts = [...state.posts];
+    console.log("update post called", newPosts)
+    posts = newPosts ? posts.concat(newPosts) : posts;
+
+    return {
+        ...state,
+        posts: posts,
+        nextPageNo: nextPage
+    }
+
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CREATE_NEW_POST: 
@@ -56,13 +70,11 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_FEED: //when ever fetch feed we set the new posts.
             return {
                 ...state,
-                posts: action.posts,
+                posts: state.posts.concat(action.posts),
+                nextPageNo: action.next,
             }
         case actionTypes.FETCH_SECTIONS: //we fetch the sections
-            return {
-                ...state,
-                sections: action.sections
-            }
+            return updatePosts(action.posts, state, action.next)
         case actionTypes.UPDATE_POST_COMMENT:
             return updatePostComment(state, action);
         case actionTypes.TOGGLE_LIKE:

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , useEffect} from 'react';
 import Post from './Post/Post';
 import Spinner from '../../../UI/Spinner/Spinner'
 import {connect } from 'react-redux';
@@ -30,14 +30,37 @@ return (
 class Feed extends Component {
     
   state = {
-    loading: true
+    loading: true,
   };
 
 
-    componentDidMount() {
-        this.props.onFetchFeed();
+  componentDidMount() {
+      this.props.onFetchFeed(this.props.nextPageNo);
+      window.addEventListener("scroll", this.onScroll, false);
+  }
+
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+
+  onScroll = (difference) => {
+    console.log("how are you")
+    if(difference <= 50) return;
+    if (this.hasReachedBottom()) {
+      console.log("bottom")
+      this.props.onFetchFeed(this.props.nextPageNo);
     }
+  };
+
+  hasReachedBottom() {
+    let difference = document.documentElement.scrollHeight - window.innerHeight;
+    let scrollposition = document.documentElement.scrollTop;
     
+    console.log(difference, scrollposition, Math.round(difference - scrollposition))
+    return Math.round(difference - scrollposition) === 0 ;
+  }
+
     render () {
         
         // let posts  = <Spinner/>;
@@ -71,7 +94,8 @@ class Feed extends Component {
               },
             },
           };
-
+        
+        console.log(this.props.posts)
         if(this.props.posts != null && this.props.posts.length > 0){
             const number_of_posts = Object.keys(this.props.posts).length;
             posts = [...Array(number_of_posts)].map((x, i) => {
@@ -102,36 +126,36 @@ class Feed extends Component {
                 {/* {posts} */}
                 <motion.section exit={{ opacity: 0 }}>
                 <InitialTransition/>
-                <motion.div
-                    initial="initial"
-                    animate="animate"
-                    variants={content}
-                    className="space-y-12"
-                >
-                    <motion.div variants={title} className="text-6xl font-black text-center">
-                    {posts}
-                    </motion.div>
+                  <motion.div
+                      initial="initial"
+                      animate="animate"
+                      variants={content}
+                      className="space-y-12"
+                  >
+                      <motion.div variants={title} className="text-6xl font-black text-center">
+                        {posts}
+                      </motion.div>
 
-                    <motion.section variants={products} className="text-gray-700 body-font">
-                    
-                    </motion.section>
-                </motion.div>
+                      <motion.section variants={products} className="text-gray-700 body-font">
+                      
+                      </motion.section>
+                  </motion.div>
                 </motion.section>
             </div>
         );
     }
-
 }
 
 const mapStateToProps = state => {
     return {
         posts: state.feed.posts,
+        nextPageNo: state.feed.nextPageNo
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFeed: () => dispatch(actions.fetchFeed()),
+        onFetchFeed: (pageNo) => dispatch(actions.fetchFeed(pageNo)),
     }
 }
 
