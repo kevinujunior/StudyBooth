@@ -52,7 +52,12 @@ class Home extends Component {
         }
        
         return (
-            <div className={homeClasses.join(" ")} >
+            <div className={homeClasses.join(" ")} onScroll ={(e) => {
+                //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
+                if(Math.round(e.target.scrollHeight -  e.target.scrollTop) === e.target.offsetHeight){
+                    this.props.onFetchFeed(this.props.nextPageNo)
+                }
+            }}>
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
                     onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
@@ -79,12 +84,14 @@ class Home extends Component {
 const mapStateToProps = (state) => {
     return {
         theme: state.theme.theme,
+        nextPageNo: state.feed.nextPageNo
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onFetchCurrentUserDetail: () => dispatch(actions.fetchCurrentUser()),
+        onFetchFeed: (pageNo) => dispatch(actions.fetchFeed(pageNo)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

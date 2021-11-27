@@ -1,7 +1,12 @@
 .Home{
-  position: relative;
+  position: fixed;
   transition: all 0.3s;
   display: block;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
 }
 
 .Dark {

@@ -36,30 +36,8 @@ class Feed extends Component {
 
   componentDidMount() {
       this.props.onFetchFeed(this.props.nextPageNo);
-      window.addEventListener("scroll", this.onScroll, false);
   }
 
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScroll, false);
-  }
-
-  onScroll = (difference) => {
-    console.log("how are you")
-    if(difference <= 50) return;
-    if (this.hasReachedBottom()) {
-      console.log("bottom")
-      this.props.onFetchFeed(this.props.nextPageNo);
-    }
-  };
-
-  hasReachedBottom() {
-    let difference = document.documentElement.scrollHeight - window.innerHeight;
-    let scrollposition = document.documentElement.scrollTop;
-    
-    console.log(difference, scrollposition, Math.round(difference - scrollposition))
-    return Math.round(difference - scrollposition) === 0 ;
-  }
 
     render () {
         
