@@ -4,6 +4,7 @@ import CommentItem from './CommentItem/CommentItem';
 
 class CommentSection extends Component{
 
+    
     componentWillMount(){
         this.props.fetchComment();
     }
@@ -31,15 +32,14 @@ class CommentSection extends Component{
                     userPic = {comment.commentatorUser.userPic}
                     createdAt = {comment.createdAt}
                     refreshComment = {this.props.fetchComment}
-                    replies= {comment.replies}
-                />    
+                /> ;  
             })
         }
         
         return(
             <div className={CmtSectionClass.join(" ")}>
                 {comments}
-                <button className={classes.LoadMore}>load more Comments</button>
+                {this.props.ifMoreComment ? <button className={classes.LoadMore} onClick={() => this.props.fetchComment()}>load more Comments</button> : null}
             </div>
         )
     }

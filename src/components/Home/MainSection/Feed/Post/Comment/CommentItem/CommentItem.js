@@ -19,6 +19,9 @@ class CommentItem extends Component {
         isReplyBoxVisible: false,
         isActionPopUpVisible: false,
         reply:"",
+        replies:[],
+        repliesNextPageNo:1,
+        repliesCount: 0,
     }
     
     
@@ -49,7 +52,35 @@ class CommentItem extends Component {
                 reply:"",
                 isReplyBoxVisible:false,
             })
-            this.props.refreshComment()
+            this.fetchReplies(true);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    fetchReplies = (shouldRefresh) => {
+        if(shouldRefresh){
+            this.setState({
+                repliesNextPageNo:1,
+                replies:[],
+            })
+        }
+        
+        if(this.state.repliesNextPageNo == null) return;
+        axios.get(`feed/get_comment/replies/?parent=${this.props.id}&page=${this.state.repliesNextPageNo}`)
+        .then(res =>{
+            console.log(res)
+            let repliesNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
+            if(repliesNextPage) repliesNextPage = String(repliesNextPage).substring(5, repliesNextPage.length-1);
+            
+            this.setState({
+                replies: this.state.replies.concat(res.data.results),
+                repliesNextPageNo: repliesNextPage,
+                repliesCount: res.data.count
+            })
+
+            console.log('replies', this.state.replies)
         })
         .catch(err => {
             console.log(err)
@@ -57,8 +88,9 @@ class CommentItem extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.replies)
+        this.fetchReplies()
     }
+
 
 
     render(){
@@ -76,8 +108,8 @@ class CommentItem extends Component {
 
 
         let replies = <p>Loading...</p>;
-        if(this.props.replies){
-            replies = this.props.replies.map(comment =>{
+        if(this.state.replies.length > 0){
+            replies = this.state.replies.map(comment =>{
                 return  <CommentRepliedItem
                     theme = {this.props.theme}
                     user = {comment.commentatorUser.username}
@@ -123,7 +155,7 @@ class CommentItem extends Component {
                         <button onClick={() => this.setState({
                             isRepliesVisible: !this.state.isRepliesVisible,
                             isReplyBoxVisible: !this.state.isRepliesVisible ? false : this.state.isReplyBoxVisible,
-                        })}>Show replies</button>
+                        })}><span>{ this.state.repliesCount > 0 ? this.state.repliesCount+" replies" : null}</span></button>
                     </div>
 
                     <div className={replyBoxClasses.join(' ')}>
@@ -138,7 +170,10 @@ class CommentItem extends Component {
                         const res = await this.props.onCommentDelete(this.props.id);
                         if(res !== null) this.props.refreshComment();
                     }}/> : null}
-                    {this.state.isRepliesVisible ? <div style={{'marginTop':'10px'}}>{replies}</div> : null}
+                    {this.state.isRepliesVisible ? <div style={{'marginTop':'10px'}}>
+                        {replies}
+                        {this.state.repliesNextPageNo != null ? <div onClick={() => this.fetchReplies()}><p>load more replies</p></div> : null}
+                    </div> : null}
                 </div>
             </div>
         )

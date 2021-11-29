@@ -21,8 +21,9 @@ class Post extends Component{
         isCommentVisibe : false,
         commentText : "",
         cmtCount: this.props.commentCount,
-        comments:null,
+        comments:[],
         loading:false,
+        commentPageNo:1,
     }
 
     postComment = async () => {
@@ -41,29 +42,41 @@ class Post extends Component{
             commentText:"",
             loading: false,
         })
-        this.fetchComment();
+
+        console.log(this.state.commentPageNo)
+        this.fetchComment(true);
     }
 
-    fetchComment= () => {
-        this.setState({
-            loading:true,
-        })
-        axios.get("feed/get_comment/?post="+this.props.id,)
-        .then(res => {
-            console.log(res)
-            
-            let count = 0;
-            if(res.data){
-                count = res.data.length;
+    fetchComment= (shouldRefresh) => {
 
-                for(let i=0; i<res.data.length; i++){
-                    count+=res.data[i].replies.length;
-                }
-            }
+        if(shouldRefresh){ //if we added new comment then we are passing a boolean to refresh the commentSection
             this.setState({
-                comments: res.data,
+                commentPageNo:1,
+                loading:true,
+            })
+        }
+
+        if(this.state.commentPageNo == null) {
+            console.log("null comments");
+            return;
+        };
+        if(!shouldRefresh){
+            this.setState({
+                loading:true,
+            })
+        }
+        axios.get(`feed/get_comment/?post=${this.props.id}&page=${this.state.commentPageNo}`)
+        .then(res => {
+            let cmtNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
+            if(cmtNextPage) cmtNextPage = String(cmtNextPage).substring(5, cmtNextPage.length-1); //getting comment nexpage no
+
+            console.log(res)
+
+            this.setState({
+                comments: shouldRefresh ? [...res.data.results] : this.state.comments.concat(res.data.results),
                 loading:false,
-                cmtCount: count,
+                cmtCount: res.data.results.length > 0 ? res.data.results[0].commentCount : this.state.cmtCount,
+                commentPageNo : cmtNextPage
             })
         })
         .catch(err => console.log(err))
@@ -172,7 +185,7 @@ class Post extends Component{
                     })
                     this.props.onDeletePost(this.props.id)
                 }}/>
-                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id}/>  : null}
+                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id} ifMoreComment={this.state.commentPageNo != null}/>  : null}
             </div>
     )
   }
