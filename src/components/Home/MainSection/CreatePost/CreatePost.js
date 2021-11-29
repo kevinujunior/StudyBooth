@@ -15,6 +15,7 @@ class  createPost extends Component {
         postCaption : "",
         selectedfile: null,
         fileType: "",
+        error:"",
     }
 
     fileSelectHandler = (event) => {
@@ -39,11 +40,21 @@ class  createPost extends Component {
             formData.append('postFile' , this.state.selectedfile)
         }
         formData.append('user' ,localStorage.getItem('user'))
-    
        
         this.props.onCreateNewPost(formData); //we are handling new post request on store/feed
-        
-        this.props.closeModal();
+        if(localStorage.getItem("createPostError")){
+            this.setState({
+                error: JSON.parse(localStorage.getItem("createPostError")),
+            })
+            console.log(this.state.error)
+            localStorage.setItem("createPostError",null)
+        }
+        else{
+            this.props.closeModal();
+            this.setState({
+                error: null,
+            })
+        }
     }
 
 
@@ -71,12 +82,14 @@ class  createPost extends Component {
     render(){
         let createFeedClasses = [classes.CreateFeed]
         if(this.props.theme === 'dark') createFeedClasses.push(classes.Dark);
-        
         return (
             <div className={createFeedClasses.join(" ")}>
                 <div className={classes.Type}>
                     <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" alt=""/>
-                    <textarea type="text" value ={this.state.postCaption} placeholder="share some experiences..." onChange={(event) => this.setState({postCaption: event.target.value})}  onInput={(event) => this.auto_grow(event)}/>
+                    <div className={classes.Errormessage}>
+                    <textarea type="text" value ={this.state.postCaption} placeholder="share some experiences..." onChange={(event) => this.setState({postCaption: event.target.value})}  onInput={(event) => this.auto_grow(event)} required/>
+                    <p>{this.state.error.postCaption}</p>
+                    </div>
                 </div>
                 <div className={classes.Content}>
                     {this.getContentRenderer()}
