@@ -46,8 +46,9 @@ const LandingPage = (props) => {
 
 const Container = styled.div`
 background-color: skyblue;
-height: auto;
-width:auto;
+height: 100%;
+width:100%;
+position:fixed;
 /* margin:10px; */
   
 `;
@@ -57,6 +58,7 @@ const Nav = styled.nav`
 
     max-width : 1250px;
     margin: auto;
+    margin-top:20px;
     padding: 12px 0 16px;
     display: flex;
     align-items: center;
@@ -295,12 +297,13 @@ const Hero = styled.div`
     .welcome{
         margin-top: 130px;
         z-index:2;
-        width: auto; 
+        width: 100%; 
         font-size: 72px;
         font-weight: 500;
         line-height: 80px;
         display: inline-block;
         position: relative;
+        text-align:center;
        
 
         @media(min-width:767px) and (max-width:1024px){
@@ -313,7 +316,7 @@ const Hero = styled.div`
 
         @media(max-width:767px) and (min-width:320px){
           margin:5px;
-        font-size:8vw;
+        font-size:7vw;
         max-width: 100%;
           padding:0;
 
@@ -415,7 +418,10 @@ const Hero = styled.div`
      
         @media(max-width:1023px){
             width:100%
-    
+        }
+
+        @media(max-width:500px){
+            margin-top:60px;
         }
     }
    

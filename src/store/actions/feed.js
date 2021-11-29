@@ -3,11 +3,12 @@ import axios from  '../../axios_base';
 import { useEffect } from 'react';
 
 
-export const setPosts = (posts, nextPageNo) => {
+export const setPosts = (posts, nextPageNo, pageNo) => {
     return {
         type: actionTypes.FETCH_FEED,
         posts: posts,
-        next : nextPageNo
+        nextPage : nextPageNo,
+        currPage : pageNo
     }
 }
 
@@ -45,7 +46,7 @@ export const fetchFeed = (pageNo) => {
             const posts = response.data.results;
             const nextNo = response.data.next ? response.data.next[response.data.next.length-1] : null;
             console.log(nextNo)
-            dispatch(setPosts(posts,nextNo))  //after getting the post we are setting post in global state.
+            dispatch(setPosts(posts,nextNo,pageNo))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
             console.log(err)
@@ -58,7 +59,7 @@ export const createNewPost = (formData) => {
     return dispatch => {
         axios.post("feed/create_post/", formData)
         .then(response =>{
-            dispatch(fetchFeed()); //whenever we create a new post we fetch the feed again.
+            dispatch(fetchFeed(1)); //whenever we create a new post we fetch the feed again.
         })
         .catch(function (error) {
             if (error.response) {
@@ -74,7 +75,7 @@ export const deletePost = (postId) => {
         return new Promise(resolve => 
             axios.delete("feed/create_post/"+postId)
             .then(res => {
-                dispatch(fetchFeed())
+                dispatch(fetchFeed(1))
                 resolve("Success")
             })
             .catch(err => console.log(err))

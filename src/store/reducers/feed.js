@@ -42,7 +42,17 @@ const toggleLike = (state, postId, likeId) => {
     }
 }
 
-const updatePosts = (newPosts, state, nextPage) => {
+const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
+
+    console.log("feed reducer", currPageNo)
+    if(currPageNo == 1){ 
+        //if currPageNo is 1 means either we have refreshed, or new post, or delete post, on feed load
+        //in that case we don't want to concat with previous posts.
+        return {
+            posts: newPosts,
+            nextPageNo: nextPageNo
+        }
+    }
     let posts = [...state.posts];
     console.log("update post called", newPosts)
     posts = newPosts ? posts.concat(newPosts) : posts;
@@ -50,7 +60,7 @@ const updatePosts = (newPosts, state, nextPage) => {
     return {
         ...state,
         posts: posts,
-        nextPageNo: nextPage
+        nextPageNo: nextPageNo
     }
 
 }
@@ -68,13 +78,12 @@ const reducer = (state = initialState, action) => {
                 refreshFeed: false,
             }
         case actionTypes.FETCH_FEED: //when ever fetch feed we set the new posts.
+            return updatePosts(action.posts, state, action.nextPage, action.currPage)
+        case actionTypes.FETCH_SECTIONS: //we fetch the sections
             return {
                 ...state,
-                posts: state.posts.concat(action.posts),
-                nextPageNo: action.next,
+                sections: action.sections,
             }
-        case actionTypes.FETCH_SECTIONS: //we fetch the sections
-            return updatePosts(action.posts, state, action.next)
         case actionTypes.UPDATE_POST_COMMENT:
             return updatePostComment(state, action);
         case actionTypes.TOGGLE_LIKE:
