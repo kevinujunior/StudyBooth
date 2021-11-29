@@ -80,7 +80,7 @@ class Header extends Component {
         return (
             <div className={headerClasses.join(" ")}>
                 <div className={classes.HeaderContent}>
-                    <div>        
+                    <div className = {classes.homeIcon} title="Home">        
                         <img src={logo} alt=""  id={classes.fuckoff} onClick={() => {
                             this.props.history.push({
                                 pathname: '/',

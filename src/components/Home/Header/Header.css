@@ -197,6 +197,13 @@
     align-self: right;
     margin-left: 290px;
 }
+#fuckoff{
+    cursor: pointer;
+}
+
+
+
+
 @media (max-width:850px) {
     .NotfBtn{
         display: none;
