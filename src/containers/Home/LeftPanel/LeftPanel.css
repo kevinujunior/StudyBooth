@@ -38,7 +38,7 @@
     .LeftPanel{
         position: fixed;
         left: -100%;
-        top: 50.3px;
+        top: 51px;
         z-index: 150;
         width: 80%;
         height: 100%;

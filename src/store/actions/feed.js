@@ -51,10 +51,11 @@ export const fetchFeed = (pageNo, loading) => {
         console.log("fetch feed called")
         dispatch(setLoading(true))
         axios.get(`feed/get_post/?page=${pageNo}`)
-        .then(response =>{
-            console.log(response)
-            const posts = response.data.results;
-            const nextNo = response.data.next ? response.data.next[response.data.next.length-1] : null;
+        .then(res =>{
+            console.log(res)
+            const posts = res.data.results;
+            let nextNo = res.data.next ? res.data.next.match(/page=.*/gm)[0]: null;
+            if(nextNo) nextNo = String(nextNo).substring(5, nextNo.length); //post next page no
             console.log(nextNo)
             dispatch(setPosts(posts,nextNo,pageNo))  //after getting the post we are setting post in global state.
         })
