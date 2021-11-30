@@ -137,7 +137,7 @@ class Post extends Component{
                     }}>
                         <img src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt=""/>
                         
-                        <p>{this.props.name}</p>
+                        <p className={classes.userName}>{this.props.name}</p>
                         <p className={classes.Time}>{time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}</p>
                     </div>
                     <div className={classes.Category}>

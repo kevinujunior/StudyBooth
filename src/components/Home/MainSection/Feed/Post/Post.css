@@ -18,7 +18,7 @@
 }
 
 .Dark{
-    background-color:rgb(15, 15, 15);
+    background-color:rgb(8, 8, 8);
     /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
     border: 0.5px solid rgb(20, 20, 20);
 
@@ -52,6 +52,10 @@
     margin-top: 15px;
 }
 
+.userName:hover {
+    text-decoration: underline;
+}
+
 .Header img{
     height: 35px;
     width: 35px;
@@ -64,7 +68,11 @@
     direction: row;
     align-items: center;
     cursor: pointer;
+    
 }
+
+
+
 .NamePhoto > p{
     margin-left: 10px;
 }
@@ -91,8 +99,9 @@
     flex-direction: column;
     box-sizing: border-box;
     margin-bottom: 0px !important;
-    border: 1px solid rgb(224, 224, 224);
+    border: 0.5px solid rgb(165, 165, 165);
     border-radius: 5px;
+    
 }
 
 .Icons{
@@ -145,6 +154,8 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+
 
 @keyframes loader-animation {
     0% {

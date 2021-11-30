@@ -6,6 +6,7 @@
     margin: 5px 0px 10px 0px;
     transition: all 0.3s;
     position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Geneva, Tahoma, sans-serif;
 }
 
 .CommentorImage{
@@ -16,7 +17,7 @@
 }
 
 .Dark .Comment{
-    background-color: #393b3b;
+    background-color: #0f0f0f;
 }
 
 .Dark .Comment p{
