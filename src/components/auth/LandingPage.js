@@ -10,7 +10,7 @@ const LandingPage = (props) => {
         <Container>
             <Nav>
                 <a href="/">
-                    <img src ="/images/login-logo.svg" alt=""/>
+                    <img src ="/images/cool_nice.png" alt=""/>
                 </a>
                 <div>
                     <Join href ="/signup">Join now</Join>
@@ -58,7 +58,7 @@ const Nav = styled.nav`
 
     max-width : 1250px;
     margin: auto;
-    margin-top:20px;
+    margin-top:10px;
     padding: 12px 0 16px;
     display: flex;
     align-items: center;
@@ -98,8 +98,8 @@ const Nav = styled.nav`
     
     & > a{
      
-        width: 120px;
-        height: 34px;
+        width: 230px;
+        height: 25px;
         /* padding:2%; */
 
         @media(max-width:360px){
@@ -110,8 +110,8 @@ const Nav = styled.nav`
        
         @media(min-width: 360px) and (max-width:767px) {
             /* padding:10px; */
-            width: 90px;
-            height: 25px;
+            width: 150px;
+            height: auto;
             margin: 10px;
         }
         /* on a phone device give some extra padding*/
@@ -119,15 +119,16 @@ const Nav = styled.nav`
 
         @media(min-width: 768px) and (max-width:1022px){
             padding:5px;
-            width: 120px;
-            height: 34px;
+            width: 240px;
+            height: auto;
           
         }
 
         @media(min-width: 1023px){
-            padding:5px;
-            width: 120px;
-            height: 34px;
+            /* padding:5px; */
+            margin-top: 0px;
+            width: 280px;
+            height: auto;
         
         }
 
