@@ -1,2 +1,4 @@
-
-  
+#logoImg{
+    max-width: 30px !important;
+    z-index: 100;
+}
