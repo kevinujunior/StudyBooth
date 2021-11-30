@@ -12,6 +12,7 @@ export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 export const REFRESH_FEED = 'REFRESH_FEED';
 export const FETCH_FEED = 'FETCH_FEED';
 export const UPDATE_POST_COMMENT = 'UPDATE_POST_COMMENT';
+export const SET_LOADING = 'SET_LOADING';
 
 export const FETCH_SECTIONS = 'FETCH_SECTIONS';
 

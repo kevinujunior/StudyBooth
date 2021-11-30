@@ -13,6 +13,13 @@ export const setPosts = (posts, nextPageNo, pageNo) => {
 }
 
 
+export const setLoading = (loading) => {
+    return{
+        type: actionTypes.SET_LOADING,
+        loading: loading
+    }
+}
+
 export const setSections = (sections) => {
     return {
         type: actionTypes.FETCH_SECTIONS,
@@ -36,10 +43,12 @@ export const updatePostComment = (commentData) => {
     }
 }
 
-export const fetchFeed = (pageNo) => {
+export const fetchFeed = (pageNo, loading) => {
     //this is the method to fetch the feed.
-    return dispatch => {
+    return (dispatch) => {
         if(pageNo == null) return;
+        if(loading) return;
+        dispatch(setLoading(true))
         axios.get(`feed/get_post/?page=${pageNo}`)
         .then(response =>{
             console.log(response)

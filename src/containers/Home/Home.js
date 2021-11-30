@@ -18,6 +18,7 @@ class Home extends Component {
         isChatActive: false,
         isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
         isCreatePostVisible: false,
+        feedCurrPageNo: null, //
     }
 
     switchChatState  = (currentState) => {
@@ -54,9 +55,15 @@ class Home extends Component {
         return (
             <div className={homeClasses.join(" ")} onScroll ={(e) => {
                 //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
-                if(Math.round(e.target.scrollHeight -  e.target.scrollTop) === e.target.offsetHeight){
-                    this.props.onFetchFeed(this.props.nextPageNo)
+                if(Math.round(e.target.scrollHeight -  e.target.scrollTop) <= e.target.offsetHeight + 400){
+                    if(this.props.nextPageNo == this.state.feedCurrPageNo) return; //if we are calling for same page again return;
+                    console.log("function callled", this.props.nextPageNo)
+                    this.props.onFetchFeed(this.props.nextPageNo, this.props.loading)
+                    this.setState({
+                        feedCurrPageNo: this.props.nextPageNo,
+                    })
                 }
+
             }}>
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
@@ -84,7 +91,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
     return {
         theme: state.theme.theme,
-        nextPageNo: state.feed.nextPageNo
+        nextPageNo: state.feed.nextPageNo,
+        loading: state.feed.isFeedLoading,
     }
 }
 

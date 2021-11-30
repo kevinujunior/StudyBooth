@@ -5,6 +5,7 @@ const initialState = {
     posts : [],
     sections: null,
     nextPageNo: 1,
+    isFeedLoading: false,
 }
 
 
@@ -44,6 +45,7 @@ const toggleLike = (state, postId, likeId) => {
 
 const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
 
+    if(state.nextPageNo == nextPageNo) return state;
     console.log("feed reducer", currPageNo)
     if(currPageNo == 1){ 
         //if currPageNo is 1 means either we have refreshed, or new post, or delete post, on feed load
@@ -60,7 +62,8 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
     return {
         ...state,
         posts: posts,
-        nextPageNo: nextPageNo
+        nextPageNo: nextPageNo,
+        isFeedLoading: false,
     }
 
 }
@@ -88,6 +91,11 @@ const reducer = (state = initialState, action) => {
             return updatePostComment(state, action);
         case actionTypes.TOGGLE_LIKE:
             return toggleLike(state, action.postId, action.likeId);
+        case actionTypes.SET_LOADING:
+            return {
+                ...state,
+                isFeedLoading: action.loading,
+            }
         default:
             return state;
     }

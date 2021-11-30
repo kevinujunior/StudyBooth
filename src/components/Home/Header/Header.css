@@ -52,6 +52,7 @@
     height: 40px;
     margin-top: auto;
     /* height: 70px; */
+    cursor: pointer;
 }
 
 .SearchAndCreate{
