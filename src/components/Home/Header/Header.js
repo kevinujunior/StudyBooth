@@ -134,7 +134,9 @@ class Header extends Component {
                     </div>             
                     
                 </div>
-                
+                {this.props.loading ?<div className={classes.loader}>
+                        <div className={classes.bar}></div>
+                    </div> : null }
             </div>
         );
     }
@@ -145,6 +147,7 @@ const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
         userData: state.currentUser.data,
+        loading: state.feed.isFeedLoading,
     }
 }
 const mapDispathToProps = dispatch => {

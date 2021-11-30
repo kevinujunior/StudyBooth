@@ -44,17 +44,22 @@ const toggleLike = (state, postId, likeId) => {
 }
 
 const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
+    console.log("update posts called")
 
-    if(state.nextPageNo == nextPageNo) return state;
-    console.log("feed reducer", currPageNo)
     if(currPageNo == 1){ 
         //if currPageNo is 1 means either we have refreshed, or new post, or delete post, on feed load
         //in that case we don't want to concat with previous posts.
         return {
-            posts: newPosts,
-            nextPageNo: nextPageNo
+            ...state,
+            posts: [...newPosts],
+            nextPageNo: nextPageNo,
+            isFeedLoading: false,
         }
     }
+
+    if(state.nextPageNo == nextPageNo) return state;
+    console.log("feed reducer", currPageNo)
+
     let posts = [...state.posts];
     console.log("update post called", newPosts)
     posts = newPosts ? posts.concat(newPosts) : posts;

@@ -48,6 +48,7 @@ export const fetchFeed = (pageNo, loading) => {
     return (dispatch) => {
         if(pageNo == null) return;
         if(loading) return;
+        console.log("fetch feed called")
         dispatch(setLoading(true))
         axios.get(`feed/get_post/?page=${pageNo}`)
         .then(response =>{
@@ -84,6 +85,7 @@ export const deletePost = (postId) => {
         return new Promise(resolve => 
             axios.delete("feed/create_post/"+postId)
             .then(res => {
+                console.log("post deleted")
                 dispatch(fetchFeed(1))
                 resolve("Success")
             })
