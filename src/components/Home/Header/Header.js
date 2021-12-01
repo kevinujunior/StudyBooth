@@ -1,6 +1,7 @@
 import React, {  Component,  } from 'react';
 import { connect } from 'react-redux';
 import * as actionsTypes from '../../../store/actions/actionTypes';
+import * as actions from '../../../store/actions/index';
 import { withRouter } from 'react-router';
 import classes from './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
@@ -40,6 +41,7 @@ class Header extends Component {
             else{
                 users = [...Array(number_of_users)].map((x, i) => {
                     return  <li key={i} value={search[i]["username"]} onClick={() => {
+                        this.props.onFetchUserProfile(search[i]["id"]);
                         this.props.history.push({
                             pathname: '/profile',
                             userId: search[i]["id"],
@@ -157,6 +159,7 @@ const mapDispathToProps = dispatch => {
             if(theme === 'light') return dispatch({type: actionsTypes.DARK_THEME})
             return dispatch({type: actionsTypes.LIGHT_THEME})
         },
+        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
     }
 }
 

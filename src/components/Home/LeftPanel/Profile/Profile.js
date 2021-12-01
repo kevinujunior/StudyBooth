@@ -16,7 +16,7 @@ function Profile(props){
                         <img src={props.userData ? props.userData.userPic ? props.userData.userPic : "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg":"https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"} />
                     </div>
                     <p>{props.userData ? props.userData.fullName : 'Alien'}</p>
-                    <p style={{fontSize:"13px"}}>Lives on mars.</p>
+                    <p style={{fontSize:"13px"}}>How are you?</p>
                 </div>
             </div>
         </div>

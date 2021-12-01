@@ -6,6 +6,7 @@ import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
 import Chat from './Chat/Chat';
 import ChatIn from './Chat/chatIn';
+import LoadingPage from '../../components/UI/LoadingPage/LoadingPage';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
@@ -39,11 +40,6 @@ class Home extends Component {
         })
     }
 
-    componentDidMount() {
-        this.props.onFetchCurrentUserDetail();
-    }
-
-    
 
     render(){
         let ButtonIcon = <ChatBubbleIcon />;
@@ -51,38 +47,35 @@ class Home extends Component {
         if(this.props.theme === 'dark'){
             homeClasses.push(classes.Dark);
         }
-       
         return (
             <div className={homeClasses.join(" ")} onScroll ={(e) => {
-                //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
-                if(Math.round(e.target.scrollHeight -  e.target.scrollTop) <= e.target.offsetHeight + 400){
-                    if(this.props.nextPageNo == this.state.feedCurrPageNo) return; //if we are calling for same page again return;
-                    this.props.onFetchFeed(this.props.nextPageNo, this.props.loading)
-                    this.setState({
-                        feedCurrPageNo: this.props.nextPageNo,
-                    })
-                }
-
-            }}>
-                <Header 
-                    onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
-                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
-                />
-                <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
-                    {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
-                </Modal>
-                <div className={classes.main}>
-                    <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
-                    <MainSection /> 
-                    {/* <ChatIn /> */}
-                    <RightPanel />
-                </div>
-                <Chat isActive={this.state.isChatActive}/>
-                <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
-                    {ButtonIcon}
-                </button>
+                    //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
+                    if(Math.round(e.target.scrollHeight -  e.target.scrollTop) <= e.target.offsetHeight + 400){
+                        if(this.props.nextPageNo == this.state.feedCurrPageNo) return; //if we are calling for same page again return;
+                        this.props.onFetchFeed(this.props.nextPageNo, this.props.loading)
+                        this.setState({
+                            feedCurrPageNo: this.props.nextPageNo,
+                        })
+                    }
+                }}>
+                    <Header 
+                        onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
+                        onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
+                    />
+                    <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
+                        {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
+                    </Modal>
+                    <div className={classes.main}>
+                        <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
+                        <MainSection /> 
+                        {/* <ChatIn /> */}
+                        <RightPanel />
+                    </div>
+                    <Chat isActive={this.state.isChatActive}/>
+                    <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
+                        {ButtonIcon}
+                    </button>
             </div>
-           
         )
     }
 }
@@ -97,7 +90,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchCurrentUserDetail: () => dispatch(actions.fetchCurrentUser()),
         onFetchFeed: (pageNo) => dispatch(actions.fetchFeed(pageNo)),
     }
 }

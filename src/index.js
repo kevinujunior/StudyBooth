@@ -10,6 +10,7 @@ import themeReducer from './store/reducers/theme';
 import authReducer from './store/reducers/auth';
 import feedReducer from './store/reducers/feed';
 import currentUserReducer from './store/reducers/currentUser';
+import profileReducer from './store/reducers/profile';
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   feed: feedReducer,
   currentUser: currentUserReducer,
+  profile: profileReducer,
 })
 
 

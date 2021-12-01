@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+let isAlredyFetchedRefreshToken = false;
+
 const customAxios = axios.create({
     baseURL: `https://study-booth-backend.herokuapp.com/`,
     headers: {
@@ -38,14 +40,14 @@ customAxios.interceptors.response.use((response) => {
     }, async function (error) {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && originalRequest.url === 'https://study-booth-backend.herokuapp.com/dj-rest-auth/token/refresh/') {
+    if (error.response.status === 401 && isAlredyFetchedRefreshToken) {
+        isAlredyFetchedRefreshToken = false;
         return Promise.reject(error);
     }
 
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response.status === 401 && !isAlredyFetchedRefreshToken) {
 
-        
-        originalRequest._retry = true;
+        isAlredyFetchedRefreshToken = true;
         const res = await customAxios.post('dj-rest-auth/token/refresh/',
         {
             refresh: localStorage.getItem('refresh_token'),

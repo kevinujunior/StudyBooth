@@ -9,9 +9,17 @@ export const setCurrentUser = (userdata) => {
     }
 }
 
+export const setLoading = (loading) => {
+    return {
+        type: actionTypes.USER_SET_LOADING,
+        loading:loading,
+    }
+}
+
 export const fetchCurrentUser = () => {
 
     return dispatch => {
+        dispatch(setLoading(true));
         let userId = localStorage.getItem('user');
         axios.get('users/userview/'+userId,)
         .then(response =>{

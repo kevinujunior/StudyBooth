@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
-import { useEffect } from 'react';
 
 
 export const setPosts = (posts, nextPageNo, pageNo) => {
@@ -13,9 +12,16 @@ export const setPosts = (posts, nextPageNo, pageNo) => {
 }
 
 
-export const setLoading = (loading) => {
+export const setFeedLoading = (loading) => {
     return{
-        type: actionTypes.SET_LOADING,
+        type: actionTypes.FEED_SET_LOADING,
+        loading: loading
+    }
+}
+
+export const setHomeLoading = (loading) => {
+    return{
+        type: actionTypes.SET_HOME_LOADING,
         loading: loading
     }
 }
@@ -46,10 +52,10 @@ export const updatePostComment = (commentData) => {
 export const fetchFeed = (pageNo, loading) => {
     //this is the method to fetch the feed.
     return (dispatch) => {
+        console.log("fetch feed called")
         if(pageNo == null) return;
         if(loading) return;
-        console.log("fetch feed called")
-        dispatch(setLoading(true))
+        dispatch(setFeedLoading(true));
         axios.get(`feed/get_post/?page=${pageNo}`)
         .then(res =>{
             console.log(res)
@@ -60,6 +66,7 @@ export const fetchFeed = (pageNo, loading) => {
             dispatch(setPosts(posts,nextNo,pageNo))  //after getting the post we are setting post in global state.
         })
         .catch(err => {
+            dispatch(setFeedLoading(false))
             console.log(err)
         });
     }
@@ -147,12 +154,14 @@ export const toggleLikeRequest = (data, isLiked,likeId) => {
 export const fetchFeedFilterBySection = (id) => {
     //here we are getting the section id and the we are filtering feed on basis of that.
     return dispatch => {
+        dispatch(setFeedLoading(true))
         axios.get('feed/get_post/?section='+id)
         .then(response =>{
             const posts = response.data;
             // dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
         })
         .catch(err => {
+            dispatch(setFeedLoading(false))
             console.log(err)
         });
     }

@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios, {AxiosError} from  'axios';
+import * as feedFunc from './feed';
+import * as userFunc from './currentUser';
 
 export const authStart = () => {
     return {
@@ -28,6 +30,14 @@ export const authFail = error => {
 //         }, expirationTime*1000)
 //     }
 // }
+
+const loadEssential = dispatch => {
+    console.log("load essential called")
+    // feedFunc.fetchSection();
+    dispatch(userFunc.fetchCurrentUser());
+    dispatch(feedFunc.fetchFeed(1));
+    console.log("end")
+}
 
 export const logout = () => {
     localStorage.removeItem('user');
@@ -58,6 +68,7 @@ export const authLogin = (username, password) => {
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
             // dispatch(checkAuthTimeout(3600));
+            loadEssential(dispatch);
         })
         .catch(err => {
             console.log(err.response.data)
@@ -75,7 +86,6 @@ export const authSignup = (username, fullname,email, password1, password2) => {
             email: email,
             password1: password1,
             password2: password2,
-            
         })
         .then(res =>{
             const access_token = res.data.access_token;
@@ -88,6 +98,7 @@ export const authSignup = (username, fullname,email, password1, password2) => {
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
             // dispatch(checkAuthTimeout(3600));
+            loadEssential(dispatch);
         })
         .catch(err => {
             dispatch(authFail(Object.values(err.response.data)[0][0]))
@@ -102,6 +113,7 @@ export const authCheckState = () => {
         if(token === undefined) {
             dispatch(logout());
         } else {
+            loadEssential(dispatch);
             dispatch(authSuccess(token));
         }
     }

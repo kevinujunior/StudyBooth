@@ -35,7 +35,6 @@ class Feed extends Component {
 
 
   componentDidMount() {
-      this.props.onFetchFeed(this.props.nextPageNo);
   }
 
 
@@ -127,14 +126,8 @@ class Feed extends Component {
 const mapStateToProps = state => {
     return {
         posts: state.feed.posts,
-        nextPageNo: state.feed.nextPageNo
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchFeed: (pageNo) => dispatch(actions.fetchFeed(pageNo)),
-    }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(Feed);
+export default connect(mapStateToProps)(Feed);

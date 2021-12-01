@@ -130,6 +130,7 @@ class Post extends Component{
                     </div> : null }
                 <div className={classes.Header}>
                     <div className={classes.NamePhoto} onClick={() => {
+                        this.props.onFetchUserProfile(this.props.userId);
                         this.props.history.push({
                             pathname: '/profile',
                             userId: this.props.userId,
@@ -201,7 +202,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onComment : (data) => actions.createNewComment(data),
         onLike: (data, isLiked, likeId) => dispatch(actions.toggleLikeRequest(data, isLiked, likeId)),
-        onDeletePost : (postId) => dispatch(actions.deletePost(postId))
+        onDeletePost : (postId) => dispatch(actions.deletePost(postId)),
+        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
     }
 }
 

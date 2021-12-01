@@ -5,7 +5,8 @@ const initialState = {
     posts : [],
     sections: null,
     nextPageNo: 1,
-    isFeedLoading: false,
+    isFeedLoading: true,
+    isHomeLoading: true,
 }
 
 
@@ -54,6 +55,7 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
             posts: [...newPosts],
             nextPageNo: nextPageNo,
             isFeedLoading: false,
+            isHomeLoading: false,
         }
     }
 
@@ -69,6 +71,7 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
         posts: posts,
         nextPageNo: nextPageNo,
         isFeedLoading: false,
+        isHomeLoading: false,
     }
 
 }
@@ -96,10 +99,15 @@ const reducer = (state = initialState, action) => {
             return updatePostComment(state, action);
         case actionTypes.TOGGLE_LIKE:
             return toggleLike(state, action.postId, action.likeId);
-        case actionTypes.SET_LOADING:
+        case actionTypes.FEED_SET_LOADING:
             return {
                 ...state,
                 isFeedLoading: action.loading,
+            }
+        case actionTypes.SET_HOME_LOADING:
+            return {
+                ...state,
+                isHomeLoading: action.loading,
             }
         default:
             return state;

@@ -7,6 +7,7 @@ export {
     toggleLikeRequest,
     deletePost,
     deleteComment,
+    setHomeLoading,
 } from './feed'
 
 
@@ -21,3 +22,8 @@ export {
 export {
     fetchCurrentUser,
 } from './currentUser'
+
+export {
+    fetchUserData,
+    fetchUserPosts,
+} from './profile'
