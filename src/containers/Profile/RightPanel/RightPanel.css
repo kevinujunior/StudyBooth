@@ -1,7 +1,7 @@
 .RightPanel{
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 95vh;
     max-width: 300px;
     min-width: 270px;
     position: sticky;

@@ -2,6 +2,7 @@ import React from "react";
 import classes from './Profile.css';
 import {connect} from 'react-redux';
 import { useHistory } from "react-router-dom";
+import * as actions from '../../../../store/actions/index';
 
 function Profile(props){
 
@@ -12,7 +13,10 @@ function Profile(props){
             <div className = {classes.Info}>
                 <div className={classes.InfoBox}>
                     {/* photo and name*/}
-                    <div onClick={() => history.push('/profile')} style={{'cursor':'pointer'}}>
+                    <div onClick={() => {
+                        props.onFetchUserProfile(localStorage.getItem('user'));
+                        history.push('/profile')
+                    }} style={{'cursor':'pointer'}}>
                         <img src={props.userData ? props.userData.userPic ? props.userData.userPic : "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg":"https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"} />
                     </div>
                     <p>{props.userData ? props.userData.fullName : 'Alien'}</p>
@@ -28,4 +32,10 @@ const mapStateToProps = state => {
         userData: state.currentUser.data,
     }
 }
-export default connect(mapStateToProps)(Profile);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);

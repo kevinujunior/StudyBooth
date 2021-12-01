@@ -39,9 +39,10 @@ class Profile extends Component{
     }
 
     postUnfollow= () => { 
-        axios.delete('users/unfollow/'+this.props.location.userId)
+        axios.delete('users/unfollow/'+this.state.userId)
         .then(res => {
             //we have to rest profile to show unfollowed profile
+            this.props.onFetchUserData(this.state.userId)
         })
         .catch(err => console.log(err))
     }

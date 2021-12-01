@@ -42,35 +42,6 @@ class Feed extends Component {
         
         // let posts  = <Spinner/>;
         let posts = [];
-        const content = {
-            animate: {
-              transition: { staggerChildren: 0.1, delayChildren: 2.8 },
-            },
-          };
-          
-          const title = {
-            initial: { y: -20, opacity: 0 },
-            animate: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 1.3,
-                ease: [0.6, -0.05, 0.01, 0.99],
-              },
-            },
-          };
-          
-          const products = {
-            initial: { y: -20, opacity: 0 },
-            animate: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 1.0,
-                ease: [0.6, -0.05, 0.01, 0.99],
-              },
-            },
-          };
         
         console.log(this.props.posts)
         if(this.props.posts != null && this.props.posts.length > 0){
@@ -99,25 +70,7 @@ class Feed extends Component {
 
         return (
             <div>
-                {/* <AnimationComponent /> */}
-                {/* {posts} */}
-                <motion.section exit={{ opacity: 0 }}>
-                <InitialTransition/>
-                  <motion.div
-                      initial="initial"
-                      animate="animate"
-                      variants={content}
-                      className="space-y-12"
-                  >
-                      <motion.div variants={title} className="text-6xl font-black text-center">
-                        {posts}
-                      </motion.div>
-
-                      <motion.section variants={products} className="text-gray-700 body-font">
-                      
-                      </motion.section>
-                  </motion.div>
-                </motion.section>
+                {posts}
             </div>
         );
     }

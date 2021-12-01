@@ -54,7 +54,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return{
     isAuthenticated: state.auth.token !== null,
-    isHomeLoading: (state.feed.isFeedLoading && state.currentUser.loading) || state.feed.isHomeLoading,
+    isHomeLoading: state.feed.isHomeLoading,
     isProfileLoading: state.profile.loading,
   }
 }
