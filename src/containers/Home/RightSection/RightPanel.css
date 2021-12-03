@@ -1,9 +1,8 @@
-
 .RightPanel{
     display: flex;
     flex-direction: column;
-    top: 61.5px;
-    height: 96vh;
+    top: 50px;
+    height:calc(100vh - 50px);
     max-width: 300px;
     position: sticky;
     right: 0px;
@@ -14,11 +13,12 @@
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    box-sizing: border-box;
 }
 
 .RightPanel::-webkit-scrollbar {
     display: none;
-  }
+}
 
 .Dark{
     background-color:rgb(2, 1, 1);

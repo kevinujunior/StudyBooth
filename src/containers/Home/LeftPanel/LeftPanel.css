@@ -1,13 +1,14 @@
 .LeftPanel{
     position: sticky;
-    top: 61.5px;
+    top: 50px;
     left: 0;
-    height: 70vh;
+    height: calc(100vh - 200px);
     font-family:"Work Sans","Open Sans";
     max-width: 300px;
     background-color: white;
     transition: all 0.3s;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-sizing: border-box;
 }
 
 .Visible{
@@ -38,8 +39,8 @@
     .LeftPanel{
         position: fixed;
         left: -100%;
-        top: 50.7px;
-        z-index: 150;
+        top: 0px;
+        z-index: 250;
         width: 80%;
         height: 100%;
     }

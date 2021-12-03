@@ -43,7 +43,6 @@ class Feed extends Component {
         // let posts  = <Spinner/>;
         let posts = [];
         
-        console.log(this.props.posts)
         if(this.props.posts != null && this.props.posts.length > 0){
             const number_of_posts = Object.keys(this.props.posts).length;
             posts = [...Array(number_of_posts)].map((x, i) => {

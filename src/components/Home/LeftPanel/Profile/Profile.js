@@ -7,7 +7,6 @@ import * as actions from '../../../../store/actions/index';
 function Profile(props){
 
     let history = useHistory();
-    console.log(props.userData)
     return (
         <div className={classes.Profile}>
             <div className = {classes.Info}>

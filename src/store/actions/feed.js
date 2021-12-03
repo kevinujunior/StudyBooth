@@ -52,17 +52,17 @@ export const updatePostComment = (commentData) => {
 export const fetchFeed = (pageNo, loading) => {
     //this is the method to fetch the feed.
     return (dispatch) => {
-        console.log("fetch feed called")
+
         if(pageNo == null) return;
         if(loading) return;
+
         dispatch(setFeedLoading(true));
+
         axios.get(`feed/get_post/?page=${pageNo}`)
         .then(res =>{
-            console.log(res)
             const posts = res.data.results;
             let nextNo = res.data.next ? res.data.next.match(/page=.*/gm)[0]: null;
             if(nextNo) nextNo = String(nextNo).substring(5, nextNo.length); //post next page no
-            console.log(nextNo)
             dispatch(setPosts(posts,nextNo,pageNo))  //after getting the post we are setting post in global state.
         })
         .catch(err => {

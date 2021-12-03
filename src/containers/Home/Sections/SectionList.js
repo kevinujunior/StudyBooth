@@ -32,12 +32,12 @@ class SectionList extends Component {
                     <Section sectionName="Friends" sectionPic="images/signin-image.jpg" />
                     </div>
                 <div className = {classes.sectionContainer}>
-                    <h4 class = {classes.sectionName}> Popular Sections</h4>
+                    <h4 className = {classes.sectionName}> Popular Sections</h4>
                     {sections}
                 </div>
 
-                <div class = {classes.sectionContainer}>
-                    <h4 class = {classes.sectionName}> All Sections</h4>
+                <div className = {classes.sectionContainer}>
+                    <h4 className = {classes.sectionName}> All Sections</h4>
                     {sections}
                 </div>
 

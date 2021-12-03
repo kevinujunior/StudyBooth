@@ -3,30 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {Provider} from 'react-redux';
-import { createStore,compose,applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-
-import themeReducer from './store/reducers/theme';
-import authReducer from './store/reducers/auth';
-import feedReducer from './store/reducers/feed';
-import currentUserReducer from './store/reducers/currentUser';
-import profileReducer from './store/reducers/profile';
-
-const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-
-const rootReducer = combineReducers({
-  theme: themeReducer,
-  auth: authReducer,
-  feed: feedReducer,
-  currentUser: currentUserReducer,
-  profile: profileReducer,
-})
-
-
-const store = createStore(rootReducer, composeEnhances(
-    applyMiddleware(thunk)
-));
+import store from './store/store';
 
 
 const app = (

@@ -98,7 +98,7 @@ class Header extends Component {
                         <div className={classes.Input}>
                             <input 
                                 type="text" 
-                                class={classes.inputSearch}     
+                                className={classes.inputSearch}     
                                 value={this.state.searchinput}
                                 onChange={e => this.setState({
                                     searchInput: e.target.value,
@@ -110,7 +110,7 @@ class Header extends Component {
                                 }}
                                 placeholder="Type to Search...">
                             </input>
-                            <button class={classes.btnSearch} onClick={this.triggerSearch}>{<SearchIcon/>}</button>
+                            <button className={classes.btnSearch} onClick={this.triggerSearch}>{<SearchIcon/>}</button>
                             {dropdownMenu}
                         </div>
                         <div>

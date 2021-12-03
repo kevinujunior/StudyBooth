@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import classes from './LeftPanel.css';
 import DashBoard from '../../../components/Home/LeftPanel/DashBoard/DashBoard';
-import Backdrop from '@mui/material/Backdrop';
+import Backdrop from '../../../components/UI/Backdrop/Backdrop';
 import {connect} from 'react-redux';
+import Auxi from '../../../HOC/Auxi/Auxi'
 
 class LeftPanel extends Component{
     
@@ -13,10 +14,14 @@ class LeftPanel extends Component{
         if(this.props.isVisible){
             classNames.push(classes.Visible)
         }
+
         return (
-            <div className={classNames.join(' ')}>
-                <DashBoard />
-            </div>
+            <Auxi>
+                <Backdrop show={this.props.isVisible} clicked={this.props.closeLeftPanel}/>
+                <div className={classNames.join(' ')}>
+                    <DashBoard />
+                </div>
+            </Auxi>
         )
     }
 }

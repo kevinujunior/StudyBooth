@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from './store/store';
+import * as actionTypes from './store/actions/actionTypes';
 
 let isAlredyFetchedRefreshToken = false;
 
@@ -34,6 +36,15 @@ customAxios.interceptors.request.use(
     (error) => errorHandler(error)
 );
 
+export const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    };
+}
 
 customAxios.interceptors.response.use((response) => {
     return response
@@ -42,6 +53,7 @@ customAxios.interceptors.response.use((response) => {
 
     if (error.response.status === 401 && isAlredyFetchedRefreshToken) {
         isAlredyFetchedRefreshToken = false;
+        store.dispatch(logout())
         return Promise.reject(error);
     }
 
@@ -52,6 +64,7 @@ customAxios.interceptors.response.use((response) => {
         {
             refresh: localStorage.getItem('refresh_token'),
         });
+        console.log("access token fetch", res)
         if (res.status === 200) {
             localStorage.setItem('access_token', res.data.access);
             customAxios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');

@@ -5,8 +5,7 @@ import RightPanel from './RightSection/RightPanel';
 import LeftPanel from './LeftPanel/LeftPanel';
 import MainSection from './MainSection/MainSection';
 import Chat from './Chat/Chat';
-import ChatIn from './Chat/chatIn';
-import LoadingPage from '../../components/UI/LoadingPage/LoadingPage';
+// import ChatIn from './Chat/chatIn';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import {connect } from 'react-redux';
 import Modal from '../../components/UI/Modal/Modal';
@@ -66,7 +65,7 @@ class Home extends Component {
                         {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                     </Modal>
                     <div className={classes.main}>
-                        <LeftPanel isVisible = {this.state.isLeftPanelVisible}/> 
+                        <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/> 
                         <MainSection /> 
                         {/* <ChatIn /> */}
                         <RightPanel />

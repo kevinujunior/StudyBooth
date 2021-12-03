@@ -51,8 +51,6 @@ export const fetchUserData = (userId) => {
             }
         })
         .catch(err => console.log(err))
-
-
     }
 }
 

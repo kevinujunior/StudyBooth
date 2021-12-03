@@ -1,4 +1,3 @@
-import classes from './App.css';
 import React, {Component } from 'react';
 import { BrowserRouter as Router,  Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -12,6 +11,7 @@ import * as actions from './store/actions/index';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
@@ -27,7 +27,7 @@ class App extends Component {
 
     
     return (
-      <div className={classes.app}>
+      <div>
         <Router>
           <Switch>
             <Route exact path="/home"> 
