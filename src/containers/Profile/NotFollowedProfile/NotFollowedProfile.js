@@ -32,9 +32,9 @@ const NotFollowedProfile = (props) => {
             </div>
             <div className={classes.posts}>
                 {/* <h2>You don't follow this user</h2> */}
-                {Number(currUser)!==userData.id ? 
+                {userData ? Number(currUser)!==userData.id ? 
                 (<Button variant="outlined" onClick={() => props.postFollow()}>Follow</Button>) 
-                : null}
+                : null : null}
             </div>
         </div>
     );
