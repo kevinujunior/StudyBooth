@@ -120,7 +120,7 @@ class CommentItem extends Component {
                     comment = {comment.commentText}
                     userPic = {comment.commentatorUser.userPic}
                     createdAt = {comment.createdAt}
-                    refreshComment = {this.props.refreshComment}
+                    refreshReplies = {this.fetchReplies}
                 />    
             })
         }
@@ -170,7 +170,7 @@ class CommentItem extends Component {
                         const res = await this.props.onCommentDelete(this.props.id);
                         if(res !== null) this.props.refreshComment();
                     }}/> : null}
-                    {this.state.isRepliesVisible ? <div style={{'marginTop':'10px'}}>
+                    {this.state.isRepliesVisible && this.state.replies.length > 0 ? <div style={{'marginTop':'10px'}}>
                         {replies}
                         {this.state.repliesNextPageNo != null ? <div onClick={() => this.fetchReplies()}><p>load more replies</p></div> : null}
                     </div> : null}

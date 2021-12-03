@@ -24,7 +24,7 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
     if(currPageNo == null){
         return {
             ...state,
-            posts : [],
+            posts : null,
             nextPageNo:1,
             loading: false,
         }

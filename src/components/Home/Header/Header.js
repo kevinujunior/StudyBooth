@@ -42,7 +42,7 @@ class Header extends Component {
                 users = [...Array(number_of_users)].map((x, i) => {
                     return  <li key={i} value={search[i]["username"]} onClick={() => {
                         this.props.onFetchUserProfile(search[i]["id"]);
-                        this.props.history.push({
+                        this.props.history.push({   
                             pathname: '/profile',
                             userId: search[i]["id"],
                         });

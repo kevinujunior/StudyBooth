@@ -73,8 +73,8 @@ class Profile extends Component{
                 {this.props.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
-                    {this.props.posts.length > 0 ? <RightPanel user={this.props.userData} postUnfollow={this.postUnfollow}/> : <NotFollowedProfile user={this.props.userData ? this.props.userData[0] : null} postFollow={this.postFollow}  />}
-                    {this.props.posts.length > 0 ? <MainSection posts={this.props.posts}/> : null}
+                    {this.props.posts ? <RightPanel user={this.props.userData} postUnfollow={this.postUnfollow}/> : <NotFollowedProfile user={this.props.userData ? this.props.userData[0] : null} postFollow={this.postFollow}  />}
+                    {this.props.posts ? <MainSection posts={this.props.posts}/> : null}
                 </div>}
             </div>
         );

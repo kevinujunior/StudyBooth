@@ -116,13 +116,11 @@ export const createNewComment = (data) => {
 }
 
 export const deleteComment = (commentId) => {
-    
     return new Promise(resolve => axios.delete("feed/create_comment/"+commentId)
     .then(res => {
         resolve("Success");
     })
     .catch(err => console.log(err)));
-    
 }
 
 export const toggleLikeRequest = (data, isLiked,likeId) => {

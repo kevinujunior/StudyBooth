@@ -95,7 +95,7 @@ class CommentItem extends Component {
                     </div>
                     {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
                         const res = await this.props.onCommentDelete(this.props.id);
-                        if(res !== null) this.props.refreshComment();
+                        if(res !== null) this.props.refreshReplies(true);
                     }}/> : null}
                 </div>
             </div>
