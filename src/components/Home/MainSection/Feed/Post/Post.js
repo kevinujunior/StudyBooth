@@ -124,69 +124,75 @@ class Post extends Component{
         let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes
         
         return (
-            <div className={postClasses.join(' ')}>
-                {this.state.loading ?<div className={classes.loader}>
-                        <div className={classes.bar}></div>
-                    </div> : null }
-                <div className={classes.Header}>
-                    <div className={classes.NamePhoto} onClick={() => {
-                        this.props.onFetchUserProfile(this.props.userId);
-                        this.props.history.push({
-                            pathname: '/profile',
-                            userId: this.props.userId,
-                        });
-                    }}>
-                        <img src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt=""/>
-                        
-                        <p className={classes.userName}>{this.props.name}</p>
-                        <p className={classes.Time}>{time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}</p>
-                    </div>
-                    <div className={classes.Category}>
-                        <p>{this.props.category}</p>
-                        {/* <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}> */}
-                        <IconButton onClick = {this.toggleActions.bind(this,this.state.isActionsVisible)}>
-                            <MoreHorizIcon className={classes.IconColor}/>
-                        </IconButton>
-                    </div>
-                </div>
-
-                <div className={classes.PostInfo}>
-                    <p>{this.props.about}</p> 
-                </div>
-
-                <div className={classes.PostImage}>
-                    <img src = {this.props.postImage}  alt=""/>
-                </div>
-
-                {this.props.userId ? <div className={classes.Interact}>
-                    <div className={classes.Icons}>
-                        <div className={classes.IconLeft}>
-                            <IconButton onClick = {this.postLike}>
-                                {this.props.isLikedByuser ? <FavoriteIcon style={{color:"crimson"}}/> : <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/> }
-                            </IconButton>
-                            <p>{this.props.likesCount}</p>
-                            <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
-                                <CommentOutlinedIcon style={{color:"grey"}}/>
-                            </IconButton>
-                            <p>{this.state.cmtCount}</p>
+            <div className={classes.Wrapper}>
+                    <div className={postClasses.join(' ')}>
+                    {this.state.loading ?<div className={classes.loader}>
+                            <div className={classes.bar}></div>
+                        </div> : null }
+                    <div className={classes.Header}>
+                        <div className={classes.NamePhoto} onClick={() => {
+                            this.props.onFetchUserProfile(this.props.userId);
+                            this.props.history.push({
+                                pathname: '/profile',
+                                userId: this.props.userId,
+                            });
+                        }}>
+                            <img src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt=""/>
+                            
+                            <p className={classes.userName}>{this.props.name}</p>
+                            <p className={classes.Time}>{time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}</p>
                         </div>
-                        <div className={classes.VerticalLine}></div>
-                        <div className={classes.Comment}>
-                            <input type="text" value={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
+                        <div className={classes.Category}>
+                            <p>{this.props.category}</p>
+                            {/* <IconButton onClick = {() => this.toggleActions(this.state.isActionsVisible)}> */}
+                            <IconButton onClick = {this.toggleActions.bind(this,this.state.isActionsVisible)}>
+                                <MoreHorizIcon className={classes.IconColor}/>
+                            </IconButton>
                         </div>
-                        <IconButton onClick={this.postComment}>
-                            <SendRoundedIcon style={{color:"#1e90ff"}}/>
-                        </IconButton>
                     </div>
-                </div>:null}
 
-                <ActionPopUp Visible={this.state.isActionsVisible} userId={this.props.userId} onDeletePost={() => {
-                    this.setState({
-                        loading:true,
-                    })
-                    this.props.onDeletePost(this.props.id)
-                }}/>
-                { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id} ifMoreComment={this.state.commentPageNo != null}/>  : null}
+                    <div className={classes.PostInfo}>
+                        <p>{this.props.about}</p> 
+                    </div>
+
+                    <div className={classes.PostImage}>
+                        <img src = {this.props.postImage}  alt=""/>
+                    </div>
+
+                    {this.props.userId ? <div className={classes.Interact}>
+                        <div className={classes.Icons}>
+                            <div className={classes.IconLeft}>
+                                <IconButton onClick = {this.postLike}>
+                                    {this.props.isLikedByuser ? <FavoriteIcon style={{color:"crimson"}}/> : <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/> }
+                                </IconButton>
+                                <p>{this.props.likesCount}</p>
+                                <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
+                                    <CommentOutlinedIcon style={{color:"grey"}}/>
+                                </IconButton>
+                                <p>{this.state.cmtCount}</p>
+                            </div>
+                            <div className={classes.VerticalLine}></div>
+                            <div className={classes.Comment}>
+                                <input type="text" value={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
+                            </div>
+                            <IconButton onClick={this.postComment}>
+                                <SendRoundedIcon style={{color:"#1e90ff"}}/>
+                            </IconButton>
+                        </div>
+                    </div>:null}
+                    { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id} ifMoreComment={this.state.commentPageNo != null}/>  : null}
+                </div>
+                {this.state.isActionsVisible ?
+                        <ActionPopUp 
+                            userId={this.props.userId} 
+                            onDeletePost={() => {
+                                this.setState({
+                                    loading:true,
+                                })
+                                this.props.onDeletePost(this.props.id)
+                            }}
+                            close={() => this.setState({isActionsVisible:false})}
+                        /> : null}
             </div>
     )
   }

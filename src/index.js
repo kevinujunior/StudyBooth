@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import {Provider} from 'react-redux';
 import store from './store/store';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 const app = (
   <Provider store={store}>{/* provider is needed to connect redux to react so react can use the store*/}
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
   </Provider>
 )

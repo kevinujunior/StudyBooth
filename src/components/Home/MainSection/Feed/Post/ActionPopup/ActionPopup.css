@@ -1,21 +1,30 @@
 .ActionPopUp{
-    background-color: inherit;
+    background-color: white;
     position: absolute;
-    top: 55px;
     right: 20px;
     padding: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     box-sizing: border-box;
     border-radius: 5px;
-    visibility: hidden;
     transition: all 0.3s;
-    opacity: 0;
-    z-index: 90;
+    z-index: 150;
 }
 
-.Visible{
-    visibility: visible;
-    opacity: 1;
+.bottom {
+    bottom: 10px;
+}
+
+.top{
+    top: 55px;
+}
+
+.Backdrop{
+    height: 100vh ;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 .ActionPopUp div{

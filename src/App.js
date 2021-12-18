@@ -7,6 +7,7 @@ import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
 import Profile from './containers/Profile/Profile';
 import LoadingPage from './components/UI/LoadingPage/LoadingPage';
+import Layout from './HOC/Layout/Layout';
 import * as actions from './store/actions/index';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken'
@@ -27,26 +28,25 @@ class App extends Component {
 
     
     return (
-      <div>
-        <Router>
-          <Switch>
-            <Route exact path="/home"> 
-              {this.props.isAuthenticated ? this.props.isHomeLoading ? <LoadingPage /> : <Home /> : <Redirect to="/login" /> }
-            </Route>
-            <Route exact path="/signup" component ={Signup}/> 
-            <Route exact path="/loading" component ={LoadingPage} />
-            <Route exact path="/login"> 
-              {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
-            </Route>
-            <Route exact path="/profile" >
-              {this.props.isAuthenticated ? this.props.isProfileLoading ? <LoadingPage /> : <Profile /> : <Redirect to="/login" />}
-            </Route>
-            <Route exact path='/' >
-              {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+        <Switch>
+          <Route exact path="/home"> 
+            {this.props.isAuthenticated ? this.props.isHomeLoading ? <LoadingPage /> : <Layout>
+              <Home />
+            </Layout> : <Redirect to="/login" /> }
+          </Route>
+          <Route exact path="/layout" component ={Layout}/> 
+          <Route exact path="/signup" component ={Signup}/> 
+          <Route exact path="/loading" component ={LoadingPage} />
+          <Route exact path="/login"> 
+            {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
+          </Route>
+          <Route exact path="/profile" >
+            {this.props.isAuthenticated ? this.props.isProfileLoading ? <LoadingPage /> : <Profile /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path='/' >
+            {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
+          </Route>
+        </Switch>
     );
   }
 }

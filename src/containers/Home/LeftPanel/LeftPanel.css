@@ -1,10 +1,10 @@
 .LeftPanel{
     position: sticky;
-    top: 50px;
     left: 0;
-    height: calc(100vh - 200px);
+    top: 0;
+    height: calc(100vh - 50px) !important;
     font-family:"Work Sans","Open Sans";
-    max-width: 300px;
+    width: 300px;
     background-color: white;
     transition: all 0.3s;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
