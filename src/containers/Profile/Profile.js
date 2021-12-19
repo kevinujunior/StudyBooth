@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Navbar from '../../components/Home/Header/Header'
 import NotFollowedProfile  from './NotFollowedProfile/NotFollowedProfile';
 import RightPanel from './RightPanel/RightPanel';
 import MainSection from './MainSection/MainSection';
@@ -69,7 +68,6 @@ class Profile extends Component{
                     })
                 }
             }}>
-                <Navbar />
                 {this.props.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>

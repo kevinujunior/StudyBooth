@@ -32,7 +32,6 @@ class Home extends Component {
                         })
                     }
                 }}>
-                    
                     <div className={classes.main}>
                         <LeftPanel /> 
                         <MainSection /> 

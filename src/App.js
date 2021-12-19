@@ -41,7 +41,7 @@ class App extends Component {
             {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
           </Route>
           <Route exact path="/profile" >
-            {this.props.isAuthenticated ? this.props.isProfileLoading ? <LoadingPage /> : <Profile /> : <Redirect to="/login" />}
+            {this.props.isAuthenticated ? this.props.isProfileLoading ? <LoadingPage /> : <Layout> <Profile /> </Layout> : <Redirect to="/login" />}
           </Route>
           <Route exact path='/' >
             {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}

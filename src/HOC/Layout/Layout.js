@@ -35,7 +35,7 @@ class Layout extends Component {
 
 
     componentDidMount(){
-        if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false}) ;
+        if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true}) ;
         window.addEventListener('resize', () => {
             console.log(window.innerWidth)
             if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false})
@@ -51,6 +51,7 @@ class Layout extends Component {
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
                     onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
                 />
+
                 {this.props.children}
 
                 {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/> : null}
