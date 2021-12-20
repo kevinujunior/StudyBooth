@@ -1,10 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    loading:true,
+    loading:false,
     userData:null,
     posts:[],
-    nextPageNo:1
+    nextPageNo:1,
+    profileFeedLoading:false,
 }
 
 const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
@@ -18,6 +19,7 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
             posts: [...newPosts],
             nextPageNo: nextPageNo,
             loading: false,
+            profileFeedLoading:false,
         }
     }
 
@@ -27,6 +29,7 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
             posts : null,
             nextPageNo:1,
             loading: false,
+            profileFeedLoading:false,
         }
     }
 
@@ -38,11 +41,14 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
     let posts = [...state.posts];
     posts = newPosts ? posts.concat(newPosts) : posts;
 
+    console.log("profile posts updated")
+
     return {
         ...state,
         posts: posts,
         nextPageNo: nextPageNo,
         loading: false,
+        profileFeedLoading:false,
     }
 
 }
@@ -53,7 +59,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.PROFILE_SET_LOADING:
             return {
                 ...state,
-                loading: action.loading,
+                loading: action.loading ? action.loading : state.loading,
+                profileFeedLoading: action.profileFeedLoading ? action.profileFeedLoading : state.profileFeedLoading,
             }
         case actionTypes.SET_PROFILE_USER_POSTS:
             return updatePosts(action.posts, state, action.nextPageNo, action.currPage)

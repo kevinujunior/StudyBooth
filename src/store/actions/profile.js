@@ -2,10 +2,11 @@ import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
 
 
-export const setLoading = (loading) => {
+export const setLoading = (loading, profileFeedLoading) => {
     return{
         type: actionTypes.PROFILE_SET_LOADING,
-        loading: loading
+        loading: loading,
+        profileFeedLoading: profileFeedLoading,
     }
 }
 
@@ -29,7 +30,7 @@ export const setProfileUserPosts = (posts, nextPage, currPage) => {
 export const fetchUserData = (userId) => {
     return dispatch => {
         //this will fetch the user profile details
-        dispatch(setLoading(true));
+        dispatch(setLoading(true,null));
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
             console.log(res.data)
@@ -58,6 +59,7 @@ export const fetchUserPosts = (nextPageNo, userId) => {
     
     return dispatch => {
         if(nextPageNo == null) return;
+        dispatch(setLoading(null,true));
         axios.get(`feed/get_post/?page=${nextPageNo}&viewUserPost=${userId}`)
         .then(res => {
             console.log(res)

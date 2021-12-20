@@ -149,7 +149,7 @@ const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
         userData: state.currentUser.data,
-        loading: state.feed.isFeedLoading,
+        loading: state.feed.isFeedLoading || state.profile.profileFeedLoading,
     }
 }
 const mapDispathToProps = dispatch => {

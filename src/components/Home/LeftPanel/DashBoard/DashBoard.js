@@ -16,6 +16,7 @@ import { IconButton } from '@mui/material';
 import {connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import * as actionsTypes from '../../../../store/actions/actionTypes';
+import {withRouter} from 'react-router-dom';
 
 
 class DashBoard extends Component{
@@ -38,7 +39,10 @@ class DashBoard extends Component{
                     <div>
                         <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => {
                             this.changeSelected("Feed");
-                            this.props.onFetchFeed();
+
+                            this.props.history.replace({
+                                pathname:'/home'
+                            })
                             document.documentElement.scrollTop = 0;
                         }} />
                         <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
@@ -70,7 +74,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFeed: () => dispatch(actions.fetchFeed()),
         onLogOut : () => dispatch(actions.logout()),
         onChangeTheme: (theme) => {
             //here we are changing theme of basis of current theme
@@ -80,4 +83,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DashBoard));
