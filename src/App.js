@@ -10,12 +10,15 @@ import LoadingPage from './components/UI/LoadingPage/LoadingPage';
 import Layout from './HOC/Layout/Layout';
 import * as actions from './store/actions/index';
 import axios from 'axios';
+import WebSocketInstance from './websocket';
+
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
+    WebSocketInstance.connect();
   }
 
   loadEssential = () => {

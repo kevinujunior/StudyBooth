@@ -4,13 +4,67 @@ import { connect } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton } from "@mui/material";
+import WebSocketInstance from '../../../websocket';
+import MessageBox from './MessageBox';
+import onClickOutside from 'react-onclickoutside'
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
 class Chat extends Component {
-  componentDidUpdate() {
-    console.log(this.props);
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMessageBox:true,
+    }
+
+    this.waitForSocketConnection(() => {
+      WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this))
+      WebSocketInstance.fetchMessages(this.props.currentUser);
+    });
   }
+
+
+  waitForSocketConnection(callback) {
+    const component = this;
+    setTimeout(
+        function () {
+        if (WebSocketInstance.state() === 1) {
+            console.log("Connection is made")
+            callback();
+            return;
+        } else {
+            console.log("wait for connection...")
+            component.waitForSocketConnection(callback);
+        }
+    }, 100);
+  }
+
+  handleClickOutside = () => {
+    this.props.close();
+  }
+
+  addMessage(message) {
+    this.setState({ messages: [...this.state.messages, message]});
+  }
+
+  setMessages(messages) {
+    this.setState({ messages: messages.reverse()});
+  }
+
+
+  sendMessageHandler = (e, message) => {
+    e.preventDefault();
+    const messageObject = {
+        from: "user1",
+        content: message,
+    };
+    WebSocketInstance.newChatMessage(messageObject);
+  }
+
+  
+
+
   render() {
     let chatclasses = [classes.Chat];
     if (this.props.theme === "dark") chatclasses.push(classes.Dark);
@@ -20,7 +74,6 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}>
         <div className={classes.Header}>
-          <div></div>
           <div className={classes.Switch}>
             <button className={classes.ActiveButton}>Chat</button>
             <button>Classes</button>
@@ -34,13 +87,19 @@ class Chat extends Component {
             </IconButton>
           </div>
         </div>
-        <div>
-          <PersonalChat />
-        </div>
+        <PersonalChat />
+        <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages}/>
       </div>
     );
   }
 }
+
+
+
+
+
+
+
 
 const mapStateToProps = (state) => {
   return {
@@ -48,4 +107,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Chat);
+export default connect(mapStateToProps)(onClickOutside(Chat));

@@ -1,5 +1,5 @@
 .Chat{
-    min-height: 100vh;
+    min-height: calc(100vh - 55px);
     width: 450px;
     background-color: white;
     padding:10px;
@@ -9,8 +9,9 @@
     border: 1px solid #eee;
     position: fixed;
     right: -100%;
-    top: 77px;
+    top: 60px;
     transition: all 0.5s;
+    z-index: 250;
 }
 
 .ActiveChat{

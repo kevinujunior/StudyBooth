@@ -37,7 +37,6 @@ class Layout extends Component {
     componentDidMount(){
         if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true}) ;
         window.addEventListener('resize', () => {
-            console.log(window.innerWidth)
             if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false})
             else this.setState({shouldLeftPanelVisible:true})
         })
@@ -60,7 +59,7 @@ class Layout extends Component {
                     {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                 </Modal>
 
-                <Chat isActive={this.state.isChatActive}/>
+                <Chat isActive={this.state.isChatActive} close={() => this.switchChatState(true)}/>
 
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}
