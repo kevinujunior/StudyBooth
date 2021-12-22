@@ -47,7 +47,7 @@ class Layout extends Component {
     }
 
     componentWillUnmount(){
-        window.removeEventListener('resize');
+        window.removeEventListener('resize',null);
     }
 
     render(){
