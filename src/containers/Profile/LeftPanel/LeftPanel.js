@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 
 class LeftPanel extends Component{
     
+    
     render(){
+        
         let classNames = [classes.LeftPanel];
         if(this.props.theme === 'dark') classNames.push(classes.Dark)
         if(this.props.isVisible){
@@ -14,7 +16,7 @@ class LeftPanel extends Component{
         }
         return (
             <div className={classNames.join(' ')}>
-                <DashBoard />
+                <DashBoard/>
             </div>
         )
     }

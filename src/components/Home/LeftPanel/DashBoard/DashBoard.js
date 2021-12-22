@@ -46,6 +46,12 @@ class DashBoard extends Component{
                             document.documentElement.scrollTop = 0;
                         }} />
                         <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
+                        {this.props.showChat ? <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => {
+                            this.changeSelected("Chat")
+                            this.props.history.push({
+                                pathname:'/chat'
+                            })
+                        }}/> : null}
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
                         <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>
                         <DashBoardItems name="Questions" icon = {<HelpOutlineOutlinedIcon />} active = {this.state.selected === "Questions"} onClick = {() => this.changeSelected("Questions")}/>

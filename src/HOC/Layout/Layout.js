@@ -13,6 +13,7 @@ class Layout extends Component {
         isLeftPanelVisible: false, //with help of this we can control the visiblity of left panel in mobile view i.e less than 580px
         isCreatePostVisible: false,
         shouldLeftPanelVisible: false,
+        chatUnmount:true,
     }
 
     switchChatState  = (currentState) => {
@@ -34,12 +35,19 @@ class Layout extends Component {
     }
 
 
-    componentDidMount(){
-        if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true}) ;
+    componentWillMount(){
+        if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true,isChatActive: true, chatUnmount:true}) ;
+        if(window.innerWidth >= 630) this.setState({chatUnmount:false})
         window.addEventListener('resize', () => {
-            if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false})
-            else this.setState({shouldLeftPanelVisible:true})
+            if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false, chatUnmount: false})
+            else this.setState({shouldLeftPanelVisible:true, isChatActive: true, chatUnmount:true})
         })
+
+        console.log(this.state)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('resize');
     }
 
     render(){
@@ -53,13 +61,13 @@ class Layout extends Component {
 
                 {this.props.children}
 
-                {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/> : null}
+                {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)} showChat={this.state.chatUnmount}/> : null}
 
                 <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
                     {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                 </Modal>
 
-                <Chat isActive={this.state.isChatActive} close={() => this.switchChatState(true)}/>
+                {!this.state.chatUnmount ? <Chat isActive={this.state.isChatActive} close={() => this.switchChatState(true)}/> : null}
 
                 <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
                     {ButtonIcon}

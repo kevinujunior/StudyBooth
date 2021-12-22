@@ -6,31 +6,34 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 const MessageBox = (props) => {
 
     const [message, setMessage] = useState("");
-    console.log(props.messages)
 
     const renderMessages = (messages) => {
-        const currentUser = "user1";
-        console.log(messages)
+        const currentUser = props.username;
         if(messages === undefined) return;
         return messages.map((message, i) => (
             <div key={message.id}>
                 <li  
                     className={message.author === currentUser ? classes.Sent : classes.Received}>
                     <img src="http://emilcarlsson.se/assets/mikeross.png" />
-                    <p>{message.content}
-                        <br />
-                        <small style={{fontSize:'11px'}}>
-                        {Math.round((new Date().getTime() - new Date(message.timestamp).getTime())/60000)} minutes ago
-                        </small>
-                    </p>
+                    <div className={classes.Msg}>
+                        <div className={classes.TimeAndAuth}>
+                            <p style={{fontSize:'11px'}}>{message.author}</p>
+                            <small style={{fontSize:'11px'}}>
+                            {Math.round((new Date().getTime() - new Date(message.timestamp).getTime())/60000)} minutes ago
+                            </small>
+                        </div>
+                        <p>{message.content}</p>
+                    </div>
                 </li>
             </div>
         ));
-      }
+    }
+
+
     return(
       <div className={[classes.MessageBox, props.show ? classes.Show : null,].join(" ")}>
           <div className={classes.Head}>
-            <p>UserName</p>
+            <p>Randi++</p>
           </div>
           <div className={classes.Messages}>
             <ul>

@@ -16,6 +16,7 @@ class Chat extends Component {
     super(props);
     this.state = {
       showMessageBox:true,
+      messages:[],
     }
 
     this.waitForSocketConnection(() => {
@@ -41,7 +42,7 @@ class Chat extends Component {
   }
 
   handleClickOutside = () => {
-    this.props.close();
+    this.props.close && this.props.close();
   }
 
   addMessage(message) {
@@ -56,14 +57,16 @@ class Chat extends Component {
   sendMessageHandler = (e, message) => {
     e.preventDefault();
     const messageObject = {
-        from: "user1",
+        from: this.props.data ? this.props.data.username : "admin",
         content: message,
     };
     WebSocketInstance.newChatMessage(messageObject);
   }
 
   
-
+  componentWillUnmount(){
+    
+  }
 
   render() {
     let chatclasses = [classes.Chat];
@@ -88,7 +91,7 @@ class Chat extends Component {
           </div>
         </div>
         <PersonalChat />
-        <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages}/>
+        <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages} username={this.props.data ? this.props.data.username : null}/>
       </div>
     );
   }
@@ -104,6 +107,7 @@ class Chat extends Component {
 const mapStateToProps = (state) => {
   return {
     theme: state.theme.theme,
+    data: state.currentUser.data,
   };
 };
 

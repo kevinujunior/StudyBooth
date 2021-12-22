@@ -18,6 +18,7 @@
    height: 50px;
    width: 100%;
    border: 1px solid black;
+   padding: 10px;
 }
 
 .Messages{
@@ -30,20 +31,35 @@
     width: 100%;
     height: auto;
 }
+
 .Messages li{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    max-width: 60%;
+    position: sticky;
+    margin: 7px;
+    padding: 7px;
 }
 .Messages li img{
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
+.TimeAndAuth{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 .Sent{
-    right: 0;
+    background-color: cornflowerblue;
+    transform: translateX(65%);
+    border-radius: 15px 0px 15px 15px;
 }
 .Received{
+    background-color: grey;
    left: 0;
+   border-radius: 0px 15px 15px 15px;
 }
 
 .Input{

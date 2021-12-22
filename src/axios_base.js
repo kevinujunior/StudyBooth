@@ -3,7 +3,7 @@ import store from './store/store';
 import * as actionTypes from './store/actions/actionTypes';
 
 let isRefreshTokenFetched = false;
-
+let count = 0;
 const customAxios = axios.create({
     baseURL: `https://study-booth-backend.herokuapp.com/`,
     headers: {
@@ -51,8 +51,9 @@ customAxios.interceptors.response.use((response) => {
     }, async function (error) {
     const originalRequest = error.config;
 
-    if(error.response.status === 401 && isRefreshTokenFetched){
+    if(error.response.status === 401 && isRefreshTokenFetched && count === 5){
         isRefreshTokenFetched = false;
+        count = 0;
         store.dispatch(logout())
         return Promise.reject(error);
     }
@@ -60,6 +61,7 @@ customAxios.interceptors.response.use((response) => {
     if (error.response.status === 401 && !isRefreshTokenFetched) {
 
         isRefreshTokenFetched = true;
+        count++;
         const res = await customAxios.post('dj-rest-auth/token/refresh/',
         {
             refresh: localStorage.getItem('refresh_token'),

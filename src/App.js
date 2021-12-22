@@ -11,6 +11,7 @@ import Layout from './HOC/Layout/Layout';
 import * as actions from './store/actions/index';
 import axios from 'axios';
 import WebSocketInstance from './websocket';
+import Chat from './containers/Home/Chat/Chat';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -39,6 +40,9 @@ class App extends Component {
           </Route>
           <Route exact path="/layout" component ={Layout}/> 
           <Route exact path="/signup" component ={Signup}/> 
+          <Route exact path="/chat" >
+            <Layout><Chat /></Layout>
+          </Route>
           <Route exact path="/loading" component ={LoadingPage} />
           <Route exact path="/login"> 
             {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
