@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import classes from './MessageBox.css';
 import { IconButton } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -6,6 +6,13 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 const MessageBox = (props) => {
 
     const [message, setMessage] = useState("");
+
+    const node = useRef(null);
+
+    useEffect(() => {
+        const domNode = node.current;
+        if(domNode) domNode.scrollTop = domNode.scrollHeight;
+    },[props.messages])
 
     const renderMessages = (messages) => {
         const currentUser = props.username;
@@ -35,7 +42,7 @@ const MessageBox = (props) => {
           <div className={classes.Head}>
             <p>Randi++</p>
           </div>
-          <div className={classes.Messages}>
+          <div className={classes.Messages} ref={node}>
             <ul>
                 {renderMessages(props.messages)}
             </ul>
