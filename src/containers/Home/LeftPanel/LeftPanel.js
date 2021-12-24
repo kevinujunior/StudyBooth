@@ -19,7 +19,7 @@ class LeftPanel extends Component{
             <Auxi>
                 <Backdrop show={this.props.isVisible} clicked={this.props.closeLeftPanel}/>
                 <div className={classNames.join(' ')}>
-                    <DashBoard showChat={this.props.showChat}/>
+                    <DashBoard />
                 </div>
             </Auxi>
         )

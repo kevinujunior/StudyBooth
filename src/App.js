@@ -41,7 +41,7 @@ class App extends Component {
           <Route exact path="/layout" component ={Layout}/> 
           <Route exact path="/signup" component ={Signup}/> 
           <Route exact path="/chat" >
-            <Layout><Chat /></Layout>
+            {this.props.isAuthenticated ? <Layout><Chat /></Layout> : <Redirect to="/login" /> }
           </Route>
           <Route exact path="/loading" component ={LoadingPage} />
           <Route exact path="/login"> 

@@ -5,11 +5,12 @@ import {IconButton } from '@mui/material';
 import {withRouter} from 'react-router-dom'
 import ActionPopUp from '../../ActionPopup/CommentActionPopup';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import {connect } from 'react-redux';
-import * as actions from '../../../../../../../store/actions/index';
+
 import onClickOutside from 'react-onclickoutside';
 import axios from '../../../../../../../axios_base';
 
+
+import {deleteComment} from '../../../../../../../store/actions/feed'
 
 class CommentItem extends Component {
 
@@ -47,7 +48,8 @@ class CommentItem extends Component {
     }
 
     render(){
-        let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
+        let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes;
+        time = Math.max(time, 0);
         let cmtItemClasses = [classes.CommentRepliedItem];
         let replyBoxClasses = [classes.ReplyBox];
         if(this.props.theme === 'dark'){
@@ -94,8 +96,9 @@ class CommentItem extends Component {
                         </IconButton>
                     </div>
                     {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
-                        const res = await this.props.onCommentDelete(this.props.id);
+                        const res = await deleteComment(this.props.id);
                         if(res !== null) this.props.refreshReplies(true);
+                        console.log("deleted")
                     }}/> : null}
                 </div>
             </div>
@@ -103,9 +106,5 @@ class CommentItem extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onCommentDelete: (commentId) => actions.deleteComment(commentId)
-    }
-}
-export default connect(null, mapDispatchToProps)(withRouter(onClickOutside(CommentItem)));
+
+export default withRouter(onClickOutside(CommentItem));

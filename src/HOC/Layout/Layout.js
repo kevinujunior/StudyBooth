@@ -3,9 +3,9 @@ import classes from './Layout.css';
 import Header from '../../components/Home/Header/Header';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateFeed from '../../components/Home/MainSection/CreatePost/CreatePost';
-import Chat from '../../containers/Home/Chat/Chat';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import LeftPanel from '../../containers/Home/LeftPanel/LeftPanel'
+
+import {connect } from 'react-redux';
 class Layout extends Component {
 
     state = {
@@ -36,11 +36,10 @@ class Layout extends Component {
 
 
     componentWillMount(){
-        if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true,isChatActive: true, chatUnmount:true}) ;
-        if(window.innerWidth >= 630) this.setState({chatUnmount:false})
+        if(window.innerWidth < 630) this.setState({shouldLeftPanelVisible:true}) ;
         window.addEventListener('resize', () => {
-            if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false, chatUnmount: false})
-            else this.setState({shouldLeftPanelVisible:true, isChatActive: true, chatUnmount:true})
+            if(window.innerWidth >= 630) this.setState({shouldLeftPanelVisible:false})
+            else this.setState({shouldLeftPanelVisible:true})
         })
 
         console.log(this.state)
@@ -51,9 +50,11 @@ class Layout extends Component {
     }
 
     render(){
-        let ButtonIcon = <ChatBubbleIcon />;
+
+        let classesL = [classes.Layout]
+        if(this.props.theme == 'dark') classesL.push(classes.Dark)
         return (
-            <div className={classes.Layout}>
+            <div className={classesL.join(" ")}>
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
                     onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
@@ -61,20 +62,21 @@ class Layout extends Component {
 
                 {this.props.children}
 
-                {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)} showChat={this.state.chatUnmount}/> : null}
+                {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/> : null}
 
                 <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
                     {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
                 </Modal>
-
-                {!this.state.chatUnmount ? <Chat isActive={this.state.isChatActive} close={() => this.switchChatState(true)}/> : null}
-
-                <button className={classes.SwitchButton} onClick={() => this.switchChatState(this.state.isChatActive)}>
-                    {ButtonIcon}
-                </button>
             </div>
         );
     }
 }
 
-export default Layout;
+
+const mapStateToProps = (state) => {
+    return {
+        theme: state.theme.theme,
+    }
+}
+
+export default connect(mapStateToProps)(Layout);

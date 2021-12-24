@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.Dark {
+  background-color: #000000;
+}
+
 .SwitchButton {
   position: fixed;
   bottom: 10px;

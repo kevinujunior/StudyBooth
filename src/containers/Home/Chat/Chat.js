@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import WebSocketInstance from '../../../websocket';
 import MessageBox from './MessageBox';
 import onClickOutside from 'react-onclickoutside'
+import * as actions from '../../../store/actions/index'
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
@@ -63,9 +64,8 @@ class Chat extends Component {
     WebSocketInstance.newChatMessage(messageObject);
   }
 
-  
-  componentWillUnmount(){
-    
+  componentDidMount(){
+    this.props.onFetchUserProfile(localStorage.getItem('user'))
   }
 
   render() {
@@ -76,21 +76,9 @@ class Chat extends Component {
     }
     return (
       <div className={chatclasses.join(" ")}>
-        <div className={classes.Header}>
-          <div className={classes.Switch}>
-            <button className={classes.ActiveButton}>Chat</button>
-            <button>Classes</button>
-          </div>
-          <div className={classes.Option}>
-            <IconButton>
-              <SearchIcon className={classes.IconColor} />
-            </IconButton>
-            <IconButton>
-              <MoreVertIcon className={classes.IconColor} />
-            </IconButton>
-          </div>
+        <div className={classes.ChatList}>
+          <PersonalChat />
         </div>
-        <PersonalChat />
         <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages} username={this.props.data ? this.props.data.username : null}/>
       </div>
     );
@@ -111,4 +99,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(onClickOutside(Chat));
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(onClickOutside(Chat));

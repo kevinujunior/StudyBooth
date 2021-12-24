@@ -1,17 +1,13 @@
 .MessageBox{
-    height: calc(99%);
-    width: calc(100%);
-    right: -100%;
-    /* border: 2px solid green; */
-    position: absolute;
-    top: 0;
+    height: calc(100vh - 65px);
+    width: 75%;
     transition: right 0.5s;
     background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid lightgray;
 }
 
-.Show{
-    right: 0%;
-}
 
 .Head{
    display: flex; 
@@ -22,28 +18,31 @@
 }
 
 .Messages{
-    height: calc(100% - 100px);
+    flex-grow: 1;
     overflow-y: auto;
     padding: 0px 10px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-end; */
 }
 
-.Messages div{
-    width: 100%;
-    height: auto;
-}
 
-.Messages li{
+.MsgRow{
     display: flex;
     align-items: flex-start;
-    max-width: 60%;
-    position: sticky;
-    margin: 7px;
-    padding: 7px;
+    margin: 20px;
 }
-.Messages li img{
+.MsgRow img{
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.Msg{
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    max-width: 60%;
+    font-weight: 300;
 }
 
 .TimeAndAuth{
@@ -52,15 +51,16 @@
     flex-wrap: wrap;
 }
 .Sent{
-    background-color: cornflowerblue;
-    transform: translateX(65%);
-    border-radius: 15px 0px 15px 15px;
+    justify-content: flex-end;
 }
-.Received{
-    background-color: grey;
-   left: 0;
-   border-radius: 0px 15px 15px 15px;
+.Sent > div{
+    border-radius: 10px 0px 10px 10px;
+    background-color: #027CDE;
 }
+.Received > div{
+    border-radius: 0px 10px 10px 10px;
+}
+
 
 .Input{
     display: flex;

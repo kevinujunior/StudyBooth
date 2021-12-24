@@ -11,6 +11,7 @@ import onClickOutside from 'react-onclickoutside';
 import axios from '../../../../../../../axios_base';
 import CommentRepliedItem from "../CommentRepliedItem/CommentRepliedItem";
 
+import {deleteComment} from '../../../../../../../store/actions/feed'
 
 class CommentItem extends Component {
 
@@ -60,6 +61,7 @@ class CommentItem extends Component {
     }
 
     fetchReplies = (shouldRefresh) => {
+        console.log("refresh called", shouldRefresh)
         if(shouldRefresh){
             this.setState({
                 repliesNextPageNo:1,
@@ -91,10 +93,12 @@ class CommentItem extends Component {
         this.fetchReplies()
     }
 
+    
 
 
     render(){
-        let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60));
+        let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60)) ;
+        time = Math.max(0,time);
         let cmtItemClasses = [classes.CommentItem];
         let replyBoxClasses = [classes.ReplyBox];
         if(this.props.theme === 'dark'){
@@ -167,8 +171,9 @@ class CommentItem extends Component {
                         </IconButton>
                     </div>
                     {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
-                        const res = await this.props.onCommentDelete(this.props.id);
-                        if(res !== null) this.props.refreshComment();
+                        const res = await deleteComment(this.props.id);
+
+                        if(res !== null) this.props.refreshComment(true);
                     }}/> : null}
                     {this.state.isRepliesVisible && this.state.replies.length > 0 ? <div style={{'marginTop':'10px'}}>
                         {replies}

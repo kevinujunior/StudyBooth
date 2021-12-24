@@ -49,12 +49,15 @@ class Post extends Component{
 
     fetchComment= (shouldRefresh) => {
 
+        console.log("refresh", shouldRefresh)
         if(shouldRefresh){ //if we added new comment then we are passing a boolean to refresh the commentSection
             this.setState({
                 commentPageNo:1,
                 loading:true,
             })
         }
+
+        console.log(this.state)
 
         if(this.state.commentPageNo == null) {
             console.log("null comments");
@@ -75,7 +78,7 @@ class Post extends Component{
             this.setState({
                 comments: shouldRefresh ? [...res.data.results] : this.state.comments.concat(res.data.results),
                 loading:false,
-                cmtCount: res.data.results.length > 0 ? res.data.results[0].commentCount : this.state.cmtCount,
+                cmtCount: res.data.results.length > 0 ? res.data.results[0].commentCount : 0,
                 commentPageNo : cmtNextPage
             })
         })
@@ -122,6 +125,7 @@ class Post extends Component{
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
         let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes
+        time = Math.max(time, 0);
         
         return (
             <div className={classes.Wrapper}>
