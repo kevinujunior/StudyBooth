@@ -72,13 +72,7 @@
     float: right;
 }
 
-@media (max-width: 700px){
-    .Chat{
-        top:60px;
-        max-width: 300px;
-    }
 
-}
 
 @media (max-width:630px) {
     .Chat{

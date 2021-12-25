@@ -46,7 +46,7 @@ const MessageBox = (props) => {
           </div>
           <div className={classes.Input}>
                 <div className={classes.Comment}>
-                    <input type="text" value={message}  placeholder="write a comment..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
+                    <input type="text" value={message}  placeholder="enter a message..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
                         if (e.code === "Enter") {
                             e.preventDefault()
                             props.send(e, message);
