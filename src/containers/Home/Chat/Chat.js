@@ -60,7 +60,7 @@ class Chat extends Component {
     const messageObject = {
         from: this.props.data ? this.props.data.username : "admin",
         content: message,
-        chatId : 2,
+        chatId : 1,
     };
     WebSocketInstance.newChatMessage(messageObject);
   }

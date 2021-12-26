@@ -14,7 +14,7 @@ class WebSocketService {
   }
 
   connect() {
-    const chatId = 2;
+    const chatId = 1;
     const path = `ws://localhost:8000/ws/chat/${chatId}/`;
     this.socketRef = new WebSocket(path);
     this.socketRef.onopen = () => {
@@ -51,7 +51,7 @@ class WebSocketService {
 
 
   fetchMessages(username) {
-    const chatId = 2;
+    const chatId = 1;
     this.sendMessage({ command: 'fetch_messages', username: username, chatId: chatId});
   }
 
