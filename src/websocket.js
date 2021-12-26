@@ -14,7 +14,8 @@ class WebSocketService {
   }
 
   connect() {
-    const path = 'wss://study-booth-backend.herokuapp.com/ws/chat/test/';
+    const chatId = 2;
+    const path = `ws://localhost:8000/ws/chat/${chatId}/`;
     this.socketRef = new WebSocket(path);
     this.socketRef.onopen = () => {
       console.log('WebSocket open');
@@ -48,12 +49,14 @@ class WebSocketService {
     }
   }
 
+
   fetchMessages(username) {
-    this.sendMessage({ command: 'fetch_messages', username: username });
+    const chatId = 2;
+    this.sendMessage({ command: 'fetch_messages', username: username, chatId: chatId});
   }
 
   newChatMessage(message) {
-    this.sendMessage({ command: 'new_message', from: message.from, message: message.content }); 
+    this.sendMessage({ command: 'new_message', from: message.from, message: message.content, chatId :message.chatId }); 
   }
 
   addCallbacks(messagesCallback, newMessageCallback) {

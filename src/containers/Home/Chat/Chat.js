@@ -22,7 +22,7 @@ class Chat extends Component {
 
     this.waitForSocketConnection(() => {
       WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this))
-      WebSocketInstance.fetchMessages(this.props.currentUser);
+      WebSocketInstance.fetchMessages(this.props.data.username);
     });
   }
 
@@ -60,6 +60,7 @@ class Chat extends Component {
     const messageObject = {
         from: this.props.data ? this.props.data.username : "admin",
         content: message,
+        chatId : 2,
     };
     WebSocketInstance.newChatMessage(messageObject);
   }

@@ -20,11 +20,11 @@ const MessageBox = (props) => {
         return messages.map((message, i) => (
             <div  
                 id={message.id}
-                className={[classes.MsgRow , message.author === currentUser ? classes.Sent : classes.Received].join(" ")}>
+                className={[classes.MsgRow , message.user === currentUser ? classes.Sent : classes.Received].join(" ")}>
                 <img src="http://emilcarlsson.se/assets/mikeross.png" />
                 <div className={classes.Msg}>
                     <div >
-                        <p style={{fontSize:'11px'}}>{message.author}</p>
+                        <p style={{fontSize:'11px'}}>{message.user}</p>
                         <small style={{fontSize:'11px'}}>
                         {Math.round((new Date().getTime() - new Date(message.timestamp).getTime())/60000)} minutes ago
                         </small>
