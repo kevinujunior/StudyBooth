@@ -18,6 +18,13 @@
     width:35% ;
     max-width: 400px;
     height: 100%;
+    z-index: 100;
+    margin: 10px 5px;
+}
+
+.SearchInputBox{
+    z-index: 200;
+    position: relative;
 }
 
 .Dark{

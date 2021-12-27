@@ -159,6 +159,7 @@
     max-height: 400px;
     min-height: 70px;
     overflow-y: scroll;
+    overflow-wrap: normal;
 }
 .searchDropdown > ul{
   list-style: none;

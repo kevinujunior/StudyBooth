@@ -12,7 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ToggleButton from '../../UI/ToggleButton/ToggleButton';
 import AddIcon from '@mui/icons-material/Add';
 import axios from '../../../axios_base';
-import onClickOutside from 'react-onclickoutside'
+import onClickOutside from 'react-onclickoutside';
+import SearchBox from '../../UI/SearchBox/SearchBox';
 
 class Header extends Component {
 
@@ -27,45 +28,14 @@ class Header extends Component {
         })
     }
 
-    fetchSearch = () => {
-        let users = null;
-        axios.get(`users/userview/?user=${this.state.searchInput}`)
-        .then(response =>{
-            const search = response.data   
-            
-            var number_of_users = Object.keys(search).length;
-
-            if(number_of_users === 0) {
-                users = <li><p>No user found :-( </p></li>
-            }
-            else{
-                users = [...Array(number_of_users)].map((x, i) => {
-                    return  <li key={i} value={search[i]["username"]} onClick={() => {
-                        this.props.onFetchUserProfile(search[i]["id"]);
-                        this.props.history.push({   
-                            pathname: '/profile',
-                            userId: search[i]["id"],
-                        });
-                    }}>
-                        <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
-                        <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
-                        <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
-                    </li> 
-                })
-            } 
-
-            this.setState({
-                dropdown:users,
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        }); 
-    } 
-
-    triggerSearch = () => {
-        this.fetchSearch();
+    callBack = (search,i) => {
+        this.props.onFetchUserProfile(search[i]["id"]);
+        this.props.history.push({   
+            pathname: '/profile',
+            userId: search[i]["id"],
+        });
     }
+
     
     render(){
         
@@ -74,13 +44,8 @@ class Header extends Component {
             headerClasses.push(classes.Dark);
         }
 
-        let dropdownMenu = this.state.dropdown ? (<div className={classes.searchDropdown}>
-                            <ul class={classes.searchDropdownMenu} aria-label="submenu">
-                                {this.state.dropdown}
-                            </ul>
-                        </div>) : null;
         return (
-            <div className={headerClasses.join(" ")}>
+            <div className={headerClasses.join(" ")} >
                 <div className={classes.HeaderContent}>
                     <div className = {classes.homeIcon} title="Home">        
                         <img src={logo} alt=""  id={classes.fuckoff} onClick={() => {
@@ -95,24 +60,7 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className={classes.SearchAndCreate}>
-                        <div className={classes.Input}>
-                            <input 
-                                type="text" 
-                                className={classes.inputSearch}     
-                                value={this.state.searchinput}
-                                onChange={e => this.setState({
-                                    searchInput: e.target.value,
-                                })}
-                                onKeyPress={event => {
-                                    if (event.key === 'Enter') {
-                                        this.triggerSearch()
-                                    }
-                                }}
-                                placeholder="Type to Search...">
-                            </input>
-                            <button className={classes.btnSearch} onClick={this.triggerSearch}>{<SearchIcon/>}</button>
-                            {dropdownMenu}
-                        </div>
+                        <SearchBox theme={this.props.theme}/>
                         <div>
                             <button  className={classes.CreatePostButton1} onClick={this.props.onCreateFeedClick}>
                                 <p>Create Post</p>

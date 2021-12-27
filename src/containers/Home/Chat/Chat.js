@@ -8,6 +8,7 @@ import WebSocketInstance from '../../../websocket';
 import MessageBox from './MessageBox';
 import onClickOutside from 'react-onclickoutside'
 import * as actions from '../../../store/actions/index'
+import SearchBox from '../../../components/UI/SearchBox/SearchBox';
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
@@ -77,6 +78,9 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}>
         <div className={classes.ChatList}>
+          <div className={classes.SearchInputBox}>
+            <SearchBox theme={this.props.theme}/>
+          </div>
           <PersonalChat />
         </div>
         <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages} username={this.props.data ? this.props.data.username : null}/>
@@ -84,11 +88,6 @@ class Chat extends Component {
     );
   }
 }
-
-
-
-
-
 
 
 
