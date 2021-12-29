@@ -44,9 +44,12 @@ const MessageBox = (props) => {
         });
     }
 
-    console.log(props.show)
+    console.log("new message is loading ",props.loading)
     return(
       <div className={[classes.MessageBox, props.show ? classes.Show : null,].join(" ")}>
+          { props.loading ? <div className={classes.loader}>
+                        <div className={classes.bar}></div>
+                    </div> : null }
           <div className={classes.Head}>
             <IconButton onClick={() => props.setShowMessageBox(false)}><ArrowBackIcon /></IconButton>
             <h1>{props.chatName}</h1>

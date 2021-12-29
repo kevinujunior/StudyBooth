@@ -83,11 +83,11 @@
 
 @media (max-width:700px) {
     .Chat{
-        height: 85vh;
+        height: 80vh;
         width: 90vw;
         padding:10px;
         overflow-x:hidden;
-        margin-top: 90px;
+        margin-top: 110px;
     }
     .ChatList{
         width: 100%;

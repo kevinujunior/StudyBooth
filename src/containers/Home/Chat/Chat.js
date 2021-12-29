@@ -19,6 +19,7 @@ class Chat extends Component {
     chatId:null,
     chatList: [],
     chatName: "Anonymous",
+    loading:false,
   }
 
   initialiseChat = (chatId,username) => {
@@ -62,6 +63,7 @@ class Chat extends Component {
 
   setMessages = (messages) => {
     this.setState({ messages: messages.reverse()});
+    this.setState({loading:false})
   }
 
 
@@ -82,6 +84,7 @@ class Chat extends Component {
   }
 
   changeChatId = (chatId,friend) => {
+    this.setState({loading:true})
     console.log("chat id change", chatId)
     this.setState({chatId:chatId})
     this.setState({chatName:friend})
@@ -101,6 +104,7 @@ class Chat extends Component {
 
 
   fetchChatList = () => {
+    
     axios.get('users/userchats/')
     .then(res => {
       console.log(res.data)
@@ -145,6 +149,7 @@ class Chat extends Component {
           username={this.props.data ? this.props.data.username : null}
           chatName={this.state.chatName}
           setShowMessageBox={this.setShowMessageBox}
+          loading={this.state.loading}
         />
       </div>
     );
