@@ -28,11 +28,11 @@ class Header extends Component {
         })
     }
 
-    callBack = (search,i) => {
-        this.props.onFetchUserProfile(search[i]["id"]);
+    callBack = (userId) => {
+        this.props.onFetchUserProfile(userId);
         this.props.history.push({   
             pathname: '/profile',
-            userId: search[i]["id"],
+            userId: userId,
         });
     }
 
@@ -60,7 +60,7 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className={classes.SearchAndCreate}>
-                        <SearchBox theme={this.props.theme}/>
+                        <SearchBox theme={this.props.theme} headerCallBack={this.callBack}/>
                         <div>
                             <button  className={classes.CreatePostButton1} onClick={this.props.onCreateFeedClick}>
                                 <p>Create Post</p>

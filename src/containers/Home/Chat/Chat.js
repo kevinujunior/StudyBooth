@@ -84,6 +84,7 @@ class Chat extends Component {
   }
 
   changeChatId = (chatId,friend) => {
+    this.setState({messages:[]})
     this.setState({loading:true})
     console.log("chat id change", chatId)
     this.setState({chatId:chatId})
@@ -134,7 +135,7 @@ class Chat extends Component {
           <div className={classes.SearchInputBox}>
             <SearchBox 
               theme={this.props.theme} 
-              callBack={this.callback}
+              chatCallBack={this.callback}
             />
           </div>
           <PersonalChat 

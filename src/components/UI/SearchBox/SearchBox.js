@@ -31,7 +31,12 @@ const SearchBox = (props) => {
             }
             else{
                 users = [...Array(number_of_users)].map((x, i) => {
-                    return  <li key={i} value={search[i]["username"]} onClick={() => props.callBack(curruserId, search[i].id)}>
+                    return  <li key={i} value={search[i]["username"]} 
+                                onClick={() => {
+                                    if(props.chatCallBack) props.chatCallBack(curruserId, search[i].id);
+                                    if(props.headerCallBack) props.headerCallBack(search[i].id);
+                                }}
+                        >
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                         <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                         <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>

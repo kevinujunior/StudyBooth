@@ -118,6 +118,10 @@
     .Msg{
         max-width: 70%;
     }
+
+    .Msg > p{
+        font-size: 12px;
+    }
 }
 
 
