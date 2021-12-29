@@ -1,34 +1,41 @@
 import React, { Component } from "react";
 import classes from "./Chat.css";
 import { connect } from "react-redux";
-import SearchIcon from "@mui/icons-material/Search";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { IconButton } from "@mui/material";
 import WebSocketInstance from '../../../websocket';
 import MessageBox from './MessageBox';
 import onClickOutside from 'react-onclickoutside'
 import * as actions from '../../../store/actions/index'
 import SearchBox from '../../../components/UI/SearchBox/SearchBox';
+import axios from '../../../axios_base';
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
 class Chat extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMessageBox:true,
-      messages:[],
-    }
 
+  state = {
+    showMessageBox:true,
+    messages:[],
+    chatId:null,
+    chatList: [],
+  }
+
+  initialiseChat = (chatId,username) => {
+    console.log(chatId,username)
+    WebSocketInstance.setChatId(chatId);
+    console.log(this)
+    WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this))
     this.waitForSocketConnection(() => {
-      WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this))
-      WebSocketInstance.fetchMessages(this.props.data.username);
+      WebSocketInstance.fetchMessages(
+        username,
+        chatId,
+      );
     });
+    WebSocketInstance.connect();
   }
 
 
-  waitForSocketConnection(callback) {
+  waitForSocketConnection = (callback) => {
     const component = this;
     setTimeout(
         function () {
@@ -61,14 +68,46 @@ class Chat extends Component {
     const messageObject = {
         from: this.props.data ? this.props.data.username : "admin",
         content: message,
-        chatId : 1,
+        chatId : this.state.chatId,
     };
     WebSocketInstance.newChatMessage(messageObject);
   }
 
   componentDidMount(){
     this.props.onFetchUserProfile(localStorage.getItem('user'))
+    this.fetchChatList();
+    this.initialiseChat();
   }
+
+  changeChatId = (chatId) => {
+    console.log("chat id change", chatId)
+    this.setState({
+      chatId:chatId
+    })
+    WebSocketInstance.disconnect();
+    this.initialiseChat(chatId,this.props.data.username);
+  }
+
+  callback = (author, friend) => {
+    axios.post('chat/privatechat/', {author: author, friend:friend} )
+    .then(res => {
+      this.changeChatId(res.data.id)
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  fetchChatList = () => {
+    axios.get('users/userchats/')
+    .then(res => {
+      this.setState({
+        chatList: res.data
+      })
+      this.chatIdChanged();
+    })
+    .catch(err => console.log(err))
+  }
+
 
   render() {
     let chatclasses = [classes.Chat];
@@ -80,9 +119,9 @@ class Chat extends Component {
       <div className={chatclasses.join(" ")}>
         <div className={classes.ChatList}>
           <div className={classes.SearchInputBox}>
-            <SearchBox theme={this.props.theme}/>
+            <SearchBox theme={this.props.theme} callBack={this.callback}/>
           </div>
-          <PersonalChat />
+          <PersonalChat chatList={this.state.chatList} changeChatId={this.changeChatId}/>
         </div>
         <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages} username={this.props.data ? this.props.data.username : null}/>
       </div>

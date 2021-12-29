@@ -37,7 +37,6 @@
 
 
 
-
 .searchDropdown{
     z-index:-1;
     top: 10px;
@@ -56,11 +55,13 @@
     min-height: 70px;
     overflow-y: scroll;
     overflow-wrap: normal;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .Dark .searchDropdown{
     background-color: #202020;
     color: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 .searchDropdown > ul{
   list-style: none;
@@ -75,7 +76,7 @@
     display: flex;
     flex-direction: row;
 }
-.Dark .searchDropdown ul > li{
+.Dark .searchDropdown ul > li > p{
     color: white;
 }
 .searchDropdown ul > li:hover { 

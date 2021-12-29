@@ -72,7 +72,7 @@ export const fetchFeed = (pageNo, loading) => {
     }
 }
 
-export const createNewPost = (formData) => {
+export const createNewPost = (formData, callBack) => {
 
     return dispatch => {
         axios.post("feed/create_post/", formData)
@@ -84,7 +84,9 @@ export const createNewPost = (formData) => {
                 const json = JSON.stringify(error.response.data);
                 localStorage.setItem("createPostError", json);
             }
-          });
+        })
+        .finally(() => callBack());
+        
     }
 }
 

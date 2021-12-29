@@ -11,28 +11,32 @@ const SearchBox = (props) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [userList, setUserList] = useState(null);
 
+    console.log(props)
+
     const fetchSearch = () => {
         let users = null;
 
         axios.get(`users/userview/?user=${searchInput}`)
         .then(response =>{
             const search = response.data   
-            
+            console.log(response.data)
             var number_of_users = Object.keys(search).length;
+
+
+            let curruserId = localStorage.getItem('user');
 
             if(number_of_users === 0) {
                 users = <li><p>No user found :-( </p></li>
             }
             else{
                 users = [...Array(number_of_users)].map((x, i) => {
-                    return  <li key={i} value={search[i]["username"]} onClick={props.callBack}>
+                    return  <li key={i} value={search[i]["username"]} onClick={() => props.callBack(curruserId, search[i].id)}>
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />
                         <p className={classes.searchDropdownMenu__fullname}>{search[i]["fullName"]}</p>
                         <p className={classes.searchDropdownMenu__username}>@{search[i]["username"]}</p>
                     </li> 
                 })
             } 
-            console.log(users)
             setUserList(users)
             setShowDropdown(true)
         })
@@ -44,8 +48,8 @@ const SearchBox = (props) => {
     } 
 
 
-    let dropdownMenu = showDropdown ? (<div className={classes.searchDropdown} >
-        <ul class={classes.searchDropdownMenu} aria-label="submenu">
+    let dropdownMenu = showDropdown ? (<div className={classes.searchDropdown} tabIndex={0} onBlur={() => setShowDropdown(false)}>
+        <ul className={classes.searchDropdownMenu} aria-label="submenu">
             {userList}
         </ul>
     </div>) : null;
@@ -60,7 +64,7 @@ const SearchBox = (props) => {
     if(props.theme === 'dark') classess.push(classes.Dark);
 
     return (
-        <div className={classess.join(" ")} tabIndex={0} onBlur={() => setShowDropdown(false)}>
+        <div className={classess.join(" ")} >
             <input 
                 type="text" 
                 className={classes.inputSearch}     

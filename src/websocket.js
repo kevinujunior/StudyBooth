@@ -1,6 +1,7 @@
 class WebSocketService {
   static instance = null;
   callbacks = {};
+  chatId = null;
 
   static getInstance() {
     if (!WebSocketService.instance) {
@@ -13,9 +14,13 @@ class WebSocketService {
     this.socketRef = null;
   }
 
+  setChatId(chatId){
+    this.chatId= chatId;
+  }
+
   connect() {
-    const chatId = 1;
-    const path = `wss://study-booth-backend.herokuapp.com/ws/chat/${chatId}/`;
+    console.log("new connection with chat id ", this.chatId)
+    const path = `wss://study-booth-backend.herokuapp.com/ws/chat/${this.chatId}/`;
     this.socketRef = new WebSocket(path);
     this.socketRef.onopen = () => {
       console.log('WebSocket open');
@@ -35,6 +40,10 @@ class WebSocketService {
     };
   }
 
+  disconnect() {
+    this.socketRef.close();
+  }
+
   socketNewMessage(data) {
     const parsedData = JSON.parse(data);
     const command = parsedData.command;
@@ -50,8 +59,7 @@ class WebSocketService {
   }
 
 
-  fetchMessages(username) {
-    const chatId = 1;
+  fetchMessages(username,chatId) {
     this.sendMessage({ command: 'fetch_messages', username: username, chatId: chatId});
   }
 

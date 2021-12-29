@@ -2,11 +2,11 @@ import React from 'react';
 
 import ChatItem from '../ChatItem/ChatItem';
 import classes from './Chat.css';
-const Chat = () => {
+const Chat = (props) => {
 
     return(
         <div className={classes.Chat}>
-            <ChatItem />
+            {props.chatList.map((data,i) => <ChatItem data={data} key={i} changeChatId={props.changeChatId}/>)}
         </div>
     );
 }

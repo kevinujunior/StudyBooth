@@ -28,9 +28,10 @@ class Layout extends Component {
         })
     }
 
-    onCreateFeedClick = (currentState) => {
+    onCreateFeedClick = (val) => {
+        console.log("setting create feed")
         this.setState({
-            isCreatePostVisible: !currentState,
+            isCreatePostVisible: val,
         })
     }
 
@@ -57,15 +58,15 @@ class Layout extends Component {
             <div className={classesL.join(" ")}>
                 <Header 
                     onHamburgerClick = {() => this.onHamburgerClick(this.state.isLeftPanelVisible)}
-                    onCreateFeedClick = {() => this.onCreateFeedClick(this.state.isCreatePostVisible)}
+                    onCreateFeedClick = {() => this.onCreateFeedClick(true)}
                 />
 
                 {this.props.children}
 
                 {this.state.shouldLeftPanelVisible ? <LeftPanel isVisible = {this.state.isLeftPanelVisible} closeLeftPanel={() => this.onHamburgerClick(this.state.isLeftPanelVisible)}/> : null}
 
-                <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}>
-                    {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(this.state.isCreatePostVisible)}  /> : null }
+                <Modal show={this.state.isCreatePostVisible} closeModal={() => this.onCreateFeedClick(false)}>
+                    {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(false)}  /> : null }
                 </Modal>
             </div>
         );
