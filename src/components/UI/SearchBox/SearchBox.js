@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useState, useRef} from 'react';
 import classes from './SearchBox.css';
 import axios from '../../../axios_base';
 import { Avatar} from '@mui/material';
@@ -10,6 +10,7 @@ const SearchBox = (props) => {
     const [searchInput, setSearchInput] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const [userList, setUserList] = useState(null);
+    const dropdownNode = useRef("");
 
     console.log(props)
 
@@ -48,11 +49,13 @@ const SearchBox = (props) => {
     } 
 
 
-    let dropdownMenu = showDropdown ? (<div className={classes.searchDropdown} tabIndex={0} onBlur={() => setShowDropdown(false)}>
+    let dropdownMenu = showDropdown ? (<div className={classes.searchDropdown} ref={dropdownNode}  tabIndex={0} onBlur={() => setShowDropdown(false)}>
         <ul className={classes.searchDropdownMenu} aria-label="submenu">
             {userList}
         </ul>
     </div>) : null;
+
+    if(dropdownNode.current) dropdownNode.current.focus();
 
     console.log(showDropdown,dropdownMenu)
 

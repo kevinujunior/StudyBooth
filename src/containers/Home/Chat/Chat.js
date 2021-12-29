@@ -14,7 +14,7 @@ class Chat extends Component {
 
 
   state = {
-    showMessageBox:true,
+    showMessageBox:false,
     messages:[],
     chatId:null,
     chatList: [],
@@ -24,15 +24,14 @@ class Chat extends Component {
   initialiseChat = (chatId,username) => {
     console.log(chatId,username)
     WebSocketInstance.setChatId(chatId);
-    console.log(this)
-    WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this))
+    WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this));
+    WebSocketInstance.connect();
     this.waitForSocketConnection(() => {
       WebSocketInstance.fetchMessages(
         username,
         chatId,
       );
     });
-    WebSocketInstance.connect();
   }
 
 
@@ -88,6 +87,7 @@ class Chat extends Component {
     this.setState({chatName:friend})
     WebSocketInstance.disconnect();
     this.initialiseChat(chatId,this.props.data.username);
+    this.setShowMessageBox(true);
   }
 
   callback = (author, friend) => {
@@ -112,6 +112,11 @@ class Chat extends Component {
     .catch(err => console.log(err))
   }
 
+  setShowMessageBox = (val) => {
+    this.setState({showMessageBox:val})
+    console.log(this.state.showMessageBox)
+  }
+
 
   render() {
     let chatclasses = [classes.Chat];
@@ -123,9 +128,15 @@ class Chat extends Component {
       <div className={chatclasses.join(" ")}>
         <div className={classes.ChatList}>
           <div className={classes.SearchInputBox}>
-            <SearchBox theme={this.props.theme} callBack={this.callback}/>
+            <SearchBox 
+              theme={this.props.theme} 
+              callBack={this.callback}
+            />
           </div>
-          <PersonalChat chatList={this.state.chatList} changeChatId={this.changeChatId}/>
+          <PersonalChat 
+            chatList={this.state.chatList} 
+            changeChatId={this.changeChatId}
+          />
         </div>
         <MessageBox 
           show={this.state.showMessageBox} 
@@ -133,6 +144,7 @@ class Chat extends Component {
           messages={this.state.messages} 
           username={this.props.data ? this.props.data.username : null}
           chatName={this.state.chatName}
+          setShowMessageBox={this.setShowMessageBox}
         />
       </div>
     );

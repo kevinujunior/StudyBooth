@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import classes from './MessageBox.css';
 import { IconButton } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const MessageBox = (props) => {
 
@@ -43,10 +44,11 @@ const MessageBox = (props) => {
         });
     }
 
-
+    console.log(props.show)
     return(
       <div className={[classes.MessageBox, props.show ? classes.Show : null,].join(" ")}>
           <div className={classes.Head}>
+            <IconButton onClick={() => props.setShowMessageBox(false)}><ArrowBackIcon /></IconButton>
             <h1>{props.chatName}</h1>
           </div>
           <div className={classes.Messages} ref={node}>

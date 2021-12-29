@@ -167,7 +167,14 @@ class Post extends Component{
                         <div className={classes.Icons}>
                             <div className={classes.IconLeft}>
                                 <IconButton onClick = {this.postLike}>
-                                    {this.props.isLikedByuser ? <FavoriteIcon style={{color:"crimson"}}/> : <FavoriteBorderOutlinedIcon style={{color:"crimson"}}/> }
+                                    {this.props.isLikedByuser ? 
+                                        <FavoriteIcon 
+                                            style={{color:"crimson"}}
+                                        /> : 
+                                        <FavoriteBorderOutlinedIcon 
+                                            style={{color:"crimson"}}
+                                        /> 
+                                    }
                                 </IconButton>
                                 <p>{this.props.likesCount}</p>
                                 <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
@@ -177,26 +184,41 @@ class Post extends Component{
                             </div>
                             <div className={classes.VerticalLine}></div>
                             <div className={classes.Comment}>
-                                <input type="text" value={this.state.commentText} placeholder="write a comment..." onChange={this.commentHandler}/>
+                                <input 
+                                    type="text" 
+                                    value={this.state.commentText} 
+                                    placeholder="write a comment..." 
+                                    onChange={this.commentHandler}
+                                />
                             </div>
                             <IconButton onClick={this.postComment}>
                                 <SendRoundedIcon style={{color:"#1e90ff"}}/>
                             </IconButton>
                         </div>
                     </div>:null}
-                    { this.state.isCommentVisibe ? <CommentSection theme={this.props.theme} fetchComment={this.fetchComment} comments={this.state.comments} postId={this.props.id} ifMoreComment={this.state.commentPageNo != null}/>  : null}
+                    { this.state.isCommentVisibe ? 
+                        <CommentSection 
+                            theme={this.props.theme} 
+                            fetchComment={this.fetchComment} 
+                            comments={this.state.comments} 
+                            postId={this.props.id} 
+                            ifMoreComment={this.state.commentPageNo != null}/>  
+                        : null
+                    }
                 </div>
                 {this.state.isActionsVisible ?
-                        <ActionPopUp 
-                            userId={this.props.userId} 
-                            onDeletePost={() => {
-                                this.setState({
-                                    loading:true,
-                                })
-                                this.props.onDeletePost(this.props.id)
-                            }}
-                            close={() => this.setState({isActionsVisible:false})}
-                        /> : null}
+                    <ActionPopUp 
+                        userId={this.props.userId} 
+                        onDeletePost={() => {
+                            this.setState({
+                                loading:true,
+                            })
+                            this.props.onDeletePost(this.props.id)
+                        }}
+                        close={() => this.setState({isActionsVisible:false})}
+                    /> : 
+                    null
+                }
             </div>
     )
   }
