@@ -18,6 +18,7 @@ class Chat extends Component {
     messages:[],
     chatId:null,
     chatList: [],
+    chatName: "Anonymous",
   }
 
   initialiseChat = (chatId,username) => {
@@ -54,11 +55,13 @@ class Chat extends Component {
     this.props.close && this.props.close();
   }
 
-  addMessage(message) {
+  addMessage = (message) => {
+    let length = this.state.messages.length;
+    if(this.state.messages[length-1].id === message.id) return;
     this.setState({ messages: [...this.state.messages, message]});
   }
 
-  setMessages(messages) {
+  setMessages = (messages) => {
     this.setState({ messages: messages.reverse()});
   }
 
@@ -79,11 +82,10 @@ class Chat extends Component {
     this.initialiseChat();
   }
 
-  changeChatId = (chatId) => {
+  changeChatId = (chatId,friend) => {
     console.log("chat id change", chatId)
-    this.setState({
-      chatId:chatId
-    })
+    this.setState({chatId:chatId})
+    this.setState({chatName:friend})
     WebSocketInstance.disconnect();
     this.initialiseChat(chatId,this.props.data.username);
   }
@@ -92,6 +94,7 @@ class Chat extends Component {
     axios.post('chat/privatechat/', {author: author, friend:friend} )
     .then(res => {
       this.changeChatId(res.data.id)
+      this.setState({chatName:friend})
     })
     .catch(err => console.log(err))
   }
@@ -100,6 +103,7 @@ class Chat extends Component {
   fetchChatList = () => {
     axios.get('users/userchats/')
     .then(res => {
+      console.log(res.data)
       this.setState({
         chatList: res.data
       })
@@ -123,7 +127,13 @@ class Chat extends Component {
           </div>
           <PersonalChat chatList={this.state.chatList} changeChatId={this.changeChatId}/>
         </div>
-        <MessageBox show={this.state.showMessageBox} send={this.sendMessageHandler} messages={this.state.messages} username={this.props.data ? this.props.data.username : null}/>
+        <MessageBox 
+          show={this.state.showMessageBox} 
+          send={this.sendMessageHandler} 
+          messages={this.state.messages} 
+          username={this.props.data ? this.props.data.username : null}
+          chatName={this.state.chatName}
+        />
       </div>
     );
   }

@@ -17,11 +17,13 @@ const MessageBox = (props) => {
     const renderMessages = (messages) => {
         const currentUser = props.username;
         if(messages === undefined) return;
+
+        console.log(messages)
         return messages.map((message, i) => {
 
             let time = Math.floor((new Date().getTime() - new Date(message.timestamp).getTime())/(1000*60)); //time in minutes
             time = Math.max(time, 0);
-            
+
             return (
                 <div  
                     key={i}
@@ -45,7 +47,7 @@ const MessageBox = (props) => {
     return(
       <div className={[classes.MessageBox, props.show ? classes.Show : null,].join(" ")}>
           <div className={classes.Head}>
-            <h1>Chat++</h1>
+            <h1>{props.chatName}</h1>
           </div>
           <div className={classes.Messages} ref={node}>
                 {renderMessages(props.messages)}

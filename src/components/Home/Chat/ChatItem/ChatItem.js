@@ -4,7 +4,16 @@ import classes from './ChatItem.css';
 
 class ChatItem extends Component {
     
-    
+    state = {
+        friend:null,
+    }
+
+    componentDidMount(){
+        let curruserId = localStorage.getItem('user');
+        let friend = curruserId == this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
+        this.setState({friend:friend});
+    }
+
     render(){
         let chatClass = [classes.ChatItem];
         
@@ -12,12 +21,12 @@ class ChatItem extends Component {
         //     chatClass.push(classes.Dark);
         // } 
         return (
-            <div className={chatClass.join(' ')} onClick={() => this.props.changeChatId(this.props.data.id)}>
+            <div className={chatClass.join(' ')} onClick={() => this.props.changeChatId(this.props.data.id,this.state.friend)}>
                 {/* <div className="rajkumar">dfiushsiisdid</div> */}
                 <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" alt="lull"/>
                 <div className={classes.ChatPreview}>
                     <div>
-                        <h4>{this.props.data? this.props.data.friend.username : null}</h4>
+                        <h4>{this.state.friend}</h4>
                         <p>This is a message .</p>
                     </div>
 
