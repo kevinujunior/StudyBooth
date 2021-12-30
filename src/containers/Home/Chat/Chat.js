@@ -22,6 +22,8 @@ class Chat extends Component {
     chatName: "Anonymous",
     loading:false,
     showAddGroup:false,
+    grpName:null,
+    grpDescription:null,
   }
 
   initialiseChat = (chatId,username) => {
@@ -125,6 +127,16 @@ class Chat extends Component {
   }
 
 
+  createGroup = () => {
+    axios.post('chat/groupchat/', {
+      name:this.state.grpName,
+      description:this.state.grpDescription,
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+
+
   render() {
     let chatclasses = [classes.Chat];
     if (this.props.theme === "dark") chatclasses.push(classes.Dark);
@@ -141,8 +153,9 @@ class Chat extends Component {
             <div className={classes.Backdrop} onClick={() => this.setState({showAddGroup:false})}></div>
             <div className={classes.AddGroupBox}>
                 <h3>Add New Group</h3>
-                <input placeholder="enter group name"></input>
-                <p className={classes.Button}>Create Group ➡️</p>
+                <input placeholder="enter group name" onChange={(e) => this.setState({grpName:e.target.value})}></input>
+                <input placeholder="enter group description" onChange={(e) => this.setState({grpDescription:e.target.value})}></input>
+                <p className={classes.Button} onClick={this.createGroup}>Create Group ➡️</p>
             </div>
           </div>
           <div className={classes.SearchInputBox}>

@@ -1,0 +1,17 @@
+.ChatPopUp{
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    width: 150px;
+}
+.Dark {
+    background-color: #2E2E34!important;
+}
+.ChatPopUpItem{
+    margin: 10px auto;
+    cursor: pointer;
+}

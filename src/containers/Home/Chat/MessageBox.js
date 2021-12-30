@@ -4,17 +4,19 @@ import { IconButton } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ChatPopUp from './ChatPopUp/ChatPopUp';
 
 const MessageBox = (props) => {
 
     const [message, setMessage] = useState("");
+    const [showPopUp, setShowPopUp] = useState(false);
 
     const node = useRef(null);
 
     useEffect(() => {
         const domNode = node.current;
         if(domNode) domNode.scrollTop = domNode.scrollHeight;
-    },[props.messages])
+    },[props.messages, props.show])
 
     const renderMessages = (messages) => {
         const currentUser = props.username;
@@ -30,15 +32,15 @@ const MessageBox = (props) => {
                 <div  
                     key={i}
                     className={[classes.MsgRow , message.user === currentUser ? classes.Sent : classes.Received].join(" ")}>
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" />
+                    {/* <img src="http://emilcarlsson.se/assets/mikeross.png" /> */}
                     <div className={classes.Msg}>
+                        <p>{message.content}</p>
                         <div >
                             {/* <p style={{fontSize:'11px'}}>{message.user}</p> */}
-                            <small style={{fontSize:'11px'}}>
-                            {time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}
+                            <small style={{fontSize:'10px', fontStyle:'italic'}}>
+                            {time ? time < 60 ? time+"mn ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}
                             </small>
                         </div>
-                        <p>{message.content}</p>
                     </div>
                 </div>
             )
@@ -70,7 +72,8 @@ const MessageBox = (props) => {
                     <h1>{props.chatName}</h1>
                 </div>
                 <div>
-                    <IconButton className={classes.OptionButton}><MoreHorizIcon /></IconButton>
+                    <IconButton className={classes.OptionButton} onClick={() => setShowPopUp(true)}><MoreHorizIcon /></IconButton>
+                    {showPopUp ? <ChatPopUp setPopUp={setShowPopUp} theme={props.theme}/> : null}
                 </div>
             </div>
             <div className={classes.Messages} ref={node}>
