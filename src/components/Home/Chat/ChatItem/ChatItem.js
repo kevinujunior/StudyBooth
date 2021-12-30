@@ -6,12 +6,17 @@ class ChatItem extends Component {
     
     state = {
         friend:null,
+        id:null
     }
 
     componentDidMount(){
         let curruserId = localStorage.getItem('user');
-        let friend = curruserId == this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
-        this.setState({friend:friend});
+        let friend;
+        if(this.props.data.author == null) friend = this.props.data.name;
+        else friend = this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
+        
+        let id = this.props.data.id;
+        this.setState({friend:friend, id:id});
     }
 
     render(){
@@ -21,7 +26,7 @@ class ChatItem extends Component {
         //     chatClass.push(classes.Dark);
         // } 
         return (
-            <div className={chatClass.join(' ')} onClick={() => this.props.changeChatId(this.props.data.id,this.state.friend)}>
+            <div className={chatClass.join(' ')} onClick={() => this.props.changeChatId(this.state.id,this.state.friend)}>
                 {/* <div className="rajkumar">dfiushsiisdid</div> */}
                 <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" alt="lull"/>
                 <div className={classes.ChatPreview}>

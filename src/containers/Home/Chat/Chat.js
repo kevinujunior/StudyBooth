@@ -111,15 +111,24 @@ class Chat extends Component {
 
 
   fetchChatList = () => {
+
+    let list = [];
     axios.get('users/userchats/')
     .then(res => {
-      console.log(res.data)
-      this.setState({
-        chatList: res.data
+      list = res.data;
+      axios.get('users/usergroupchats/')
+      .then(res => {
+        list = [...list, ...res.data]
+        // console.log(list)
+        this.setState({chatList:list})
       })
+      .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
+
   }
+
+  
 
   setShowMessageBox = (val) => {
     this.setState({showMessageBox:val})

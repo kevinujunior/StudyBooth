@@ -12,7 +12,6 @@ const SearchBox = (props) => {
     const [userList, setUserList] = useState(null);
     const dropdownNode = useRef("");
 
-    console.log(props)
 
     const fetchSearch = () => {
         let users = null;
@@ -62,7 +61,6 @@ const SearchBox = (props) => {
 
     if(dropdownNode.current) dropdownNode.current.focus();
 
-    console.log(showDropdown,dropdownMenu)
 
     const triggerSearch = () => {
         fetchSearch();
