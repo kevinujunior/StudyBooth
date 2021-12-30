@@ -3,6 +3,7 @@ import classes from './MessageBox.css';
 import { IconButton } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const MessageBox = (props) => {
 
@@ -32,7 +33,7 @@ const MessageBox = (props) => {
                     <img src="http://emilcarlsson.se/assets/mikeross.png" />
                     <div className={classes.Msg}>
                         <div >
-                            <p style={{fontSize:'11px'}}>{message.user}</p>
+                            {/* <p style={{fontSize:'11px'}}>{message.user}</p> */}
                             <small style={{fontSize:'11px'}}>
                             {time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}
                             </small>
@@ -59,8 +60,18 @@ const MessageBox = (props) => {
                 : null 
             }
             <div className={classes.Head}>
-                <IconButton onClick={() => props.setShowMessageBox(false)}><ArrowBackIcon /></IconButton>
-                <h1>{props.chatName}</h1>
+                <div>
+                    <IconButton 
+                        onClick={() => props.setShowMessageBox(false)} 
+                        className={classes.BackButton}
+                        >
+                        <ArrowBackIcon />
+                    </IconButton>
+                    <h1>{props.chatName}</h1>
+                </div>
+                <div>
+                    <IconButton className={classes.OptionButton}><MoreHorizIcon /></IconButton>
+                </div>
             </div>
             <div className={classes.Messages} ref={node}>
                     {renderMessages(props.messages)}

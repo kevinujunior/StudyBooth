@@ -1,12 +1,10 @@
 .Chat{
     height: 85vh;
     background-color: white;
-    padding:10px;
     max-width: 1440px;
     /* overflow-y: scroll; */
     box-sizing: border-box;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-    transition: all 0.5s;
     margin: auto;
     margin-top: 100px;
     display: flex;
@@ -20,6 +18,8 @@
     height: 100%;
     margin: 10px 5px;
     overflow-y: auto;
+    position: relative;
+    padding: 10px;
 }
 
 .SearchInputBox{
@@ -29,6 +29,7 @@
     position: sticky;
     top: 0;
     left: 0;
+    display: flex;
 }
 
 .Dark{
@@ -38,50 +39,70 @@
     color: white;
 }
 
-.Dark p{
+.Dark .AddButton{
     color: white;
-    opacity: 0.7;
-}
-.Dark .Switch{
-    color: white;
+    margin-left: 5px;
 }
 
-.Dark .IconColor{
-    color: white;
-}
-
-.Header {
+.AddGroup{
+    height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.AddGroup .Backdrop{
+    height: 98%;
+    width: 100%;
+    position: absolute;
+    z-index: 210;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+}
+
+.AddGroupBox{
+    width: 80%;
+    background-color: #f6f1fc;
+    border-radius: 5px;
+    padding: 20px 10px 10px 25px;
+    z-index: 220;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.AddGroupBox h3{
+    font-style: italic;
+}
+
+.AddGroupBox input{
+    flex: 1;
+    width: 90%;
+    padding-left: 0px;
     background-color: inherit;
-}
-
-
-.Switch{
-    display: inline-block;
-    margin:auto;
-}
-
-.Switch > button {
-    outline: none;
     border: none;
-    background-color: transparent;
+    border-bottom: 1px solid #4A2AD3;
+    margin: 10px 0px;
+}
+
+.AddGroupBox .Button{
+    padding: 10px;
+    padding-left: 0px;
+    border:none;
+    margin: 10px 0px;
+    color: black;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    margin: 0px 20px;
-    color: inherit;
+    text-decoration: underline !important;
 }
 
-.ActiveButton {
-    border-bottom: 2px solid grey !important;
+.Dark .AddGroupBox{
+    background-color: #2E2E34;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-.Option{
-    display: inline-block;
-    float: right;
-}
+
 
 @media (max-width:700px) {
     .Chat{

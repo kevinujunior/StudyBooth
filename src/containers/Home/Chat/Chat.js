@@ -3,10 +3,11 @@ import classes from "./Chat.css";
 import { connect } from "react-redux";
 import WebSocketInstance from '../../../websocket';
 import MessageBox from './MessageBox';
-import onClickOutside from 'react-onclickoutside'
 import * as actions from '../../../store/actions/index'
 import SearchBox from '../../../components/UI/SearchBox/SearchBox';
 import axios from '../../../axios_base';
+import { IconButton } from "@mui/material";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
@@ -20,6 +21,7 @@ class Chat extends Component {
     chatList: [],
     chatName: "Anonymous",
     loading:false,
+    showAddGroup:false,
   }
 
   initialiseChat = (chatId,username) => {
@@ -51,9 +53,6 @@ class Chat extends Component {
     }, 100);
   }
 
-  handleClickOutside = () => {
-    this.props.close && this.props.close();
-  }
 
   addMessage = (message) => {
     let length = this.state.messages.length;
@@ -84,6 +83,10 @@ class Chat extends Component {
   }
 
   changeChatId = (chatId,friend) => {
+    if(this.state.chatId === chatId) {
+      this.setShowMessageBox(true);
+      return;
+    };
     WebSocketInstance.disconnect();
     this.setState({
       messages:[],
@@ -131,11 +134,27 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}>
         <div className={classes.ChatList}>
+          <div 
+            className={classes.AddGroup} 
+            style={{'display':`${this.state.showAddGroup ? 'flex':'none'}`}}
+          >
+            <div className={classes.Backdrop} onClick={() => this.setState({showAddGroup:false})}></div>
+            <div className={classes.AddGroupBox}>
+                <h3>Add New Group</h3>
+                <input placeholder="enter group name"></input>
+                <p className={classes.Button}>Create Group ➡️</p>
+            </div>
+          </div>
           <div className={classes.SearchInputBox}>
             <SearchBox 
               theme={this.props.theme} 
               chatCallBack={this.callback}
             />
+            <IconButton 
+              className={classes.AddButton} 
+              onClick={() => this.setState({showAddGroup:true})}>
+                <AddCircleIcon />
+            </IconButton>
           </div>
           <PersonalChat 
             chatList={this.state.chatList} 
@@ -172,4 +191,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(onClickOutside(Chat));
+export default connect(mapStateToProps,mapDispatchToProps)(Chat);

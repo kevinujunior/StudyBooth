@@ -42,7 +42,6 @@ class  createPost extends Component {
         formData.append('user' ,localStorage.getItem('user'))
        
         this.props.onCreateNewPost(formData, () => {
-
             if(localStorage.getItem("createPostError") !== 'null'){
                 this.setState({
                     error: JSON.parse(localStorage.getItem("createPostError")),
@@ -51,7 +50,6 @@ class  createPost extends Component {
                 localStorage.setItem("createPostError",null)
             }
             else{
-
                 this.props.closeModal();
                 this.setState({
                     error: null,
