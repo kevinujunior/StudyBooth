@@ -56,6 +56,12 @@ class WebSocketService {
     if (command === 'new_message') {
       this.callbacks[command](parsedData.message);
     }
+    if (command === 'group_messages') {
+      this.callbacks[command](parsedData.messages);
+    }
+    if (command === 'new_group_message') {
+      this.callbacks[command](parsedData.message);
+    }
   }
 
 

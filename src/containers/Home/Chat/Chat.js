@@ -25,11 +25,14 @@ class Chat extends Component {
     showAddGroup:false,
     grpName:null,
     grpDescription:null,
-    whichChat:null,
+    whichChat:'Group',
   }
+
 
   initialiseChat = (chatId,username) => {
     console.log(chatId,username)
+    if (chatId==null) return
+
     WebSocketInstance.setChatId(chatId);
     WebSocketInstance.addCallbacks(
       this.setMessages.bind(this), 
@@ -37,13 +40,27 @@ class Chat extends Component {
       this.setGroupMessages.bind(this),
       this.addGroupMessage.bind(this),
     );
-    WebSocketInstance.connect();
-    this.waitForSocketConnection(() => {
-      WebSocketInstance.fetchMessages(
-        username,
-        chatId,
-      );
-    });
+
+    console.log(this.state.whichChat)
+    if(this.state.whichChat==='Group'){
+        WebSocketInstance.connect();
+        this.waitForSocketConnection(() => {
+          WebSocketInstance.fetchGroupMessages(
+            username,
+            chatId,
+          );
+        });
+  }
+
+  else{
+        WebSocketInstance.connect();
+        this.waitForSocketConnection(() => {
+          WebSocketInstance.fetchMessages(
+            username,
+            chatId,
+          );
+        });
+      }
   }
 
 
@@ -70,6 +87,7 @@ class Chat extends Component {
   }
 
   setMessages = (messages) => {
+    console.log(messages)
     this.setState({ messages: messages.reverse()});
     this.setState({loading:false})
   }
@@ -81,6 +99,7 @@ class Chat extends Component {
   }
 
   setGroupMessages = (messages) => {
+    console.log(messages)
     this.setState({ grpMessages: messages.reverse()});
     this.setState({loading:false})
   }
@@ -92,16 +111,39 @@ class Chat extends Component {
       content: message,
       chatId : this.state.chatId,
     };
-    WebSocketInstance.newChatMessage(messageObject);
+    if(this.state.whichChat==='Group'){
+      
+      WebSocketInstance.newGroupMessage(messageObject);
+    }
+    else{
+      WebSocketInstance.newChatMessage(messageObject);
+    }
   }
 
+  sendGroupMessageHandler = (e, message) => {
+    e.preventDefault();
+    const messageObject = {
+      from: this.props.data ? this.props.data.username : "admin",
+      content: message,
+      chatId : this.state.chatId,
+    };
+    WebSocketInstance.newGroupMessage(messageObject);
+  }
+
+  
+
   componentDidMount(){
+
+
     this.props.onFetchUserProfile(localStorage.getItem('user'))
     this.fetchChatList();
     this.initialiseChat();
   }
 
   changeChatId = (chatId,chatName,whichChat) => {
+
+    console.log(whichChat)
+
     if(this.state.chatId === chatId && this.state.whichChat === whichChat) {
       this.setShowMessageBox(true);
       return;
@@ -113,6 +155,7 @@ class Chat extends Component {
       loading:true,
       chatId:chatId,
       chatName:chatName,
+      whichChat: whichChat,
     })
     this.initialiseChat(chatId,this.props.data.username);
     this.setShowMessageBox(true);
@@ -150,7 +193,6 @@ class Chat extends Component {
 
   setShowMessageBox = (val) => {
     this.setState({showMessageBox:val})
-    console.log(this.state.showMessageBox)
   }
 
 
@@ -204,7 +246,7 @@ class Chat extends Component {
         <MessageBox 
           show={this.state.showMessageBox} 
           send={this.sendMessageHandler} 
-          messages={this.state.messages} 
+          messages={this.state.whichChat=='Group' ? this.state.grpMessages: this.state.messages} 
           username={this.props.data ? this.props.data.username : null}
           chatName={this.state.chatName}
           setShowMessageBox={this.setShowMessageBox}
