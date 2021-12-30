@@ -10,20 +10,24 @@ class ChatItem extends Component {
         whichChat:null,
     }
 
-    componentDidMount(){
+
+    componentWillMount(){
+
         let curruserId = localStorage.getItem('user');
-        let friend;
+        let friend,id,whichChat;
+
         if(this.props.data.author == null){
             friend = this.props.data.name;
-            this.setState({whichChat:'Group'})
+            whichChat = 'Group';
         } 
         else {
             friend = curruserId == this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
-            this.setState({whichChat:'User'})
+            whichChat = 'User';
         }
         
-        let id = this.props.data.id;
-        this.setState({friend:friend, id:id});
+        id = this.props.data.id;
+        this.setState({friend:friend, id:id, whichChat: whichChat});
+        console.log(this.state)
     }
 
     render(){
