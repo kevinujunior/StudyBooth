@@ -17,6 +17,7 @@ class Chat extends Component {
   state = {
     showMessageBox:false,
     messages:[],
+    grpMessages:[],
     chatId:null,
     chatList: [],
     chatName: "Anonymous",
@@ -24,12 +25,18 @@ class Chat extends Component {
     showAddGroup:false,
     grpName:null,
     grpDescription:null,
+    whichChat:null,
   }
 
   initialiseChat = (chatId,username) => {
     console.log(chatId,username)
     WebSocketInstance.setChatId(chatId);
-    WebSocketInstance.addCallbacks(this.setMessages.bind(this), this.addMessage.bind(this));
+    WebSocketInstance.addCallbacks(
+      this.setMessages.bind(this), 
+      this.addMessage.bind(this), 
+      this.setGroupMessages.bind(this),
+      this.addGroupMessage.bind(this),
+    );
     WebSocketInstance.connect();
     this.waitForSocketConnection(() => {
       WebSocketInstance.fetchMessages(
@@ -67,13 +74,23 @@ class Chat extends Component {
     this.setState({loading:false})
   }
 
+  addGroupMessage = (message) => {
+    let length = this.state.grpMessages.length;
+    if(this.state.grpMessages[length-1].id === message.id) return;
+    this.setState({ grpMessages: [...this.state.grpMessages, message]});
+  }
+
+  setGroupMessages = (messages) => {
+    this.setState({ grpMessages: messages.reverse()});
+    this.setState({loading:false})
+  }
 
   sendMessageHandler = (e, message) => {
     e.preventDefault();
     const messageObject = {
-        from: this.props.data ? this.props.data.username : "admin",
-        content: message,
-        chatId : this.state.chatId,
+      from: this.props.data ? this.props.data.username : "admin",
+      content: message,
+      chatId : this.state.chatId,
     };
     WebSocketInstance.newChatMessage(messageObject);
   }
@@ -84,17 +101,18 @@ class Chat extends Component {
     this.initialiseChat();
   }
 
-  changeChatId = (chatId,friend) => {
-    if(this.state.chatId === chatId) {
+  changeChatId = (chatId,chatName,whichChat) => {
+    if(this.state.chatId === chatId && this.state.whichChat === whichChat) {
       this.setShowMessageBox(true);
       return;
     };
     WebSocketInstance.disconnect();
     this.setState({
       messages:[],
+      grpMessages:[],
       loading:true,
       chatId:chatId,
-      chatName:friend,
+      chatName:chatName,
     })
     this.initialiseChat(chatId,this.props.data.username);
     this.setShowMessageBox(true);

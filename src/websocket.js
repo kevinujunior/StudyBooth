@@ -67,9 +67,19 @@ class WebSocketService {
     this.sendMessage({ command: 'new_message', from: message.from, message: message.content, chatId :message.chatId }); 
   }
 
-  addCallbacks(messagesCallback, newMessageCallback) {
+  fetchGroupMessages(username,chatId) {
+    this.sendMessage({ command: 'fetch_group_messages', username: username, chatId: chatId});
+  }
+
+  newGroupMessage(message) {
+    this.sendMessage({ command: 'new_group_message', from: message.from, message: message.content, chatId :message.chatId }); 
+  }
+
+  addCallbacks(messagesCallback, newMessageCallback, groupMessageCallback, newGroupMessageCallback) {
     this.callbacks['messages'] = messagesCallback;
     this.callbacks['new_message'] = newMessageCallback;
+    this.callbacks['group_messages'] = groupMessageCallback;
+    this.callbacks['new_group_message'] = newGroupMessageCallback;
   }
   
   sendMessage(data) {
