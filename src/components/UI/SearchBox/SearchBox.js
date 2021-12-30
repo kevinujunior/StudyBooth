@@ -34,6 +34,7 @@ const SearchBox = (props) => {
                                 onClick={() => {
                                     if(props.chatCallBack) props.chatCallBack(curruserId, search[i].id);
                                     if(props.headerCallBack) props.headerCallBack(search[i].id);
+                                    if(props.addUserCallBack) props.addUserCallBack(search[i].id)
                                 }}
                         >
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />

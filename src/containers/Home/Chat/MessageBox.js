@@ -5,11 +5,13 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatPopUp from './ChatPopUp/ChatPopUp';
+import SearchBox from '../../../components/UI/SearchBox/SearchBox';
 
 const MessageBox = (props) => {
 
     const [message, setMessage] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
+    const [showAddUserBox, setShowAddUserBox] = useState(false);
 
     const node = useRef(null);
 
@@ -22,7 +24,6 @@ const MessageBox = (props) => {
         const currentUser = props.username;
         if(messages === undefined) return;
 
-        console.log(messages)
         return messages.map((message, i) => {
 
             let time = Math.floor((new Date().getTime() - new Date(message.timestamp).getTime())/(1000*60)); //time in minutes
@@ -47,7 +48,6 @@ const MessageBox = (props) => {
         });
     }
 
-    console.log("new message is loading ",props.loading)
     return(
       <div className={[
             classes.MessageBox, 
@@ -61,6 +61,19 @@ const MessageBox = (props) => {
                     </div> 
                 : null 
             }
+
+            <div className={classes.Backdrop} style={{'display':`${showAddUserBox ? 'block':'none'}`}} onClick={() => setShowAddUserBox(false)}></div>
+            <div 
+                className={classes.AddUserBox}
+                style={{'display':`${showAddUserBox ? 'block':'none'}`}}
+            >
+                <div style={{ 'marginTop':'10%','height':'auto', 'zIndex':'230'}}>
+                    <SearchBox addUserCallBack={(userId) => {
+                        props.addNewUserToGroup(userId);
+                        setShowAddUserBox(false);
+                    }}/>
+                </div>
+            </div>
             <div className={classes.Head}>
                 <div>
                     <IconButton 
@@ -73,7 +86,13 @@ const MessageBox = (props) => {
                 </div>
                 <div>
                     <IconButton className={classes.OptionButton} onClick={() => setShowPopUp(true)}><MoreHorizIcon /></IconButton>
-                    {showPopUp ? <ChatPopUp setPopUp={setShowPopUp} theme={props.theme}/> : null}
+                    {showPopUp ? 
+                        <ChatPopUp 
+                            setPopUp={setShowPopUp} 
+                            theme={props.theme} 
+                            whichChat={props.whichChat}
+                            setShowAddUserBox={setShowAddUserBox}
+                        /> : null}
                 </div>
             </div>
             <div className={classes.Messages} ref={node}>

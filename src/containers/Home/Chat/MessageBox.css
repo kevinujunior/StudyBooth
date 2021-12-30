@@ -134,6 +134,33 @@
     color: white;
 }
 
+
+.AddUserBox{
+    height: 100%;
+    width: 40%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 220;
+    background-color: inherit;
+}
+
+.AddUserBox > div{
+    margin: auto;
+}
+
+.Backdrop{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 210;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
 @media (max-width:700px) {
     .MessageBox{
         position: absolute;
@@ -179,6 +206,10 @@
     }
     .Dark .BackButton{
         display: block;
+    }
+
+    .AddUserBox{
+        width: 75%;
     }
 }
 

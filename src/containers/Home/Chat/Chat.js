@@ -25,11 +25,11 @@ class Chat extends Component {
     showAddGroup:false,
     grpName:null,
     grpDescription:null,
-    whichChat:'Group',
+    whichChat:null,
   }
 
 
-  initialiseChat = (chatId,username) => {
+  initialiseChat = (chatId,username,whichChat) => {
     console.log(chatId,username)
     if (chatId==null) return
 
@@ -41,8 +41,8 @@ class Chat extends Component {
       this.addGroupMessage.bind(this),
     );
 
-    console.log(this.state.whichChat)
-    if(this.state.whichChat==='Group'){
+    console.log(whichChat)
+    if(whichChat==='Group'){
         WebSocketInstance.connect();
         this.waitForSocketConnection(() => {
           WebSocketInstance.fetchGroupMessages(
@@ -50,9 +50,8 @@ class Chat extends Component {
             chatId,
           );
         });
-  }
-
-  else{
+    }
+    else{
         WebSocketInstance.connect();
         this.waitForSocketConnection(() => {
           WebSocketInstance.fetchMessages(
@@ -60,7 +59,7 @@ class Chat extends Component {
             chatId,
           );
         });
-      }
+    }
   }
 
 
@@ -94,7 +93,7 @@ class Chat extends Component {
 
   addGroupMessage = (message) => {
     let length = this.state.grpMessages.length;
-    if(this.state.grpMessages[length-1].id === message.id) return;
+    if(length !== 0 && this.state.grpMessages[length-1].id === message.id) return;
     this.setState({ grpMessages: [...this.state.grpMessages, message]});
   }
 
@@ -133,8 +132,6 @@ class Chat extends Component {
   
 
   componentDidMount(){
-
-
     this.props.onFetchUserProfile(localStorage.getItem('user'))
     this.fetchChatList();
     this.initialiseChat();
@@ -157,7 +154,9 @@ class Chat extends Component {
       chatName:chatName,
       whichChat: whichChat,
     })
-    this.initialiseChat(chatId,this.props.data.username);
+
+    console.log(this.state)
+    this.initialiseChat(chatId,this.props.data.username,whichChat);
     this.setShowMessageBox(true);
   }
 
@@ -172,7 +171,6 @@ class Chat extends Component {
 
 
   fetchChatList = () => {
-
     let list = [];
     axios.get('users/userchats/')
     .then(res => {
@@ -205,6 +203,15 @@ class Chat extends Component {
     .catch(err => console.log(err))
   }
 
+  addNewUserToGroup = (userId) => {
+    axios.post('chat/groupmember/',{
+      member:userId,
+      group:this.state.chatId,
+      role:'M'
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
 
   render() {
     let chatclasses = [classes.Chat];
@@ -246,12 +253,14 @@ class Chat extends Component {
         <MessageBox 
           show={this.state.showMessageBox} 
           send={this.sendMessageHandler} 
-          messages={this.state.whichChat=='Group' ? this.state.grpMessages: this.state.messages} 
+          messages={this.state.whichChat === 'Group' ? this.state.grpMessages: this.state.messages} 
           username={this.props.data ? this.props.data.username : null}
           chatName={this.state.chatName}
           setShowMessageBox={this.setShowMessageBox}
           loading={this.state.loading}
           theme={this.props.theme}
+          whichChat={this.state.whichChat}
+          addNewUserToGroup={this.addNewUserToGroup}
         />
       </div>
     );

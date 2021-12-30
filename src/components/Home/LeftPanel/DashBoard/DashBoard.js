@@ -25,10 +25,18 @@ class DashBoard extends Component{
         selected : "Feed",
     }
 
-    changeSelected = (selected) => {
+    changeSelected = (selected,path) => {
         this.setState({
             selected: selected,
         })
+
+        if(path){
+            this.props.history.replace({
+                pathname:path,
+            })
+        }
+
+        this.props.closeLeftPanel();
     }
 
     render(){
@@ -38,19 +46,12 @@ class DashBoard extends Component{
                 <div className={[classes.Component1, this.state.selected === "Sections" ? classes.SlideLeft_c1 : classes.SlideRight_c1].join(" ")}>
                     <div>
                         <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => {
-                            this.changeSelected("Feed");
-
-                            this.props.history.replace({
-                                pathname:'/home'
-                            })
+                            this.changeSelected("Feed", "/home");
                             document.documentElement.scrollTop = 0;
                         }} />
                         <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
                         <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => {
-                            this.changeSelected("Chat")
-                            this.props.history.push({
-                                pathname:'/chat'
-                            })
+                            this.changeSelected("Chat","/chat")
                         }}/>
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
                         <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>
