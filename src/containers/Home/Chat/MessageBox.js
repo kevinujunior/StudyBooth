@@ -35,13 +35,13 @@ const MessageBox = (props) => {
                     className={[classes.MsgRow , message.user === currentUser ? classes.Sent : classes.Received].join(" ")}>
                     {/* <img src="http://emilcarlsson.se/assets/mikeross.png" /> */}
                     <div className={classes.Msg}>
-                        <p>{message.content}</p>
                         <div >
-                            {/* <p style={{fontSize:'11px'}}>{message.user}</p> */}
+                            {props.whichChat === 'Group' ? <p style={{fontSize:'11px'}}>{message.user}</p> : null}
                             <small style={{fontSize:'10px', fontStyle:'italic'}}>
                             {time ? time < 60 ? time+"mn ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}
                             </small>
                         </div>
+                        <p>{message.content}</p>
                     </div>
                 </div>
             )
