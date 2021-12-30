@@ -84,12 +84,13 @@ class Chat extends Component {
   }
 
   changeChatId = (chatId,friend) => {
-    this.setState({messages:[]})
-    this.setState({loading:true})
-    console.log("chat id change", chatId)
-    this.setState({chatId:chatId})
-    this.setState({chatName:friend})
     WebSocketInstance.disconnect();
+    this.setState({
+      messages:[],
+      loading:true,
+      chatId:chatId,
+      chatName:friend,
+    })
     this.initialiseChat(chatId,this.props.data.username);
     this.setShowMessageBox(true);
   }
@@ -105,14 +106,12 @@ class Chat extends Component {
 
 
   fetchChatList = () => {
-    
     axios.get('users/userchats/')
     .then(res => {
       console.log(res.data)
       this.setState({
         chatList: res.data
       })
-      this.chatIdChanged();
     })
     .catch(err => console.log(err))
   }
@@ -151,6 +150,7 @@ class Chat extends Component {
           chatName={this.state.chatName}
           setShowMessageBox={this.setShowMessageBox}
           loading={this.state.loading}
+          theme={this.props.theme}
         />
       </div>
     );

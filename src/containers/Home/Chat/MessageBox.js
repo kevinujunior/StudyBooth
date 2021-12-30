@@ -46,34 +46,42 @@ const MessageBox = (props) => {
 
     console.log("new message is loading ",props.loading)
     return(
-      <div className={[classes.MessageBox, props.show ? classes.Show : null,].join(" ")}>
-          { props.loading ? <div className={classes.loader}>
+      <div className={[
+            classes.MessageBox, 
+            props.show ? classes.Show : null, 
+            props.theme === 'dark' ? classes.Dark : null].join(" ")}
+        >
+            { 
+                props.loading ?
+                 <div className={classes.loader}>
                         <div className={classes.bar}></div>
-                    </div> : null }
-          <div className={classes.Head}>
-            <IconButton onClick={() => props.setShowMessageBox(false)}><ArrowBackIcon /></IconButton>
-            <h1>{props.chatName}</h1>
-          </div>
-          <div className={classes.Messages} ref={node}>
-                {renderMessages(props.messages)}
-          </div>
-          <div className={classes.Input}>
-                <div className={classes.Comment}>
-                    <input type="text" value={message}  placeholder="enter a message..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
-                        if (e.code === "Enter") {
-                            e.preventDefault()
-                            props.send(e, message);
-                            setMessage("");
-                        }
-                    }}/>
-                </div>
-                <IconButton onClick={(e) => {
-                    props.send(e, message);
-                    setMessage("");
-                }}>
-                    <SendRoundedIcon style={{color:"#1e90ff"}} fontSize="huge"/>
-                </IconButton>
-          </div>
+                    </div> 
+                : null 
+            }
+            <div className={classes.Head}>
+                <IconButton onClick={() => props.setShowMessageBox(false)}><ArrowBackIcon /></IconButton>
+                <h1>{props.chatName}</h1>
+            </div>
+            <div className={classes.Messages} ref={node}>
+                    {renderMessages(props.messages)}
+            </div>
+            <div className={classes.Input}>
+                    <div className={classes.Comment}>
+                        <input type="text" value={message}  placeholder="enter a message..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
+                            if (e.code === "Enter") {
+                                e.preventDefault()
+                                props.send(e, message);
+                                setMessage("");
+                            }
+                        }}/>
+                    </div>
+                    <IconButton onClick={(e) => {
+                        props.send(e, message);
+                        setMessage("");
+                    }}>
+                        <SendRoundedIcon style={{color:"#1e90ff"}} fontSize="huge"/>
+                    </IconButton>
+            </div>
       </div>
     )
 }

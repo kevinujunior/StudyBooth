@@ -63,12 +63,29 @@
 }
 .Sent > div{
     border-radius: 20px 0px 20px 20px;
-    background-color: #027CDE;
+    background-color: #4E426D;
+}
+.Sent p{
+    color: white;
+}
+.Sent small {
+    color: rgb(211, 211, 211);
 }
 .Received > div{
     border-radius: 0px 20px 20px 20px;
+    background-color: #eff2fa;
+}
+.Received p{
+    color: black;
 }
 
+.Dark .Received > div{
+    background-color: rgba(255,255,255,0.1) !important;
+}
+
+.Dark .Received p{
+    color: white;
+}
 
 .Input{
     display: flex;
@@ -84,9 +101,13 @@
     padding: 5px 15px;
     border: none;
     outline: none;
-    background-color: rgb(108, 108, 108);
+    background-color: #F5F7FB;
     border-radius: 20px;
     height: 40px;
+}
+
+.Dark .Comment input{
+    background-color: rgb(108, 108, 108);
 }
 
 .Comment input:focus{
@@ -121,6 +142,12 @@
 
     .Msg > p{
         font-size: 12px;
+    }
+
+    .MsgRow img{
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 5px;
     }
 }
 
