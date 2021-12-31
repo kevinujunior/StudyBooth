@@ -16,6 +16,7 @@ class PostActionPopUp extends Component {
     }
 
     setBottom(val) {
+        if(this.state.bottom === val) return;
         this.setState({bottom:val});
     }
 
@@ -30,7 +31,6 @@ class PostActionPopUp extends Component {
             <div ref={el => {
                 if(!el) return;
                 if(el.parentElement.getBoundingClientRect().top >= window.innerHeight - 200) this.setBottom(1);
-
               }} >
                 <div className={[classes.ActionPopUp, this.state.bottom ? classes.bottom : classes.top ].join(" ")} >
                     <div> <ShareIcon className={classes.grey}/> <p>Share</p></div>

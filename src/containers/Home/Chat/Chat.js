@@ -86,7 +86,7 @@ class Chat extends Component {
 
   addMessage = (message) => {
     let length = this.state.messages.length;
-    if(this.state.messages[length-1].id === message.id) return;
+    if(length !== 0 && this.state.messages[length-1].id === message.id) return;
     this.setState({ messages: [...this.state.messages, message]});
   }
 
@@ -154,9 +154,7 @@ class Chat extends Component {
   callback = (author, friend) => {
     axios.post('chat/privatechat/', {author: author, friend:friend} )
     .then(res => {
-      console.log("new chat created..")
-      this.changeChatId(res.data.id)
-      this.setState({chatName:friend})
+      this.fetchChatList("New")
     })
     .catch(err => console.log(err))
   }

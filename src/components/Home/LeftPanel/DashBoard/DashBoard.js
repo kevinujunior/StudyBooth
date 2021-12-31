@@ -60,7 +60,7 @@ class DashBoard extends Component{
                     <div className = {classes.Bottom}>
                         <DashBoardItems name="Logout" icon = {<LogoutOutlinedIcon />} onClick = {this.props.onLogOut}/>
                         <div className={classes.ToggleBtn}>
-                            <ToggleButton theme={this.props.theme} onClick = {() => this.props.onChangeTheme(this.props.theme)} />
+                            <ToggleButton theme={this.props.theme} onClick = {() => {this.props.onChangeTheme(this.props.theme);this.props.closeLeftPanel()}} />
                         </div>
                     </div>
                 </div>

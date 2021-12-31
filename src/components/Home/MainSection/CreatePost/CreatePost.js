@@ -41,14 +41,11 @@ class  createPost extends Component {
         }
         formData.append('user' ,localStorage.getItem('user'))
        
-        this.props.onCreateNewPost(formData, () => {
-            console.log("callBack called")
-            if(localStorage.getItem("createPostError") !== 'null'){
+        this.props.onCreateNewPost(formData, (isError, errorMsg) => {
+            if(isError){
                 this.setState({
-                    error: JSON.parse(localStorage.getItem("createPostError")),
+                    error: JSON.parse(errorMsg),
                 })
-                console.log(this.state.error)
-                localStorage.setItem("createPostError",null)
             }
             else{
                 this.props.closeModal();

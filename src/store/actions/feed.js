@@ -72,20 +72,19 @@ export const fetchFeed = (pageNo, loading) => {
     }
 }
 
-export const createNewPost = (formData, callBack) => {
+export const createNewPost = (formData, errorHandler) => {
 
     return dispatch => {
         axios.post("feed/create_post/", formData)
         .then(response =>{
             dispatch(fetchFeed(1)); //whenever we create a new post we fetch the feed again.
+            errorHandler(false);
         })
         .catch(function (error) {
-            if (error.response) {
-                const json = JSON.stringify(error.response.data);
-                localStorage.setItem("createPostError", json);
-            }
+            const json = JSON.stringify(error.response.data);
+            errorHandler(true,json);
         })
-        .finally(() => callBack());
+       
         
     }
 }
