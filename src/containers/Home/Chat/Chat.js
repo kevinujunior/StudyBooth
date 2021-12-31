@@ -5,9 +5,11 @@ import WebSocketInstance from '../../../websocket';
 import MessageBox from './MessageBox';
 import * as actions from '../../../store/actions/index'
 import SearchBox from '../../../components/UI/SearchBox/SearchBox';
+import LoadingBar from "../../../components/UI/LoadingBar/LoadingBar";
 import axios from '../../../axios_base';
 import { IconButton } from "@mui/material";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ChatPopUp from "./ChatPopUp/ChatPopUp";
 
 import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
 
@@ -26,6 +28,9 @@ class Chat extends Component {
     grpName:null,
     grpDescription:null,
     whichChat:null,
+    whichList:"Personal",
+    chatListLoading:true,
+    userIsAdmin:false,
   }
 
 
@@ -110,36 +115,21 @@ class Chat extends Component {
       content: message,
       chatId : this.state.chatId,
     };
-    if(this.state.whichChat==='Group'){
-      
-      WebSocketInstance.newGroupMessage(messageObject);
-    }
-    else{
-      WebSocketInstance.newChatMessage(messageObject);
-    }
-  }
-
-  sendGroupMessageHandler = (e, message) => {
-    e.preventDefault();
-    const messageObject = {
-      from: this.props.data ? this.props.data.username : "admin",
-      content: message,
-      chatId : this.state.chatId,
-    };
-    WebSocketInstance.newGroupMessage(messageObject);
+    if(this.state.whichChat==='Group') WebSocketInstance.newGroupMessage(messageObject);
+    else WebSocketInstance.newChatMessage(messageObject);
   }
 
   
 
   componentDidMount(){
     this.props.onFetchUserProfile(localStorage.getItem('user'))
-    this.fetchChatList();
+    this.fetchChatList("New");
     this.initialiseChat();
   }
 
-  changeChatId = (chatId,chatName,whichChat) => {
+  changeChatId = (chatId,chatName,whichChat, userIsAdmin) => {
 
-    console.log(whichChat)
+    console.log(whichChat,userIsAdmin)
 
     if(this.state.chatId === chatId && this.state.whichChat === whichChat) {
       this.setShowMessageBox(true);
@@ -153,6 +143,7 @@ class Chat extends Component {
       chatId:chatId,
       chatName:chatName,
       whichChat: whichChat,
+      userIsAdmin: userIsAdmin
     })
 
     console.log(this.state)
@@ -163,6 +154,7 @@ class Chat extends Component {
   callback = (author, friend) => {
     axios.post('chat/privatechat/', {author: author, friend:friend} )
     .then(res => {
+      console.log("new chat created..")
       this.changeChatId(res.data.id)
       this.setState({chatName:friend})
     })
@@ -170,36 +162,60 @@ class Chat extends Component {
   }
 
 
-  fetchChatList = () => {
-    let list = [];
-    axios.get('users/userchats/')
-    .then(res => {
-      list = res.data;
-      axios.get('users/usergroupchats/')
+  fetchChatList = (whichList) => {
+    if((whichList !== "New" || whichList !== "Delete") && whichList === this.state.whichList) return;
+    if(whichList === "New" || whichList === "Delete") whichList = this.state.whichList;
+
+    console.log(whichList,"from fetch List")
+    this.setState({chatListLoading:true})
+    if(whichList === "Personal"){
+      axios.get('users/userchats/')
       .then(res => {
-        list = [...list, ...res.data]
-        // console.log(list)
-        this.setState({chatList:list})
+        this.setState({chatList:res.data, chatListLoading:false})
       })
       .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
-
+    }
+    else{
+      axios.get('users/usergroupchats/')
+      .then(res => {
+        this.setState({chatList:res.data, chatListLoading:false})
+      })
+      .catch(err => console.log(err))
+    }
   }
 
-  
+  deleteChat = () => {
+    let url=`chat/privatechat/${this.state.chatId}`;
+    if(this.state.whichChat === 'Group') url = `chat/groupchat/${this.state.chatId}`;
+    if(this.state.whichChat === 'Group' && !this.state.userIsAdmin) return; //if user is not admin then he/she should not be able to delete tha chat ig.
+    axios.delete(url)
+    .then(res => {
+      WebSocketInstance.disconnect();
+      this.setState({
+        showMessageBox:false,
+        chatId:null,
+        chatName:null,
+        messages:[],
+        grpMessages:[]
+      })
+      this.fetchChatList("Delete");
+    })
+    .catch(err => console.log(err))
+  }
 
   setShowMessageBox = (val) => {
     this.setState({showMessageBox:val})
   }
-
 
   createGroup = () => {
     axios.post('chat/groupchat/', {
       name:this.state.grpName,
       description:this.state.grpDescription,
     })
-    .then(res => console.log(res))
+    .then(res => {
+      this.setState({showAddGroup:false})
+      this.fetchChatList("New");
+    })
     .catch(err => console.log(err))
   }
 
@@ -222,6 +238,7 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}>
         <div className={classes.ChatList}>
+          {this.state.chatListLoading ? <LoadingBar background={'linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83))'}/> :null}
           <div 
             className={classes.AddGroup} 
             style={{'display':`${this.state.showAddGroup ? 'flex':'none'}`}}
@@ -238,12 +255,30 @@ class Chat extends Component {
             <SearchBox 
               theme={this.props.theme} 
               chatCallBack={this.callback}
+              placeholder={"Search user to start chat..."}
             />
-            <IconButton 
-              className={classes.AddButton} 
-              onClick={() => this.setState({showAddGroup:true})}>
-                <AddCircleIcon />
-            </IconButton>
+            <div>
+              <IconButton 
+                className={classes.AddButton} 
+                onClick={() => this.setState({showPopUp:true})}
+                >
+                  <MoreHorizIcon />
+              </IconButton>
+              {this.state.showPopUp ? 
+                <ChatPopUp 
+                    setPopUp={(val) => this.setState({showPopUp:val})} 
+                    theme={this.props.theme} 
+                    where="ChatList"
+                    showAddGrp={() => this.setState({showAddGroup:true})}
+                    setChatList={(listName) => {
+                      console.log(listName)
+                      if(this.state.whichList !== listName){
+                        this.setState({whichList:listName})
+                        this.fetchChatList(listName);
+                      }
+                    }}
+                /> : null}
+            </div>
           </div>
           <PersonalChat 
             chatList={this.state.chatList} 
@@ -261,6 +296,7 @@ class Chat extends Component {
           theme={this.props.theme}
           whichChat={this.state.whichChat}
           addNewUserToGroup={this.addNewUserToGroup}
+          deleteChat={this.deleteChat}
         />
       </div>
     );

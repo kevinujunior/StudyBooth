@@ -60,7 +60,7 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className={classes.SearchAndCreate}>
-                        <SearchBox theme={this.props.theme} headerCallBack={this.callBack}/>
+                        <SearchBox theme={this.props.theme} headerCallBack={this.callBack} placeholder={"search profile.."}/>
                         <div>
                             <button  className={classes.CreatePostButton1} onClick={this.props.onCreateFeedClick}>
                                 <p>Create Post</p>

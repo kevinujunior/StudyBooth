@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatPopUp from './ChatPopUp/ChatPopUp';
 import SearchBox from '../../../components/UI/SearchBox/SearchBox';
+import LoadingBar from '../../../components/UI/LoadingBar/LoadingBar';
 
 const MessageBox = (props) => {
 
@@ -56,9 +57,7 @@ const MessageBox = (props) => {
         >
             { 
                 props.loading ?
-                 <div className={classes.loader}>
-                        <div className={classes.bar}></div>
-                    </div> 
+                    <LoadingBar background={'linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83))'}/>
                 : null 
             }
 
@@ -71,7 +70,9 @@ const MessageBox = (props) => {
                     <SearchBox addUserCallBack={(userId) => {
                         props.addNewUserToGroup(userId);
                         setShowAddUserBox(false);
-                    }}/>
+                    }}
+                    placeholder={"Search user to add in group.."}
+                    />
                 </div>
             </div>
             <div className={classes.Head}>
@@ -92,6 +93,8 @@ const MessageBox = (props) => {
                             theme={props.theme} 
                             whichChat={props.whichChat}
                             setShowAddUserBox={setShowAddUserBox}
+                            deleteChat={props.deleteChat}
+                            where="MesssageBox"
                         /> : null}
                 </div>
             </div>

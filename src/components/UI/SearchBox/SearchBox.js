@@ -82,7 +82,7 @@ const SearchBox = (props) => {
                         triggerSearch()
                     }
                 }}
-                placeholder="Type to Search...">
+                placeholder={props.placeholder}>
             </input>
             <button className={classes.btnSearch} onClick={triggerSearch}>{<SearchIcon/>}</button>
             {dropdownMenu}

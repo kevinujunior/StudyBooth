@@ -31,7 +31,7 @@ class DashBoard extends Component{
         })
 
         if(path){
-            this.props.history.replace({
+            this.props.history.push({
                 pathname:path,
             })
         }
