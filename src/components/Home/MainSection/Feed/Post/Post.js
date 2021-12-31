@@ -24,27 +24,33 @@ class Post extends Component{
         comments:[],
         loading:false,
         commentPageNo:1,
+        isLiked:this.props.isLikedByuser,
+        likeId: this.props.likeId,
     }
 
-    postComment = async () => {
-        if(this.state.commentText === "" || this.state.commentText === " ") return; //we have to manage for empty comment
+    postComment = () => {
+
+        if(this.state.commentText.trim() === "") return; //we have to manage for empty comment
         this.setState({
             loading:true,
         })
+
         const data = {
             post : this.props.id,
             commentText : this.state.commentText,
             commentatorUser : localStorage.getItem('user'),
         }
-        await this.props.onComment(data);
-        this.setState({
-            isCommentVisibe: true,
-            commentText:"",
-            loading: false,
-        })
 
-        console.log(this.state.commentPageNo)
-        this.fetchComment(true);
+        this.props.onComment(data, () => {
+            this.setState({
+                isCommentVisibe: true,
+                commentText:"",
+                loading: false,
+            })
+    
+            this.fetchComment(true);
+        });
+        
     }
 
     fetchComment= (shouldRefresh) => {
@@ -57,7 +63,6 @@ class Post extends Component{
             })
         }
 
-        console.log(this.state)
 
         if(this.state.commentPageNo == null) {
             console.log("null comments");
@@ -68,6 +73,7 @@ class Post extends Component{
                 loading:true,
             })
         }
+
         axios.get(`feed/get_comment/?post=${this.props.id}&page=${this.state.commentPageNo}`)
         .then(res => {
             let cmtNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
@@ -85,7 +91,7 @@ class Post extends Component{
         .catch(err => console.log(err))
     }
 
-    postLike = async () => {
+    postLike = () => {
         const data ={
             post: this.props.id,
             likeUser: localStorage.getItem('user'),
@@ -93,10 +99,13 @@ class Post extends Component{
         this.setState({
             loading:true,
         })
-        await this.props.onLike(data, this.props.isLikedByuser, this.props.likeId);
-        this.setState({
-            loading:false,
-        })
+        this.props.onLike(data, this.state.isLiked, this.state.likeId, (res,likeId) => {
+            this.setState({
+                loading:false,
+                isLiked: res === 'Success' ? !this.state.isLiked : this.state.isLiked, 
+                likeId: res === 'Success' ? likeId : this.state.likeId,
+            })
+        });
         
     }
 
@@ -117,6 +126,10 @@ class Post extends Component{
         this.setState({
             isCommentVisibe: !commentSectionState,
         })
+    }
+
+    setLoading = (val) => {
+        this.setState({loading:val})
     }
     
     render(){
@@ -167,7 +180,7 @@ class Post extends Component{
                         <div className={classes.Icons}>
                             <div className={classes.IconLeft}>
                                 <IconButton onClick = {this.postLike}>
-                                    {this.props.isLikedByuser ? 
+                                    {this.state.isLiked ? 
                                         <FavoriteIcon 
                                             style={{color:"crimson"}}
                                         /> : 
@@ -202,7 +215,9 @@ class Post extends Component{
                             fetchComment={this.fetchComment} 
                             comments={this.state.comments} 
                             postId={this.props.id} 
-                            ifMoreComment={this.state.commentPageNo != null}/>  
+                            ifMoreComment={this.state.commentPageNo != null}
+                            setLoading={this.setLoading}
+                        />  
                         : null
                     }
                 </div>
@@ -232,8 +247,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onComment : (data) => actions.createNewComment(data),
-        onLike: (data, isLiked, likeId) => dispatch(actions.toggleLikeRequest(data, isLiked, likeId)),
+        onComment : (data, callBack) => actions.createNewComment(data, callBack),
+        onLike: (data, isLiked, likeId, callBack) => actions.toggleLikeRequest(data, isLiked, likeId,callBack),
         onDeletePost : (postId) => dispatch(actions.deletePost(postId)),
         onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
     }

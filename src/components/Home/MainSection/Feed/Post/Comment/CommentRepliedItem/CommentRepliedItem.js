@@ -8,8 +8,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import onClickOutside from 'react-onclickoutside';
 import axios from '../../../../../../../axios_base';
-
-
 import {deleteComment} from '../../../../../../../store/actions/feed'
 
 class CommentItem extends Component {
@@ -61,6 +59,7 @@ class CommentItem extends Component {
         }
         let currUserID = localStorage.getItem('user');
 
+        console.log("comment reply item rendered")
         return (
             <div className={cmtItemClasses.join(' ')}>
                 <div onClick={() => this.props.history.push({
@@ -95,10 +94,12 @@ class CommentItem extends Component {
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
-                    {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
-                        const res = await deleteComment(this.props.id);
-                        if(res !== null) this.props.refreshReplies(true);
-                        console.log("deleted")
+                    {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ () => {
+                        this.props.setLoading(true);
+                        deleteComment(this.props.id, () => {
+                            this.props.refreshReplies(true)
+                            this.props.setLoading(false);
+                        });
                     }}/> : null}
                 </div>
             </div>

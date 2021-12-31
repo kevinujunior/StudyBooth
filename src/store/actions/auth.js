@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios, {AxiosError} from  'axios';
+import axios from  'axios';
 import * as feedFunc from './feed';
 import * as userFunc from './currentUser';
 

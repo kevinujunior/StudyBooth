@@ -5,8 +5,6 @@ import {IconButton } from '@mui/material';
 import {withRouter} from 'react-router-dom'
 import ActionPopUp from '../../ActionPopup/CommentActionPopup';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import {connect } from 'react-redux';
-import * as actions from '../../../../../../../store/actions/index';
 import onClickOutside from 'react-onclickoutside';
 import axios from '../../../../../../../axios_base';
 import CommentRepliedItem from "../CommentRepliedItem/CommentRepliedItem";
@@ -40,6 +38,7 @@ class CommentItem extends Component {
     }
 
     createNewReplyComment = () => {
+        this.props.setLoading(true);
         const data = {
             post : this.props.postId,
             commentText : this.state.reply,
@@ -54,9 +53,11 @@ class CommentItem extends Component {
                 isReplyBoxVisible:false,
             })
             this.fetchReplies(true);
+            this.props.setLoading(false);
         })
         .catch(err => {
             console.log(err)
+            this.props.setLoading(false);
         })
     }
 
@@ -93,9 +94,6 @@ class CommentItem extends Component {
         this.fetchReplies()
     }
 
-    
-
-
     render(){
         let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60)) ;
         time = Math.max(0,time);
@@ -125,6 +123,7 @@ class CommentItem extends Component {
                     userPic = {comment.commentatorUser.userPic}
                     createdAt = {comment.createdAt}
                     refreshReplies = {this.fetchReplies}
+                    setLoading ={this.props.setLoading}
                 />    
             })
         }
@@ -132,10 +131,13 @@ class CommentItem extends Component {
 
         return (
             <div className={cmtItemClasses.join(' ')}>
-                <div onClick={() => this.props.history.push({
-                    pathname: '/profile',
-                    userId: this.props.userId,
-                })} style={{'cursor':'pointer'}}>
+                <div 
+                    onClick={() => this.props.history.push({
+                        pathname: '/profile',
+                        userId: this.props.userId,
+                    })} 
+                    style={{'cursor':'pointer'}}
+                >
                     <img src={this.props.userPic ? this.props.userPic : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtpifVQVd-5cglJ6GahRdGyMVW_ZbY_CJD5w&usqp=CAU"} className={classes.CommentorImage} alt="xxx"/>
                 </div>
                 <div className={classes.Comment}>
@@ -170,10 +172,11 @@ class CommentItem extends Component {
                             <SendRoundedIcon style={{color:"#1e90ff"}}/>
                         </IconButton>
                     </div>
-                    {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ async () => {
-                        const res = await deleteComment(this.props.id);
-
-                        if(res !== null) this.props.refreshComment(true);
+                    {this.props.userId == currUserID ? <ActionPopUp Visible={this.state.isActionPopUpVisible} userId={this.props.userId} deleteCmt ={ () => {
+                        this.props.setLoading(true);
+                        deleteComment(this.props.id, () => {
+                            this.props.refreshComment(true);
+                        });       
                     }}/> : null}
                     {this.state.isRepliesVisible && this.state.replies.length > 0 ? <div style={{'marginTop':'10px'}}>
                         {replies}
@@ -185,9 +188,5 @@ class CommentItem extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onCommentDelete: (commentId) => actions.deleteComment(commentId)
-    }
-}
-export default connect(null, mapDispatchToProps)(withRouter(onClickOutside(CommentItem)));
+
+export default withRouter(onClickOutside(CommentItem));

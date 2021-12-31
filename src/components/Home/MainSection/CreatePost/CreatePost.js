@@ -44,7 +44,7 @@ class  createPost extends Component {
         this.props.onCreateNewPost(formData, (isError, errorMsg) => {
             if(isError){
                 this.setState({
-                    error: JSON.parse(errorMsg),
+                    error: errorMsg,
                 })
             }
             else{

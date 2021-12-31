@@ -23,7 +23,6 @@ class Home extends Component {
         return (
             <div className={homeClasses.join(" ")} onScroll ={(e) => {
                     //here we are checking the scroll of home page and if scroll reaches to end we are calling fetchFeed for next page.
-                    console.log("function called")
                     if(Math.round(e.target.scrollHeight -  e.target.scrollTop) <= e.target.offsetHeight + 400){
                         if(this.props.nextPageNo == this.state.feedCurrPageNo) return; //if we are calling for same page again return;
                         this.props.onFetchFeed(this.props.nextPageNo, this.props.loading)
