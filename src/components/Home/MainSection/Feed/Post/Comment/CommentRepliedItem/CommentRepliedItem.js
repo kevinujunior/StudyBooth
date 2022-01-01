@@ -46,7 +46,7 @@ class CommentItem extends Component {
     }
 
     render(){
-        let time = Math.floor((new Date().getTime() - new Date(this.props.time).getTime())/(1000*60)); //time in minutes;
+        let time = Math.floor((new Date().getTime() - new Date(this.props.createdAt).getTime())/(1000*60)); //time in minutes;
         time = Math.max(time, 0);
         let cmtItemClasses = [classes.CommentRepliedItem];
         let replyBoxClasses = [classes.ReplyBox];
@@ -59,7 +59,8 @@ class CommentItem extends Component {
         }
         let currUserID = localStorage.getItem('user');
 
-        console.log("comment reply item rendered")
+        console.log(time,this.props.createdAt)
+
         return (
             <div className={cmtItemClasses.join(' ')}>
                 <div onClick={() => this.props.history.push({
