@@ -8,10 +8,10 @@ import classes from './Header.css';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import {  IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import ToggleButton from '../../UI/ToggleButton/ToggleButton';
+import ToggleButton from '../ToggleButton/ToggleButton';
 import AddIcon from '@mui/icons-material/Add';
 import onClickOutside from 'react-onclickoutside';
-import SearchBox from '../../UI/SearchBox/SearchBox';
+import SearchBox from '../SearchBox/SearchBox';
 
 class Header extends Component {
 

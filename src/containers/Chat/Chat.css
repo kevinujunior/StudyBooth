@@ -14,7 +14,7 @@
 }
 
 .ChatList{
-    width:35% ;
+    width:30% ;
     height: 100%;
     position: relative;
     overflow-x: clip;
@@ -32,6 +32,12 @@
     border: none;
     font-size: 16px;
 }
+
+.Dark .SwitchChat button{
+    background-color: #161718;
+    color: white;
+}
+
 .SearchInputBox{
     z-index: 200;
     position: relative;
@@ -41,7 +47,7 @@
     left: 0;
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
 }
 
 .Dark{

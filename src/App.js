@@ -11,7 +11,7 @@ import Layout from './HOC/Layout/Layout';
 import * as actions from './store/actions/index';
 import axios from 'axios';
 import WebSocketInstance from './websocket';
-import Chat from './containers/Home/Chat/Chat';
+import Chat from './containers/Chat/Chat';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'

@@ -5,8 +5,8 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatPopUp from './ChatPopUp/ChatPopUp';
-import SearchBox from '../../../components/UI/SearchBox/SearchBox';
-import LoadingBar from '../../../components/UI/LoadingBar/LoadingBar';
+import SearchBox from '../../components/UI/SearchBox/SearchBox';
+import LoadingBar from '../../components/UI/LoadingBar/LoadingBar';
 
 const MessageBox = (props) => {
 
@@ -48,8 +48,6 @@ const MessageBox = (props) => {
             )
         });
     }
-
-    console.log(props.grpMemeberList)
 
     return(
       <div className={[

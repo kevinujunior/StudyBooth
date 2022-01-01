@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './Layout.css';
-import Header from '../../components/Home/Header/Header';
+import Header from '../../components/UI/Header/Header';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateFeed from '../../components/Home/MainSection/CreatePost/CreatePost';
 import LeftPanel from '../../containers/Home/LeftPanel/LeftPanel'

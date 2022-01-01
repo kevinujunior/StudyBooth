@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import classes from "./Chat.css";
 import { connect } from "react-redux";
-import WebSocketInstance from '../../../websocket';
+import WebSocketInstance from '../../websocket';
 import MessageBox from './MessageBox';
-import * as actions from '../../../store/actions/index'
-import SearchBox from '../../../components/UI/SearchBox/SearchBox';
-import LoadingBar from "../../../components/UI/LoadingBar/LoadingBar";
-import axios from '../../../axios_base';
+import * as actions from '../../store/actions/index'
+import SearchBox from '../../components/UI/SearchBox/SearchBox';
+import LoadingBar from "../../components/UI/LoadingBar/LoadingBar";
+import axios from '../../axios_base';
 import { IconButton } from "@mui/material";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ChatPopUp from "./ChatPopUp/ChatPopUp";
 
-import PersonalChat from "../../../components/Home/Chat/PersonalChat/Chat";
+import PersonalChat from "../../components/Chat/PersonalChat/Chat";
 
 class Chat extends Component {
 
@@ -223,7 +223,10 @@ class Chat extends Component {
       group:this.state.chatId,
       role:'M'
     })
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res)
+      this.setState({grpMemberList: [...this.state.grpMemberList, res.data]})
+    })
     .catch(err => console.log(err))
   }
 
