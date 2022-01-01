@@ -32,7 +32,7 @@ class DashBoard extends Component{
             })
         }
 
-        this.props.closeLeftPanel();
+        if (this.props.closeLeftPanel) this.props.closeLeftPanel()
     }
 
     render(){
