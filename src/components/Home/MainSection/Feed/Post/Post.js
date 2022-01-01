@@ -26,6 +26,7 @@ class Post extends Component{
         commentPageNo:1,
         isLiked:this.props.isLikedByuser,
         likeId: this.props.likeId,
+        likeCount: this.props.likeCount,
     }
 
     postComment = () => {
@@ -100,10 +101,13 @@ class Post extends Component{
             loading:true,
         })
         this.props.onLike(data, this.state.isLiked, this.state.likeId, (res,likeId) => {
+            let likeCnt = this.state.likeCount;
+            let isLiked = this.state.isLiked;
             this.setState({
                 loading:false,
-                isLiked: res === 'Success' ? !this.state.isLiked : this.state.isLiked, 
+                isLiked: res === 'Success' ? !isLiked : isLiked, 
                 likeId: res === 'Success' ? likeId : this.state.likeId,
+                likeCount : res === 'Success' ? isLiked ?  likeCnt-1 : likeCnt+1 : likeCnt,
             })
         });
         
