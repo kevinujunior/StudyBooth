@@ -144,10 +144,26 @@
     padding: 10px;
     z-index: 220;
     background-color: inherit;
+    overflow-y: auto;
+    right: -100%;
+    transition: right 0.3s;
+}
+
+.Show{
+    right: 0%;
 }
 
 .AddUserBox > div{
     margin: auto;
+}
+
+.MemberListItem{
+    width: 100%;
+    border-bottom: 0.3px solid black;
+    margin: 5px 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .Backdrop{

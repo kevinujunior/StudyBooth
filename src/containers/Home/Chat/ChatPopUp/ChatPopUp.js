@@ -19,11 +19,22 @@ class ChatPopUp extends React.Component {
                 <div 
                     className={classes.ChatPopUpItem}
                     onClick={() => {
-                        this.props.setShowAddUserBox(true)
+                        this.props.setShowBox("AddUser")
                         this.close();
                     }}
                     >
                         <p>Add new user</p>
+                </div> 
+                : null}
+                {this.props.whichChat === 'Group' ? 
+                <div 
+                    className={classes.ChatPopUpItem}
+                    onClick={() => {
+                        this.props.setShowBox("MemberList")
+                        this.close();
+                    }}
+                    >
+                        <p>Member List</p>
                 </div> 
                 : null}
                 <div className={classes.ChatPopUpItem} onClick={() => {
@@ -37,8 +48,6 @@ class ChatPopUp extends React.Component {
             toRender = (
                 <>
                     <div className={classes.ChatPopUpItem} onClick={() => {this.props.showAddGrp(); this.close()}}><p>New Group</p></div>
-                    <div className={classes.ChatPopUpItem} onClick={() => {this.props.setChatList("Personal"); this.close()}}><p>Personal Chat</p></div>
-                    <div className={classes.ChatPopUpItem} onClick={() => {this.props.setChatList("Group"); this.close()}}><p>Group Chat</p></div>
                 </>
             )
         }

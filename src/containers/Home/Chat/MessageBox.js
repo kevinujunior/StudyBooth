@@ -12,14 +12,14 @@ const MessageBox = (props) => {
 
     const [message, setMessage] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
-    const [showAddUserBox, setShowAddUserBox] = useState(false);
+    const [showBox, setShowBox] = useState(false);
 
     const node = useRef(null);
 
     useEffect(() => {
         const domNode = node.current;
         if(domNode) domNode.scrollTop = domNode.scrollHeight;
-    },[props.messages, props.show])
+    },[props.messages, props.show,props.grpMemeberList])
 
     const renderMessages = (messages) => {
         const currentUser = props.username;
@@ -49,6 +49,8 @@ const MessageBox = (props) => {
         });
     }
 
+    console.log(props.grpMemeberList)
+
     return(
       <div className={[
             classes.MessageBox, 
@@ -61,19 +63,27 @@ const MessageBox = (props) => {
                 : null 
             }
 
-            <div className={classes.Backdrop} style={{'display':`${showAddUserBox ? 'block':'none'}`}} onClick={() => setShowAddUserBox(false)}></div>
+            <div className={classes.Backdrop} style={{'display':`${showBox ? 'block':'none'}`}} onClick={() => setShowBox(false)}></div>
             <div 
-                className={classes.AddUserBox}
-                style={{'display':`${showAddUserBox ? 'block':'none'}`}}
+                className={[classes.AddUserBox, showBox ? classes.Show : null].join(" ")}
             >
                 <div style={{ 'marginTop':'10%','height':'auto', 'zIndex':'230'}}>
-                    <SearchBox addUserCallBack={(userId) => {
-                        props.addNewUserToGroup(userId);
-                        setShowAddUserBox(false);
-                    }}
-                    placeholder={"Search user to add in group.."}
-                    theme={props.theme}
-                    />
+                    {showBox === "AddUser" ?
+                        <SearchBox 
+                            addUserCallBack={(userId) => {
+                                props.addNewUserToGroup(userId);
+                                setShowBox(false);
+                            }}
+                            placeholder={"Search user to add in group.."}   
+                            theme={props.theme}
+                        /> 
+                    : null}
+                    {showBox === "MemberList" ?
+                        <>
+                            <h3>Memeber List</h3>
+                            {props.grpMemeberList.map(mem => <div key={mem.id} className={classes.MemberListItem}><p>{mem.member.fullName}</p> <p>{mem.role}</p></div>)}
+                        </>
+                    : null}
                 </div>
             </div>
             <div className={classes.Head}>
@@ -93,31 +103,31 @@ const MessageBox = (props) => {
                             setPopUp={setShowPopUp} 
                             theme={props.theme} 
                             whichChat={props.whichChat}
-                            setShowAddUserBox={setShowAddUserBox}
+                            setShowBox={setShowBox}
                             deleteChat={props.deleteChat}
                             where="MesssageBox"
                         /> : null}
                 </div>
             </div>
-            <div className={classes.Messages} ref={node}>
-                    {renderMessages(props.messages)}
+            <div className={classes.Messages} ref={node} style={props.chatId == null ? {'display':'flex', 'justifyContent':'center', 'alignItems':'center'} : null}>
+                {props.chatId == null ? <h3>Please select a chat to start messaging</h3> : renderMessages(props.messages) }
             </div>
             <div className={classes.Input}>
-                    <div className={classes.Comment}>
-                        <input type="text" value={message}  placeholder="enter a message..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
-                            if (e.code === "Enter") {
-                                e.preventDefault()
-                                props.send(e, message);
-                                setMessage("");
-                            }
-                        }}/>
-                    </div>
-                    <IconButton onClick={(e) => {
-                        props.send(e, message);
-                        setMessage("");
-                    }}>
-                        <SendRoundedIcon style={{color:"#1e90ff"}} fontSize="huge"/>
-                    </IconButton>
+                <div className={classes.Comment}>
+                    <input type="text" value={message}  placeholder="enter a message..." onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => {
+                        if (e.code === "Enter") {
+                            e.preventDefault()
+                            props.send(e, message);
+                            setMessage("");
+                        }
+                    }}/>
+                </div>
+                <IconButton onClick={(e) => {
+                    props.send(e, message);
+                    setMessage("");
+                }}>
+                    <SendRoundedIcon style={{color:"#1e90ff"}} fontSize="huge"/>
+                </IconButton>
             </div>
       </div>
     )

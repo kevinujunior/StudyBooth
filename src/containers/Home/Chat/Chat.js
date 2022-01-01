@@ -22,7 +22,7 @@ class Chat extends Component {
     grpMessages:[],
     chatId:null,
     chatList: [],
-    chatName: "Anonymous",
+    chatName: null,
     loading:false,
     showAddGroup:false,
     grpName:null,
@@ -31,6 +31,7 @@ class Chat extends Component {
     whichList:"Personal",
     chatListLoading:true,
     userIsAdmin:false,
+    grpMemberList:[],
   }
 
 
@@ -127,9 +128,7 @@ class Chat extends Component {
     this.initialiseChat();
   }
 
-  changeChatId = (chatId,chatName,whichChat, userIsAdmin) => {
-
-    console.log(whichChat,userIsAdmin)
+  changeChatId = (chatId,chatName,whichChat, userIsAdmin, grpMemberList) => {
 
     if(this.state.chatId === chatId && this.state.whichChat === whichChat) {
       this.setShowMessageBox(true);
@@ -143,10 +142,10 @@ class Chat extends Component {
       chatId:chatId,
       chatName:chatName,
       whichChat: whichChat,
-      userIsAdmin: userIsAdmin
+      userIsAdmin: userIsAdmin,
+      grpMemberList:grpMemberList,
     })
 
-    console.log(this.state)
     this.initialiseChat(chatId,this.props.data.username,whichChat);
     this.setShowMessageBox(true);
   }
@@ -218,6 +217,7 @@ class Chat extends Component {
   }
 
   addNewUserToGroup = (userId) => {
+    console.log("new user called")
     axios.post('chat/groupmember/',{
       member:userId,
       group:this.state.chatId,
@@ -225,6 +225,14 @@ class Chat extends Component {
     })
     .then(res => console.log(res))
     .catch(err => console.log(err))
+  }
+
+  setChatList=(listName) => {
+    console.log(listName)
+    if(this.state.whichList !== listName){
+      this.setState({whichList:listName})
+      this.fetchChatList(listName);
+    }
   }
 
   render() {
@@ -249,6 +257,10 @@ class Chat extends Component {
                 <p className={classes.Button} onClick={this.createGroup}>Create Group ➡️</p>
             </div>
           </div>
+          <div className={classes.SwitchChat}>
+            <button onClick={() => this.setChatList("Personal")}>Personal</button>
+            <button onClick={() => this.setChatList("Group")}>Group</button>
+          </div>
           <div className={classes.SearchInputBox}>
             <SearchBox 
               theme={this.props.theme} 
@@ -268,13 +280,6 @@ class Chat extends Component {
                     theme={this.props.theme} 
                     where="ChatList"
                     showAddGrp={() => this.setState({showAddGroup:true})}
-                    setChatList={(listName) => {
-                      console.log(listName)
-                      if(this.state.whichList !== listName){
-                        this.setState({whichList:listName})
-                        this.fetchChatList(listName);
-                      }
-                    }}
                 /> : null}
             </div>
           </div>
@@ -295,6 +300,8 @@ class Chat extends Component {
           whichChat={this.state.whichChat}
           addNewUserToGroup={this.addNewUserToGroup}
           deleteChat={this.deleteChat}
+          chatId={this.state.chatId}
+          grpMemeberList={this.state.grpMemberList}
         />
       </div>
     );

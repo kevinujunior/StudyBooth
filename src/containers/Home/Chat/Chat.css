@@ -16,14 +16,22 @@
 .ChatList{
     width:35% ;
     height: 100%;
-    margin: 10px 5px;
-    overflow-y: auto;
     position: relative;
-    padding: 10px;
     overflow-x: clip;
 }
 
+.SwitchChat{
+    width: 100%;
+    display: flex;
+}
 
+.SwitchChat button{
+    flex: 1;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
 .SearchInputBox{
     z-index: 200;
     position: relative;
@@ -33,6 +41,7 @@
     left: 0;
     display: flex;
     align-items: center;
+    padding: 20px;
 }
 
 .Dark{
