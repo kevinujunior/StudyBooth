@@ -116,7 +116,7 @@ export const deleteComment = (commentId, callBack) => {
 }
 
 export const toggleLikeRequest = (data, isLiked,likeId, callBack) => {
-    console.log("function called", isLiked)
+
     if(!isLiked){
         axios.post('feed/create_like/',data)
         .then(res => {

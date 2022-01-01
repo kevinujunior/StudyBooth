@@ -26,7 +26,7 @@ class Post extends Component{
         commentPageNo:1,
         isLiked:this.props.isLikedByuser,
         likeId: this.props.likeId,
-        likeCount: this.props.likeCount,
+        likeCount: this.props.likesCount,
     }
 
     postComment = () => {
@@ -103,6 +103,7 @@ class Post extends Component{
         this.props.onLike(data, this.state.isLiked, this.state.likeId, (res,likeId) => {
             let likeCnt = this.state.likeCount;
             let isLiked = this.state.isLiked;
+            console.log(res)
             this.setState({
                 loading:false,
                 isLiked: res === 'Success' ? !isLiked : isLiked, 
@@ -193,7 +194,7 @@ class Post extends Component{
                                         /> 
                                     }
                                 </IconButton>
-                                <p>{this.props.likesCount}</p>
+                                <p>{this.state.likeCount}</p>
                                 <IconButton onClick={() => this.toggleCommentSection(this.state.isCommentVisibe)}>
                                     <CommentOutlinedIcon style={{color:"grey"}}/>
                                 </IconButton>
