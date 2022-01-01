@@ -7,12 +7,8 @@ import SectionItems from '../../../../containers/Home/Sections/SectionList';
 import ToggleButton from '../../../UI/ToggleButton/ToggleButton';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
-import ClassOutlinedIcon from '@mui/icons-material/ClassOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { IconButton } from '@mui/material';
 import {connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import * as actionsTypes from '../../../../store/actions/actionTypes';
@@ -49,13 +45,13 @@ class DashBoard extends Component{
                             this.changeSelected("Feed", "/home");
                             document.documentElement.scrollTop = 0;
                         }} />
-                        <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/>
+                        {/* <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/> */}
                         <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => {
                             this.changeSelected("Chat","/chat")
                         }}/>
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
-                        <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>
-                        <DashBoardItems name="Questions" icon = {<HelpOutlineOutlinedIcon />} active = {this.state.selected === "Questions"} onClick = {() => this.changeSelected("Questions")}/>
+                        {/* <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>
+                        <DashBoardItems name="Questions" icon = {<HelpOutlineOutlinedIcon />} active = {this.state.selected === "Questions"} onClick = {() => this.changeSelected("Questions")}/> */}
                     </div>
                     <div className = {classes.Bottom}>
                         <DashBoardItems name="Logout" icon = {<LogoutOutlinedIcon />} onClick = {this.props.onLogOut}/>

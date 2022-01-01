@@ -100,9 +100,9 @@ class  createPost extends Component {
                     <UploadButton accept="image/*" onChange={this.fileSelectHandler}>
                         <InsertPhotoIcon className={classes.IconColor}/>
                     </UploadButton>
-                    <UploadButton accept="video/*" onChange={this.fileSelectHandler}>
+                    {/* <UploadButton accept="video/*" onChange={this.fileSelectHandler}>
                         <VideoCameraBackIcon className={classes.IconColor}/>
-                    </UploadButton>
+                    </UploadButton> */}
                     {/* <input type="file"  onChange={this.fileSelectHandler}/> */}
                     <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.makePost}>Share</Button>
                 </div>

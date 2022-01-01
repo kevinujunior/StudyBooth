@@ -43,8 +43,7 @@ class ChatItem extends Component {
         // } 
         return (
             <div className={chatClass.join(' ')} onClick={() => this.props.changeChatId(this.state.id,this.state.friend, this.state.whichChat, this.state.userIsAdmin)}>
-                {/* <div className="rajkumar">dfiushsiisdid</div> */}
-                <img src="https://i.pinimg.com/600x315/4b/74/cf/4b74cfb5f9ba362728b5ebfa6920b0f5.jpg" alt="lull"/>
+                <img src="/images/male_emoji.png" alt="lull"/>
                 <div className={classes.ChatPreview}>
                     <div>
                         <h4>{this.state.friend}</h4>

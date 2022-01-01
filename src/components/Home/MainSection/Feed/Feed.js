@@ -1,6 +1,5 @@
-import React, { Component , useEffect} from 'react';
+import React, { Component } from 'react';
 import Post from './Post/Post';
-import Spinner from '../../../UI/Spinner/Spinner'
 import {connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -65,7 +64,11 @@ class Feed extends Component {
             })
         }
 
-        if(this.props.posts != null && this.props.posts.length === 0) posts = <Post about="Hey new user please make a post.. :-)"/>;
+        if(this.props.posts != null && this.props.posts.length === 0){
+            posts = <Post 
+                postImage={'/images/info.png'}
+            />;
+        } 
 
         return (
             <div>
@@ -82,4 +85,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(Feed);
+export default connect(mapStateToProps)(React.memo(Feed));

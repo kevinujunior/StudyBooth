@@ -15,7 +15,7 @@ const UserProfile = (props) => {
     return (
         <div className={classes.UserProfile}>
             <div style={{'display':'flex', 'alignItems':'center', 'flexDirection':'column'}}>
-                <img src={userData.userPic ? base+userData.userPic : "https://www.wpbeginner.com/wp-content/uploads/2013/04/wp404error.jpg"} alt=""></img>
+                <img src={userData.userPic ? base+userData.userPic : "/images/male_emoji.png"} alt=""></img>
                 <h2 style={{'textAlign':'center'}}>{userData ? userData.fullName : null}</h2>
                 <div className={classes.stats}>
                     <div>

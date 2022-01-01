@@ -29,6 +29,7 @@
     .RightPanel{
         max-width: 100%;
         min-width: 100%;
+        height: auto;
         max-height: 450px;
         position: relative;
         top: 0px;

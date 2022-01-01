@@ -4,14 +4,12 @@ import * as actionsTypes from '../../../store/actions/actionTypes';
 import * as actions from '../../../store/actions/index';
 import { withRouter } from 'react-router';
 import classes from './Header.css';
-import SearchIcon from '@mui/icons-material/Search';
-import logo from '../../../assets/Study_Booth.png'
+// import logo from '../../../assets/SB_png.png'
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
-import { Avatar, IconButton } from '@mui/material';
+import {  IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleButton from '../../UI/ToggleButton/ToggleButton';
 import AddIcon from '@mui/icons-material/Add';
-import axios from '../../../axios_base';
 import onClickOutside from 'react-onclickoutside';
 import SearchBox from '../../UI/SearchBox/SearchBox';
 
@@ -48,7 +46,7 @@ class Header extends Component {
             <div className={headerClasses.join(" ")} >
                 <div className={classes.HeaderContent}>
                     <div className = {classes.homeIcon} title="Home">        
-                        <img src={logo} alt=""  id={classes.fuckoff} onClick={() => {
+                        <img src="/images/logo.png" alt=""  id={classes.fuckoff} onClick={() => {
                             this.props.history.push({
                                 pathname: '/',
                             });

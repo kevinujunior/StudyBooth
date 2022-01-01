@@ -1,14 +1,30 @@
 .LeftPanel{
-    position: sticky;
+    /* position: sticky;
     left: 0;
     top: 0;
-    height: calc(100vh - 50px) !important;
+    height: calc(100vh - 51px);
     font-family:"Work Sans","Open Sans";
     width: 300px;
     background-color: white;
     transition: all 0.3s;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     box-sizing: border-box;
+    overflow-y: hidden; */
+
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    max-width: 300px;
+    min-width: 270px;
+    position: sticky;
+    right: 0px;
+    top: 0px;
+    font-family: "Work Sans";
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    transition: all 0.3s;
+    background-color: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .Visible{

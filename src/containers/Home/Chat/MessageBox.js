@@ -72,6 +72,7 @@ const MessageBox = (props) => {
                         setShowAddUserBox(false);
                     }}
                     placeholder={"Search user to add in group.."}
+                    theme={props.theme}
                     />
                 </div>
             </div>
