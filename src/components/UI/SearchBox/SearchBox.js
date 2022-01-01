@@ -16,6 +16,7 @@ class SearchBox extends Component {
 
     handleClickOutside = () => {
         this.setState({showDropdown:false})
+        
     }
     
     fetchSearch = () => {
@@ -40,6 +41,7 @@ class SearchBox extends Component {
                                     if(this.props.chatCallBack) this.props.chatCallBack(curruserId, search[i].id);
                                     if(this.props.headerCallBack) this.props.headerCallBack(search[i].id);
                                     if(this.props.addUserCallBack) this.props.addUserCallBack(search[i].id)
+                                    this.setState({showDropdown:false})
                                 }}
                         >
                         <Avatar alt={search[i]["username"]} src={search[i]["userPic"]} />

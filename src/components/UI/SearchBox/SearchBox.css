@@ -75,6 +75,7 @@
     padding-right: 10px;
     display: flex;
     flex-direction: row;
+    cursor : pointer;
 }
 .Dark .searchDropdown ul > li > p{
     color: white;
