@@ -7,7 +7,10 @@ import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ArticleIcon from '@mui/icons-material/Article';
 import { IconButton, Button} from '@mui/material';
-import * as actions from '../../../../store/actions/feed'
+import * as actions from '../../../../store/actions/feed';
+import LoadingBar from '../../../UI/LoadingBar/LoadingBar';
+
+import imageCompression from 'browser-image-compression';
 
 class  createPost extends Component {
 
@@ -16,6 +19,7 @@ class  createPost extends Component {
         selectedfile: null,
         fileType: "",
         error:"",
+        loading:false,
     }
 
     fileSelectHandler = (event) => {
@@ -28,8 +32,39 @@ class  createPost extends Component {
     }
 
 
+    handleImageUpload = (event) => {
 
-    makePost = () => {
+        const imageFile = this.state.selectedfile;
+        this.setState({loading:true});
+        if(imageFile == null){
+            this.makePost();
+            return;
+        }
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+        let component = this;
+        const options = {
+          maxSizeMB: 0.6,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        }
+        imageCompression(imageFile, options)
+        .then(function (compressedFile) {
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+            component.makePost(compressedFile); // write your own logic
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
+
+      }
+
+
+    makePost = (file) => {
+        console.log("make post called.")
         //if user has not selected image and not written some caption then we should return.
         if(this.state.postCaption == null && this.state.selectedfile ==null) return;
 
@@ -37,19 +72,21 @@ class  createPost extends Component {
 
         formData.append('postCaption' , this.state.postCaption)
         if(this.state.selectedfile!==null){
-            formData.append('postFile' , this.state.selectedfile)
+            formData.append('postFile' , file)
         }
         formData.append('user' ,localStorage.getItem('user'))
        
         this.props.onCreateNewPost(formData, (isError, errorMsg) => {
             if(isError){
                 this.setState({
+                    loading:false,
                     error: errorMsg,
                 })
             }
             else{
                 this.props.closeModal();
                 this.setState({
+                    loading:false,
                     error: null,
                 })
             }
@@ -104,8 +141,9 @@ class  createPost extends Component {
                         <VideoCameraBackIcon className={classes.IconColor}/>
                     </UploadButton> */}
                     {/* <input type="file"  onChange={this.fileSelectHandler}/> */}
-                    <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.makePost}>Share</Button>
+                    <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.handleImageUpload}>Share</Button>
                 </div>
+                {this.state.loading ? <LoadingBar backgroundColor="#4FC4F6"/> : null}
             </div>
         );
     }

@@ -37,7 +37,10 @@ class PostActionPopUp extends Component {
                     <div><TurnedInIcon className={classes.grey}/> <p>Save</p> </div>
                     <div><FileDownloadIcon className={classes.grey}/> <p>Download</p> </div>
                     <div> <BlockIcon className={classes.grey}/> <p>Block</p></div>
-                    {currUserID == this.props.userId ? <div onClick={this.props.onDeletePost}> <DeleteIcon className={classes.grey} /><p>Delete</p></div> : null}
+                    {currUserID == this.props.userId ? <div onClick={() => {
+                        this.props.onDeletePost();
+                        this.props.close();
+                    }}> <DeleteIcon className={classes.grey} /><p>Delete</p></div> : null}
                 </div>
             </div>
         );
