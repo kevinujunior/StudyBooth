@@ -40,8 +40,8 @@ class  createPost extends Component {
             this.makePost();
             return;
         }
-        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+        // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        // console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
         let component = this;
         const options = {
@@ -51,8 +51,8 @@ class  createPost extends Component {
         }
         imageCompression(imageFile, options)
         .then(function (compressedFile) {
-            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
 
             component.makePost(compressedFile); // write your own logic
         })
@@ -64,7 +64,6 @@ class  createPost extends Component {
 
 
     makePost = (file) => {
-        console.log("make post called.")
         //if user has not selected image and not written some caption then we should return.
         if(this.state.postCaption == null && this.state.selectedfile ==null) return;
 

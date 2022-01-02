@@ -38,7 +38,6 @@ class CommentItem extends Component {
         }
         axios.post("feed/create_comment/", data)
         .then(res =>{
-            console.log(res)
         })
         .catch(err => {
             console.log(err)
@@ -59,7 +58,6 @@ class CommentItem extends Component {
         }
         let currUserID = localStorage.getItem('user');
 
-        console.log(time,this.props.createdAt)
 
         return (
             <div className={cmtItemClasses.join(' ')}>

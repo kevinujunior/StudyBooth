@@ -63,7 +63,6 @@ customAxios.interceptors.response.use((response) => {
         {
             refresh: localStorage.getItem('refresh_token'),
         });
-        console.log("access token fetch", res)
         if (res.status === 200) {
             localStorage.setItem('access_token', res.data.access);
             customAxios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');

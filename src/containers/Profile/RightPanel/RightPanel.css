@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     height: calc(100vh - 50px);
-    max-width: 300px;
-    min-width: 270px;
+    width: 350px;
     position: sticky;
     right: 0px;
     top: 0px;

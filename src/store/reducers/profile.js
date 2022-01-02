@@ -9,7 +9,6 @@ const initialState = {
 }
 
 const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
-    console.log("update posts called")
 
     if(currPageNo == 1){ 
         //if currPageNo is 1 means either we have refreshed, or new post, or delete post, on feed load
@@ -41,7 +40,6 @@ const updatePosts = (newPosts, state, nextPageNo, currPageNo) => {
     let posts = [...state.posts];
     posts = newPosts ? posts.concat(newPosts) : posts;
 
-    console.log("profile posts updated")
 
     return {
         ...state,

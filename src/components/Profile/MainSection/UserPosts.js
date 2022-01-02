@@ -6,7 +6,6 @@ class Posts extends Component{
 
     render(){
         let posts = <p>Loading...</p>
-        console.log(this.props.posts)
         if(this.props.posts){
             posts = [...Array(this.props.posts.length)].map((_,i) => {
                 return <Post

@@ -56,7 +56,6 @@ class Post extends Component{
 
     fetchComment= (shouldRefresh) => {
 
-        console.log("refresh", shouldRefresh)
         if(shouldRefresh){ //if we added new comment then we are passing a boolean to refresh the commentSection
             this.setState({
                 commentPageNo:1,
@@ -66,9 +65,9 @@ class Post extends Component{
 
 
         if(this.state.commentPageNo == null) {
-            console.log("null comments");
             return;
         };
+
         if(!shouldRefresh){
             this.setState({
                 loading:true,
@@ -80,7 +79,6 @@ class Post extends Component{
             let cmtNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
             if(cmtNextPage) cmtNextPage = String(cmtNextPage).substring(5, cmtNextPage.length-1); //getting comment nexpage no
 
-            console.log(res)
 
             this.setState({
                 comments: shouldRefresh ? [...res.data.results] : this.state.comments.concat(res.data.results),
@@ -103,7 +101,6 @@ class Post extends Component{
         this.props.onLike(data, this.state.isLiked, this.state.likeId, (res,likeId) => {
             let likeCnt = this.state.likeCount;
             let isLiked = this.state.isLiked;
-            console.log(res)
             this.setState({
                 loading:false,
                 isLiked: res === 'Success' ? !isLiked : isLiked, 

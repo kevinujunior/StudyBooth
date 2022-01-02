@@ -62,7 +62,6 @@ class CommentItem extends Component {
     }
 
     fetchReplies = (shouldRefresh) => {
-        console.log("refresh called", shouldRefresh)
         if(shouldRefresh){
             this.setState({
                 repliesNextPageNo:1,
@@ -73,7 +72,6 @@ class CommentItem extends Component {
         if(this.state.repliesNextPageNo == null) return;
         axios.get(`feed/get_comment/replies/?parent=${this.props.id}&page=${this.state.repliesNextPageNo}`)
         .then(res =>{
-            console.log(res)
             let repliesNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
             if(repliesNextPage) repliesNextPage = String(repliesNextPage).substring(5, repliesNextPage.length-1);
             
@@ -83,7 +81,6 @@ class CommentItem extends Component {
                 repliesCount: res.data.count
             })
 
-            console.log('replies', this.state.replies)
         })
         .catch(err => {
             console.log(err)

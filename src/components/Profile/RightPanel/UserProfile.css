@@ -1,7 +1,14 @@
 .UserProfile{
-    padding: 10px;
+    padding: 20px;
+    width: 100%;
+}
+
+.ImgAndStats{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .UserProfile img{
@@ -15,6 +22,7 @@
 }
 
 .stats{
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,8 +47,22 @@
     margin-top: 10px;
 }
 
+.NameAndDescription{
+    margin-bottom: 10px;
+}
+
+.NameAndDescription h3{
+    font-weight: 400;
+    text-transform: capitalize;
+}
 .InfoBlocks{
     margin-top: 8px;
+}
+
+.Buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 @media (max-width: 1060px){
@@ -49,7 +71,6 @@
     }
 
     .UserProfile  img{
-        max-height: 150px;
-        max-width: 200px;
+        max-height: 100px;
     }
 }

@@ -33,7 +33,6 @@ export const fetchUserData = (userId) => {
         dispatch(setLoading(true,null));
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
-            console.log(res.data)
             dispatch(setProfileUserData(res.data));
         })
         .catch(err => console.log(err))
@@ -42,7 +41,6 @@ export const fetchUserData = (userId) => {
 
         axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
-            console.log("im following", res)
             if(res.data.length >= 1 || userId == localStorage.getItem('user')){ 
                 //res.data will have length greater than 1 if current user follow other user.
                 dispatch(fetchUserPosts(1,userId));
@@ -62,7 +60,6 @@ export const fetchUserPosts = (nextPageNo, userId) => {
         dispatch(setLoading(null,true));
         axios.get(`feed/get_post/?page=${nextPageNo}&viewUserPost=${userId}`)
         .then(res => {
-            console.log(res)
             let nextNo = res.data.next ? res.data.next.match(/page=.*&/gm)[0]: null;
             if(nextNo) nextNo = String(nextNo).substring(5, nextNo.length-1);
             dispatch(setProfileUserPosts(res.data.results, nextNo, nextPageNo))

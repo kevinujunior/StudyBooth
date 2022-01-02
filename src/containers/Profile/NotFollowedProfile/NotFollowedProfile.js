@@ -6,8 +6,6 @@ const NotFollowedProfile = (props) => {
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
     let base = "https://study-booth-backend.herokuapp.com"
     const currUser = localStorage.getItem('user')
-    console.log(currUser)
-    console.log(props.user)
     return (
         <div className={classes.NFP}>
             <div className={classes.UserInfo}>

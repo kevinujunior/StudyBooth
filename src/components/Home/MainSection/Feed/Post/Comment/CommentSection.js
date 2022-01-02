@@ -17,9 +17,7 @@ const CommentSection = (props) => {
         CmtSectionClass.push(classes.Dark)
     }
 
-    console.log("component updated")
     let comments = <p>Loading...</p>;
-    console.log(props.comments)
     if(props.comments){
         comments = props.comments.map(comment =>{
             return  <CommentItem
