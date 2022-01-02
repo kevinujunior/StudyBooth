@@ -16,7 +16,14 @@ const SearchPage = (props) => {
     const fetchProfile = () => {
         console.log("fxn called")
         axios.get(`users/userview/?user=${searchText}`)
-        .then(res => setProfilesList(res.data))
+        .then(res => {
+            if(res.data.length > 0) setProfilesList(res.data)
+            else {
+                setProfilesList([{
+                    fullName:"No user found 🥱🥱"
+                }])
+            }
+        })
         .catch(err => console.log(err));
     }
 
