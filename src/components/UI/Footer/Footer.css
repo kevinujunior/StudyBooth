@@ -17,9 +17,14 @@
     align-items: center;
 }
 .Icon{
-    color: #4FC4F6;
+    color: #4D426D;
 }
 
 .Dark {
-    background-color: #202124;
+    background-color: #151826;
+}
+
+
+.Dark .Icon{
+    color: #2295FE;
 }

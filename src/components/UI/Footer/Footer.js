@@ -21,10 +21,10 @@ const Footer = (props) => {
             {props.loading ? <LoadingBar backgroundColor="#4FC4F6"/> : null}
             <div className={styles.Buttons}>
                 <IconButton onClick={() => props.setLeftPanel(true)} ><AccountCircleIcon className={styles.Icon}/></IconButton>
-                <IconButton onClick={() => props.onCreateFeedClick(true)} ><AddCircleRoundedIcon className={styles.Icon}/></IconButton>
                 <IconButton onClick={() => history.push('/search')} ><SearchIcon className={styles.Icon}/></IconButton>
-                {/* <IconButton onClick={() => history.push('/chat')}><MarkChatUnreadIcon /></IconButton>
-                <IconButton onClick={() => history.push('/home')}><HomeIcon /></IconButton> */}
+                <IconButton onClick={() => props.onCreateFeedClick(true)} ><AddCircleRoundedIcon className={styles.Icon}/></IconButton>
+                <IconButton onClick={() => history.push('/chat')}><MarkChatUnreadIcon className={styles.Icon}/></IconButton>
+                <IconButton onClick={() => history.push('/home')}><HomeIcon className={styles.Icon}/></IconButton>
             </div>
         </div>
     )
