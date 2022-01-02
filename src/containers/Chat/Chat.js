@@ -245,7 +245,11 @@ class Chat extends Component {
       chatclasses.push(classes.ActiveChat);
     }
     return (
-      <div className={chatclasses.join(" ")}>
+      <div className={chatclasses.join(" ")}  
+          style={{
+            'marginTop':`${this.props.device === 'mobile' ? '20px' : '80px'}`,
+            'height': `${this.props.device === 'mobile' ? '90vh' : '85vh'}`}
+        }>
         <div className={classes.ChatList}>
           {this.state.chatListLoading ? <LoadingBar background={'linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83))'}/> :null}
           <div 
@@ -317,6 +321,7 @@ const mapStateToProps = (state) => {
   return {
     theme: state.theme.theme,
     data: state.currentUser.data,
+    device: state.page.whichDevice,
   };
 };
 

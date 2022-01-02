@@ -1,0 +1,56 @@
+.SearchPage{
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.Input{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(226, 226, 226);
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding: 5px 10px 5px 5px;
+    align-items: center;
+    width: 90%;
+    position: relative;
+    margin: 5%;
+}
+
+.Input input{
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+}
+
+.Input input:focus{
+    outline: none;
+    border: none;
+}
+
+.Input button{
+    border:none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.UserList{
+    width: 80%;
+    flex: 1;
+    overflow-y: scroll;
+    margin: auto;
+}
+
+.User{
+    width: 100%;
+    border-bottom: 0.3px solid black;
+    margin: 5px 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}

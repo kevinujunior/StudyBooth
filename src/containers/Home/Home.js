@@ -30,7 +30,7 @@ class Home extends Component {
                             feedCurrPageNo: this.props.nextPageNo,
                         })
                     }
-                }}>
+                }} style={{'marginTop':`${this.props.device === 'mobile' ? '0px' : '51px'}`}}>
                     <div className={classes.main}>
                         <LeftPanel /> 
                         <MainSection /> 
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => {
         theme: state.theme.theme,
         nextPageNo: state.feed.nextPageNo,
         loading: state.feed.isFeedLoading,
+        device: state.page.whichDevice,
     }
 }
 

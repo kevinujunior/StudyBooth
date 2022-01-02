@@ -67,7 +67,7 @@ class Profile extends Component{
                         postsCurrPageNo: this.props.nextPageNo,
                     })
                 }
-            }}>
+            }} style={{'marginTop':`${this.props.device === 'mobile' ? '0px' : '51px'}`}}>
                 {this.props.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
@@ -85,6 +85,7 @@ const mapStateToProps = state => {
         posts: state.profile.posts,
         nextPageNo: state.profile.nextPageNo,
         loading: state.profile.loading,
+        device: state.page.whichDevice,
     }
 }
 

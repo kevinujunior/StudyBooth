@@ -6,6 +6,7 @@ import authReducer from './reducers/auth';
 import feedReducer from './reducers/feed';
 import currentUserReducer from './reducers/currentUser';
 import profileReducer from './reducers/profile';
+import pageReducer from './reducers/page'
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   feed: feedReducer,
   currentUser: currentUserReducer,
   profile: profileReducer,
+  page: pageReducer,
 })
 
 

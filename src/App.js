@@ -12,6 +12,7 @@ import * as actions from './store/actions/index';
 import axios from 'axios';
 import WebSocketInstance from './websocket';
 import Chat from './containers/Chat/Chat';
+import SearchPage from './containers/SearchPage/SearchPage';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -43,6 +44,9 @@ class App extends Component {
           <Route exact path="/chat" >
             {this.props.isAuthenticated ? <Layout><Chat /></Layout> : <Redirect to="/login" /> }
           </Route>
+          <Route exact path="/search" >
+            {this.props.device === 'mobile' ? <Layout><SearchPage /></Layout> : <Redirect to="/home" /> }
+          </Route>
           <Route exact path="/loading" component ={LoadingPage} />
           <Route exact path="/login"> 
             {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
@@ -60,9 +64,10 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return{
-    isAuthenticated: state.auth.token !== null,
+    isAuthenticated: state.auth.token !== null && localStorage.getItem('user') !== null,
     isHomeLoading: state.feed.isHomeLoading,
     isProfileLoading: state.profile.loading,
+    device: state.page.whichDevice,
   }
 }
 

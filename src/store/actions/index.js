@@ -27,3 +27,8 @@ export {
     fetchUserData,
     fetchUserPosts,
 } from './profile'
+
+
+export {
+    deviceWidthChage,
+} from './page'

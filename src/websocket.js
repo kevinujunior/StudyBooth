@@ -19,7 +19,6 @@ class WebSocketService {
   }
 
   connect() {
-    console.log("new connection with chat id ", this.chatId)
     const path = `wss://study-booth-backend.herokuapp.com/ws/chat/${this.chatId}/`;
     this.socketRef = new WebSocket(path);
     this.socketRef.onopen = () => {
