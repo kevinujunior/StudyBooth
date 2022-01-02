@@ -235,6 +235,7 @@ class Post extends Component{
                             })
                             this.props.onDeletePost(this.props.id)
                         }}
+                        theme={this.props.theme}
                         close={() => this.setState({isActionsVisible:false})}
                     /> : 
                     null

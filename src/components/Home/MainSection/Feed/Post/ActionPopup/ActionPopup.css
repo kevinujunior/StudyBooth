@@ -15,7 +15,7 @@
 }
 
 .top{
-    top: 55px;
+    top: 30px;
 }
 
 .ActionPopUp div{
@@ -37,4 +37,8 @@
 
 .grey {
     color: grey;
+}
+
+.Dark {
+    background-color: #2B313A;
 }

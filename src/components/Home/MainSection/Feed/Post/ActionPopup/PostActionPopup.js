@@ -30,9 +30,9 @@ class PostActionPopUp extends Component {
         return (
             <div ref={el => {
                 if(!el) return;
-                if(el.parentElement.getBoundingClientRect().top >= window.innerHeight - 200) this.setBottom(1);
+                if(el.parentElement.getBoundingClientRect().top >= window.innerHeight - 400) this.setBottom(1);
               }} >
-                <div className={[classes.ActionPopUp, this.state.bottom ? classes.bottom : classes.top ].join(" ")} >
+                <div className={[classes.ActionPopUp, this.state.bottom ? classes.bottom : classes.top, this.props.theme === 'dark'? classes.Dark : null ].join(" ")} >
                     <div> <ShareIcon className={classes.grey}/> <p>Share</p></div>
                     <div><TurnedInIcon className={classes.grey}/> <p>Save</p> </div>
                     <div><FileDownloadIcon className={classes.grey}/> <p>Download</p> </div>
