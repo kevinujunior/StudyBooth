@@ -142,7 +142,7 @@ class  createPost extends Component {
                     {/* <input type="file"  onChange={this.fileSelectHandler}/> */}
                     <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.handleImageUpload}>Share</Button>
                 </div>
-                {this.state.loading ? <LoadingBar backgroundColor="#4FC4F6"/> : null}
+                {this.state.loading ? <LoadingBar backgroundColor="#4150AF"/> : null}
             </div>
         );
     }

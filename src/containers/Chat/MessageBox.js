@@ -19,7 +19,7 @@ const MessageBox = (props) => {
     useEffect(() => {
         const domNode = node.current;
         if(domNode) domNode.scrollTop = domNode.scrollHeight;
-    },[props.messages, props.show,props.grpMemeberList])
+    },[props.messages, props.show,props.grpMemeberList, node.current ? node.current.height : null])
 
     const renderMessages = (messages) => {
         const currentUser = props.username;

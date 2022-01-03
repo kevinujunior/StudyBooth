@@ -59,6 +59,7 @@ class Layout extends Component {
 
     render(){
 
+        console.log(this.props.page)
         let classesL = [classes.Layout]
         if(this.props.theme === 'dark') classesL.push(classes.Dark)
         return (
@@ -82,7 +83,7 @@ class Layout extends Component {
                     {this.state.isCreatePostVisible ? <CreateFeed  closeModal={() => this.onCreateFeedClick(false)}  /> : null }
                 </Modal>
 
-                {this.props.device === 'mobile' ? 
+                {this.props.device === 'mobile' && this.props.page !== '/chat'? 
                     <Footer 
                         setLeftPanel = {this.onHamburgerClick}
                         onCreateFeedClick = {this.onCreateFeedClick}
@@ -103,6 +104,7 @@ const mapStateToProps = (state) => {
         theme: state.theme.theme,
         device: state.page.whichDevice,
         isPageLoading: state.page.pageLoading,
+        page : state.page.whichPage,
     }
 }
 

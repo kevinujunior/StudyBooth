@@ -263,7 +263,9 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}  
           style={{
-            'marginTop':`${this.props.device === 'mobile' ? '10px' : '80px'}`}
+            'marginTop':`${this.props.device === 'mobile' ? '10px' : '80px'}`,
+            'height': `${this.props.device === 'mobile' ? '97vh' : '85vh'}`
+          }
         }>
         <div className={classes.ChatList}>
           {this.state.chatListLoading ? <LoadingBar background={'linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83))'}/> :null}

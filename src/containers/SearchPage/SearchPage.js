@@ -60,7 +60,7 @@ const SearchPage = (props) => {
 
     return (
         <div className={styles.SearchPage}>
-            {loading ? <LoadingBar backgroundColor="#4FC4F6"/> : null}
+            {loading ? <LoadingBar backgroundColor="#FEB12F"/> : null}
             <div className={styles.Input}>
                 <input 
                     type="text" 
