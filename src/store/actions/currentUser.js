@@ -21,9 +21,10 @@ export const fetchCurrentUser = () => {
     return dispatch => {
         dispatch(setLoading(true));
         let userId = localStorage.getItem('user');
-        axios.get('users/userview/'+userId,)
+        return axios.get('users/userview/'+userId,)
         .then(response =>{
             dispatch(setCurrentUser(response.data));
+            return Promise.resolve();
         })
         .catch(err => console.log(err));
     }

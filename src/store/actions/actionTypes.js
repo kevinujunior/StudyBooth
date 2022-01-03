@@ -27,3 +27,4 @@ export const SET_HOME_LOADING = 'SET_HOME_LOADING';
 
 export const PAGE_CHANGE = 'PAGE_CHANGE';
 export const DEVICE_SIZE_CHANGE = 'DEVICE_SIZE_CHANGE';
+export const PAGE_LOADING = 'PAGE_LOADING';

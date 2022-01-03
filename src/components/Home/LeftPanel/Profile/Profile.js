@@ -13,8 +13,11 @@ function Profile(props){
                 <div className={classes.InfoBox}>
                     {/* photo and name*/}
                     <div onClick={() => {
-                        props.onFetchUserProfile(localStorage.getItem('user'));
-                        history.push('/profile')
+                        props.onChangePage(localStorage.getItem('user'), () => {
+                            console.log("callback called")
+                            history.push('/profile');
+                        });
+                        if(props.close) props.close()
                     }} style={{'cursor':'pointer'}}>
                         <img src={props.userData ? props.userData.userPic ? props.userData.userPic : "/images/male_emoji2.png" : "/images/male_emoji2.png" } />
                     </div>
@@ -34,7 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+        onChangePage : (userId, callBack) => dispatch(actions.changePage('/profile', {userId})).then(() => callBack())
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Profile);

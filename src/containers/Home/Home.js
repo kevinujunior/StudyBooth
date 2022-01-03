@@ -31,13 +31,12 @@ class Home extends Component {
                         })
                     }
                 }} style={{'marginTop':`${this.props.device === 'mobile' ? '0px' : '51px'}`}}>
-                    <div className={classes.main}>
+                    {this.props.loading ? null :<div className={classes.main}>
                         <LeftPanel /> 
                         <MainSection /> 
                         {/* <ChatIn /> */}
                         <RightPanel />
-                    </div>
-                    
+                    </div>}
             </div>
         )
     }
@@ -47,7 +46,7 @@ const mapStateToProps = (state) => {
     return {
         theme: state.theme.theme,
         nextPageNo: state.feed.nextPageNo,
-        loading: state.feed.isFeedLoading,
+        loading: state.page.pageLoading && state.page.whichPage === '/home',
         device: state.page.whichDevice,
     }
 }

@@ -9,6 +9,9 @@ import Footer from '../../components/UI/Footer/Footer';
 import {connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
+import LoadingPage from '../../components/UI/LoadingPage/LoadingPage';
+
+
 class Layout extends Component {
 
     state = {
@@ -55,6 +58,7 @@ class Layout extends Component {
     }
 
     render(){
+
         let classesL = [classes.Layout]
         if(this.props.theme === 'dark') classesL.push(classes.Dark)
         return (
@@ -85,6 +89,7 @@ class Layout extends Component {
                         theme={this.props.theme}
                     /> 
                 : null}
+                {this.props.isPageLoading ? <LoadingPage /> : null}
             </div>
         );
 
@@ -97,6 +102,7 @@ const mapStateToProps = (state) => {
     return {
         theme: state.theme.theme,
         device: state.page.whichDevice,
+        isPageLoading: state.page.pageLoading,
     }
 }
 

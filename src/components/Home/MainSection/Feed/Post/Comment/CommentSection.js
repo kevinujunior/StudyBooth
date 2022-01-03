@@ -7,7 +7,7 @@ const CommentSection = (props) => {
     const [mount, setMount] = useState(true);
     useEffect(() => {
         if(mount){
-            props.fetchComment();
+            props.fetchComment(true);
             setMount(false);
         }
     },[props.comments, props.theme])
@@ -16,6 +16,8 @@ const CommentSection = (props) => {
     if(props.theme === 'dark'){
         CmtSectionClass.push(classes.Dark)
     }
+
+    console.log(props.comments)
 
     let comments = <p>Loading...</p>;
     if(props.comments){
@@ -32,6 +34,7 @@ const CommentSection = (props) => {
                 createdAt = {comment.createdAt}
                 refreshComment = {props.fetchComment}
                 setLoading={props.setLoading}
+                onChangePage={props.onChangePage}
             /> ;  
         })
     }

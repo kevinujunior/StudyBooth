@@ -7,7 +7,6 @@ export {
     toggleLikeRequest,
     deletePost,
     deleteComment,
-    setHomeLoading,
 } from './feed'
 
 
@@ -31,4 +30,6 @@ export {
 
 export {
     deviceWidthChage,
+    changePage,
+    pageLoading,
 } from './page'

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './SearchPage.css';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -8,13 +8,17 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
+import LoadingBar from '../../components/UI/LoadingBar/LoadingBar';
+
 
 const SearchPage = (props) => {
     const [profilesList, setProfilesList] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const fetchProfile = () => {
         console.log("fxn called")
+        setLoading(true)
         axios.get(`users/userview/?user=${searchText}`)
         .then(res => {
             if(res.data.length > 0) setProfilesList(res.data)
@@ -23,22 +27,39 @@ const SearchPage = (props) => {
                     fullName:"No user found 🥱🥱"
                 }])
             }
+            setLoading(false)
         })
         .catch(err => console.log(err));
     }
 
-    let history = useHistory();
+    const history = useHistory();
 
     const callBack = (userId) => {
-        props.onFetchUserProfile(userId);
-        history.push({   
+        props.onChangePage(userId, () => history.push({
             pathname: '/profile',
-            userId: userId,
-        });
+            userId: userId
+        }))
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            props.onSetPageLoading();
+        },300)
+
+        return () => {
+            if (history.action === "POP") {
+                // props.history.replace('/home')
+                props.onChangePage('/home', () => {
+                    props.history.replace('/home')
+                })
+            }
+        }
+
+    },[history])
 
     return (
         <div className={styles.SearchPage}>
+            {loading ? <LoadingBar backgroundColor="#4FC4F6"/> : null}
             <div className={styles.Input}>
                 <input 
                     type="text" 
@@ -63,7 +84,8 @@ const SearchPage = (props) => {
 
 const mapDispathToProps = dispatch => {
     return {
-        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+        onChangePage : (userId, callBack) => dispatch(actions.changePage('/profile', {userId:userId})).then(() => callBack()),
+        onSetPageLoading: () => dispatch(actions.pageLoading(false)),
     }
 }
 

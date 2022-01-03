@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from  'axios';
-import * as feedFunc from './feed';
-import * as userFunc from './currentUser';
+import {changePage} from './page'
 
 export const authStart = () => {
     return {
@@ -23,21 +22,6 @@ export const authFail = error => {
     }
 }
 
-// export const checkAuthTimeout = expirationTime => {
-//     return dispatch => {
-//         setTimeout(() =>{
-//             dispatch(logout());
-//         }, expirationTime*1000)
-//     }
-// }
-
-const loadEssential = dispatch => {
-    console.log("load essential called")
-    // feedFunc.fetchSection();
-    dispatch(userFunc.fetchCurrentUser());
-    dispatch(feedFunc.fetchFeed(1));
-    console.log("end")
-}
 
 export const logout = () => {
     localStorage.removeItem('user');
@@ -68,7 +52,7 @@ export const authLogin = (username, password) => {
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
             // dispatch(checkAuthTimeout(3600));
-            loadEssential(dispatch);
+            dispatch(changePage('/home'))
         })
         .catch(err => {
             console.log(err.response.data)
@@ -98,7 +82,7 @@ export const authSignup = (username, fullname,email, password1, password2) => {
             localStorage.setItem('expirationDate',expirationDate);
             dispatch(authSuccess(access_token));
             // dispatch(checkAuthTimeout(3600));
-            loadEssential(dispatch);
+            dispatch(changePage('/home'))
         })
         .catch(err => {
             dispatch(authFail(Object.values(err.response.data)[0][0]))
@@ -110,10 +94,10 @@ export const authSignup = (username, fullname,email, password1, password2) => {
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('access_token');
-        if(token === undefined) {
+        if(token === undefined || token === null) {
             dispatch(logout());
         } else {
-            loadEssential(dispatch);
+            dispatch(changePage('/home'))
             dispatch(authSuccess(token));
         }
     }

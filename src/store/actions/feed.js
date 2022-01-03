@@ -19,13 +19,6 @@ export const setFeedLoading = (loading) => {
     }
 }
 
-export const setHomeLoading = (loading) => {
-    return{
-        type: actionTypes.SET_HOME_LOADING,
-        loading: loading
-    }
-}
-
 export const setSections = (sections) => {
     return {
         type: actionTypes.FETCH_SECTIONS,
@@ -55,18 +48,20 @@ export const fetchFeed = (pageNo, loading) => {
         if(pageNo == null) return;
         if(loading) return;
 
-        dispatch(setFeedLoading(true));
+        dispatch(setFeedLoading(true))
 
-        axios.get(`feed/get_post/?page=${pageNo}`)
+        return axios.get(`feed/get_post/?page=${pageNo}`)
         .then(res =>{
             const posts = res.data.results;
             let nextNo = res.data.next ? res.data.next.match(/page=.*/gm)[0]: null;
             if(nextNo) nextNo = String(nextNo).substring(5, nextNo.length); //post next page no
             dispatch(setPosts(posts,nextNo,pageNo))  //after getting the post we are setting post in global state.
+            dispatch(setFeedLoading(false))
+            return Promise.resolve();
         })
         .catch(err => {
-            dispatch(setFeedLoading(false))
             console.log(err)
+            return Promise.reject();
         });
     }
 }
@@ -142,14 +137,14 @@ export const toggleLikeRequest = (data, isLiked,likeId, callBack) => {
 export const fetchFeedFilterBySection = (id) => {
     //here we are getting the section id and the we are filtering feed on basis of that.
     return dispatch => {
-        dispatch(setFeedLoading(true))
+        // dispatch(setFeedLoading(true))
         axios.get('feed/get_post/?section='+id)
         .then(response =>{
             const posts = response.data;
             // dispatch(setPosts(posts)) //after we got all the posts we set the posts. and that will be stored in our global state.
         })
         .catch(err => {
-            dispatch(setFeedLoading(false))
+            // dispatch(setFeedLoading(false))
             console.log(err)
         });
     }

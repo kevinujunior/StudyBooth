@@ -27,8 +27,10 @@ class DashBoard extends Component{
         })
 
         if(path){
-            this.props.history.push({
-                pathname:path,
+            this.props.onPageChange(path, ()=> {
+                this.props.history.push({
+                    pathname:path,
+                })
             })
         }
 
@@ -38,7 +40,7 @@ class DashBoard extends Component{
     render(){
         return (
             <div className = {classes.DashBoard}>
-                <Profile />
+                <Profile close={this.props.closeLeftPanel}/>
                 <div className={[classes.Component1, this.state.selected === "Sections" ? classes.SlideLeft_c1 : classes.SlideRight_c1].join(" ")}>
                     <div>
                         <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => {
@@ -83,6 +85,7 @@ const mapDispatchToProps = dispatch => {
             if(theme === 'light') return dispatch({type: actionsTypes.DARK_THEME})
             return dispatch({type: actionsTypes.LIGHT_THEME})
         },
+        onPageChange : (page, callBack) => dispatch(actions.changePage(page)).then(() => callBack())
     }
 }
 

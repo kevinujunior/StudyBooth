@@ -13,7 +13,8 @@ class Profile extends Component{
 
     state = {
         postsCurrPageNo:null,
-        userId : this.props.location.userId ? this.props.location.userId : localStorage.getItem('user')
+        userId : this.props.location.userId ? this.props.location.userId : localStorage.getItem('user'),
+        loading:false,
     }
 
     postFollow = () =>{
@@ -22,34 +23,41 @@ class Profile extends Component{
 
         let currUserId = localStorage.getItem('user')
         let testid = this.props.location.userId
-        if(testid!==currUserId)
-           { axios.post("users/followingview/",{
+        if(testid!==currUserId){ 
+            this.setState({loading:true})
+            axios.post("users/followingview/",{
                 currUser : currUserId,
                 followingUser : this.props.location.userId
             }).then(res => {
                 //if we followed the user of whom we were viewing profile then we should refresh userData
-                this.setState({
-                    loading:true
-                })
-                this.props.onFetchUserData(testid);
+                this.props.onFetchUserData(testid, () => this.setState({
+                    loading:false
+                }));
             })
             .catch(err=>console.log(err))
         }
     }
 
     postUnfollow= () => { 
+        this.setState({loading:true})
         axios.delete('users/unfollow/'+this.state.userId)
         .then(res => {
-            //we have to rest profile to show unfollowed profile
-            this.props.onFetchUserData(this.state.userId)
+            //we have to reset profile to show unfollowed profile
+            this.props.onFetchUserData(this.state.userId, () => this.setState({
+                loading:false
+            }));
         })
         .catch(err => console.log(err))
     }
 
     componentWillUnmount(){
         //when profile will unmount then we setHomeLoading true and fetch latest feed for home
-        this.props.onSetHomeLoading();
-        this.props.onFetchFeed();
+        // this.props.onSetHomeLoading();
+        if(this.props.history.action === "POP") {
+            this.props.onPageChange('/home', () => {
+                this.props.history.replace('/home')
+            })
+        }
     }
 
     render(){
@@ -68,7 +76,7 @@ class Profile extends Component{
                     })
                 }
             }} style={{'marginTop':`${this.props.device === 'mobile' ? '0px' : '51px'}`}}>
-                {this.props.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
+                {this.state.loading ? <div className={[classes.emptyBox, this.props.theme === 'dark' ? classes.Dark : null].join(" ")}>
                     <Spinner /> 
                 </div>: <div className={classes.main}>
                     {this.props.posts ? <RightPanel user={this.props.userData} postUnfollow={this.postUnfollow}/> : <NotFollowedProfile user={this.props.userData ? this.props.userData[0] : null} postFollow={this.postFollow}  />}
@@ -78,24 +86,25 @@ class Profile extends Component{
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
         userData: state.profile.userData,
         posts: state.profile.posts,
         nextPageNo: state.profile.nextPageNo,
-        loading: state.profile.loading,
+        loading: state.page.pageLoading && state.page.whichPage==='/profile',
         device: state.page.whichDevice,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchCurrentUser: () => dispatch(actions.fetchCurrentUser()),
-        onFetchUserData : (userId) => dispatch(actions.fetchUserData(userId)),
+        onFetchUserData : (userId,callBack) => dispatch(actions.fetchUserData(userId)).then(() => callBack()),
         onFetchUserPosts : (pageno, userId) => dispatch(actions.fetchUserPosts(pageno, userId)),
         onFetchFeed : () => dispatch(actions.fetchFeed(1)),
-        onSetHomeLoading : () => dispatch(actions.setHomeLoading(true))
+        // onSetHomeLoading : () => dispatch(actions.setHomeLoading(true))
+        onPageChange : (page, callBack) => dispatch(actions.changePage(page)).then(() => callBack())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Profile));

@@ -47,47 +47,50 @@ class Post extends Component{
                 isCommentVisibe: true,
                 commentText:"",
                 loading: false,
+                commentPageNo:1,
+            }, () => {
+                this.fetchComment(true);
             })
-    
-            this.fetchComment(true);
         });
         
     }
 
     fetchComment= (shouldRefresh) => {
 
+        const callBack = () => {
+            //this callback will be called to fetch comments after setState is completed.
+            axios.get(`feed/get_comment/?post=${this.props.id}&page=${this.state.commentPageNo}`)
+            .then(res => {
+                let cmtNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
+                if(cmtNextPage) cmtNextPage = String(cmtNextPage).substring(5, cmtNextPage.length-1); //getting comment nexpage no
+
+                this.setState({
+                    comments: shouldRefresh ? [...res.data.results] : this.state.comments.concat(res.data.results),
+                    loading:false,
+                    cmtCount: res.data.results.length > 0 ? res.data.results[0].commentCount : 0,
+                    commentPageNo : cmtNextPage
+                })
+            })
+            .catch(err => this.setState({loading:false}))
+        }
+
         if(shouldRefresh){ //if we added new comment then we are passing a boolean to refresh the commentSection
             this.setState({
                 commentPageNo:1,
                 loading:true,
-            })
+            }, callBack)
         }
 
-
-        if(this.state.commentPageNo == null) {
+        if(!shouldRefresh && this.state.commentPageNo == null) {
             return;
         };
 
         if(!shouldRefresh){
             this.setState({
                 loading:true,
-            })
+            },callBack)
         }
-
-        axios.get(`feed/get_comment/?post=${this.props.id}&page=${this.state.commentPageNo}`)
-        .then(res => {
-            let cmtNextPage = res.data.next ? res.data.next.match(/page=.*&/gm)[0] : null;
-            if(cmtNextPage) cmtNextPage = String(cmtNextPage).substring(5, cmtNextPage.length-1); //getting comment nexpage no
-
-
-            this.setState({
-                comments: shouldRefresh ? [...res.data.results] : this.state.comments.concat(res.data.results),
-                loading:false,
-                cmtCount: res.data.results.length > 0 ? res.data.results[0].commentCount : 0,
-                commentPageNo : cmtNextPage
-            })
-        })
-        .catch(err => console.log(err))
+        
     }
 
     postLike = () => {
@@ -150,10 +153,11 @@ class Post extends Component{
                         </div> : null }
                     <div className={classes.Header}>
                         <div className={classes.NamePhoto} onClick={() => {
-                            this.props.onFetchUserProfile(this.props.userId);
-                            this.props.history.push({
-                                pathname: '/profile',
-                                userId: this.props.userId,
+                            this.props.onChangePage(this.props.userId, () => {
+                                this.props.history.push({
+                                    pathname: '/profile',
+                                    userId: this.props.userId
+                                })
                             });
                         }}>
                             <img src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt=""/>
@@ -219,6 +223,7 @@ class Post extends Component{
                             postId={this.props.id} 
                             ifMoreComment={this.state.commentPageNo != null}
                             setLoading={this.setLoading}
+                            onChangePage={this.props.onChangePage}
                         />  
                         : null
                     }
@@ -253,7 +258,7 @@ const mapDispatchToProps = dispatch => {
         onComment : (data, callBack) => actions.createNewComment(data, callBack),
         onLike: (data, isLiked, likeId, callBack) => actions.toggleLikeRequest(data, isLiked, likeId,callBack),
         onDeletePost : (postId) => dispatch(actions.deletePost(postId)),
-        onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+        onChangePage : (userId, callBack) => dispatch(actions.changePage('/profile', {userId:userId})).then(() => callBack())
     }
 }
 

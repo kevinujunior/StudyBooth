@@ -31,28 +31,25 @@ class App extends Component {
   
   render(){
 
-    
     return (
         <Switch>
           <Route exact path="/home"> 
-            {this.props.isAuthenticated ? this.props.isHomeLoading ? <LoadingPage /> : <Layout>
-              <Home />
-            </Layout> : <Redirect to="/login" /> }
+            {this.props.isAuthenticated ? <Layout> <Home /> </Layout> : <Redirect to="/login" /> }
           </Route>
           <Route exact path="/layout" component ={Layout}/> 
           <Route exact path="/signup" component ={Signup}/> 
           <Route exact path="/chat" >
-            {this.props.isAuthenticated ? <Layout><Chat /></Layout> : <Redirect to="/login" /> }
+            {this.props.isAuthenticated ?  <Layout> <Chat /></Layout> : <Redirect to="/login" /> }
           </Route>
           <Route exact path="/search" >
-            {this.props.device === 'mobile' ? <Layout><SearchPage /></Layout> : <Redirect to="/home" /> }
+            {this.props.device === 'mobile' ?  <Layout><SearchPage /></Layout> : <Redirect to="/home" /> }
           </Route>
           <Route exact path="/loading" component ={LoadingPage} />
           <Route exact path="/login"> 
             {this.props.isAuthenticated ? <Redirect to="/home" /> :<Login />  }
           </Route>
           <Route exact path="/profile" >
-            {this.props.isAuthenticated ? this.props.isProfileLoading ? <LoadingPage /> : <Layout> <Profile /> </Layout> : <Redirect to="/login" />}
+            {this.props.isAuthenticated ?  <Layout> <Profile /> </Layout> : <Redirect to="/login" />}
           </Route>
           <Route exact path='/' >
             {this.props.isAuthenticated ? <Redirect to="/home" /> : <LandingPage />}
@@ -65,8 +62,6 @@ class App extends Component {
 const mapStateToProps = state => {
   return{
     isAuthenticated: state.auth.token !== null && localStorage.getItem('user') !== null,
-    isHomeLoading: state.feed.isHomeLoading,
-    isProfileLoading: state.profile.loading,
     device: state.page.whichDevice,
   }
 }

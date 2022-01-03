@@ -28,9 +28,9 @@ export const setProfileUserPosts = (posts, nextPage, currPage) => {
 
 
 export const fetchUserData = (userId) => {
+    console.log(userId)
     return dispatch => {
         //this will fetch the user profile details
-        dispatch(setLoading(true,null));
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
             dispatch(setProfileUserData(res.data));
@@ -39,14 +39,15 @@ export const fetchUserData = (userId) => {
 
         //this will fetch the user posts if followed by current user or current user watching his/her profile.
 
-        axios.get('/users/followingview/?followingUser='+userId)
+        return axios.get('/users/followingview/?followingUser='+userId)
         .then(res => {
             if(res.data.length >= 1 || userId == localStorage.getItem('user')){ 
                 //res.data will have length greater than 1 if current user follow other user.
-                dispatch(fetchUserPosts(1,userId));
+                return dispatch(fetchUserPosts(1,userId))
             }
             else{
                 dispatch(setProfileUserPosts(null, null))
+                return Promise.resolve();
             }
         })
         .catch(err => console.log(err))
@@ -58,11 +59,12 @@ export const fetchUserPosts = (nextPageNo, userId) => {
     return dispatch => {
         if(nextPageNo == null) return;
         dispatch(setLoading(null,true));
-        axios.get(`feed/get_post/?page=${nextPageNo}&viewUserPost=${userId}`)
+        return axios.get(`feed/get_post/?page=${nextPageNo}&viewUserPost=${userId}`)
         .then(res => {
             let nextNo = res.data.next ? res.data.next.match(/page=.*&/gm)[0]: null;
             if(nextNo) nextNo = String(nextNo).substring(5, nextNo.length-1);
             dispatch(setProfileUserPosts(res.data.results, nextNo, nextPageNo))
+            return Promise.resolve()
         })
         .catch(err => console.log(err))
     }

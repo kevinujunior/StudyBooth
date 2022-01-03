@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import classes from "./Chat.css";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import WebSocketInstance from '../../websocket';
 import MessageBox from './MessageBox';
 import * as actions from '../../store/actions/index'
+import * as actionsTypes from '../../store/actions/actionTypes'
 import SearchBox from '../../components/UI/SearchBox/SearchBox';
 import LoadingBar from "../../components/UI/LoadingBar/LoadingBar";
 import axios from '../../axios_base';
@@ -36,7 +38,6 @@ class Chat extends Component {
 
 
   initialiseChat = (chatId,username,whichChat) => {
-    console.log(chatId,username)
     if (chatId==null) return
 
     WebSocketInstance.setChatId(chatId);
@@ -168,7 +169,11 @@ class Chat extends Component {
     if(whichList === "Personal"){
       axios.get('users/userchats/')
       .then(res => {
-        this.setState({chatList:res.data, chatListLoading:false})
+        this.setState({chatList:res.data, chatListLoading:false},
+          () => {
+            console.log("chat loaded")
+            this.props.onSetPageLoding(false)
+          });
       })
       .catch(err => console.log(err))
     }
@@ -238,6 +243,17 @@ class Chat extends Component {
     }
   }
 
+
+
+  componentWillUnmount(){
+    if(this.props.history.action === "POP") {
+      this.props.onPageChange('/home', () => {
+          this.props.history.replace('/home')
+      })
+    }
+  }
+  
+
   render() {
     let chatclasses = [classes.Chat];
     if (this.props.theme === "dark") chatclasses.push(classes.Dark);
@@ -247,8 +263,7 @@ class Chat extends Component {
     return (
       <div className={chatclasses.join(" ")}  
           style={{
-            'marginTop':`${this.props.device === 'mobile' ? '20px' : '80px'}`,
-            'height': `${this.props.device === 'mobile' ? '90vh' : '85vh'}`}
+            'marginTop':`${this.props.device === 'mobile' ? '10px' : '80px'}`}
         }>
         <div className={classes.ChatList}>
           {this.state.chatListLoading ? <LoadingBar background={'linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83))'}/> :null}
@@ -327,8 +342,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId))
+    onFetchUserProfile : (userId) => dispatch(actions.fetchUserData(userId)),
+    onSetPageLoding: (val) => dispatch(actions.pageLoading(val)),
+    onPageChange : (page, callBack) => dispatch(actions.changePage(page)).then(() => callBack())
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Chat);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Chat));
