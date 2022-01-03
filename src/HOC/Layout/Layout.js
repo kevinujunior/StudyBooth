@@ -59,7 +59,6 @@ class Layout extends Component {
 
     render(){
 
-        console.log(this.props.page)
         let classesL = [classes.Layout]
         if(this.props.theme === 'dark') classesL.push(classes.Dark)
         return (

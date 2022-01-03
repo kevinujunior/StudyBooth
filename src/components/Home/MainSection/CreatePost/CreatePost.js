@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 
 import classes from './CreatePost.css';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
-import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
-import AddLinkIcon from '@mui/icons-material/AddLink';
-import ArticleIcon from '@mui/icons-material/Article';
-import { IconButton, Button} from '@mui/material';
+// import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+// import AddLinkIcon from '@mui/icons-material/AddLink';
+// import ArticleIcon from '@mui/icons-material/Article';
+import { Button} from '@mui/material';
 import * as actions from '../../../../store/actions/feed';
 import LoadingBar from '../../../UI/LoadingBar/LoadingBar';
 
@@ -45,7 +45,7 @@ class  createPost extends Component {
 
         let component = this;
         const options = {
-          maxSizeMB: 0.6,
+          maxSizeMB: 0.4,
           maxWidthOrHeight: 1920,
           useWebWorker: true
         }
@@ -142,7 +142,7 @@ class  createPost extends Component {
                     {/* <input type="file"  onChange={this.fileSelectHandler}/> */}
                     <Button variant="outlined" size="small"  className={classes.IconColor} onClick={this.handleImageUpload}>Share</Button>
                 </div>
-                {this.state.loading ? <LoadingBar backgroundColor="#4150AF"/> : null}
+                {this.state.loading ? <LoadingBar backgroundColor={this.props.theme === 'dark' ?"#4150AF":"#234EBA"}/> : null}
             </div>
         );
     }

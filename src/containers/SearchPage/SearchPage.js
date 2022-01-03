@@ -58,9 +58,10 @@ const SearchPage = (props) => {
 
     },[history])
 
+    console.log(props.theme)
     return (
         <div className={styles.SearchPage}>
-            {loading ? <LoadingBar backgroundColor="#FEB12F"/> : null}
+            {loading ? <LoadingBar backgroundColor={props.theme === 'dark' ? "#FEB12F" : "#4150AF"}/> : null}
             <div className={styles.Input}>
                 <input 
                     type="text" 
@@ -83,6 +84,12 @@ const SearchPage = (props) => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        theme: state.theme.theme,
+    }
+}
+
 const mapDispathToProps = dispatch => {
     return {
         onChangePage : (userId, callBack) => dispatch(actions.changePage('/profile', {userId:userId})).then(() => callBack()),
@@ -91,4 +98,4 @@ const mapDispathToProps = dispatch => {
 }
 
 
-export default connect(null,mapDispathToProps)(SearchPage);
+export default connect(mapStateToProps,mapDispathToProps)(SearchPage);

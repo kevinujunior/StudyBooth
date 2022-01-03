@@ -15,11 +15,12 @@ const MessageBox = (props) => {
     const [showBox, setShowBox] = useState(false);
 
     const node = useRef(null);
+    const mainNode = useRef(null);
 
     useEffect(() => {
         const domNode = node.current;
         if(domNode) domNode.scrollTop = domNode.scrollHeight;
-    },[props.messages, props.show,props.grpMemeberList, node.current ? node.current.height : null])
+    },[props.messages, props.show,props.grpMemeberList, mainNode.current ? mainNode.current.height : null])
 
     const renderMessages = (messages) => {
         const currentUser = props.username;
@@ -54,6 +55,7 @@ const MessageBox = (props) => {
             classes.MessageBox, 
             props.show ? classes.Show : null, 
             props.theme === 'dark' ? classes.Dark : null].join(" ")}
+            ref={mainNode}
         >
             { 
                 props.loading ?

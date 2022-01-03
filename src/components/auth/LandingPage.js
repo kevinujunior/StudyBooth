@@ -21,8 +21,8 @@ const LandingPage = (props) => {
                 <Hero>
                     <div class= "main-welcome">
                     <h1 class="welcome"> Welcome to StudyBooth.</h1>
-                    <p class="about-text">lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum</p>
-                    <div class="emailz"> 
+                    {/* <p class="about-text">lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum lorem epsum</p> */}
+                    {/* <div class="emailz"> 
                           <input type="text" placeholder="Enter Email" name="email" id="email" 
                                 value={email}
                                 onChange={e => setemail(e.target.value)} required></input>
@@ -32,7 +32,7 @@ const LandingPage = (props) => {
                                 pathname: '/signup',
                                 email: email,
                             });}}>Signup</button>                    
-                        </div>
+                        </div> */}
                     </div>
                     <img src="/images/login_slider_2.png" alt =""/>
                 </Hero>

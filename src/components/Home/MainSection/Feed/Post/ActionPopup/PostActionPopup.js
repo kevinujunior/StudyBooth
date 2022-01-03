@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import classes from './ActionPopup.css';
 
-import ShareIcon from '@mui/icons-material/Share';
-import TurnedInIcon from '@mui/icons-material/TurnedIn';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import BlockIcon from '@mui/icons-material/Block';
+// import ShareIcon from '@mui/icons-material/Share';
+// import TurnedInIcon from '@mui/icons-material/TurnedIn';
+// import FileDownloadIcon from '@mui/icons-material/FileDownload';
+// import BlockIcon from '@mui/icons-material/Block';
 import DeleteIcon from '@mui/icons-material/Delete';
 import onClickOutside from 'react-onclickoutside'
 
@@ -33,10 +33,10 @@ class PostActionPopUp extends Component {
                 if(el.parentElement.getBoundingClientRect().top >= window.innerHeight - 400) this.setBottom(1);
               }} >
                 <div className={[classes.ActionPopUp, this.state.bottom ? classes.bottom : classes.top, this.props.theme === 'dark'? classes.Dark : null ].join(" ")} >
-                    <div> <ShareIcon className={classes.grey}/> <p>Share</p></div>
+                    {/* <div> <ShareIcon className={classes.grey}/> <p>Share</p></div>
                     <div><TurnedInIcon className={classes.grey}/> <p>Save</p> </div>
                     <div><FileDownloadIcon className={classes.grey}/> <p>Download</p> </div>
-                    <div> <BlockIcon className={classes.grey}/> <p>Block</p></div>
+                    <div> <BlockIcon className={classes.grey}/> <p>Block</p></div> */}
                     {currUserID == this.props.userId ? <div onClick={() => {
                         this.props.onDeletePost();
                         this.props.close();
