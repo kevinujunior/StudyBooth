@@ -37,7 +37,8 @@ const SearchPage = (props) => {
     const callBack = (userId) => {
         props.onChangePage(userId, () => history.push({
             pathname: '/profile',
-            userId: userId
+            userId: userId,
+            shouldReplace:true, 
         }))
     }
 

@@ -53,7 +53,9 @@ class Profile extends Component{
     componentWillUnmount(){
         //when profile will unmount then we setHomeLoading true and fetch latest feed for home
         // this.props.onSetHomeLoading();
-        if(this.props.history.action === "POP") {
+        console.log(this.props.location)
+        if(this.props.history.action === "POP" && !this.props.location.shouldReplace) {
+            console.log("replacing")
             this.props.onPageChange('/home', () => {
                 this.props.history.replace('/home')
             })
