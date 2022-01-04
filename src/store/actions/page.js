@@ -37,13 +37,14 @@ export const changePage = (page, props) => {
                 return Promise.resolve();
 
             default:
+                dispatch({type: actionTypes.PAGE_CHANGE, page:page, loading: true});
                 return Promise.resolve();
         }
     }
 }
 
 export const pageLoading = (loading) => {
-    
+
     return dispatch => {
         dispatch({type: actionTypes.PAGE_LOADING, pageLoading:loading});
         return Promise.resolve();

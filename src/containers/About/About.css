@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.Dark h2, p, h3, .Icons {
+    color: white;
+}
+
 .Normies{
     display: flex;
     flex-direction: column;

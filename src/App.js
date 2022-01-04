@@ -39,9 +39,13 @@ class App extends Component {
             {this.props.isAuthenticated ? <Layout> <Home /> </Layout> : <Redirect to="/login" /> }
           </Route>
           <Route exact path="/layout" component ={Layout}/> 
-          <Route exact path="/about" component ={About}/> 
+          <Route exact path="/about" > 
+            {this.props.isAuthenticated ? <Layout> <About/> </Layout> : <Redirect to="/login" /> } 
+          </Route>
           <Route exact path="/signup" component ={Signup}/> 
-          <Route exact path="/settings" component ={Settings}/> 
+          <Route exact path="/settings"> 
+            {this.props.isAuthenticated ? <Layout> <Settings/> </Layout> : <Redirect to="/login" /> }  
+          </Route>
           <Route exact path="/chat" >
             {this.props.isAuthenticated ?  <Layout> <Chat /></Layout> : <Redirect to="/login" /> }
           </Route>

@@ -77,6 +77,21 @@ class Settings extends React.Component {
         })
     }
 
+    componentDidMount(){
+        setTimeout(() => {
+            console.log('loading false settings')
+            this.props.onSetPageLoading();
+        },1000)
+    }
+
+    componentWillUnmount(){
+        if(this.props.history.action === "POP") {
+            this.props.onPageChange('/home', () => {
+                this.props.history.replace('/home')
+            })
+        }
+    }
+
     render(){
         console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
         return(
@@ -122,7 +137,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPageChange : (page,userId, callBack) => dispatch(actions.changePage(page,userId)).then(() => callBack())
+        onPageChange : (page,userId, callBack) => dispatch(actions.changePage(page,userId)).then(() => callBack()),
+        onSetPageLoading: () => dispatch(actions.pageLoading(false)),
     }
 }
 

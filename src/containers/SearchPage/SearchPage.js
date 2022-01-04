@@ -35,7 +35,7 @@ const SearchPage = (props) => {
     const history = useHistory();
 
     const callBack = (userId) => {
-        props.onChangePage(userId, () => history.push({
+        props.onChangePage('/profile', userId, () => history.push({
             pathname: '/profile',
             userId: userId,
             shouldReplace:true, 
@@ -50,7 +50,7 @@ const SearchPage = (props) => {
         return () => {
             if (history.action === "POP") {
                 // props.history.replace('/home')
-                props.onChangePage('/home', () => {
+                props.onChangePage('/home', null, () => {
                     props.history.replace('/home')
                 })
             }
@@ -92,7 +92,7 @@ const mapStateToProps = state => {
 
 const mapDispathToProps = dispatch => {
     return {
-        onChangePage : (userId, callBack) => dispatch(actions.changePage('/profile', {userId:userId})).then(() => callBack()),
+        onChangePage : (path, userId, callBack) => dispatch(actions.changePage(path, {userId})).then(() => callBack()),
         onSetPageLoading: () => dispatch(actions.pageLoading(false)),
     }
 }

@@ -30,6 +30,7 @@ class DashBoard extends Component{
 
         if(path){
             this.props.onPageChange(path, ()=> {
+                console.log("callback executed")
                 this.props.history.push({
                     pathname:path,
                 })
