@@ -19,14 +19,14 @@ class Settings extends React.Component {
 
     state={
         image:null,
-        fullName:null,
-        email:null,
-        bio:null,
+        fullName:this.props.userData.fullName !== "null" ? this.props.userData.fullName : "" ,
+        email:this.props.userData.email !== "null" ? this.props.userData.email : "",
+        bio:this.props.userData.userBio !== "null" ? this.props.userData.userBio : "",
+        username:this.props.userData.username !== "null" ? this.props.userData.username : "",
         loading:false,
     }
 
     compressImage = () => {
-
 
         let imageFile = null;
         this.setState({loading:true})
@@ -65,9 +65,9 @@ class Settings extends React.Component {
         const formData = new FormData();
         formData.append('fullName', this.state.fullName)
         formData.append('email', this.state.email)
-        formData.append('userPic', image)
+        formData.append('userPic', image ? image: this.props.userData.userPic)
         formData.append('userBio', this.state.bio)
-        formData.append('username', 'sushant')
+        formData.append('username', this.state.username)
 
         axios.put(`/users/userview/${userId}/`,formData)
         .then(() => {
@@ -92,8 +92,24 @@ class Settings extends React.Component {
         }
     }
 
+    updateForm = (e, which) => {
+        switch(which){
+            case "fullName":
+                this.setState({fullName: e.target.value}); break;
+            case "username":
+                this.setState({username: e.target.value}); break;
+            case "email":
+                this.setState({email: e.target.value}); break;
+            case "bio":
+                this.setState({bio: e.target.value}); break;
+            default:
+                break;
+        }
+    }
+
     render(){
-        console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
+        console.log(this.state)
+        // console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
         return(
             <div className={[styles.Settings, this.props.theme === 'dark' ? styles.Dark : null].join(" ")}>
                 {this.state.loading ? <LoadingBar backgroundColor="#FEB12F" /> : null}
@@ -105,22 +121,26 @@ class Settings extends React.Component {
                                 <CameraEnhanceIcon className={styles.IconColor}/>
                             </UploadButton> 
                         </div>
-                        <img src={this.state.image ? URL.createObjectURL(this.state.image) : null}/>
+                        <img src={this.state.image ? URL.createObjectURL(this.state.image) : this.props.userData.userPic ? this.props.userData.userPic : null }/>
                     </div>
                     <div className={styles.Inputs}>
                         <div className={[styles.form__group,styles.field].join(" ")}>
-                            <input type="input" className={styles.form__field} placeholder="Full Name" name="name" id='name' required />
+                            <input type="input" value={this.state.username} className={styles.form__field} placeholder="Username" name="name" id='name' required onChange={(e) => this.updateForm(e,"username")} />
+                            <label for="name" className={styles.form__label}>Username</label>
+                        </div>
+                        <div className={[styles.form__group,styles.field].join(" ")}>
+                            <input type="input" value={this.state.fullName} className={styles.form__field} placeholder="Full Name" name="name" id='name' required onChange={(e) => this.updateForm(e,"fullName")}/>
                             <label for="name" className={styles.form__label}>Full Name</label>
                         </div>
                         <div className={[styles.form__group,styles.field].join(" ")}>
-                            <input type="input" className={styles.form__field} placeholder="Email" name="name" id='name' required />
+                            <input type="input" value={this.state.email} className={styles.form__field} placeholder="Email" name="name" id='name' required onChange={(e) => this.updateForm(e,"email")}/>
                             <label for="name" className={styles.form__label}>Email</label>
                         </div>
                         <div className={[styles.form__group,styles.field].join(" ")}>
-                            <input type="input" className={styles.form__field} placeholder="Bio" name="name" id='name' required />
+                            <input type="input" value={this.state.bio} className={styles.form__field} placeholder="Bio" name="name" id='name' required onChange={(e) => this.updateForm(e,"bio")}/>
                             <label for="name" className={styles.form__label}>Bio</label>
                         </div>
-                        <Button variant="contained" onClick={this.compressImage}>Submit</Button>
+                        <Button variant="contained" onClick={() => this.updateDetails(this.state.image)}>Submit</Button>
                     </div>
                 </div>
             </div>
@@ -131,7 +151,8 @@ class Settings extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        theme: state.theme.theme
+        theme: state.theme.theme,
+        userData: state.currentUser.data,
     }
 }
 

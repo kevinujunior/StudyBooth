@@ -12,6 +12,8 @@ const UserProfile = (props) => {
 
     const currUser = localStorage.getItem('user')
 
+    console.log(userData)
+
     let history = useHistory();
 
     return (
