@@ -46,18 +46,18 @@ class DashBoard extends Component{
                 <Profile close={this.props.closeLeftPanel}/>
                 <div className={[classes.Component1, this.state.selected === "Sections" ? classes.SlideLeft_c1 : classes.SlideRight_c1].join(" ")}>
                     <div>
-                        <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.state.selected === "Feed"} onClick = {() => {
+                        <DashBoardItems name="Feed" icon = {<HomeOutlinedIcon />} active = {this.props.page === "/home"} onClick = {() => {
                             this.changeSelected("Feed", "/home");
                             document.documentElement.scrollTop = 0;
                         }} />
                         {/* <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/> */}
-                        <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => {
+                        <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.props.page === "/chat"} onClick = {() => {
                             this.changeSelected("Chat","/chat")
                         }}/>
-                        <DashBoardItems name="Settings" icon = {<SettingsIcon />} active = {this.state.selected === "Settings"} onClick = {() => {
+                        <DashBoardItems name="Settings" icon = {<SettingsIcon />} active = {this.props.page === "/settings"} onClick = {() => {
                             this.changeSelected("Settings","/settings")
                         }}/>
-                        <DashBoardItems name="About" icon = {<InfoIcon />} active = {this.state.selected === "About"} onClick = {() => {
+                        <DashBoardItems name="About" icon = {<InfoIcon />} active = {this.props.page === "/about"} onClick = {() => {
                             this.changeSelected("About","/about")
                         }}/>
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
@@ -83,6 +83,7 @@ class DashBoard extends Component{
 const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
+        page: state.page.whichPage
     }
 }
 

@@ -19,7 +19,7 @@ function Profile(props){
                         });
                         if(props.close) props.close()
                     }} style={{'cursor':'pointer'}}>
-                        <img src={props.userData ? props.userData.userPic ? props.userData.userPic : "/images/male_emoji2.jpg" : "/images/male_emoji2.jpg" } />
+                        <img src={props.userData ? props.userData.userPic ? props.userData.userPic : "/images/male_emoji2.png" : "/images/male_emoji2.png" } />
                     </div>
                     <p>{props.userData ? props.userData.fullName : 'Alien'}</p>
                     <p style={{fontSize:"13px"}}>How are you?</p>

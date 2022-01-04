@@ -100,7 +100,7 @@ class Settings extends React.Component {
                 <div className={styles.InputBox}>
                     <h2>Update Details</h2>
                     <div className={styles.ImageBox} >
-                        <div style={{'backgroundColor':'cornflowerblue', padding:'12px 15px', borderRadius:'10px', marginRight:'10px'}}>
+                        <div style={{'backgroundColor':'cornflowerblue', padding:'12px 15px', borderRadius:'10px', marginRight:'10px', cursor:'pointer'}}>
                             <UploadButton accept="image/*" onChange={(e) => this.setState({image:e.target.files[0]})}>
                                 <CameraEnhanceIcon className={styles.IconColor}/>
                             </UploadButton> 
@@ -147,7 +147,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Settings)
 function UploadButton  (props) {
     return (
         <div>
-            <label style={{position:'relative'}}>
+            <label style={{position:'relative', cursor:'pointer'}}>
                 <input type="file" style={{display:'none'}} accept={props.accept} onChange={props.onChange}/>
                 {props.children}
             </label>

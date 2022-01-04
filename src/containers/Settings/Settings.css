@@ -35,6 +35,12 @@
     position: relative;
 }
 
+.ImageBox img{
+    max-height: 70px;
+    max-width: 70px;
+    object-fit: cover;
+    object-position: top;
+}
 
 .Inputs{
     display: flex;

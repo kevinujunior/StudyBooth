@@ -18,7 +18,7 @@ const UserProfile = (props) => {
         <div className={classes.UserProfile}>
             <div>
                 <div className={classes.ImgAndStats}>
-                    <img src={userData.userPic ? base+userData.userPic : "/images/male_emoji.jpg"} alt=""></img>
+                    <img src={userData.userPic ? base+userData.userPic : "/images/male_emoji.png"} alt=""></img>
                     <div className={classes.stats}>
                         <div>
                             <div>

@@ -35,15 +35,18 @@ const About = (props) => {
             <div className={styles.Normies}>
                 <h2>About Us</h2>
                 <p>we build this website out of curiosity.</p>
+                <h3>Connect with us on</h3>
                 <div className={styles.Normie}>
                     <h3>Sushant</h3>
                     <IconButton><GitHubIcon className={styles.Icons}/></IconButton>
                     <IconButton><LinkedInIcon className={styles.Icons} /></IconButton>
+                    <div className={styles.Part}><p>Frontend</p></div>
                 </div>
                 <div className={styles.Normie}>
                     <h3>Udit</h3>
                     <IconButton><GitHubIcon className={styles.Icons}/></IconButton>
                     <IconButton><LinkedInIcon className={styles.Icons}/></IconButton>
+                    <div className={styles.Part}><p>Backend</p></div>
                 </div>
             </div>
         </div>
