@@ -140,7 +140,7 @@ class Settings extends React.Component {
                             <input type="input" value={this.state.bio} className={styles.form__field} placeholder="Bio" name="name" id='name' required onChange={(e) => this.updateForm(e,"bio")}/>
                             <label for="name" className={styles.form__label}>Bio</label>
                         </div>
-                        <Button variant="contained" onClick={() => this.updateDetails(this.state.image)}>Submit</Button>
+                        <Button variant="contained" onClick={this.compressImage}>Submit</Button>
                     </div>
                 </div>
             </div>
