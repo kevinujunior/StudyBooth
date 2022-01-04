@@ -1,0 +1,140 @@
+import React from 'react';
+import styles from './Settings.css';
+
+import { TextField } from '@mui/material';
+import { Button } from '@mui/material';
+
+import CameraEnhanceIcon from '@mui/icons-material/CameraEnhance';
+import imageCompression from 'browser-image-compression';
+import LoadingBar from '../../components/UI/LoadingBar/LoadingBar';
+
+import axios from '../../axios_base';
+
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index'
+
+
+class Settings extends React.Component {
+
+    state={
+        image:null,
+        fullName:null,
+        email:null,
+        bio:null,
+        loading:false,
+    }
+
+    compressImage = () => {
+
+
+        let imageFile = null;
+        this.setState({loading:true})
+
+        if(this.state.image == null) this.updateDetails();
+        else imageFile = this.state.image;
+
+        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+        let component = this;
+        const options = {
+          maxSizeMB: 0.15,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        }
+        imageCompression(imageFile, options)
+        .then(function (compressedFile) {
+            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            
+            component.updateDetails(compressedFile) // write your own logic
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
+
+    }
+
+    updateDetails = (image) => {
+
+        console.log(image)
+
+        const userId = localStorage.getItem('user');
+
+        const formData = new FormData();
+        formData.append('fullName', this.state.fullName)
+        formData.append('email', this.state.email)
+        formData.append('userPic', image)
+        formData.append('userBio', this.state.bio)
+        formData.append('username', 'sushant')
+
+        axios.put(`/users/userview/${userId}/`,formData)
+        .then(() => {
+            this.props.onPageChange('/profile',{userId}, () => {
+                this.props.history.replace('/profile')
+            })
+        })
+    }
+
+    render(){
+        console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
+        return(
+            <div className={[styles.Settings, this.props.theme === 'dark' ? styles.Dark : null].join(" ")}>
+                {this.state.loading ? <LoadingBar backgroundColor="#FEB12F" /> : null}
+                <div className={styles.InputBox}>
+                    <h2>Update Details</h2>
+                    <div className={styles.ImageBox} >
+                        <div style={{'backgroundColor':'cornflowerblue', padding:'12px 15px', borderRadius:'10px', marginRight:'10px'}}>
+                            <UploadButton accept="image/*" onChange={(e) => this.setState({image:e.target.files[0]})}>
+                                <CameraEnhanceIcon className={styles.IconColor}/>
+                            </UploadButton> 
+                        </div>
+                        <img src={this.state.image ? URL.createObjectURL(this.state.image) : null}/>
+                    </div>
+                    <div className={styles.Inputs}>
+                        <div className={[styles.form__group,styles.field].join(" ")}>
+                            <input type="input" className={styles.form__field} placeholder="Full Name" name="name" id='name' required />
+                            <label for="name" className={styles.form__label}>Full Name</label>
+                        </div>
+                        <div className={[styles.form__group,styles.field].join(" ")}>
+                            <input type="input" className={styles.form__field} placeholder="Email" name="name" id='name' required />
+                            <label for="name" className={styles.form__label}>Email</label>
+                        </div>
+                        <div className={[styles.form__group,styles.field].join(" ")}>
+                            <input type="input" className={styles.form__field} placeholder="Bio" name="name" id='name' required />
+                            <label for="name" className={styles.form__label}>Bio</label>
+                        </div>
+                        <Button variant="contained" onClick={this.compressImage}>Submit</Button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+    
+}
+
+const mapStateToProps = state => {
+    return {
+        theme: state.theme.theme
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPageChange : (page,userId, callBack) => dispatch(actions.changePage(page,userId)).then(() => callBack())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Settings));
+
+function UploadButton  (props) {
+    return (
+        <div>
+            <label style={{position:'relative'}}>
+                <input type="file" style={{display:'none'}} accept={props.accept} onChange={props.onChange}/>
+                {props.children}
+            </label>
+        </div>
+    );
+}

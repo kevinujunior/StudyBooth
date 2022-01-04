@@ -9,6 +9,8 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SettingsIcon from '@mui/icons-material/Settings';
+import InfoIcon from '@mui/icons-material/Info';
 import {connect } from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import * as actionsTypes from '../../../../store/actions/actionTypes';
@@ -50,6 +52,12 @@ class DashBoard extends Component{
                         {/* <DashBoardItems name="Sections" icon = {<ListAltOutlinedIcon />} active = {this.state.selected === "Sections"} onClick = {() => this.changeSelected("Sections")}/> */}
                         <DashBoardItems name="Chat" icon = {<ChatBubbleOutlineOutlinedIcon />} active = {this.state.selected === "Chat"} onClick = {() => {
                             this.changeSelected("Chat","/chat")
+                        }}/>
+                        <DashBoardItems name="Settings" icon = {<SettingsIcon />} active = {this.state.selected === "Settings"} onClick = {() => {
+                            this.changeSelected("Settings","/settings")
+                        }}/>
+                        <DashBoardItems name="About" icon = {<InfoIcon />} active = {this.state.selected === "About"} onClick = {() => {
+                            this.changeSelected("About","/about")
                         }}/>
                         {/* <Sections visible = {this.state.selected === "Sections"} /> */}
                         {/* <DashBoardItems name="MyClass" icon = {<ClassOutlinedIcon />} active = {this.state.selected === "MyClass"} onClick = {() => this.changeSelected("MyClass")}/>

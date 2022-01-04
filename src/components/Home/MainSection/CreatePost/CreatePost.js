@@ -45,7 +45,7 @@ class  createPost extends Component {
 
         let component = this;
         const options = {
-          maxSizeMB: 0.4,
+          maxSizeMB: 0.3,
           maxWidthOrHeight: 1920,
           useWebWorker: true
         }
@@ -60,13 +60,13 @@ class  createPost extends Component {
             console.log(error.message);
         });
 
-      }
+    }
 
 
     makePost = (file) => {
         //if user has not selected image and not written some caption then we should return.
         if(this.state.postCaption == null && this.state.selectedfile ==null) return;
-
+        console.log(file)
         const formData = new FormData();
 
         formData.append('postCaption' , this.state.postCaption)

@@ -7,6 +7,8 @@ import LandingPage from './components/auth/LandingPage';
 import Login from './components/auth/Login';
 import Profile from './containers/Profile/Profile';
 import LoadingPage from './components/UI/LoadingPage/LoadingPage';
+import About from './containers/About/About';
+import Settings from './containers/Settings/Settings';
 import Layout from './HOC/Layout/Layout';
 import * as actions from './store/actions/index';
 import axios from 'axios';
@@ -37,7 +39,9 @@ class App extends Component {
             {this.props.isAuthenticated ? <Layout> <Home /> </Layout> : <Redirect to="/login" /> }
           </Route>
           <Route exact path="/layout" component ={Layout}/> 
+          <Route exact path="/about" component ={About}/> 
           <Route exact path="/signup" component ={Signup}/> 
+          <Route exact path="/settings" component ={Settings}/> 
           <Route exact path="/chat" >
             {this.props.isAuthenticated ?  <Layout> <Chat /></Layout> : <Redirect to="/login" /> }
           </Route>

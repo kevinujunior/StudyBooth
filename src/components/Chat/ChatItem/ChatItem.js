@@ -55,7 +55,7 @@ class ChatItem extends Component {
                                 this.state.userIsAdmin,
                                 this.state.grpMemberList,
                             )}>
-                <img src="/images/male_emoji.png" alt="lull"/>
+                <img src="/images/male_emoji.jpg" alt="lull"/>
                 <div className={classes.ChatPreview}>
                     <div>
                         <h4>{this.state.friend}</h4>

@@ -15,13 +15,15 @@
 .loader {
     height: 5px;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
 .loader .bar {
     width: 100%;
     position: absolute;
     height: 5px;
-    top: 0;
-    left: 0;
     /* background: linear-gradient(to right,rgb(76,217,105),rgb(90,200,250),rgb(0,132,255),rgb(52,170,220),rgb(88,86,217),rgb(255,45,83)); */
     animation-name: loader-animation;
     animation-duration: 3s;
