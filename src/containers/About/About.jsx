@@ -7,7 +7,8 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { IconButton } from '@mui/material';
 import {connect} from 'react-redux';
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index';
+import { SvgIcon } from '@mui/material';
 
 const About = (props) => {
 
@@ -37,16 +38,18 @@ const About = (props) => {
                 <p>we build this website out of curiosity.</p>
                 <h3>Connect with us on</h3>
                 <div className={styles.Normie}>
-                    <h3>Sushant</h3>
-                    <IconButton><GitHubIcon className={styles.Icons}/></IconButton>
-                    <IconButton><LinkedInIcon className={styles.Icons} /></IconButton>
-                    <div className={styles.Part}><p>Frontend</p></div>
+                    <h3>Sushant Mishra</h3>
+                    <div >
+                        <a href="https://github.com/sushantdev-git"><SvgIcon className={styles.Icons}><GitHubIcon /></SvgIcon></a>
+                        <a href="https://www.linkedin.com/in/sushant-mishra-3032b81b5/"><SvgIcon className={styles.Icons}><LinkedInIcon  /></SvgIcon></a>
+                    </div>
                 </div>
                 <div className={styles.Normie}>
-                    <h3>Udit</h3>
-                    <IconButton><GitHubIcon className={styles.Icons}/></IconButton>
-                    <IconButton><LinkedInIcon className={styles.Icons}/></IconButton>
-                    <div className={styles.Part}><p>Backend</p></div>
+                    <h3>Udit Dabsay</h3>
+                    <div >
+                        <a href="https://github.com/kevinujunior"><SvgIcon className={styles.Icons}><GitHubIcon /></SvgIcon></a>
+                        <a href="https://www.linkedin.com/in/uditdabsay/"><SvgIcon className={styles.Icons}><LinkedInIcon  /></SvgIcon></a>
+                    </div>
                 </div>
             </div>
         </div>

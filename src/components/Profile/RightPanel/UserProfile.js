@@ -59,7 +59,7 @@ const UserProfile = (props) => {
                         <Button variant="outlined" style={{'margin':'auto'}} onClick={() => routeChange('/chat')}>Message</Button>
                     </>
                     ) 
-                    : <Button variant="outlined" style={{'margin':'auto'}} onClick={() => routeChange('/settings')}>Settings</Button>}
+                    : <Button variant="outlined" style={{'margin':'auto'}} onClick={() => routeChange('/settings')}>Edit Profile</Button>}
                 </div>
             </div>
             {/* <div>

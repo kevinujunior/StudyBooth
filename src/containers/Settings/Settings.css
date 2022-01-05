@@ -74,7 +74,7 @@
   border: 0;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: black;
   padding: 7px 0;
   background: transparent;
@@ -128,3 +128,8 @@
 /* reset input */
 
 .form__field:required,.form__field:invalid { box-shadow:none; }
+
+.Error{
+    color: red;
+    font-style: italic;
+}

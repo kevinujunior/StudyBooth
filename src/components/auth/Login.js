@@ -71,7 +71,7 @@ export class Login extends Component {
 const mapStateToProps = (state) => {
     return{
         isAuthenticated: state.auth.token && localStorage.getItem('user') != null,
-        error: state.auth.error
+        error: state.auth.error,
     }
 }
 

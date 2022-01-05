@@ -564,11 +564,25 @@ label.valid {
     -moz-order: 2;
     -webkit-order: 2;
     -o-order: 2;
-    -ms-order: 2; }
+    -ms-order: 2; 
+  }
+
+  .signinImage img{
+    display: none;
+  }
+
+  .loginMain{
+    padding: 20px 0px;
+  }
+
+
 
   .signupForm, .signupImage, .signinForm, .signinImage {
     width: auto; }
 
+  .signupImage img{
+    display: none;
+  }
   .socialLogin {
     justify-content: center;
     -moz-justify-content: center;

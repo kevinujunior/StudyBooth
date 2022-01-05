@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Settings.css';
 
-import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 
 import CameraEnhanceIcon from '@mui/icons-material/CameraEnhance';
@@ -10,7 +9,6 @@ import LoadingBar from '../../components/UI/LoadingBar/LoadingBar';
 
 import axios from '../../axios_base';
 
-import defaultAxios from 'axios';
 
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -26,7 +24,8 @@ class Settings extends React.Component {
         bio:this.props.userData.userBio !== "null" ? this.props.userData.userBio : "",
         username:this.props.userData.username !== "null" ? this.props.userData.username : "",
         loading:false,
-        currimg: null
+        currimg: null,
+        error:null,
     }
 
     compressImage = () => {
@@ -101,7 +100,10 @@ class Settings extends React.Component {
                 this.props.history.replace('/profile')
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err.response.data)
+            this.setState({error: err.response.data.username, loading: false})
+        })
     }
 
     componentDidMount(){
@@ -169,6 +171,7 @@ class Settings extends React.Component {
                             <input type="input" value={this.state.bio} className={styles.form__field} placeholder="Bio" name="name" id='name' required onChange={(e) => this.updateForm(e,"bio")}/>
                             <label for="name" className={styles.form__label}>Bio</label>
                         </div>
+                        {this.state.error ? <p className={styles.Error}>{this.state.error}</p> : null}
                         <Button variant="contained" onClick={this.compressImage}>Submit</Button>
                     </div>
                 </div>

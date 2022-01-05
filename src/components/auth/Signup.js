@@ -50,19 +50,17 @@ export class Signup extends Component {
                                     <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
                                 </div>
                                 {errorMessage}
-                                <div class={classes.formGroup}>
+                                {/* <div class={classes.formGroup}>
                                     <input type="checkbox" name="remember-me" id="remember-me" class={classes.agreeTerm} />
                                 <label for="remember-me" class={classes.labelAgreeTerm}><span><span></span></span>I agree all statements in  <a href="#" class={classes.termService}>Terms of service</a></label>
-                                </div>
+                                </div> */}
                                 <div className = {[classes.formGroup, classes.formButton].join(" ")}>
                                     <input type="submit" name="signup" id={classes.signup} class={classes.formSubmit} value="Register"/>
                                 </div>
                             </form>
                         </div>
                         <div class={classes.signupImage}>
-                            <figure>
-                            <img src ="images/signup-image.jpg" alt=""/>
-                            </figure>
+                            {this.props.device !== 'mobile' ? <figure><img src ="images/signup-image.jpg" alt=""/></figure> : null}
                             <a href="/login" class={classes.signupImageLink}>I am already member</a>
                         </div>
                     </div>
@@ -78,7 +76,8 @@ export class Signup extends Component {
 const mapStateToProps = (state) => {
     return{
         isAuthenticated : state.auth.token,
-        error: state.auth.error
+        error: state.auth.error,
+        device: state.page.whichDevice,
     }
 }
 

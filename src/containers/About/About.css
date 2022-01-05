@@ -7,6 +7,11 @@
     color: black;
 }
 
+
+.Icons{
+    margin: 10px;
+}
+
 .Dark h2, .Dark p, .Dark h3, .Dark .Icons {
     color: white;
 }
@@ -22,6 +27,7 @@
 .Normie{
     display: flex;
     align-items: center;
+    flex-direction: column;
     margin: 5px;
 }
 
