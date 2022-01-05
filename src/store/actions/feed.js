@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
+import {fetchUserPosts} from './profile'
 
 
 export const setPosts = (posts, nextPageNo, pageNo) => {
@@ -72,6 +73,7 @@ export const createNewPost = (formData, errorHandler) => {
         axios.post("feed/create_post/", formData)
         .then(response =>{
             dispatch(fetchFeed(1)); //whenever we create a new post we fetch the feed again.
+            dispatch(fetchUserPosts(1, localStorage.getItem('user')))
             errorHandler(false);
         })
         .catch(function (error) {
@@ -86,7 +88,9 @@ export const deletePost = (postId) => {
         axios.delete("feed/create_post/"+postId)
         .then(res => {
             console.log("post deleted")
+            //after we have delete a post we should load new post in feed and profile too.
             dispatch(fetchFeed(1))
+            dispatch(fetchUserPosts(1, localStorage.getItem('user')))
         })
         .catch(err => console.log(err))
     }
