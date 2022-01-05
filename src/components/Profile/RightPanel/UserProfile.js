@@ -4,7 +4,8 @@ import { Button } from '@mui/material';
 
 import { useHistory } from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index'
+import * as actions from '../../../store/actions/index';
+import ImageLoading from '../../UI/ImageLoading/ImageLoading';
 
 const UserProfile = (props) => {
 
@@ -24,12 +25,27 @@ const UserProfile = (props) => {
         })
     }   
 
+    const imgEl = React.useRef(null);
+    const [loaded, setLoaded] = React.useState(false);
+
+    const onImageLoaded = () => setLoaded(true);
+
+    React.useEffect(() => {
+        const imgElCurrent = imgEl.current;
+
+        if (imgElCurrent) {
+        imgElCurrent.addEventListener('load', onImageLoaded);
+        return () => imgElCurrent.removeEventListener('load', onImageLoaded);
+        }
+    }, [imgEl]);
+
 
     return (
         <div className={classes.UserProfile}>
             <div>
                 <div className={classes.ImgAndStats}>
-                    <img src={userData.userPic ? userData.userPic : "/images/male_emoji.png"} alt=""></img>
+                    <img ref={imgEl} src={userData.userPic ? userData.userPic : "/images/male_emoji.png"} alt="" style={{display:`${loaded ? 'block' : 'none' }`}}></img>
+                    {!loaded && userData.userPic? <ImageLoading width="35px" height="35px" borderRadius="50%"/> : null}
                     <div className={classes.stats}>
                         <div>
                             <div>

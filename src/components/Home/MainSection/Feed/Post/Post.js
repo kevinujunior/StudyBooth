@@ -29,17 +29,22 @@ class Post extends Component{
         isLiked:this.props.isLikedByuser,
         likeId: this.props.likeId,
         likeCount: this.props.likesCount,
-        imageRef: React.createRef(null),
-        imgLoaded:false,
+
+        postImageRef: React.createRef(null),
+        postImgLoaded:false,
+        profileImageRef: React.createRef(null),
+        profileImageLoaded:false,
         
     }
 
     componentDidMount() {
-        this.state.imageRef.current.addEventListener('load', this.onImageLoad);
+        this.state.postImageRef.current.addEventListener('load',() =>  this.onImageLoad("post"));
+        this.state.profileImageRef.current.addEventListener('load',() => this.onImageLoad("profile"));
     }
 
-    onImageLoad = () => { 
-        this.setState({imgLoaded: true})
+    onImageLoad = (which) => { 
+        if(which === "post") this.setState({postImgLoaded: true})
+        if(which === "profile") this.setState({profileImageLoaded: true})
     }
 
     
@@ -154,7 +159,6 @@ class Post extends Component{
     
     render(){
 
-        console.log(this.state.imgLoaded)
         let postClasses = [classes.Post]
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
@@ -176,8 +180,8 @@ class Post extends Component{
                                 })
                             });
                         }}>
-                            <img src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt=""/>
-                            
+                            <img ref={this.state.profileImageRef} src = {this.props.profileImage? this.props.profileImage:"https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png"} alt="" style={{display:`${this.state.profileImageLoaded ? 'block' : 'none' }`}}/>
+                            {!this.state.profileImageLoaded && this.props.profileImage? <ImageLoading width="35px" height="35px" borderRadius="50%"/> : null}
                             <p className={classes.userName}>{this.props.name}</p>
                             <p className={classes.Time}>{time ? time < 60 ? time+"min ago":  time <= 1440 ? Math.floor(time/60)+"hr ago": Math.floor(time/(60*24))+"d ago" : ""}</p>
                         </div>
@@ -195,8 +199,8 @@ class Post extends Component{
                     </div>
 
                     <div className={classes.PostImage}>
-                        <img src = {this.props.postImage}  alt="" ref={this.state.imageRef} style={{display:`${this.state.imgLoaded ? 'block' : 'none' }`}} />
-                        {!this.state.imgLoaded && this.props.postImage? <ImageLoading width="100%"/> : null}
+                        <img src = {this.props.postImage}  alt="" ref={this.state.postImageRef} style={{display:`${this.state.postImgLoaded ? 'block' : 'none' }`}} />
+                        {!this.state.postImgLoaded && this.props.postImage? <ImageLoading width="100%" height="200px"/> : null}
                     </div>
 
                     {this.props.userId ? <div className={classes.Interact}>

@@ -10,13 +10,16 @@ class ChatItem extends Component {
         whichChat:null,
         userIsAdmin:false,
         grpMemberList:[],
+        image:null,
     }
 
 
     componentWillMount(){
 
         let curruserId = localStorage.getItem('user');
-        let friend,whichChat,userIsAdmin, memberList;
+        let friend,whichChat,userIsAdmin, memberList, image=null;
+
+        console.log(this.props.data)
 
         if(this.props.data.author == null){
             friend = this.props.data.name;
@@ -27,6 +30,7 @@ class ChatItem extends Component {
         } 
         else {
             friend = curruserId == this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
+            image = curruserId == this.props.data.author.id ? this.props.data.friend.userPic : this.props.data.author.userPic;
             whichChat = 'User';
         }
         
@@ -36,6 +40,7 @@ class ChatItem extends Component {
             whichChat: whichChat, 
             userIsAdmin: userIsAdmin,
             grpMemberList: memberList,
+            image:image,
         });
     }
 
@@ -55,7 +60,7 @@ class ChatItem extends Component {
                                 this.state.userIsAdmin,
                                 this.state.grpMemberList,
                             )}>
-                <img src="/images/male_emoji.png" alt="lull"/>
+                <img src={this.state.image ? this.state.image : "/images/male_emoji.png"} alt="lull"/>
                 <div className={classes.ChatPreview}>
                     <div>
                         <h4>{this.state.friend}</h4>
