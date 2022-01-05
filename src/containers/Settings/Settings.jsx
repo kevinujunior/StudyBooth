@@ -111,7 +111,10 @@ class Settings extends React.Component {
         console.log(this.state)
         // console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
         return(
-            <div className={[styles.Settings, this.props.theme === 'dark' ? styles.Dark : null].join(" ")}>
+            <div 
+                className={[styles.Settings, this.props.theme === 'dark' ? styles.Dark : null].join(" ")}
+                style={{height:`${this.props.device === 'mobile' ? 'calc(100vh - 50px)' : '100vh'}`}}
+            >
                 {this.state.loading ? <LoadingBar backgroundColor="#FEB12F" /> : null}
                 <div className={styles.InputBox}>
                     <h2>Update Details</h2>
@@ -153,6 +156,7 @@ const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
         userData: state.currentUser.data,
+        device: state.page.whichDevice,
     }
 }
 

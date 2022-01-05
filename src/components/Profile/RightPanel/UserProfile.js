@@ -3,12 +3,13 @@ import classes from './UserProfile.css';
 import { Button } from '@mui/material';
 
 import { useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../../store/actions/index'
 
 const UserProfile = (props) => {
 
     
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
-    let base = "https://study-booth-backend.herokuapp.com"
 
     const currUser = localStorage.getItem('user')
 
@@ -16,11 +17,19 @@ const UserProfile = (props) => {
 
     let history = useHistory();
 
+
+    const routeChange = (path) => {
+        props.onPageChange(path, () => {
+            history.replace(path);
+        })
+    }   
+
+
     return (
         <div className={classes.UserProfile}>
             <div>
                 <div className={classes.ImgAndStats}>
-                    <img src={userData.userPic ? base+userData.userPic : "/images/male_emoji.png"} alt=""></img>
+                    <img src={userData.userPic ? userData.userPic : "/images/male_emoji.png"} alt=""></img>
                     <div className={classes.stats}>
                         <div>
                             <div>
@@ -44,9 +53,13 @@ const UserProfile = (props) => {
                 </div>
                 <div className={classes.Buttons}>
                     {Number(currUser)!==userData.id ? 
-                    (<Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>) 
-                    : null}
-                    <Button variant="outlined" style={{'margin':'auto'}} onClick={() => history.replace('/chat')}>Message</Button>
+                    (
+                    <>
+                        <Button variant="outlined" style={{'margin':'auto'}} onClick={() => props.postUnfollow()}>Unfollow</Button>
+                        <Button variant="outlined" style={{'margin':'auto'}} onClick={() => routeChange('/chat')}>Message</Button>
+                    </>
+                    ) 
+                    : <Button variant="outlined" style={{'margin':'auto'}} onClick={() => routeChange('/settings')}>Settings</Button>}
                 </div>
             </div>
             {/* <div>
@@ -72,4 +85,17 @@ const UserProfile = (props) => {
     );
 }
 
-export default UserProfile;
+
+const mapStateToProps = state => {
+    return {
+        loading: state.feed.isFeedLoading || state.profile.profileFeedLoading,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPageChange : (page, callBack) => dispatch(actions.changePage(page)).then(() => callBack())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
