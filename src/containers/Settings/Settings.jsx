@@ -24,6 +24,7 @@ class Settings extends React.Component {
         bio:this.props.userData.userBio !== "null" ? this.props.userData.userBio : "",
         username:this.props.userData.username !== "null" ? this.props.userData.username : "",
         loading:false,
+        currimg: null
     }
 
     compressImage = () => {
@@ -32,10 +33,12 @@ class Settings extends React.Component {
         this.setState({loading:true})
 
         if(this.state.image == null) this.updateDetails();
-        else imageFile = this.state.image;
+        else 
+        {
+            imageFile = this.state.image;
 
-        console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-        console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+        // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+        // console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
         let component = this;
         const options = {
@@ -45,27 +48,41 @@ class Settings extends React.Component {
         }
         imageCompression(imageFile, options)
         .then(function (compressedFile) {
-            console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-            console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+            // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
             
             component.updateDetails(compressedFile) // write your own logic
         })
         .catch(function (error) {
             console.log(error.message);
         });
+    }
 
     }
 
+ 
+
+   
+    
     updateDetails = (image) => {
+        console.log(this.props.userData.userPic)
+        var url = this.props.userData.userPic
+ 
+    
+        let res = fetch(url)
+        var imgfile = new File([res],{type:'image/jpeg'});  
+       
+       
+        console.log(imgfile)
 
-        console.log(image)
-
+        
+    
         const userId = localStorage.getItem('user');
 
         const formData = new FormData();
         formData.append('fullName', this.state.fullName)
         formData.append('email', this.state.email)
-        formData.append('userPic', image ? image: this.props.userData.userPic)
+        formData.append('userPic', image ? image: imgfile)
         formData.append('userBio', this.state.bio)
         formData.append('username', this.state.username)
 
@@ -108,7 +125,6 @@ class Settings extends React.Component {
     }
 
     render(){
-        console.log(this.state)
         // console.log(this.state.image ? URL.createObjectURL(this.state.image) : null)
         return(
             <div 
