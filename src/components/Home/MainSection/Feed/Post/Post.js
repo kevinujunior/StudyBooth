@@ -13,6 +13,8 @@ import * as actions from '../../../../../store/actions/index';
 import {withRouter} from 'react-router-dom'
 import axios from '../../../../../axios_base';
 
+import ImageLoading from '../../../../UI/ImageLoading/ImageLoading';
+
 
 class Post extends Component{
 
@@ -27,7 +29,20 @@ class Post extends Component{
         isLiked:this.props.isLikedByuser,
         likeId: this.props.likeId,
         likeCount: this.props.likesCount,
+        imageRef: React.createRef(null),
+        imgLoaded:false,
+        
     }
+
+    componentDidMount() {
+        this.state.imageRef.current.addEventListener('load', this.onImageLoad);
+    }
+
+    onImageLoad = () => { 
+        this.setState({imgLoaded: true})
+    }
+
+    
 
     postComment = () => {
 
@@ -139,6 +154,7 @@ class Post extends Component{
     
     render(){
 
+        console.log(this.state.imgLoaded)
         let postClasses = [classes.Post]
         if(this.props.theme === 'dark') postClasses.push(classes.Dark);
 
@@ -179,7 +195,8 @@ class Post extends Component{
                     </div>
 
                     <div className={classes.PostImage}>
-                        <img src = {this.props.postImage}  alt=""/>
+                        <img src = {this.props.postImage}  alt="" ref={this.state.imageRef} style={{display:`${this.state.imgLoaded ? 'block' : 'none' }`}} />
+                        {!this.state.imgLoaded && this.props.postImage? <ImageLoading width="100%"/> : null}
                     </div>
 
                     {this.props.userId ? <div className={classes.Interact}>

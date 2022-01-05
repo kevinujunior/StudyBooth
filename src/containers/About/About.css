@@ -12,6 +12,10 @@
     margin: 10px;
 }
 
+.Links a{
+    text-decoration: none;
+}
+
 .Dark h2, .Dark p, .Dark h3, .Dark .Icons {
     color: white;
 }
