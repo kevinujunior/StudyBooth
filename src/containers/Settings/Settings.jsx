@@ -10,6 +10,8 @@ import LoadingBar from '../../components/UI/LoadingBar/LoadingBar';
 
 import axios from '../../axios_base';
 
+import defaultAxios from 'axios';
+
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index'
@@ -37,61 +39,69 @@ class Settings extends React.Component {
         {
             imageFile = this.state.image;
 
-        // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-        // console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+            // console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+            // console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
-        let component = this;
-        const options = {
-          maxSizeMB: 0.15,
-          maxWidthOrHeight: 1920,
-          useWebWorker: true
+            let component = this;
+            const options = {
+                maxSizeMB: 0.15,
+                maxWidthOrHeight: 1920,
+                useWebWorker: true
+            }
+            imageCompression(imageFile, options)
+            .then(function (compressedFile) {
+                // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                
+                component.updateDetails(compressedFile) // write your own logic
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
         }
-        imageCompression(imageFile, options)
-        .then(function (compressedFile) {
-            // console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-            // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-            
-            component.updateDetails(compressedFile) // write your own logic
-        })
-        .catch(function (error) {
-            console.log(error.message);
-        });
     }
-
-    }
-
  
 
    
     
     updateDetails = (image) => {
-        console.log(this.props.userData.userPic)
-        var url = this.props.userData.userPic
- 
-    
-        let res = fetch(url)
-        var imgfile = new File([res],{type:'image/jpeg'});  
-       
-       
-        console.log(imgfile)
 
+        console.log(this.props.userData.userPic)
         
-    
-        const userId = localStorage.getItem('user');
 
         const formData = new FormData();
         formData.append('fullName', this.state.fullName)
         formData.append('email', this.state.email)
-        formData.append('userPic', image ? image: imgfile)
         formData.append('userBio', this.state.bio)
         formData.append('username', this.state.username)
+        
+        if(image){
+            formData.append('userPic', image)
+            this.sendRequest(formData);
+        }
+        else{
+            let url = this.props.userData.userPic;
 
+            fetch(url)
+            .then(res => res.blob())
+            .then(blob => {
+                const file = new File([blob], "File name",{ type: "image/*" })
+                formData.append('userPic', file)
+                this.sendRequest(formData)
+            })
+        }
+
+    }
+
+    sendRequest = (formData) => {
+        const userId = localStorage.getItem('user');
         axios.put(`/users/userview/${userId}/`,formData)
         .then(() => {
             this.props.onPageChange('/profile',{userId}, () => {
                 this.props.history.replace('/profile')
             })
         })
+        .catch(err => console.log(err))
     }
 
     componentDidMount(){
