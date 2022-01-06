@@ -122,7 +122,7 @@ class  createPost extends Component {
         return (
             <div className={createFeedClasses.join(" ")}>
                 <div className={classes.Type}>
-                    <img src="https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg" alt=""/>
+                    <img src={this.props.currUser ? this.props.currUser.userPic :"https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"} alt=""/>
                     <div className={classes.Errormessage}>
                     <textarea type="text" value ={this.state.postCaption} placeholder="share some experiences..." onChange={(event) => this.setState({postCaption: event.target.value})}  onInput={(event) => this.auto_grow(event)} required/>
                     <p>{this.state.error ? this.state.error.postCaption : null}</p>
@@ -151,6 +151,7 @@ class  createPost extends Component {
 const mapStateToProps = state => {
     return {
         theme: state.theme.theme,
+        currUser: state.currentUser.data,
     }
 }
 

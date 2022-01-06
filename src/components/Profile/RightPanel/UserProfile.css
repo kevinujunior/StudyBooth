@@ -13,7 +13,8 @@
 
 .UserProfile img{
     border-radius: 10px;
-    height: 100px;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .UserProfile > h2{
