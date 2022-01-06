@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CURRENT_USER_FETCH:
             return {
                 ...state,
-                data: action.userdata,
+                data: {...action.userdata},
                 loading:false,
             }
         case actionTypes.USER_SET_LOADING:

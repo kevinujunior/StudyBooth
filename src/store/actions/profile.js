@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes';
 import axios from  '../../axios_base';
 
+import {setCurrentUser} from './currentUser'
+
 
 export const setLoading = (loading, profileFeedLoading) => {
     return{
@@ -34,6 +36,8 @@ export const fetchUserData = (userId) => {
         axios.get('users/profileview/?viewUser='+userId)
         .then(res => {
             dispatch(setProfileUserData(res.data));
+            console.log(userId == localStorage.getItem('user'));
+            if(userId == localStorage.getItem('user')) dispatch(setCurrentUser(res.data[0]))
         })
         .catch(err => console.log(err))
 

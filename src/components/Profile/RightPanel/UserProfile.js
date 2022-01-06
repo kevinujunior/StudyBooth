@@ -65,7 +65,7 @@ const UserProfile = (props) => {
                 </div>
                 <div className={classes.NameAndDescription}>
                     <h3>{userData.fullName}</h3>
-                    <p>{userData.userBio}</p>
+                    <p>{userData.userBio !== "null" ? userData.userBio : "How are you??"}</p>
                 </div>
                 <div className={classes.Buttons}>
                     {Number(currUser)!==userData.id ? 

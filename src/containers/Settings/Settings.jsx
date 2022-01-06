@@ -101,8 +101,8 @@ class Settings extends React.Component {
             })
         })
         .catch(err => {
-            console.log(err.response.data)
-            this.setState({error: err.response.data.username, loading: false})
+            if(err.response.data.username === undefined) this.setState({error: "Please select an image", loading: false})
+            else this.setState({error: err.response.data.username, loading: false})
         })
     }
 
