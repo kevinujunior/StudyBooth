@@ -131,6 +131,7 @@ class Chat extends Component {
 
   changeChatId = (chatId,chatName,whichChat, userIsAdmin, grpMemberList) => {
 
+    console.log(userIsAdmin)
     if(this.state.chatId === chatId && this.state.whichChat === whichChat) {
       this.setShowMessageBox(true);
       return;
@@ -187,6 +188,7 @@ class Chat extends Component {
   }
 
   deleteChat = () => {
+    console.log(this.state.userIsAdmin)
     let url=`chat/privatechat/${this.state.chatId}`;
     if(this.state.whichChat === 'Group') url = `chat/groupchat/${this.state.chatId}`;
     if(this.state.whichChat === 'Group' && !this.state.userIsAdmin) return; //if user is not admin then he/she should not be able to delete tha chat ig.

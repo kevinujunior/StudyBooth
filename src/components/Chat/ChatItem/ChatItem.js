@@ -17,16 +17,13 @@ class ChatItem extends Component {
     componentWillMount(){
 
         let curruserId = localStorage.getItem('user');
-        let friend,whichChat,userIsAdmin, memberList, image=null;
-
-        console.log(this.props.data)
+        let friend,whichChat,userIsAdmin=false, memberList, image=null;
 
         if(this.props.data.author == null){
             friend = this.props.data.name;
             whichChat = 'Group';
-            if(this.props.data.member[0].member == curruserId) userIsAdmin = true;
+            if(this.props.data.member[0].member.id == curruserId) userIsAdmin = true;
             memberList = this.props.data.member;
-            console.log(memberList)
         } 
         else {
             friend = curruserId == this.props.data.author.id ? this.props.data.friend.username : this.props.data.author.username;
