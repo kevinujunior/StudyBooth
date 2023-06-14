@@ -19,7 +19,7 @@ class WebSocketService {
   }
 
   connect() {
-    const path = `wss://https://studybooth-backend.onrender.com/ws/chat/${this.chatId}/`;
+    const path = `wss://studybooth-backend.onrender.com/ws/chat/${this.chatId}/`;
     this.socketRef = new WebSocket(path);
     this.socketRef.onopen = () => {
       console.log('WebSocket open');
