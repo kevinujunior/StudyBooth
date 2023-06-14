@@ -4,7 +4,7 @@ import * as actionTypes from './store/actions/actionTypes';
 
 let isRefreshTokenFetched = false;
 const customAxios = axios.create({
-    baseURL: `https://study-booth-backend.herokuapp.com/`,
+    baseURL: `https://studybooth-backend.onrender.com/`,
     headers: {
         "Content-Type": "application/json",
     }

@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 
 const NotFollowedProfile = (props) => {
     let userData = props.user ? props.user.isFollowedByCurrUser ? props.user.viewUser : props.user : null;
-    let base = "https://study-booth-backend.herokuapp.com"
+    let base = "https://studybooth-backend.onrender.com"
     const currUser = localStorage.getItem('user')
     return (
         <div className={classes.NFP}>
